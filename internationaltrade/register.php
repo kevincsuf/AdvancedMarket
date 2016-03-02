@@ -233,12 +233,15 @@
                                             <div class="error left-align" id="err-name">Please enter name.</div>
                                         </div>
                                     </div>
+									
 									<div class="control-group">
-                                        <div class="controls">
-                                            <input class="span5" type="text" id="buyer_rev_msg" name="buyer_rev_msg" placeholder="* Receive Message.." />
-                                            <div class="error left-align" id="err-name">Please enter name.</div>
-                                        </div>
+                                       <select class = "span5" id = "buyer_rev_msg" name="buyer_rev_msg"> 
+											<option value= "buyer_rev_msg">--Do you want to receive message--</option>
+											<option value= "Yes">Yes</option>
+											<option value= "No">No</option>
+										</select>
                                     </div>
+									
 									<div class="control-group">
                                         <div class="controls"> Pick interested Category: </br>
                                             <input class="checkbox-inline" type="checkbox" name="category" value="food">Food products
