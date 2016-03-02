@@ -101,7 +101,7 @@
 							
 							<div class="control-group">
 								<div class="controls">
-									<input  class="span5" type="number" name="n" id="qty" placeholder="* Maximum Quantity" />                                            
+									<input  class="span5" type="number" name="number" id="qty" placeholder="* Maximum Quantity" />                                            
 								</div>
 							</div>
 							

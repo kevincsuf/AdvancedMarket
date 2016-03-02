@@ -703,6 +703,11 @@ p {
     line-height: 20px;
     height: auto;
 }
+.contact input[type = "number"]{
+    padding: 10px;
+    line-height: 20px;
+    height: auto;
+}
 .contact textarea {
     height: 120px;
 }
