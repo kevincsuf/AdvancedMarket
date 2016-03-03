@@ -1,73 +1,49 @@
-<!-- Author: Yongseok Kim
-	Date: 02/26/2016 */ -->
 
-<?php
-include "login_lib.php";
+<html>
 
-// login form check
-if(isset($_POST['login_exe']) == "login") {
-    if (!$_POST['login_id'])
-        Error("Check ID!");
-    else {
-        if (!$_POST['login_pwd'])
-            Error("Check password!");
-        else {
-            if (!CheckLogin($_POST['login_id'], $_POST['login_pwd']))
-                Error ("Check ID or password!");
-            else {
-                // Create a cookie for login session
-                //SetCookie("TempLogin",$config_login_pwd,0,"/");
-                // Go to the first page of after-login
-                //echo "<meta http-equiv='refresh' content='0; url=./xxx.php'>";
-                Error ("Logged in successfully!");
-            }
-        }
-    }
-}
-?>
+    <head>
+        <title>Advanced Marketing &gt; Log in</title>
+        <?php include "_incl_header.php";?>
+    </head>
 
+	<body>
+        <?php include "_incl_navbar.php";?>
 
+        <!-- Login section starts -->
+        <div id="contact" class="contact">
+            <div class="section secondary-section">
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN">
+                <div class="container">
+                    <div class="title">
+                        <h2>Login</h2>
+                    </div>
+                </div>
 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="author" content="" />
-	<!--meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" /-->
+                <div class="container">
+                    <div class="span5 contact-form centered">
+                        <form name="loginform" id="loginform" action="login_check.php" method="post">
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input class="span5" type="text" id="user_id" placeholder="ID" name="login_id" />
+                                    <input class="span5" type="password" id="user_pass" placeholder="Password" name="login_pwd" />
+                                </div>
+                            </div>
 
-	<!--meta name="keyword" content="" /-->
-	<!--meta name="description" content="" /-->
-	<meta name="copyright" content="" />
-	<meta name="distribution" content="Global" />
+                            <div class="control-group">
+								<div class="controls">
+                                    <input type="hidden" name="login_exe" value="login" />
+                                    <button id="login-submit" class="message-btn">Submit</button>
+								</div>
+							</div>
+                		</form>
 
-	<title>Advanced Group Buying &gt; Log in</title>
+                    </div>
+                </div>
 
-	<!--link rel="stylesheet" href="" type="text/css" /-->
+            </div>
+        </div>
 
-    <style type="text/css">
-    	body { background: #b7b7c0;}
-    </style>
-</head>
-
-<body class="login" onload="document.loginform.user_id.focus();">
-
-	<div id="login">
-		<h1>Log in</h1>
-		<form name="loginform" id="loginform" action="<?=$_SERVER['PHP_SELF']?>" method="post">
-            <p>
-                <label>ID<br /><input type="text" name="login_id" id="user_id" class="input" value="" size="20" tabindex="20" /></label>
-            </p>
-            <p>
-				<label>Password<br /><input type="password" name="login_pwd" id="user_pass" class="input" value="" size="20" tabindex="20" /></label>
-			</p>
-			<p class="submit">
-				<input type="hidden" name="login_exe" value="login" />
-				<input type="submit" name="login-submit" id="login-submit" class="" value="Log in" tabindex="100" />
-			</p>
-		</form>
-	</div><!--end of login-->
-
-</body>
+	   <?php include "_incl_footer.php";?>
+	</body>
 
 </html>
