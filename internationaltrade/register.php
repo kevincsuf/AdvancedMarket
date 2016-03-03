@@ -61,25 +61,14 @@
                             <li><a href="index.php">Home</a></li>                         
 
                             <li class="active"><a href="register.php">Sign-up</a></li>
-                            <li><a href="#login">Login</a></li>
+                            <li><a href="login.php">Login</a></li>
                         </ul>
                     </div>
                     <!-- End main navigation -->
                 </div>
             </div>
         </div>
-        <!-- Start home section -->
-        <div id="home">
-            <!-- Start cSlider -->
-            <div id="" class="">
-               
-                <!-- mask elemet use for masking background image -->
-               
-                <!-- All slides centred in container element -->
-                
-            </div>
-        </div>
-        <!-- End home section -->
+
         
         
         <!-- Registeration section start -->
@@ -156,12 +145,13 @@
 												<textarea class="span5" name="seller_addr" id="seller_addr" placeholder="* Address..."></textarea>                                            
 											</div>
 										</div>
-										
+											
 										<div class="control-group">
-											<div class="controls">
-												<input class="span5" type="text" id="seller_mobile_number" name="seller_mobile_number" placeholder="* Mobile Number..." />
-											   
-											</div>
+										   <select class = "span5" id = "buyer_rev_msg" name="buyer_rev_msg"> 
+												<option value= "buyer_rev_msg">--Do you want to receive message--</option>
+												<option value= "Yes">Yes</option>
+												<option value= "No">No</option>
+											</select>
 										</div>
 										
 										<div class="control-group">
@@ -272,13 +262,7 @@
             <p>© Copyrights Advanced Market <p>
         </div>
         <!-- Footer section end -->
-        <!-- ScrollUp button start -->
-        <div class="scrollup">
-            <a href="#">
-                <i class="icon-up-open"></i>
-            </a>
-        </div>
-        <!-- ScrollUp button end -->
+
         <!-- Include javascript -->
         <script src="js/jquery.js"></script>
         <script type="text/javascript" src="js/jquery.mixitup.js"></script>
