@@ -94,7 +94,18 @@
 									<input  class="span5" type="text" name="min_price" id="min_price" placeholder="* Discounted Price" />
 								</div>
 							</div>
-
+							
+							<div class="control-group">
+								<div class="controls">
+									<select class = "span5" id = "category" name="category">
+										<option value= "category">--Category--</option>
+										<option value= "food_products">Food Products</option>
+										<option value= "electronics">Electronics</option>
+										<option value= "raw_material">Raw Material</option>
+										<option value= "entertainment">Entertainment</option>
+									</select>
+								</div>
+							</div>
 
 							<div class="control-group">
 								<div class="controls">
