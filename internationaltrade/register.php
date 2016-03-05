@@ -144,6 +144,22 @@
 			echo " </script>";
 			echo "valid Submission";
 			exit();*/
+			if (isset($_POST['seller_reg']) == "seller") { // When seller
+				$regtype; // "seler"
+				$seller_email_value = "";
+				$seller_pwd_value = "";
+				$seller_pwd_repeat_value = "";
+				$seller_first_name_value = "";
+				$seller_last_name_value = "";
+				$seller_buss_name_value = "";
+				$seller_addr_value = "";
+				$seller_rev_msg_yes = "";
+				$seller_rev_msg_no = "";
+				$seller_category_food = "";
+				$seller_category_electronics = "";
+				$seller_category_rawmaterial = "";
+				$seller_category_entertainment = "";
+			}
 			
 		} else { // invalid input
 			if (isset($_POST['seller_reg']) == "seller") { // When seller
