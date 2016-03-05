@@ -1,27 +1,78 @@
 <?php
 
-    // Get current page name
-    $page_name = basename($_SERVER['PHP_SELF']);
+// Get login information
+//require_once("_lib_login.php");
+//$login = new Login($_GET['login_id'], $_GET['login_pwd']);
 
-    // Set menu and page name pair
-    $menu_items = array(
-        'Home'=>"index.php",
-        'Seller'=>"seller_view.php",
-        'About'=>"about.php",
-        'Sign-up'=>"register.php",
-        'Login'=>"login.php"
-    );
+// Set passing login info var
+$get_var = "";
+$member_type = "";
 
-    // Generate menu code
-    $menu_display = "";
-    foreach($menu_items as $key => $value) {
+if (isset($_GET['login_id']) && isset($_GET['login_pwd'])) {
+    $get_var = "?login_id=".$login->id."&login_pwd=".$login->pwd."&member_type=".$login->member_type;
+    $member_type = $login->member_type;
+}
+else {
+    $get_var = "";
+}
+
+// Get current page name
+$page_name = basename($_SERVER['PHP_SELF']);
+
+// Set menu and page name pair
+$menu_items_seller = array(
+    'Home'=>"index.php",
+    'Seller'=>"seller_view.php",
+    'Create Deals'=>"deals.php",
+    'My Profile'=>"profile.php",
+    'Logout'=>"logout.php"
+);
+
+$menu_items_buyer = array(
+    'Home'=>"index.php",
+    'My Profile'=>"profile.php",
+    'Logout'=>"logout.php"
+);
+
+$menu_items_logout = array(
+    'Home'=>"index.php",
+    'About'=>"about.php",
+    'Sign-up'=>"register.php",
+    'Login'=>"login.php"
+);
+
+// Generate menu code
+$menu_display = "";
+
+if ($member_type == "seller") { // When seller
+    foreach($menu_items_seller as $key => $value) {
         if ($page_name == $value) {
-            $menu_display = $menu_display."<li class=\"active\"><a href=\"".$value."\">".$key."</a></li>";
+            $menu_display = $menu_display."<li class=\"active\"><a href=\"".$value.$get_var."\">".$key."</a></li>";
         }
         else {
-            $menu_display = $menu_display."<li><a href=\"".$value."\">".$key."</a></li>";
+            $menu_display = $menu_display."<li><a href=\"".$value.$get_var."\">".$key."</a></li>";
         }
     }
+} else if ($member_type == "buyer") { // When buyer
+    foreach($menu_items_buyer as $key => $value) {
+        if ($page_name == $value) {
+            $menu_display = $menu_display."<li class=\"active\"><a href=\"".$value.$get_var."\">".$key."</a></li>";
+        }
+        else {
+            $menu_display = $menu_display."<li><a href=\"".$value.$get_var."\">".$key."</a></li>";
+        }
+    }
+} else { // Not logged in yet
+    foreach($menu_items_logout as $key => $value) {
+        if ($page_name == $value) {
+            $menu_display = $menu_display."<li class=\"active\"><a href=\"".$value.$get_var."\">".$key."</a></li>";
+        }
+        else {
+            $menu_display = $menu_display."<li><a href=\"".$value.$get_var."\">".$key."</a></li>";
+        }
+    }
+}
+
 ?>
 
 <div class="navbar">

@@ -21,12 +21,9 @@
 	}
 ?>
 
-<html>
 
-    <head>
-        <title>Advanced Marketing</title>
-        <?php include "_incl_header.php";?>
-    </head>
+
+<html>
 
     <head>
         <title>Advanced Marketing</title>

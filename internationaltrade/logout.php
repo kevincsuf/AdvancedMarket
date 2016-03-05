@@ -1,8 +1,5 @@
-<!-- Author: Yongseok Kim
-	Date: 02/26/2016 */ -->
-
 <?php
-include "login_lib.php";
+//include "login_lib.php";
 
 // logout
 // Expire login session cookie
