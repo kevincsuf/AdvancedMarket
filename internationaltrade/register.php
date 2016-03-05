@@ -139,11 +139,12 @@
 
 		if($validator-> form_valid()) { // valid input
 			// redirect to Home page
-			echo "<script type='text/javascript'>\n";
+			/*echo "<script type='text/javascript'>\n";
 			echo "alert('Successfully Submitted');\n"; 
 			echo " </script>";
 			echo "valid Submission";
-			exit();
+			exit();*/
+			
 		} else { // invalid input
 			if (isset($_POST['seller_reg']) == "seller") { // When seller
 				$selected_regtype_seller = "selected=\"selected\"";
@@ -246,7 +247,7 @@
 
 
 
-
+								<!-- Seller form -->
 									
 								<div class="seller_form" style="display:none;" >
 									
@@ -254,7 +255,7 @@
 
 										<div class="control-group">
 											<div class="controls">
-												<input class="span5" type="email" name="seller_email" id="seller_email" placeholder="* Email ID here" value="<?php echo $seller_email_value;?>" />
+												<input class="span5" type="email" name= "seller_email" id="seller_email" placeholder="* Email ID here" value="<?php echo $seller_email_value;?>" />
 												<?php $validator->out_field_error('seller_email');?>
 											</div>
 										</div>
