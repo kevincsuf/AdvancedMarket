@@ -40,6 +40,35 @@ class Login {
     // Check login function
     public function check_login() {
         // Query to retrieve user password
+		/* include'core/init.php';
+
+
+		$eamil=$_POST['eamil'];
+		$password=$_POST['password'];
+
+		$sql = "SELECT * from advancedmarket.register where email ='$email' and password='$password'";
+		$result = mysqli_query($conn,$sql);
+		$row=mysqli_fetch_assoc($result);
+		$_SESSION['user']=$row['username'];
+		
+		// have to modify this part based on seller and buyer
+		
+		if(mysqli_num_rows($result)==1)
+			{
+			   if($_SESSION['user'])
+			   {
+				goto_page();
+				//header('Location:admin_services.php');
+				}
+				else
+				die("you were logged out.");
+			}
+			else
+			{        
+			goto_home();
+			}
+		
+		*/
         //$db_pwd = //select pwd from xxx_table where id=$id;
         $db_pwd_seller = "12";
         $db_pwd_buyer = "34";
