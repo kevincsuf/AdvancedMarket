@@ -317,7 +317,14 @@
 												<?php $validator->out_field_error('seller_addr');?>
 											</div>
 										</div>
-											
+										
+										<!--Added phone number for seller  -->
+										<div class="control-group">
+											<div class="controls">
+												<textarea class="span5" name="seller_mobile_number" id="seller_mobile_number" placeholder="* Contact no..."></textarea>
+												<?php // have to add validation function ?>
+											</div>
+										</div>	
 										<div class="control-group">
 										   <select class="span5" name="seller_rev_msg" id="seller_rev_msg">
 												<option value= "seller_rev_msg">--Do you want to receive message--</option>
@@ -406,7 +413,7 @@
 									
 									<div class="control-group">
                                         <div class="controls">
-											<input class="span5" type="text" name="buyer_mobile_number" id="buyer_mobile_number" placeholder="* Mobile Number..." value="<?php echo $buyer_mobile_number_value;?>" />
+											<input class="span5" type="text" name="buyer_mobile_number" id="buyer_mobile_number" placeholder="* Contact Number..." value="<?php echo $buyer_mobile_number_value;?>" />
 											<?php $validator->out_field_error('buyer_mobile_number');?>
                                         </div>
                                     </div>
