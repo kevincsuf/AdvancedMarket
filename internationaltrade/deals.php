@@ -83,7 +83,7 @@
                         
 					<div class="span5 contact-form centered">								
 										
-						<form id="deals_form" method= "post" action= "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+						<form id="deals_form" method= "post" action= "deal_lib.php"<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 						
 							<div class="control-group">
 								<div class="controls">
