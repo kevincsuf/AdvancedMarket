@@ -13,6 +13,7 @@
 	$seller_last_name_value = "";
 	$seller_buss_name_value = "";
 	$seller_addr_value = "";
+	$seller_mobile_number_value = "";
 	$selected_seller_rev_msg_yes = "";
 	$selected_seller_rev_msg_no = "";
 	$selected_seller_category_food = "";
@@ -85,6 +86,13 @@
 			$field_display_name = "Address";
 			$validator->add_field($field_name);
 			$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+
+			// seller_mobile_number
+			$field_name = "seller_mobile_number";
+			$field_display_name = "Contact number";
+			$validator->add_field($field_name);
+			$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+			$validator->add_rule_to_field($field_name, array('numbers-only'), $field_display_name);
 		}
 		//***** BUYER *****
 		else if (isset($_POST['buyer_reg']) == "buyer") { // When buyer
@@ -153,6 +161,7 @@
 				$seller_last_name_value = "";
 				$seller_buss_name_value = "";
 				$seller_addr_value = "";
+				$seller_mobile_number_value = "";
 				$seller_rev_msg_yes = "";
 				$seller_rev_msg_no = "";
 				$seller_category_food = "";
@@ -171,6 +180,7 @@
 				$seller_last_name_value = $_POST["seller_last_name"];
 				$seller_buss_name_value = $_POST["seller_buss_name"];
 				$seller_addr_value = $_POST["seller_addr"];
+				$seller_mobile_number_value = $_POST["seller_mobile_number"];
 				if ($_POST["seller_rev_msg"] == "Yes") {
 					$selected_seller_rev_msg_yes = "selected=\"selected\"";
 				} else if ($_POST["seller_rev_msg"] == "No") {
@@ -318,13 +328,13 @@
 											</div>
 										</div>
 										
-										<!--Added phone number for seller  -->
 										<div class="control-group">
 											<div class="controls">
-												<textarea class="span5" name="seller_mobile_number" id="seller_mobile_number" placeholder="* Contact no..." required></textarea>
-												<?php // have to add validation function ?>
+												<input class="span5" type="text" name="seller_mobile_number" id="seller_mobile_number" placeholder="* Contact no..." value="<?php echo $seller_mobile_number_value;?>" required />
+												<?php $validator->out_field_error('seller_mobile_number');?>
 											</div>
-										</div>	
+										</div>
+
 										<div class="control-group">
 										   <select class="span5" name="seller_rev_msg" id="seller_rev_msg">
 												<option value= "seller_rev_msg">--Do you want to receive message--</option>
