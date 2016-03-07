@@ -271,49 +271,49 @@
 
 										<div class="control-group">
 											<div class="controls">
-												<input class="span5" type="email" name= "seller_email" id="seller_email" placeholder="* Email ID here" value="<?php echo $seller_email_value;?>" />
+												<input class="span5" type="email" name= "seller_email" id="seller_email" placeholder="* Email ID here" value="<?php echo $seller_email_value;?>" required />
 												<?php $validator->out_field_error('seller_email');?>
 											</div>
 										</div>
 										
 										<div class="control-group">
 											<div class="controls">
- 												<input  class="span5" type="password" name="seller_pwd" id="seller_pwd" placeholder="* Password here" value="<?php echo $seller_pwd_value;?>" />
+ 												<input  class="span5" type="password" name="seller_pwd" id="seller_pwd" placeholder="* Password here" value="<?php echo $seller_pwd_value;?>" required />
 												<?php $validator->out_field_error('seller_pwd');?>
 											</div>
 										</div>
 										
 										<div class="control-group">
 											<div class="controls">
-												<input  class="span5" type="password" name="seller_pwd_repeat" id="seller_pwd_repeat" placeholder="* Repeat Password here" value="<?php echo $seller_pwd_repeat_value;?>" />
+												<input  class="span5" type="password" name="seller_pwd_repeat" id="seller_pwd_repeat" placeholder="* Repeat Password here" value="<?php echo $seller_pwd_repeat_value;?>" required />
 												<?php $validator->out_field_error('seller_pwd_repeat');?>
 											</div>
 										</div>
 										
 										<div class="control-group">
 											<div class="controls">
-												<input class="span5" type="text" name="seller_first_name" id="seller_first_name" placeholder="* First Name..." value="<?php echo $seller_first_name_value;?>" />
+												<input class="span5" type="text" name="seller_first_name" id="seller_first_name" placeholder="* First Name..." value="<?php echo $seller_first_name_value;?>" required />
 												<?php $validator->out_field_error('seller_first_name');?>
 											</div>
 										</div>
 
 										<div class="control-group">
 											<div class="controls">
-												<input class="span5" type="text" name="seller_last_name" id="seller_last_name" placeholder="* Last Name..." value="<?php echo $seller_last_name_value;?>" />
+												<input class="span5" type="text" name="seller_last_name" id="seller_last_name" placeholder="* Last Name..." value="<?php echo $seller_last_name_value;?>" required />
 												<?php $validator->out_field_error('seller_last_name');?>
 											</div>
 										</div>
 										
 										<div class="control-group">
 											<div class="controls">
-												<input class="span5" type="text" name="seller_buss_name" id="seller_buss_name" placeholder="* Business Name..." value="<?php echo $seller_buss_name_value;?>" />
+												<input class="span5" type="text" name="seller_buss_name" id="seller_buss_name" placeholder="* Business Name..." value="<?php echo $seller_buss_name_value;?>" required />
 												<?php $validator->out_field_error('seller_buss_name');?>
 											</div>
 										</div>
 										
 										<div class="control-group">
 											<div class="controls">
-												<textarea class="span5" name="seller_addr" id="seller_addr" placeholder="* Address..."><?php echo htmlspecialchars($seller_addr_value, ENT_QUOTES, 'UTF-8'); ?></textarea>
+												<textarea class="span5" name="seller_addr" id="seller_addr" placeholder="* Address..." required><?php echo htmlspecialchars($seller_addr_value, ENT_QUOTES, 'UTF-8'); ?></textarea>
 												<?php $validator->out_field_error('seller_addr');?>
 											</div>
 										</div>
@@ -321,7 +321,7 @@
 										<!--Added phone number for seller  -->
 										<div class="control-group">
 											<div class="controls">
-												<textarea class="span5" name="seller_mobile_number" id="seller_mobile_number" placeholder="* Contact no..."></textarea>
+												<textarea class="span5" name="seller_mobile_number" id="seller_mobile_number" placeholder="* Contact no..." required></textarea>
 												<?php // have to add validation function ?>
 											</div>
 										</div>	
@@ -373,47 +373,47 @@
 									
                                     <div class="control-group">
                                         <div class="controls">
-											<input class="span5" type="email" name="buyer_email" id="buyer_email" placeholder="* Email ID here" value="<?php echo $buyer_email_value;?>" />
+											<input class="span5" type="email" name="buyer_email" id="buyer_email" placeholder="* Email ID here" value="<?php echo $buyer_email_value;?>" required />
 											<?php $validator->out_field_error('buyer_email');?>
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <div class="controls">
-											<input class="span5" type="password" name="buyer_pwd" id="buyer_pwd" placeholder="* Password here" value="<?php echo $buyer_pwd_value;?>" />
+											<input class="span5" type="password" name="buyer_pwd" id="buyer_pwd" placeholder="* Password here" value="<?php echo $buyer_pwd_value;?>" required />
 											<?php $validator->out_field_error('buyer_pwd');?>
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <div class="controls">
-											<input class="span5" type="password" name="buyer_pwd_repeat" id="buyer_pwd_repeat" placeholder="* Repeat Password here" value="<?php echo $buyer_pwd_repeat_value;?>" />
+											<input class="span5" type="password" name="buyer_pwd_repeat" id="buyer_pwd_repeat" placeholder="* Repeat Password here" value="<?php echo $buyer_pwd_repeat_value;?>" required />
 											<?php $validator->out_field_error('buyer_pwd_repeat');?>
                                         </div>
                                     </div>
 									
 									<div class="control-group">
                                         <div class="controls">
-											<input class="span5" type="text" name="buyer_first_name" id="buyer_first_name" placeholder="* First Name..." value="<?php echo $buyer_first_name_value;?>" />
+											<input class="span5" type="text" name="buyer_first_name" id="buyer_first_name" placeholder="* First Name..." value="<?php echo $buyer_first_name_value;?>" required />
 											<?php $validator->out_field_error('buyer_first_name');?>
                                         </div>
                                     </div>
 									
 									<div class="control-group">
                                         <div class="controls">
-											<input class="span5" type="text" name="buyer_last_name" id="buyer_last_name" placeholder="* Last Name..." value="<?php echo $buyer_last_name_value;?>" />
+											<input class="span5" type="text" name="buyer_last_name" id="buyer_last_name" placeholder="* Last Name..." value="<?php echo $buyer_last_name_value;?>" required />
 											<?php $validator->out_field_error('buyer_last_name');?>
                                         </div>
                                     </div>
 	
 									<div class="control-group">
                                         <div class="controls">
-											<textarea class="span5" name="buyer_addr" id="buyer_addr" placeholder="* Address..."><?php echo htmlspecialchars($buyer_addr_value, ENT_QUOTES, 'UTF-8'); ?></textarea>
+											<textarea class="span5" name="buyer_addr" id="buyer_addr" placeholder="* Address..." required><?php echo htmlspecialchars($buyer_addr_value, ENT_QUOTES, 'UTF-8'); ?></textarea>
 											<?php $validator->out_field_error('buyer_addr');?>
                                         </div>
                                     </div>
 									
 									<div class="control-group">
                                         <div class="controls">
-											<input class="span5" type="text" name="buyer_mobile_number" id="buyer_mobile_number" placeholder="* Contact Number..." value="<?php echo $buyer_mobile_number_value;?>" />
+											<input class="span5" type="text" name="buyer_mobile_number" id="buyer_mobile_number" placeholder="* Contact Number..." value="<?php echo $buyer_mobile_number_value;?>" required />
 											<?php $validator->out_field_error('buyer_mobile_number');?>
                                         </div>
                                     </div>

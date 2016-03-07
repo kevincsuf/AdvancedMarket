@@ -167,6 +167,11 @@ p {
     color: #CF0000;
     display: none;
 }
+
+.warning > p {
+    color: #CF0000;
+}
+
 .invisible {
     display:none;
     visibility:visible;
