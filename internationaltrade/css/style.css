@@ -707,7 +707,35 @@ p {
     padding: 10px;
     line-height: 20px;
     height: auto;
-	width: 180px;
+	width:200px;
+}
+.contact input[id= description]{
+    padding: 10px;
+    line-height: 20px;
+    height: 120px;
+	width:450px;
+}
+
+.contact input[id= qty]{
+    padding: 10px;
+    line-height: 20px;
+    height: auto;
+	width:200px;
+}
+
+.contact select[id= unit]{
+    padding: 10px;
+    line-height: 20px;
+    height: auto;
+	width:80px;
+}
+
+
+.contact input[id= unit_price]{
+    padding: 10px;
+    line-height: 20px;
+    height: auto;
+	width:150px;
 }
 .contact input[type = "number"]{
     padding: 10px;

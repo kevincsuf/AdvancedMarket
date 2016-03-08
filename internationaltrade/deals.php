@@ -77,65 +77,133 @@
 								</div>
 							</div>
 							
+							
 							<div class="control-group">
 								<div class="controls">
-									<input  class="span5" type="number" name="qty" id="qty" placeholder="* Maximum Quantity" />                                            
+
+									<input  class="span5" type="text" name="number" id="qty" placeholder="* Minimum Quantity to order" />
+										<select class = "span5" id = "unit" name="unit"> 
+										<option value= "Stage_Discount">Unit</option>
+										<option value= "ticket">Ticket</option>
+										<option value= "bag">Bag</option>
+										<option value= "bottle">Bottle</option>										
+										<option value= "vpack">Value Pack</option>
+										<option value= "kg">Kg</option>
+										<option value= "lb">Lb</option>
+										<option value= "pallet">Pallet</option>
+										<option value= "case">Case</option>										
+										<option value= "other">Other</option>
+									</select> $
+									<input class="span5" type="text" id="unit_price" name="unit_price" placeholder="* Enter regular price..." /> 									
+
 								</div>
 							</div>
 							
-							<div class="control-group">
-								<div class="controls">
-									<input class="span5" type="text" id="unit_price" name="unit_price" placeholder="* Enter actual price..." /> 
-										
-								</div>
-							</div>	
 							
-							<div class="control-group">
-								<div class="controls">
-									<input  class="span5" type="text" name="min_price" id="min_price" placeholder="* Discounted Price" />                                            
+							<div class="control-group">	
+								<div class = "controls" id =  "unit_other" style = "display:none;">
+									<!-- add code for unit option other -->
+									<input class="span5" type="text" id="uother" name="uother" placeholder="* Enter the Unit" size = "20"/>									
 								</div>
 							</div>
 							
+							<div class="control-group">	
+									# of Discount Option     
+									<select class = "span5" id = "number_discount_option" name="number_discount_option">
+										<option value= "0">* # of Discount Option </option>									
+										<option value= "1">1</option>
+										<option value= "2">2</option>
+										<option value= "3">3</option>
+									</select>
+							</div>
 							
+								<div class = "controls" id =  "number_discount_option_1" style = "display:none;">
+									<!-- add code for number_discount_option_1 -->
+									<input class="span5" type="text" id="number_discount_1" name="number_discount_1" placeholder="* Enter first quantity" size = "20"/>									
+									$<input class="span5" type="text" id="amount_discount_1" name="amount_discount_1" placeholder="* Enter first price" size = "20"/>										
+								</div>
+	
+								<div class = "controls" id =  "number_discount_option_2" style = "display:none;">
+									<!-- add code for number_discount_option_2 -->
+									<input class="span5" type="text" id="number_discount_2" name="number_discount_2" placeholder="* Enter second quantity" size = "20"/>									
+									$<input class="span5" type="text" id="amount_discount_2" name="amount_discount_2" placeholder="* Enter second price" size = "20"/>										
+								</div>
+
+								<div class = "controls" id =  "number_discount_option_3" style = "display:none;">
+									<!-- add code for number_discount_option_3 -->
+									<input class="span5" type="text" id="number_discount_3" name="number_discount_3" placeholder="* Enter third quantity" size = "20"/>									
+									$<input class="span5" type="text" id="amount_discount_3" name="amount_discount_3" placeholder="* Enter third price" size = "20"/>										
+								</div>
+								
+																	
+
 							<div class="control-group">			
 								<div class="controls">
+								Time Restricted
 									<select class = "span5" id = "time_restricted" name="time_restricted"> 
 										<option value= "time_restricted">-Time Restricted-</option>
 										<option value= "Yes">Yes</option>
 										<option value= "No">No</option>
 									</select>
 									
+
 									<select class = "span5" id = "stage_discount" name="stage_discount"> 
 										<option value= "Stage_Discount">Stage Discount</option>
 										<option value= "1">1</option>
 										<option value= "2">2</option>
 										<option value= "3">3</option>
 									</select>
+
+
+
 								</div>
 							</div>
 							<div class="control-group">	
 								<div class = "controls" id =  "time_restricted_yes" style = "display:none;">
 									<!-- add code for time restrcted option yes-->
-									<input class="span5" type="text" id="start_date" name="start_date" placeholder="* Enter start date YYYY-MM-DD" size = "20"/> 
-									<input class="span5" type="text" id="end_date" name="end_date" placeholder="* Enter end date YYYY-MM-DD" size = "20"/> 
+
+									<input class="span5" type="text" id="start_date" name="start_date" placeholder="* Enter start date MM/DD/YY" size = "20"/>
+									<input class="span5" type="text" id="end_date" name="end_date" placeholder="* Enter end date MM/DD/YY" size = "20"/>									
+
 								</div>
 							</div>
 							
 							<div class="control-group">			
 								<div class="controls">
+								Location Restricted 
 									<select class = "span5" id = "location_restricted" name="location_restricted"> 
 										<option value= "location_restricted">-Location Restricted-</option>
 										<option value= "Yes">Yes</option>
 										<option value= "No">No</option>
 									</select>
-								
-									<select class = "span5" id = "shiping_included" name="shiping_included"> 
-										<option value= "shiping_included">-Shipping Included-</option>
+							</div>
+
+							<div class="control-group">	
+								<div class = "controls" id =  "location_restricted_yes" style = "display:none;">
+									<!-- add code for location restricted option yes-->
+									<input class="span5" type="text" id="location_yes" name="location_yes" placeholder="* Describe location restriction" size = "20"/>									
+								</div>
+							</div>							
+							
+
+							<div class="control-group">	
+								Shipping Included 
+									<select class = "span5" id = "shipping_included" name="shipping_included"> 
+										<option value= "shipping_included">-Shipping Included-</option>
 										<option value= "Yes">Yes</option>
 										<option value= "No">No</option>
 									</select>
 								</div>
 							</div>
+							
+							<div class="control-group">	
+								<div class = "controls" id =  "shipping_included_yes" style = "display:none;">
+									<!-- add code for shipping included option yes-->
+									<input class="span5" type="text" id="shipping_yes" name="shipping_yes" placeholder="* Enter shipping cost" size = "20"/>									
+								</div>
+							</div>							
+														
+							
 							
 							<div class="control-group">			
 								
@@ -162,7 +230,7 @@
 			<!-- Contact section edn -->
         <!-- Footer section start -->
         <div class="footer">
-            <p>© Copyrights Advanced Market <p>
+            <p>© Copyrights Advanced Group Marketing <p>
         </div>
         <!-- Footer section end -->
         <!-- ScrollUp button start -->
@@ -188,6 +256,66 @@
 		}
 		});
 
+		$('select[name=unit]').change(function () {
+		if ($(this).val() == 'other') {
+			$('#unit_other').show();
+		} else {
+			$('#unit_other').hide();
+		}
+		});		
+
+		$('select[name=number_discount_option]').change(function () {
+		if ($(this).val() == '1') {
+			$('#number_discount_option_1').show();
+			$('#number_discount_option_2').hide();
+			
+		} else {
+			$('#number_discount_option_1').hide();
+		}
+		});
+
+		$('select[name=number_discount_option]').change(function () {
+		if ($(this).val() == '2') {
+			$('#number_discount_option_1').show();
+			$('#number_discount_option_2').show();
+		} 
+		});
+
+		$('select[name=number_discount_option]').change(function () {
+		if ($(this).val() == '3') {
+			$('#number_discount_option_1').show();
+			$('#number_discount_option_2').show();
+			$('#number_discount_option_3').show();
+		} else {
+			$('#number_discount_option_3').hide();
+		}
+		});
+		
+		$('select[name=number_discount_option]').change(function () {
+		if ($(this).val() == '0') {
+			$('#number_discount_option_1').hide();
+			$('#number_discount_option_2').hide();
+			$('#number_discount_option_3').hide();
+		} 
+		});
+		
+		$('select[name=location_restricted]').change(function () {
+		if ($(this).val() == 'Yes') {
+			$('#location_restricted_yes').show();
+		} else {
+			$('#location_restricted_yes').hide();
+			}
+		});
+
+		$('select[name=shipping_included]').change(function () {
+		if ($(this).val() == 'Yes') {
+			$('#shipping_included_yes').show();
+		} else {
+			$('#shipping_included_yes').hide();
+			}
+		});		
+		
+		
 		</script>
 		<script type="text/javascript" src="js/app.js"></script>
 

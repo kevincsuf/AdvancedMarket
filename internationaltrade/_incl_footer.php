@@ -1,5 +1,5 @@
 <!-- Footer section start -->
  <div class="footer">
-     <p>© Copyrights Advanced Market <p>
+     <p>&copy; 2016 Advanced Market <p>
  </div>
  <!-- Footer section end -->
