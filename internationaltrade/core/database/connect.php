@@ -1,5 +1,5 @@
 <?php 
-$con = mysqli_connect('localhost', 'root', '');
+$con = mysqli_connect('localhost', 'root', 'spouse_idealism_servant_literacy_airlock_revert');
 // Check connection
 if (mysqli_connect_errno())
   {
