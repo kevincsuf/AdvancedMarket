@@ -2,7 +2,7 @@
 <html>
 
     <head>
-        <title>Advanced Marketing &gt; Log in</title>
+        <title>Advanced Marketing123456 &gt; Log in</title>
         <?php include "_incl_header.php";?>
     </head>
 
