@@ -83,7 +83,7 @@
                         
 					<div class="span5 contact-form centered">								
 										
-						<form id="deals_form" method= "post" action= "deal_lib.php"<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+						<form id="deals_form" method= "post" action= "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 						
 							<div class="control-group">
 								<div class="controls">
@@ -140,19 +140,19 @@
 								<div class = "controls" id =  "number_discount_option_1" style = "display:none;">
 									<!-- add code for number_discount_option_1 -->
 									<input class="span5" type="text" id="number_discount_1" name="number_discount_1" placeholder="* Enter first quantity" size = "20"/>									
-									$<input class="span5" type="text" id="amount_discount_1" name="amount_discount_1" placeholder="* Enter first price" size = "20"/>										
+									<input class="span5" type="text" id="amount_discount_1" name="amount_discount_1" placeholder="* Enter first price $ ..." size = "20"/>										
 								</div>
 	
 								<div class = "controls" id =  "number_discount_option_2" style = "display:none;">
 									<!-- add code for number_discount_option_2 -->
 									<input class="span5" type="text" id="number_discount_2" name="number_discount_2" placeholder="* Enter second quantity" size = "20"/>									
-									$<input class="span5" type="text" id="amount_discount_2" name="amount_discount_2" placeholder="* Enter second price" size = "20"/>										
+									<input class="span5" type="text" id="amount_discount_2" name="amount_discount_2" placeholder="* Enter second price $ ..." size = "20"/>										
 								</div>
 
 								<div class = "controls" id =  "number_discount_option_3" style = "display:none;">
 									<!-- add code for number_discount_option_3 -->
 									<input class="span5" type="text" id="number_discount_3" name="number_discount_3" placeholder="* Enter third quantity" size = "20"/>									
-									$<input class="span5" type="text" id="amount_discount_3" name="amount_discount_3" placeholder="* Enter third price" size = "20"/>										
+									<input class="span5" type="text" id="amount_discount_3" name="amount_discount_3" placeholder="* Enter third price $ ..." size = "20"/>										
 								</div>
 								
 																	
