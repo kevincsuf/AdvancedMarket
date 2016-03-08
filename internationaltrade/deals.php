@@ -1,25 +1,3 @@
-<?php
-	
-	require_once("libs/validator.php");
-	$validator = new validator();
-	
-	if($_POST)
-	{
-		$validator-> add_field('title');
-		$validator-> add_rule_to_field('title', array('min-length',2));
-		$validator-> add_rule_to_field('title', array('empty'));
-		
-		if($validator-> form_valid())
-		{
-			//redirect to Home page
-			echo "<script type='text/javascript'>\n";
-			echo "alert('Successfully Submitted');\n"; 
-			echo " </script>";
-			echo "valid Submission";
-			exit();
-		}
-	}
-?>
 
 <html lang="en">
     
@@ -88,7 +66,7 @@
 							<div class="control-group">
 								<div class="controls">
 									<input class="span5" type="text" id="title" name="title" placeholder="* Title here..." />												
-									<?php $validator-> out_field_error('title');?>
+									
 								</div>
 								
 							</div>
@@ -101,7 +79,7 @@
 							
 							<div class="control-group">
 								<div class="controls">
-									<input  class="span5" type="number" name="number" id="qty" placeholder="* Maximum Quantity" />                                            
+									<input  class="span5" type="number" name="qty" id="qty" placeholder="* Maximum Quantity" />                                            
 								</div>
 							</div>
 							
@@ -127,7 +105,7 @@
 										<option value= "No">No</option>
 									</select>
 									
-									<select class = "span5" id = "time_restricted" name="time_restricted"> 
+									<select class = "span5" id = "stage_discount" name="stage_discount"> 
 										<option value= "Stage_Discount">Stage Discount</option>
 										<option value= "1">1</option>
 										<option value= "2">2</option>
@@ -138,7 +116,8 @@
 							<div class="control-group">	
 								<div class = "controls" id =  "time_restricted_yes" style = "display:none;">
 									<!-- add code for time restrcted option yes-->
-									<input class="span5" type="text" id="start_date" name="start_date" placeholder="* Enter start date MM/DD/YY" size = "20"/> 
+									<input class="span5" type="text" id="start_date" name="start_date" placeholder="* Enter start date YYYY-MM-DD" size = "20"/> 
+									<input class="span5" type="text" id="end_date" name="end_date" placeholder="* Enter end date YYYY-MM-DD" size = "20"/> 
 								</div>
 							</div>
 							

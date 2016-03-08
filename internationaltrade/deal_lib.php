@@ -11,7 +11,7 @@
 		 //echo $var_description;
 		$var_qty=$_POST['qty'];
 		 //echo $var_qty;
-		$var_unit_price=$_POST['_price'];
+		$var_unit_price=$_POST['unit_price'];
 		 //echo $var_unit_price;
 		$var_min_price=$_POST['min_price'];
 		 //echo $var_min_price;
