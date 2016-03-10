@@ -3,11 +3,11 @@
 
     <head>
         <title>Advanced Marketing123456 &gt; Log in</title>
-        <?php include "_incl_header.php";?>
+        <?php include "libs/_incl_header.php";?>
     </head>
 
 	<body>
-        <?php include "_incl_navbar.php";?>
+        <?php include "libs/_incl_navbar.php";?>
 
         <!-- Login section starts -->
         <div id="contact" class="contact">
@@ -43,7 +43,7 @@
             </div>
         </div>
 
-	   <?php include "_incl_footer.php";?>
+	   <?php include "libs/_incl_footer.php";?>
 	</body>
 
 </html>

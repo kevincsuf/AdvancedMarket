@@ -1,4 +1,5 @@
-
+<?php
+// modified on 03/09/2016 date field and removed quantity 1 option?>
 <html lang="en">
     
     <head>
@@ -61,7 +62,7 @@
                         
 					<div class="span5 contact-form centered">								
 										
-						<form id="deals_form" method= "post" action= "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+						<form id="deals_form" method= "post" action= "libs/deal_lib.php" <?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>>
 						
 							<div class="control-group">
 								<div class="controls">
@@ -81,23 +82,44 @@
 							<div class="control-group">
 								<div class="controls">
 
-									<input  class="span5" type="text" name="number" id="qty" placeholder="* Minimum Quantity to order" />
-										<select class = "span5" id = "unit" name="unit"> 
-										<option value= "Stage_Discount">Unit</option>
-										<option value= "ticket">Ticket</option>
-										<option value= "bag">Bag</option>
-										<option value= "bottle">Bottle</option>										
-										<option value= "vpack">Value Pack</option>
+									<input  class="span5" type="text" name="qty" id="qty" placeholder="* Minimum Quantity per order" />
+										
+										<!--<input class = "span5" type="text" name= "unit"id = "unit" placeholder= "* Please Choose the unit"> -->
+										<!--<option>---Unit--</option>
+										<select name="unit">
+										<!--<option value= "Stage_Discount">Unit</option>-->
+										<!--<option value= "Tickets">Tickets</option>
+										<option value= "Bags">Bags</option>
+										<option value= "Bottles">Bottles</option>										
+										<option value= "vpack">Value_Pack</option>
 										<option value= "kg">Kg</option>
 										<option value= "lb">Lb</option>
 										<option value= "pallet">Pallet</option>
-										<option value= "case">Case</option>										
-										<option value= "other">Other</option>
-									</select> $
+										<option value= "case">Cases</option>										
+										<option value= "other">Others</option>
+									</select> -->
 									<input class="span5" type="text" id="unit_price" name="unit_price" placeholder="* Enter regular price..." /> 									
 
 								</div>
 							</div>
+							<div class="control-group">			
+								<div class="controls">
+								<label>Unit 
+									<select class = "span5" id = "unit" name="unit"> 
+										
+										<option value= "Tickets">Tickets</option>
+										<option value= "Bags">Bags</option>
+										<option value= "Bottles">Bottles</option>										
+										<option value= "vpack">Value_Pack</option>
+										<option value= "kg">Kg</option>
+										<option value= "lb">Lb</option>
+										<option value= "pallet">Pallet</option>
+										<option value= "case">Cases</option>										
+										<option value= "other">Others</option>
+									</select>
+								</label>
+							</div>
+
 							
 							
 							<div class="control-group">	
@@ -108,20 +130,22 @@
 							</div>
 							
 							<div class="control-group">	
+								<label>
 									# of Discount Option     
 									<select class = "span5" id = "number_discount_option" name="number_discount_option">
-										<option value= "0">* # of Discount Option </option>									
+										<!--<option value= "0">* # of Discount Option </option>									-->
 										<option value= "1">1</option>
 										<option value= "2">2</option>
 										<option value= "3">3</option>
 									</select>
+								</label>
 							</div>
 							
 								<div class = "controls" id =  "number_discount_option_1" style = "display:none;">
-									<!-- add code for number_discount_option_1 -->
+								
 									<input class="span5" type="text" id="number_discount_1" name="number_discount_1" placeholder="* Enter first quantity" size = "20"/>									
 									<input class="span5" type="text" id="amount_discount_1" name="amount_discount_1" placeholder="* Enter first price $ ..." size = "20"/>										
-								</div>
+								</div> 
 	
 								<div class = "controls" id =  "number_discount_option_2" style = "display:none;">
 									<!-- add code for number_discount_option_2 -->
@@ -139,22 +163,13 @@
 
 							<div class="control-group">			
 								<div class="controls">
-								Time Restricted
+								<label>Time Restricted
 									<select class = "span5" id = "time_restricted" name="time_restricted"> 
-										<option value= "time_restricted">-Time Restricted-</option>
-										<option value= "Yes">Yes</option>
+									<!--	<option value= "time_restricted">-Time Restricted-</option>-->
 										<option value= "No">No</option>
+										<option value= "Yes">Yes</option>
 									</select>
-									
-
-									<select class = "span5" id = "stage_discount" name="stage_discount"> 
-										<option value= "Stage_Discount">Stage Discount</option>
-										<option value= "1">1</option>
-										<option value= "2">2</option>
-										<option value= "3">3</option>
-									</select>
-
-
+								</label>
 
 								</div>
 							</div>
@@ -162,44 +177,47 @@
 								<div class = "controls" id =  "time_restricted_yes" style = "display:none;">
 									<!-- add code for time restrcted option yes-->
 
-									<input class="span5" type="text" id="start_date" name="start_date" placeholder="* Enter start date MM/DD/YY" size = "20"/>
-									<input class="span5" type="text" id="end_date" name="end_date" placeholder="* Enter end date MM/DD/YY" size = "20"/>									
+									<input class="span5" type="text" id="start_date" name="start_date" placeholder="* Enter start date YYYY/MM/DD" size = "20"/>
+									<input class="span5" type="text" id="end_date" name="end_date" placeholder="* Enter end date YYYY/MM/DD" size = "20"/>									
 
 								</div>
 							</div>
 							
 							<div class="control-group">			
 								<div class="controls">
-								Location Restricted 
+								<label>Location Restricted 
 									<select class = "span5" id = "location_restricted" name="location_restricted"> 
-										<option value= "location_restricted">-Location Restricted-</option>
-										<option value= "Yes">Yes</option>
+										<!--<option value= "location_restricted">-Location Restricted-</option>-->
 										<option value= "No">No</option>
+										<option value= "Yes">Yes</option>
 									</select>
+								</label>
 							</div>
 
 							<div class="control-group">	
 								<div class = "controls" id =  "location_restricted_yes" style = "display:none;">
 									<!-- add code for location restricted option yes-->
-									<input class="span5" type="text" id="location_yes" name="location_yes" placeholder="* Describe location restriction" size = "20"/>									
+									<input class="span5" type="text" id="location_Description" name="location_Description" placeholder="* Describe location restriction" size = "20"/>									
 								</div>
 							</div>							
 							
 
 							<div class="control-group">	
-								Shipping Included 
+								<label>Shipping Included 
 									<select class = "span5" id = "shipping_included" name="shipping_included"> 
-										<option value= "shipping_included">-Shipping Included-</option>
-										<option value= "Yes">Yes</option>
+									<!--	<option value= "shipping_included">-Shipping Included-</option>-->
 										<option value= "No">No</option>
+										<option value= "Yes">Yes</option>
+										
 									</select>
+								</label>
 								</div>
 							</div>
 							
 							<div class="control-group">	
 								<div class = "controls" id =  "shipping_included_yes" style = "display:none;">
 									<!-- add code for shipping included option yes-->
-									<input class="span5" type="text" id="shipping_yes" name="shipping_yes" placeholder="* Enter shipping cost" size = "20"/>									
+									<input class="span5" type="text" id="shipping_Description" name="shipping_Description" placeholder="* Enter shipping cost" size = "20"/>									
 								</div>
 							</div>							
 														

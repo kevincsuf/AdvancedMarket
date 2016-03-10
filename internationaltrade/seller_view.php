@@ -1,6 +1,6 @@
 <?php
 
-require_once("_lib_login.php");
+require_once("libs/_lib_login.php");
 
 if (isset($_GET['login_id']) && isset($_GET['login_pwd'])) {
     $login = new Login($_GET['login_id'], $_GET['login_pwd']);
@@ -15,11 +15,11 @@ if (isset($_GET['login_id']) && isset($_GET['login_pwd'])) {
 
     <head>
         <title>Advanced Marketing</title>
-        <?php include "_incl_header.php";?>
+        <?php include "libs/_incl_header.php";?>
     </head>
 
 	<body>
-        <?php include "_incl_navbar.php";?>
+        <?php include "libs/_incl_navbar.php";?>
 
 		<!-- Registeration section start -->
 		<div id="contact" class="contact">
@@ -46,6 +46,6 @@ if (isset($_GET['login_id']) && isset($_GET['login_pwd'])) {
             </div>
 		</div>
 
-        <?php include "_incl_footer.php";?>
+        <?php include "libs/_incl_footer.php";?>
     </body>
 </html>

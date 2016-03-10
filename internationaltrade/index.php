@@ -1,6 +1,6 @@
 <?php
 
-require_once("_lib_login.php");
+require_once("libs/_lib_login.php");
 
 $message = "";
 
@@ -21,11 +21,11 @@ else {
 
     <head>
         <title>Advanced Marketing</title>
-        <?php include "_incl_header.php";?>
+        <?php include "libs/_incl_header.php";?>
     </head>
 
 	<body>
-        <?php include "_incl_navbar.php";?>
+        <?php include "libs/_incl_navbar.php";?>
 
 		<div class = "container">
 			<H1>Welcome To Our Site OOOO Second open</H1>
@@ -33,7 +33,7 @@ else {
             <p><font color="red"><?php echo $message ?></font></p>
 		</div>
 
-	   <?php include "_incl_footer.php";?>
+	   <?php include "libs/_incl_footer.php";?>
 	</body>
 
 </html>

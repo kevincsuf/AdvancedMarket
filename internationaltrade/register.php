@@ -235,11 +235,11 @@
 
 	<head>
 		<title>Advanced Marketing</title>
-		<?php include "_incl_header.php";?>
+		<?php include "libs/_incl_header.php";?>
 	</head>
 
 	<body>
-		<?php include "_incl_navbar.php";?>
+		<?php include "libs/_incl_navbar.php";?>
 
         
         
@@ -277,11 +277,11 @@
 									
 								<div class="seller_form" style="display:none;" >
 									
-									<form id="seller_form" method = "post" action= "<?php echo $_SERVER["PHP_SELF"];?>">
+									<form id="seller_form" method="post" action="libs/register_lib.php" <?php echo $_SERVER["PHP_SELF"];?>>
 
 										<div class="control-group">
 											<div class="controls">
-												<input class="span5" type="email" name= "seller_email" id="seller_email" placeholder="* Email ID here" value="<?php echo $seller_email_value;?>" required />
+												<input class="span5" type="email" name="seller_email" id="seller_email" placeholder="* Email ID here" value="<?php echo $seller_email_value;?>" required />
 												<?php $validator->out_field_error('seller_email');?>
 											</div>
 										</div>

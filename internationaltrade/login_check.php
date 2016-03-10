@@ -1,6 +1,6 @@
 <?php
 
-require_once("_lib_login.php");
+require_once("libs/_lib_login.php");
 $login = new Login($_POST['login_id'], $_POST['login_pwd']);
 
 // login form check
