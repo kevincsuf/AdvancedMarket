@@ -1,11 +1,11 @@
 <?php
 
-require_once("_lib_login.php");
+require_once("./core/init.php");
+require_once("_incl_confirm_login.php");
 
-if (isset($_GET['login_id']) && isset($_GET['login_pwd'])) {
-    $login = new Login($_GET['login_id'], $_GET['login_pwd']);
-    $login->check_login();
-}
+$user_member_type = $_SESSION["utype"];
+$user_id = $_SESSION["uid"];
+$user_name = $_SESSION["uname"];
 
 ?>
 

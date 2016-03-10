@@ -1,16 +1,24 @@
 <?php
 
-require_once("_lib_login.php");
+require_once("./core/init.php");
+//require_once("_lib_login.php");
 
 $message = "";
 
+if (isset($_SESSION["uid"])) {
+    //$login = new Login($_GET['login_id'], $_GET['login_pwd']);
+    //$login->check_login();
+    $message = "You are currently LOGGED IN as a <b>".strtoupper($_SESSION["utype"])."</b>, the ID is <b>".$_SESSION["uid"]."</b>, and the NAME is <b>".$_SESSION["uname"]."</b>";
+}
+/*
 if (isset($_GET['login_id']) && isset($_GET['login_pwd'])) {
     $login = new Login($_GET['login_id'], $_GET['login_pwd']);
     $login->check_login();
     $message = "You are currently LOGGED IN as a ".strtoupper($login->member_type)." and the ID is ".$login->id;
 }
+*/
 else {
-    $message = "You are currently LOGGED OUT";
+    $message = "You are currently <b>LOGGED OUT</b>";
 }
 
 ?>

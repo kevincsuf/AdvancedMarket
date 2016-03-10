@@ -1,232 +1,292 @@
 <?php
-	
-	require_once("libs/validator.php");
-	$validator = new validator();
-	$field_name = "";
 
-	// Set previous input value for seller
-	$selected_regtype_seller = "";
-	$seller_email_value = "";
-	$seller_pwd_value = "";
-	$seller_pwd_repeat_value = "";
-	$seller_first_name_value = "";
-	$seller_last_name_value = "";
-	$seller_buss_name_value = "";
-	$seller_addr_value = "";
-	$seller_mobile_number_value = "";
-	$selected_seller_rev_msg_yes = "";
-	$selected_seller_rev_msg_no = "";
-	$selected_seller_category_food = "";
-	$selected_seller_category_electronics = "";
-	$selected_seller_category_rawmaterial = "";
-	$selected_seller_category_entertainment = "";
+require_once("./core/init.php");
+require_once("libs/validator.php");
 
-	// Set previous input value for buyer
-	$selected_regtype_buyer = "";
-	$buyer_email_value = "";
-	$buyer_pwd_value = "";
-	$buyer_pwd_repeat_value = "";
-	$buyer_first_name_value = "";
-	$buyer_last_name_value = "";
-	$buyer_addr_value = "";
-	$buyer_mobile_number_value = "";
-	$selected_buyer_rev_msg_yes = "";
-	$selected_buyer_rev_msg_no = "";
-	$selected_buyer_category_food = "";
-	$selected_buyer_category_electronics = "";
-	$selected_buyer_category_rawmaterial = "";
-	$selected_buyer_category_entertainment = "";
+$validator = new validator();
+$field_name = "";
 
-	if($_POST) {
-		//***** SELLER *****
-		if (isset($_POST['seller_reg']) == "seller") { // When seller
-			// seller_email
-			$field_name = "seller_email";
-			$field_display_name = "Email ID";
-			$validator->add_field($field_name);
-			$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
-			$validator->add_rule_to_field($field_name, array('email'), $field_display_name);
+// Set previous input value for seller
+$selected_regtype_seller = "";
+$seller_email_value = "";
+$seller_pwd_value = "";
+$seller_pwd_repeat_value = "";
+$seller_first_name_value = "";
+$seller_last_name_value = "";
+$seller_buss_name_value = "";
+$seller_addr_value = "";
+$seller_mobile_number_value = "";
+$selected_seller_rev_msg_yes = "";
+$selected_seller_rev_msg_no = "";
+$selected_seller_category_food = "";
+$selected_seller_category_electronics = "";
+$selected_seller_category_rawmaterial = "";
+$selected_seller_category_entertainment = "";
 
-			// seller_pwd
-			$field_name = "seller_pwd";
-			$field_display_name = "Password";
-			$validator->add_field($field_name);
-			$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
-			$validator->add_rule_to_field($field_name, array('min-length', 2), $field_display_name);
+// Set previous input value for buyer
+$selected_regtype_buyer = "";
+$buyer_email_value = "";
+$buyer_pwd_value = "";
+$buyer_pwd_repeat_value = "";
+$buyer_first_name_value = "";
+$buyer_last_name_value = "";
+$buyer_addr_value = "";
+$buyer_mobile_number_value = "";
+$selected_buyer_rev_msg_yes = "";
+$selected_buyer_rev_msg_no = "";
+$selected_buyer_category_food = "";
+$selected_buyer_category_electronics = "";
+$selected_buyer_category_rawmaterial = "";
+$selected_buyer_category_entertainment = "";
 
-			// seller_pwd_repeat
-			$field_name = "seller_pwd_repeat";
-			$field_display_name = "Repeat Password";
-			$validator->add_field($field_name);
-			$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
-			$validator->add_rule_to_field($field_name, array('pwd-not-match-seller'), $field_display_name);
+if($_POST) {
+	//***** SELLER *****
+	if (isset($_POST['seller_reg']) == "seller") { // When seller
+		// seller_email
+		$field_name = "seller_email";
+		$field_display_name = "Email ID";
+		$validator->add_field($field_name);
+		$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+		$validator->add_rule_to_field($field_name, array('email'), $field_display_name);
 
-			// seller_first_name
-			$field_name = "seller_first_name";
-			$field_display_name = "First Name";
-			$validator->add_field($field_name);
-			$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
-			$validator->add_rule_to_field($field_name, array('letters-only'), $field_display_name);
+		// seller_pwd
+		$field_name = "seller_pwd";
+		$field_display_name = "Password";
+		$validator->add_field($field_name);
+		$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+		$validator->add_rule_to_field($field_name, array('min-length', 2), $field_display_name);
 
-			// seller_last_name
-			$field_name = "seller_last_name";
-			$field_display_name = "Last Name";
-			$validator->add_field($field_name);
-			$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
-			$validator->add_rule_to_field($field_name, array('letters-only'), $field_display_name);
+		// seller_pwd_repeat
+		$field_name = "seller_pwd_repeat";
+		$field_display_name = "Repeat Password";
+		$validator->add_field($field_name);
+		$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+		$validator->add_rule_to_field($field_name, array('pwd-not-match-seller'), $field_display_name);
 
-			// seller_buss_name
-			$field_name = "seller_buss_name";
-			$field_display_name = "Business Name";
-			$validator->add_field($field_name);
-			$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+		// seller_first_name
+		$field_name = "seller_first_name";
+		$field_display_name = "First Name";
+		$validator->add_field($field_name);
+		$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+		$validator->add_rule_to_field($field_name, array('letters-only'), $field_display_name);
 
-			// seller_addr
-			$field_name = "seller_addr";
-			$field_display_name = "Address";
-			$validator->add_field($field_name);
-			$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+		// seller_last_name
+		$field_name = "seller_last_name";
+		$field_display_name = "Last Name";
+		$validator->add_field($field_name);
+		$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+		$validator->add_rule_to_field($field_name, array('letters-only'), $field_display_name);
 
-			// seller_mobile_number
-			$field_name = "seller_mobile_number";
-			$field_display_name = "Contact number";
-			$validator->add_field($field_name);
-			$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
-			$validator->add_rule_to_field($field_name, array('numbers-only'), $field_display_name);
-		}
-		//***** BUYER *****
-		else if (isset($_POST['buyer_reg']) == "buyer") { // When buyer
-			// buyer_email
-			$field_name = "buyer_email";
-			$field_display_name = "Email ID";
-			$validator->add_field($field_name);
-			$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
-			$validator->add_rule_to_field($field_name, array('email'), $field_display_name);
+		// seller_buss_name
+		$field_name = "seller_buss_name";
+		$field_display_name = "Business Name";
+		$validator->add_field($field_name);
+		$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
 
-			// buyer_pwd
-			$field_name = "buyer_pwd";
-			$field_display_name = "Password";
-			$validator->add_field($field_name);
-			$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
-			$validator->add_rule_to_field($field_name, array('min-length', 2), $field_display_name);
+		// seller_addr
+		$field_name = "seller_addr";
+		$field_display_name = "Address";
+		$validator->add_field($field_name);
+		$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
 
-			// buyer_pwd_repeat
-			$field_name = "buyer_pwd_repeat";
-			$field_display_name = "Repeat Password";
-			$validator->add_field($field_name);
-			$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
-			$validator->add_rule_to_field($field_name, array('pwd-not-match-buyer'), $field_display_name);
+		// seller_mobile_number
+		$field_name = "seller_mobile_number";
+		$field_display_name = "Contact number";
+		$validator->add_field($field_name);
+		$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+		$validator->add_rule_to_field($field_name, array('numbers-only'), $field_display_name);
+	}
+	//***** BUYER *****
+	else if (isset($_POST['buyer_reg']) == "buyer") { // When buyer
+		// buyer_email
+		$field_name = "buyer_email";
+		$field_display_name = "Email ID";
+		$validator->add_field($field_name);
+		$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+		$validator->add_rule_to_field($field_name, array('email'), $field_display_name);
 
-			// buyer_first_name
-			$field_name = "buyer_first_name";
-			$field_display_name = "First Name";
-			$validator->add_field($field_name);
-			$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
-			$validator->add_rule_to_field($field_name, array('letters-only'), $field_display_name);
+		// buyer_pwd
+		$field_name = "buyer_pwd";
+		$field_display_name = "Password";
+		$validator->add_field($field_name);
+		$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+		$validator->add_rule_to_field($field_name, array('min-length', 2), $field_display_name);
 
-			// buyer_last_name
-			$field_name = "buyer_last_name";
-			$field_display_name = "Last Name";
-			$validator->add_field($field_name);
-			$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
-			$validator->add_rule_to_field($field_name, array('letters-only'), $field_display_name);
+		// buyer_pwd_repeat
+		$field_name = "buyer_pwd_repeat";
+		$field_display_name = "Repeat Password";
+		$validator->add_field($field_name);
+		$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+		$validator->add_rule_to_field($field_name, array('pwd-not-match-buyer'), $field_display_name);
 
-			// buyer_addr
-			$field_name = "buyer_addr";
-			$field_display_name = "Address";
-			$validator->add_field($field_name);
-			$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+		// buyer_first_name
+		$field_name = "buyer_first_name";
+		$field_display_name = "First Name";
+		$validator->add_field($field_name);
+		$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+		$validator->add_rule_to_field($field_name, array('letters-only'), $field_display_name);
 
-			// buyer_mobile_number
-			$field_name = "buyer_mobile_number";
-			$field_display_name = "Mobile Number";
-			$validator->add_field($field_name);
-			$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
-			$validator->add_rule_to_field($field_name, array('numbers-only'), $field_display_name);
-		}
+		// buyer_last_name
+		$field_name = "buyer_last_name";
+		$field_display_name = "Last Name";
+		$validator->add_field($field_name);
+		$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+		$validator->add_rule_to_field($field_name, array('letters-only'), $field_display_name);
 
-		if($validator-> form_valid()) { // valid input
-			// redirect to Home page
-			/*echo "<script type='text/javascript'>\n";
-			echo "alert('Successfully Submitted');\n"; 
-			echo " </script>";
-			echo "valid Submission";
-			exit();*/
-			if (isset($_POST['seller_reg']) == "seller") { // When seller
-				$regtype; // "seler"
-				$seller_email_value = "";
-				$seller_pwd_value = "";
-				$seller_pwd_repeat_value = "";
-				$seller_first_name_value = "";
-				$seller_last_name_value = "";
-				$seller_buss_name_value = "";
-				$seller_addr_value = "";
-				$seller_mobile_number_value = "";
-				$seller_rev_msg_yes = "";
-				$seller_rev_msg_no = "";
-				$seller_category_food = "";
-				$seller_category_electronics = "";
-				$seller_category_rawmaterial = "";
-				$seller_category_entertainment = "";
+		// buyer_addr
+		$field_name = "buyer_addr";
+		$field_display_name = "Address";
+		$validator->add_field($field_name);
+		$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+
+		// buyer_mobile_number
+		$field_name = "buyer_mobile_number";
+		$field_display_name = "Mobile Number";
+		$validator->add_field($field_name);
+		$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+		$validator->add_rule_to_field($field_name, array('numbers-only'), $field_display_name);
+	}
+
+	if($validator-> form_valid()) { // valid input
+		// redirect to Home page
+		/*echo "<script type='text/javascript'>\n";
+		echo "alert('Successfully Submitted');\n";
+		echo " </script>";
+		echo "valid Submission";
+		exit();*/
+
+		// When seller
+		if (isset($_POST["seller_reg"]) == "seller") {
+			$_SESSION["regtype"] = $_POST["seller_reg"];
+			$_SESSION["seller_email"] = $_POST["seller_email"];
+			$_SESSION["seller_pwd"] = $_POST["seller_pwd"];
+			$_SESSION["seller_first_name"] = $_POST["seller_first_name"];
+			$_SESSION["seller_last_name"] = $_POST["seller_last_name"];
+			$_SESSION["seller_buss_name"] = $_POST["seller_buss_name"];
+			$_SESSION["seller_addr"] = $_POST["seller_addr"];
+			$_SESSION["seller_mobile_number"] = $_POST["seller_mobile_number"];
+			$_SESSION["seller_rev_msg"] = $_POST["seller_rev_msg"];
+			if (isset($_POST["seller_category_food"])) {
+				$_SESSION["seller_category_food"] = "1";
 			}
-			
-		} else { // invalid input
-			if (isset($_POST['seller_reg']) == "seller") { // When seller
-				$selected_regtype_seller = "selected=\"selected\"";
-				$seller_email_value = $_POST["seller_email"];
-				$seller_pwd_value = $_POST["seller_pwd"];
-				$seller_pwd_repeat_value = $_POST["seller_pwd_repeat"];
-				$seller_first_name_value = $_POST["seller_first_name"];
-				$seller_last_name_value = $_POST["seller_last_name"];
-				$seller_buss_name_value = $_POST["seller_buss_name"];
-				$seller_addr_value = $_POST["seller_addr"];
-				$seller_mobile_number_value = $_POST["seller_mobile_number"];
-				if ($_POST["seller_rev_msg"] == "Yes") {
-					$selected_seller_rev_msg_yes = "selected=\"selected\"";
-				} else if ($_POST["seller_rev_msg"] == "No") {
-					$selected_seller_rev_msg_no = "selected=\"selected\"";
-				}
-				if (isset($_POST["seller_category_food"])) {
-					$selected_seller_category_food = "checked=\"checked\"";
-				}
-				if (isset($_POST["seller_category_electronics"])) {
-					$selected_seller_category_electronics = "checked=\"checked\"";
-				}
-				if (isset($_POST["seller_category_rawmaterial"])) {
-					$selected_seller_category_rawmaterial = "checked=\"checked\"";
-				}
-				if (isset($_POST["seller_category_entertainment"])) {
-					$selected_seller_category_entertainment = "checked=\"checked\"";
-				}
-			} else if (isset($_POST['buyer_reg']) == "buyer") { // When buyer
-				$selected_regtype_buyer = "selected=\"selected\"";
-				$buyer_email_value = $_POST["buyer_email"];
-				$buyer_pwd_value = $_POST["buyer_pwd"];
-				$buyer_pwd_repeat_value = $_POST["buyer_pwd_repeat"];
-				$buyer_first_name_value = $_POST["buyer_first_name"];
-				$buyer_last_name_value = $_POST["buyer_last_name"];
-				$buyer_addr_value = $_POST["buyer_addr"];
-				$buyer_mobile_number_value = $_POST["buyer_mobile_number"];
-				if ($_POST["buyer_rev_msg"] == "Yes") {
-					$selected_buyer_rev_msg_yes = "selected=\"selected\"";
-				} else if ($_POST["buyer_rev_msg"] == "No") {
-					$selected_buyer_rev_msg_no = "selected=\"selected\"";
-				}
-				if (isset($_POST["buyer_category_food"])) {
-					$selected_buyer_category_food = "checked=\"checked\"";
-				}
-				if (isset($_POST["buyer_category_electronics"])) {
-					$selected_buyer_category_electronics = "checked=\"checked\"";
-				}
-				if (isset($_POST["buyer_category_rawmaterial"])) {
-					$selected_buyer_category_rawmaterial = "checked=\"checked\"";
-				}
-				if (isset($_POST["buyer_category_entertainment"])) {
-					$selected_buyer_category_entertainment = "checked=\"checked\"";
-				}
+			else {
+				$_SESSION["seller_category_food"] = "0";
+			}
+			if (isset($_POST["seller_category_electronics"])) {
+				$_SESSION["seller_category_electronics"] = "1";
+			}
+			else {
+				$_SESSION["seller_category_electronics"] = "0";
+			}
+			if (isset($_POST["seller_category_rawmaterial"])) {
+				$_SESSION["seller_category_rawmaterial"] = "1";
+			}
+			else {
+				$_SESSION["seller_category_rawmaterial"] = "0";
+			}
+			if (isset($_POST["seller_category_entertainment"])) {
+				$_SESSION["seller_category_entertainment"] = "1";
+			}
+			else {
+				$_SESSION["seller_category_entertainment"] = "0";
+			}
+		}
+		// When buyer
+		else if (isset($_POST["buyer_reg"]) == "buyer") {
+			$_SESSION["regtype"] = $_POST["buyer_reg"];
+			$_SESSION["buyer_email"] = $_POST["buyer_email"];
+			$_SESSION["buyer_pwd"] = $_POST["buyer_pwd"];
+			$_SESSION["buyer_first_name"] = $_POST["buyer_first_name"];
+			$_SESSION["buyer_last_name"] = $_POST["buyer_last_name"];
+			$_SESSION["buyer_addr"] = $_POST["buyer_addr"];
+			$_SESSION["buyer_mobile_number"] = $_POST["buyer_mobile_number"];
+			$_SESSION["buyer_rev_msg"] = $_POST["buyer_rev_msg"];
+			if (isset($_POST["buyer_category_food"])) {
+				$_SESSION["buyer_category_food"] = "1";
+			}
+			else {
+				$_SESSION["buyer_category_food"] = "0";
+			}
+			if (isset($_POST["buyer_category_electronics"])) {
+				$_SESSION["buyer_category_electronics"] = "1";
+			}
+			else {
+				$_SESSION["buyer_category_electronics"] = "0";
+			}
+			if (isset($_POST["buyer_category_rawmaterial"])) {
+				$_SESSION["buyer_category_rawmaterial"] = "1";
+			}
+			else {
+				$_SESSION["buyer_category_rawmaterial"] = "0";
+			}
+			if (isset($_POST["buyer_category_entertainment"])) {
+				$_SESSION["buyer_category_entertainment"] = "1";
+			}
+			else {
+				$_SESSION["buyer_category_entertainment"] = "0";
+			}
+		}
+
+		// Go to DB insert page
+		echo "<script type=\"text/javascript\">window.location.replace(\"./register_lib.php\");</script>";
+
+	} else { // invalid input
+		if (isset($_POST['seller_reg']) == "seller") { // When seller
+			$selected_regtype_seller = "selected=\"selected\"";
+			$seller_email_value = $_POST["seller_email"];
+			$seller_pwd_value = $_POST["seller_pwd"];
+			$seller_pwd_repeat_value = $_POST["seller_pwd_repeat"];
+			$seller_first_name_value = $_POST["seller_first_name"];
+			$seller_last_name_value = $_POST["seller_last_name"];
+			$seller_buss_name_value = $_POST["seller_buss_name"];
+			$seller_addr_value = $_POST["seller_addr"];
+			$seller_mobile_number_value = $_POST["seller_mobile_number"];
+			if ($_POST["seller_rev_msg"] == "yes") {
+				$selected_seller_rev_msg_yes = "selected=\"selected\"";
+			} else if ($_POST["seller_rev_msg"] == "No") {
+				$selected_seller_rev_msg_no = "selected=\"selected\"";
+			}
+			if (isset($_POST["seller_category_food"])) {
+				$selected_seller_category_food = "checked=\"checked\"";
+			}
+			if (isset($_POST["seller_category_electronics"])) {
+				$selected_seller_category_electronics = "checked=\"checked\"";
+			}
+			if (isset($_POST["seller_category_rawmaterial"])) {
+				$selected_seller_category_rawmaterial = "checked=\"checked\"";
+			}
+			if (isset($_POST["seller_category_entertainment"])) {
+				$selected_seller_category_entertainment = "checked=\"checked\"";
+			}
+		} else if (isset($_POST['buyer_reg']) == "buyer") { // When buyer
+			$selected_regtype_buyer = "selected=\"selected\"";
+			$buyer_email_value = $_POST["buyer_email"];
+			$buyer_pwd_value = $_POST["buyer_pwd"];
+			$buyer_pwd_repeat_value = $_POST["buyer_pwd_repeat"];
+			$buyer_first_name_value = $_POST["buyer_first_name"];
+			$buyer_last_name_value = $_POST["buyer_last_name"];
+			$buyer_addr_value = $_POST["buyer_addr"];
+			$buyer_mobile_number_value = $_POST["buyer_mobile_number"];
+			if ($_POST["buyer_rev_msg"] == "yes") {
+				$selected_buyer_rev_msg_yes = "selected=\"selected\"";
+			} else if ($_POST["buyer_rev_msg"] == "No") {
+				$selected_buyer_rev_msg_no = "selected=\"selected\"";
+			}
+			if (isset($_POST["buyer_category_food"])) {
+				$selected_buyer_category_food = "checked=\"checked\"";
+			}
+			if (isset($_POST["buyer_category_electronics"])) {
+				$selected_buyer_category_electronics = "checked=\"checked\"";
+			}
+			if (isset($_POST["buyer_category_rawmaterial"])) {
+				$selected_buyer_category_rawmaterial = "checked=\"checked\"";
+			}
+			if (isset($_POST["buyer_category_entertainment"])) {
+				$selected_buyer_category_entertainment = "checked=\"checked\"";
 			}
 		}
 	}
+}
 ?>
 
 
@@ -338,8 +398,8 @@
 										<div class="control-group">
 										   <select class="span5" name="seller_rev_msg" id="seller_rev_msg">
 												<option value= "seller_rev_msg">--Do you want to receive message--</option>
-												<option value= "Yes" <?php echo $selected_seller_rev_msg_yes ?>>Yes</option>
-												<option value= "No" <?php echo $selected_seller_rev_msg_no ?>>No</option>
+												<option value= "yes" <?php echo $selected_seller_rev_msg_yes ?>>Yes</option>
+												<option value= "no" <?php echo $selected_seller_rev_msg_no ?>>No</option>
 											</select>
 										</div>
 										
@@ -431,8 +491,8 @@
 									<div class="control-group">
                                        <select class = "span5" id = "buyer_rev_msg" name="buyer_rev_msg">
 										   <option value= "buyer_rev_msg">--Do you want to receive message--</option>
-										   <option value= "Yes" <?php echo $selected_buyer_rev_msg_yes ?>>Yes</option>
-										   <option value= "No" <?php echo $selected_buyer_rev_msg_no ?>>No</option>
+										   <option value= "yes" <?php echo $selected_buyer_rev_msg_yes ?>>Yes</option>
+										   <option value= "no" <?php echo $selected_buyer_rev_msg_no ?>>No</option>
 										</select>
                                     </div>
 									

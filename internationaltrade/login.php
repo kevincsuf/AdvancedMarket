@@ -24,8 +24,8 @@
                         <form name="loginform" id="loginform" action="login_check.php" method="post">
                             <div class="control-group">
                                 <div class="controls">
-                                    <input class="span5" type="text" id="user_id" placeholder="ID" name="login_id" />
-                                    <input class="span5" type="password" id="user_pass" placeholder="Password" name="login_pwd" />
+                                    <input class="span5" type="text" id="user_id" placeholder="ID" name="login_id" required />
+                                    <input class="span5" type="password" id="user_pass" placeholder="Password" name="login_pwd" required />
                                 </div>
                             </div>
 

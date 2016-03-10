@@ -5,9 +5,18 @@
 //$login = new Login($_GET['login_id'], $_GET['login_pwd']);
 
 // Set passing login info var
-$get_var = "";
+//$get_var = "";
 $member_type = "";
 
+if (isset($_SESSION["uid"])) {
+    $member_type = strtolower($_SESSION["utype"]);
+}
+
+
+/*
+ * Kevin: 03/09/2016
+ * Deprecated code used before DB
+ *
 if (isset($_GET['login_id']) && isset($_GET['login_pwd'])) {
     $get_var = "?login_id=".$login->id."&login_pwd=".$login->pwd."&member_type=".$login->member_type;
     $member_type = $login->member_type;
@@ -15,6 +24,8 @@ if (isset($_GET['login_id']) && isset($_GET['login_pwd'])) {
 else {
     $get_var = "";
 }
+*/
+
 
 // Get current page name
 $page_name = basename($_SERVER['PHP_SELF']);
@@ -47,28 +58,34 @@ $menu_display = "";
 if ($member_type == "seller") { // When seller
     foreach($menu_items_seller as $key => $value) {
         if ($page_name == $value) {
-            $menu_display = $menu_display."<li class=\"active\"><a href=\"".$value.$get_var."\">".$key."</a></li>";
+            //$menu_display = $menu_display."<li class=\"active\"><a href=\"".$value.$get_var."\">".$key."</a></li>";
+            $menu_display = $menu_display."<li class=\"active\"><a href=\"".$value."\">".$key."</a></li>";
         }
         else {
-            $menu_display = $menu_display."<li><a href=\"".$value.$get_var."\">".$key."</a></li>";
+            //$menu_display = $menu_display."<li><a href=\"".$value.$get_var."\">".$key."</a></li>";
+            $menu_display = $menu_display."<li><a href=\"".$value."\">".$key."</a></li>";
         }
     }
 } else if ($member_type == "buyer") { // When buyer
     foreach($menu_items_buyer as $key => $value) {
         if ($page_name == $value) {
-            $menu_display = $menu_display."<li class=\"active\"><a href=\"".$value.$get_var."\">".$key."</a></li>";
+            //$menu_display = $menu_display."<li class=\"active\"><a href=\"".$value.$get_var."\">".$key."</a></li>";
+            $menu_display = $menu_display."<li class=\"active\"><a href=\"".$value."\">".$key."</a></li>";
         }
         else {
-            $menu_display = $menu_display."<li><a href=\"".$value.$get_var."\">".$key."</a></li>";
+            //$menu_display = $menu_display."<li><a href=\"".$value.$get_var."\">".$key."</a></li>";
+            $menu_display = $menu_display."<li><a href=\"".$value."\">".$key."</a></li>";
         }
     }
 } else { // Not logged in yet
     foreach($menu_items_logout as $key => $value) {
         if ($page_name == $value) {
-            $menu_display = $menu_display."<li class=\"active\"><a href=\"".$value.$get_var."\">".$key."</a></li>";
+            //$menu_display = $menu_display."<li class=\"active\"><a href=\"".$value.$get_var."\">".$key."</a></li>";
+            $menu_display = $menu_display."<li class=\"active\"><a href=\"".$value."\">".$key."</a></li>";
         }
         else {
-            $menu_display = $menu_display."<li><a href=\"".$value.$get_var."\">".$key."</a></li>";
+            //$menu_display = $menu_display."<li><a href=\"".$value.$get_var."\">".$key."</a></li>";
+            $menu_display = $menu_display."<li><a href=\"".$value."\">".$key."</a></li>";
         }
     }
 }
