@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-include './core/init.php';
+require_once("./core/init.php");
 
 // to get the type from dropdown
 $var_type = $_SESSION['regtype'];

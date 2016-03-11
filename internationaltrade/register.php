@@ -1,7 +1,7 @@
 <?php
 
-require_once("./core/init.php");
-require_once("libs/validator.php");
+require_once("./libs/core/init.php");
+require_once("./libs/validator.php");
 
 $validator = new validator();
 $field_name = "";
@@ -40,6 +40,10 @@ $selected_buyer_category_rawmaterial = "";
 $selected_buyer_category_entertainment = "";
 
 if($_POST) {
+	/*
+     * Set validator
+     */
+
 	//***** SELLER *****
 	if (isset($_POST['seller_reg']) == "seller") { // When seller
 		// seller_email
@@ -147,14 +151,12 @@ if($_POST) {
 		$validator->add_rule_to_field($field_name, array('numbers-only'), $field_display_name);
 	}
 
-	if($validator-> form_valid()) { // valid input
-		// redirect to Home page
-		/*echo "<script type='text/javascript'>\n";
-		echo "alert('Successfully Submitted');\n";
-		echo " </script>";
-		echo "valid Submission";
-		exit();*/
+	/*
+     * After validation
+     */
 
+	// valid input
+	if($validator-> form_valid()) {
 		// When seller
 		if (isset($_POST["seller_reg"]) == "seller") {
 			$_SESSION["regtype"] = $_POST["seller_reg"];
@@ -228,10 +230,13 @@ if($_POST) {
 		}
 
 		// Go to DB insert page
-		echo "<script type=\"text/javascript\">window.location.replace(\"./register_lib.php\");</script>";
+		echo "<script type=\"text/javascript\">window.location.replace(\"./libs/register_lib.php\");</script>";
 
-	} else { // invalid input
-		if (isset($_POST['seller_reg']) == "seller") { // When seller
+	}
+	// invalid input
+	else {
+		// When seller
+		if (isset($_POST['seller_reg']) == "seller") {
 			$selected_regtype_seller = "selected=\"selected\"";
 			$seller_email_value = $_POST["seller_email"];
 			$seller_pwd_value = $_POST["seller_pwd"];
@@ -258,7 +263,9 @@ if($_POST) {
 			if (isset($_POST["seller_category_entertainment"])) {
 				$selected_seller_category_entertainment = "checked=\"checked\"";
 			}
-		} else if (isset($_POST['buyer_reg']) == "buyer") { // When buyer
+		}
+		// When buyer
+		else if (isset($_POST['buyer_reg']) == "buyer") {
 			$selected_regtype_buyer = "selected=\"selected\"";
 			$buyer_email_value = $_POST["buyer_email"];
 			$buyer_pwd_value = $_POST["buyer_pwd"];
@@ -295,11 +302,11 @@ if($_POST) {
 
 	<head>
 		<title>Advanced Marketing</title>
-		<?php include "_incl_header.php";?>
+		<?php include "libs/_incl_header.php";?>
 	</head>
 
 	<body>
-		<?php include "_incl_navbar.php";?>
+		<?php include "libs/_incl_navbar.php";?>
 
         
         
@@ -337,11 +344,11 @@ if($_POST) {
 									
 								<div class="seller_form" style="display:none;" >
 									
-									<form id="seller_form" method = "post" action= "<?php echo $_SERVER["PHP_SELF"];?>">
+									<form id="seller_form" method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
 
 										<div class="control-group">
 											<div class="controls">
-												<input class="span5" type="email" name= "seller_email" id="seller_email" placeholder="* Email ID here" value="<?php echo $seller_email_value;?>" required />
+												<input class="span5" type="email" name="seller_email" id="seller_email" placeholder="* Email ID here" value="<?php echo $seller_email_value;?>" required />
 												<?php $validator->out_field_error('seller_email');?>
 											</div>
 										</div>
@@ -578,7 +585,7 @@ if($_POST) {
 				$('.buyer_form').slideUp();
 				$('.seller_form').slideUp();
 			}
-		}).change();
+			}).change();
 
 		</script>
         <script type="text/javascript" src="js/app.js"></script>

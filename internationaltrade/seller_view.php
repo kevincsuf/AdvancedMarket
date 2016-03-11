@@ -1,7 +1,7 @@
 <?php
 
-require_once("./core/init.php");
-require_once("_incl_confirm_login.php");
+require_once("./libs/core/init.php");
+require_once("./libs/_incl_confirm_login.php");
 
 $user_member_type = $_SESSION["utype"];
 $user_id = $_SESSION["uid"];
@@ -15,11 +15,11 @@ $user_name = $_SESSION["uname"];
 
     <head>
         <title>Advanced Marketing</title>
-        <?php include "_incl_header.php";?>
+        <?php include "libs/_incl_header.php";?>
     </head>
 
 	<body>
-        <?php include "_incl_navbar.php";?>
+        <?php include "libs/_incl_navbar.php";?>
 
 		<!-- Registeration section start -->
 		<div id="contact" class="contact">
@@ -46,6 +46,6 @@ $user_name = $_SESSION["uname"];
             </div>
 		</div>
 
-        <?php include "_incl_footer.php";?>
+        <?php include "libs/_incl_footer.php";?>
     </body>
 </html>

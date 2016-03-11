@@ -21,8 +21,7 @@
 	 {
 		 $rule_name = $field_rule[0];    // field rule is an array which has two elements for first name field in register.php
 		 
-		 switch($rule_name)
-		 {
+		 switch ($rule_name) {
 			 case 'email':
 				 if(!filter_var($_POST[$field_name], FILTER_VALIDATE_EMAIL)) {
 					 $this->add_error_to_field($field_name, "Please enter valid email address.");
@@ -62,6 +61,35 @@
              case 'numbers-only':
                  if (!preg_match("/^[0-9]*$/", $_POST[$field_name])) {
                      $this->add_error_to_field($field_name, ucwords($field_display_name)." allows only numbers.");
+                 }
+                 break;
+
+             case 'price-only':
+                 //if (!preg_match("/([0-9,]+(\.[0-9]{2})?)/", $_POST[$field_name]) || !preg_match("/^[0-9.]*$/", $_POST[$field_name])) {
+                 if (!preg_match("/^([1-9][0-9]*|0)(\.[0-9]{2})?$/", $_POST[$field_name])) {
+                     $this->add_error_to_field($field_name, ucwords($field_display_name)." allows only dollar amount (ex: 12.34) format.");
+                 }
+                 break;
+
+             case 'date-only':
+                 if (!preg_match("/^((0?[13578]|10|12)(-|\/)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$/", $_POST[$field_name])) {
+                     $this->add_error_to_field($field_name, ucwords($field_display_name)." allows only US date (ex: 12/31/2016) format.");
+                 }
+                 break;
+
+             case 'no-past-date':
+                 $s_date = date("Y-m-d", strtotime($_POST['start_date']));
+                 $e_date = date("Y-m-d", time());
+                 if($s_date < $e_date) {
+                     $this->add_error_to_field($field_name, ucwords($field_display_name)." must be at least today.");
+                 }
+                 break;
+
+             case 'future-date-only':
+                 $s_date = date("Y-m-d", strtotime($_POST['start_date']));
+                 $e_date = date("Y-m-d", strtotime($_POST['end_date']));
+                 if($s_date >= $e_date) {
+                     $this->add_error_to_field($field_name, ucwords($field_display_name)." must be at least one day after starting date.");
                  }
                  break;
 			 
