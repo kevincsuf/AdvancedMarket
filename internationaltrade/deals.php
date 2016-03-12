@@ -3,7 +3,7 @@
 
 require_once("./libs/core/init.php");
 require_once("./libs/validator.php");
-require_once("./libs/_incl_confirm_login.php");
+//require_once("./libs/_incl_confirm_login.php");
 
 $validator = new validator();
 $field_name = "";
@@ -230,8 +230,10 @@ if($_POST) {
         }
         $_SESSION["time_restricted"] = $_POST["time_restricted"];
         if ($_POST["time_restricted"] == "yes") {
-            $_SESSION["start_date"] = $_POST["start_date"];
-            $_SESSION["end_date"] = $_POST["end_date"];
+            //$_SESSION["start_date"] = $_POST["start_date"];
+			//$_SESSION["end_date"] = $_POST["end_date"];
+			$_SESSION["start_date"] = date("Y/m/d", strtotime($_POST["start_date"]));
+			$_SESSION["end_date"] = date("Y/m/d", strtotime($_POST["end_date"]));
         }
         else {
             $_SESSION["start_date"] = "";
