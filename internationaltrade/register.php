@@ -2,6 +2,7 @@
 
 require_once("./libs/core/init.php");
 require_once("./libs/validator.php");
+require_once("./libs/functions.php");
 
 $validator = new validator();
 $field_name = "";
@@ -505,10 +506,12 @@ if($_POST) {
 									
 									<div class="control-group">
 										<div class="controls">Select Category of your choice:</br>
-											<input class="checkbox-inline" type="checkbox" name="buyer_category_food" value="food" <?php echo $selected_buyer_category_food ?> />Food products<br />
+										<?php getcategory();?>
+										<!--	<input class="checkbox-inline" type="checkbox" name="buyer_category_food" value="food" <?php echo $selected_buyer_category_food ?> />Food products<br />
 											<input class="checkbox-inline" type="checkbox" name="buyer_category_electronics" value="electronics" <?php echo $selected_buyer_category_electronics ?> />Electronics<br />
 											<input class="checkbox-inline" type="checkbox" name="buyer_category_rawmaterial" value="rawmaterial" <?php echo $selected_buyer_category_rawmaterial ?> />Raw Material<br />
 											<input class="checkbox-inline" type="checkbox" name="buyer_category_entertainment" value="entertainment" <?php echo $selected_buyer_category_entertainment ?> />Entertainment
+											-->
 										</div>
                                     </div>
                                     <div class="control-group">

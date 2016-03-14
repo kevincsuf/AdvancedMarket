@@ -2,6 +2,7 @@
 
 require_once("./libs/core/init.php");
 require_once("./libs/login_lib.php");
+require_once("./libs/functions.php");
 
 $message = "";
 
@@ -36,9 +37,15 @@ else {
         <?php include "libs/_incl_navbar.php";?>
 
 		<div class = "container">
-			<H1>Welcome To Our Site OOOO Second open</H1>
+			<H1>Welcome To Our Site </H1>
             <p><font color="red">===== Login Test Mesage =====</font></p>
             <p><font color="red"><?php echo $message ?></font></p>
+		</div>
+		
+		<div class = "container">
+			<div id= "deals_box">
+			<?php getdeal(); ?>
+			</div>
 		</div>
 
 	   <?php include "libs/_incl_footer.php";?>

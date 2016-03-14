@@ -255,6 +255,10 @@ if($_POST) {
         }
         if (isset($_FILES["datafile"]["name"])) {
             $_SESSION["datafile"] = basename($_FILES["datafile"]["name"]); // need to be improved later
+			//Added code for moving uploaded image into images folder - Nikita
+			$var_datafile = $_FILES["datafile"]["name"];
+			$var_datafile_temp = $_FILES["datafile"]["tmp_name"];
+			move_uploaded_file($var_datafile_temp,"images/$var_datafile");
         }
         else {
             $_SESSION["datafile"] = "";

@@ -13,7 +13,8 @@ $libs_files = array(
     "deal_lib.php",
     "login_lib.php",
     "register_lib.php",
-    "validator.php"
+    "validator.php",
+	"functions.php"
 );
 
 // Switch connect.php file location by the including file

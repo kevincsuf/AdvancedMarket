@@ -837,6 +837,21 @@ p {
     color:#181A1C;
 }
 /*
+Deal Display
+*****************************************************************/
+#deals_box{
+	width:780px;
+	text-align: center;
+	margin-left: 30px;
+	margin-bottom: 10px;
+}
+#single_deal{
+	float: left;
+	margin-left:20px;
+	padding: 10px;
+}
+
+/*
 3.8 Footer
 ********************************************************************/
  .footer {
