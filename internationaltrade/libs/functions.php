@@ -16,7 +16,7 @@ function getcategory()
 			$var_category_id=$var_row_category['cat_id'];
 			$var_category_title=$var_row_category['category'];
 			//echo $category_title."</br>";
-			echo $var_category_title. "<br />";
+			echo "<option>$var_category_title </option> ";
 		}
 		
 	}
@@ -30,7 +30,7 @@ function getdeal()
 		
 		while($var_row_deal= mysqli_fetch_array($var_run_deal))
 		{
-				$var_deal_id = $var_row_deal['deal_id'];
+				$var_deal_id = $var_row_deal['deal_id']; // deal_id => 1 
 				$var_deal_title = $var_row_deal['title'];
 				$var_deal_description = $var_row_deal['description'];
 				$var_deal_qty = $var_row_deal['qty'];
@@ -45,7 +45,7 @@ function getdeal()
 				<p><h4> $$var_deal_unit_price</h4></p>
 				<!-- deal_id is url variable -->
 				<a href= 'details.php?deal_url_id=$var_deal_id' style='float:center;'>Details</a>
-				<a href= 'index.php'> <button id= 'button-sp' style = 'float:right'>Join Deal </button> </a>
+				<a href= 'join_deal.php?deal_url_id2=$var_deal_id'> <button id= 'button-sp' style = 'float:right'>Join Deal </button> </a>
 			</div>
 			";
 		}

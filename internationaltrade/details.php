@@ -65,20 +65,69 @@ else {
 					<div id = 'single_deal'>
 						<h3> $var_deal_title </h3>
 						<img src = 'images/$var_deal_image' width='500' height='400' />
-						<p><h4> $$var_deal_unit_price</h4></p>
-						<p><h5>$var_deal_description</h5></p>
+						<p><h3> $$var_deal_unit_price</h3></p>
+						<p><h5> Product Description: $var_deal_description</h5></p>
 						
-						<a href= 'join.php'> <button id= 'button-sp' style = 'float:right' size = 100%>Join Deal </button> </a>
+						
 						<a href= 'index.php'> <button id= 'button-sp' style = 'float:left' size = 30%>Back </button> </a>
+						
+		                
+						<a href='#' data-toggle='modal' data-target='#PostCommentsModal'> <input type='submit' id='submit' value='Join' onclick='return changeText('submitbutton')' /> </a>
 					</div>
+					
+					
+		
 					";
 				}
+
 			}
 			?>
 			
-			
 		</div>
+		<div class='modal fade' id='PostCommentsModal' tabindex='-1' role='dialog' aria-labelledby='helpModalLabel' aria-hidden='true'>
+						<div class='modal-dialog'>      
+							<div class='modal-content'>
+									<div class='modal-header'>
+										
+										<h4 class='modal-title' id='myModalLabel'> Thank you for joining Enter Shipping Details</h4>
+									</div>
+									
+									<div class='modal-body'>
+								  
+										<div class='input-group'>
+												<span class='input-group-addon'>@</span>
+												<input type='text' class='form-control' name='quantity' id='quantity' placeholder='Quantity' />
+															
+										</div>
+						
+						   
+										<div class='input-group'>
+											<span class='input-group-addon'>@</span>
+											<input type='text' class='form-control' name='address' placeholder='Address' />
+										</div>
+						
+										<div class='input-group'>
+											<span class='input-group-addon'>@</span>
+											<input type='text' class='form-control' name='state' placeholder='State' />
+										</div>
+						
+										<div class='input-group'>
+											<span class='input-group-addon'>@</span>
+											<input rows='4' cols='50' class='form-control' name='zipcode' placeholder='Zipcode'/> 
 
+										</div>
+										</br>
+										<button type='button' class='btn btn-success'>Submit</button>
+							
+									</div>
+									<div class='modal-footer'>
+										<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+									</div>
+							   
+							</div>
+						</div>
+		</div>
+		
 	   <?php include "libs/_incl_footer.php";?>
 	</body>
 

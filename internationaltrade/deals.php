@@ -3,6 +3,7 @@
 
 require_once("./libs/core/init.php");
 require_once("./libs/validator.php");
+require_once("./libs/functions.php");
 //require_once("./libs/_incl_confirm_login.php");
 
 $validator = new validator();
@@ -476,7 +477,18 @@ if($_POST) {
                                     <?php $validator->out_field_error('uother');?>
 								</div>
 							</div>
-							
+							<!-- Adding Category-->
+							<div class="control-group">
+								<div class = "controls" >
+									
+									
+									<select name = "category">
+									<option>Select a Category </option>
+                                    <?php 
+									getcategory(); ?>
+									</select>
+								</div>
+							</div>
 							<div class="control-group">	
 								<label>
 									# of Discount Option     
