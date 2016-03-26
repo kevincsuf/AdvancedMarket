@@ -45,10 +45,11 @@ function getdeal()
 				<p><h4> $$var_deal_unit_price</h4></p>
 				<!-- deal_id is url variable -->
 				<a href= 'details.php?deal_url_id=$var_deal_id' style='float:center;'>Details</a>
-				<a href= 'join_deal.php?deal_url_id2=$var_deal_id'> <button id= 'button-sp' style = 'float:right'>Join Deal </button> </a>
+				
 			</div>
 			";
 		}
 		
 	}
+	//<a href= 'join_deal.php?deal_url_id2=$var_deal_id'> <button id= 'button-sp' style = 'float:right'>Join Deal </button> </a>
 ?>
