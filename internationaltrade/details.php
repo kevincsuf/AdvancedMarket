@@ -88,19 +88,16 @@ else {
 						<div class='modal-dialog'>      
 							<div class='modal-content'>
 									<div class='modal-header'>
-										
 										<h4 class='modal-title' id='myModalLabel'> Thank you for joining Enter Shipping Details</h4>
 									</div>
 									
 									<div class='modal-body'>
 								  
 										<div class='input-group'>
-												<span class='input-group-addon'>@</span>
-												<input type='text' class='form-control' name='quantity' id='quantity' placeholder='Quantity' />
-															
+											<span class='input-group-addon'>@</span>
+											<input type='text' class='form-control' name='quantity' id='quantity' placeholder='Quantity' />
 										</div>
-						
-						   
+
 										<div class='input-group'>
 											<span class='input-group-addon'>@</span>
 											<input type='text' class='form-control' name='address' placeholder='Address' />
@@ -114,12 +111,14 @@ else {
 										<div class='input-group'>
 											<span class='input-group-addon'>@</span>
 											<input rows='4' cols='50' class='form-control' name='zipcode' placeholder='Zipcode'/> 
-
 										</div>
+
 										</br>
+
 										<button type='button' class='btn btn-success'>Submit</button>
 							
 									</div>
+
 									<div class='modal-footer'>
 										<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
 									</div>
