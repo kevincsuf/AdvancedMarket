@@ -71,6 +71,30 @@
                  }
                  break;
 
+             case 'discount-only-1':
+                 $price_r = $_POST['unit_price'];
+                 $price_1 = $_POST["amount_discount_1"];
+                 if($price_r <= $price_1) {
+                     $this->add_error_to_field($field_name, ucwords($field_display_name)." must be less than Regular price.");
+                 }
+                 break;
+
+             case 'discount-only-2':
+                 $price_1 = $_POST["amount_discount_1"];
+                 $price_2 = $_POST["amount_discount_2"];
+                 if($price_1 <= $price_2) {
+                     $this->add_error_to_field($field_name, ucwords($field_display_name)." must be less than First price.");
+                 }
+                 break;
+
+             case 'discount-only-3':
+                 $price_2 = $_POST["amount_discount_2"];
+                 $price_3 = $_POST["amount_discount_3"];
+                 if($price_2 <= $price_3) {
+                     $this->add_error_to_field($field_name, ucwords($field_display_name)." must be less than Second price.");
+                 }
+                 break;
+
              case 'date-only':
                  if (!preg_match("/^((0?[13578]|10|12)(-|\/)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$/", $_POST[$field_name])) {
                      $this->add_error_to_field($field_name, ucwords($field_display_name)." allows only US date (ex: 12/31/2016) format.");

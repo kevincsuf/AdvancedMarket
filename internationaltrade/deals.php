@@ -115,6 +115,7 @@ if($_POST) {
     $validator->add_field($field_name);
     $validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
     $validator->add_rule_to_field($field_name, array('price-only'), $field_display_name);
+    $validator->add_rule_to_field($field_name, array('discount-only-1'), $field_display_name);
 
     // discount_2
     if ($_POST["number_discount_option"] == "2" || $_POST["number_discount_option"] == "3") {
@@ -131,6 +132,7 @@ if($_POST) {
         $validator->add_field($field_name);
         $validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
         $validator->add_rule_to_field($field_name, array('price-only'), $field_display_name);
+        $validator->add_rule_to_field($field_name, array('discount-only-2'), $field_display_name);
     }
 
     // discount_3
@@ -148,6 +150,7 @@ if($_POST) {
         $validator->add_field($field_name);
         $validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
         $validator->add_rule_to_field($field_name, array('price-only'), $field_display_name);
+        $validator->add_rule_to_field($field_name, array('discount-only-3'), $field_display_name);
     }
 
     // time_restricted
