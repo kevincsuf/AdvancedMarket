@@ -2,6 +2,7 @@
 //create_deal Ver 1.0 - 03/07/2016
 //create_deal Ver 1.0 - 03/09/2016
 //edited the Sql query- 03/11/2016
+//added category- 03/29/2016
 //include 'core/init.php';
 //$errors[] = "we can't find that username";
 //getting info from reg page to here
@@ -14,6 +15,7 @@ $var_qty = $_SESSION['qty'];
 $var_unit_price = $_SESSION['unit_price'];
 $var_unit = $_SESSION['unit'];
 $var_uother = $_SESSION['uother'];
+$var_category = $_SESSION['category'];
 $var_number_discount_option = $_SESSION['number_discount_option'];
 $var_number_discount_1 = $_SESSION['number_discount_1'];
 $var_amount_discount_1 = $_SESSION['amount_discount_1'];
@@ -42,6 +44,7 @@ echo "var_description: " . $var_description . "<br/>";
 echo "var_qty: " . $var_qty . "<br/>";
 echo "var_unit_price: " . $var_unit_price . "<br/>";
 echo "var_unit: " . $var_unit . "<br/>";
+echo "var_category: " . $var_category . "<br/>";
 echo "var_uother: " . $var_uother . "<br/>";
 echo "var_number_discount_option: " . $var_number_discount_option . "<br/>";
 echo "var_number_discount_1: " . $var_number_discount_1 . "<br/>";

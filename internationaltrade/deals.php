@@ -25,6 +25,8 @@ $selected_unit_pallet = "";
 $selected_unit_case = "";
 $selected_unit_other = "";
 
+$selected_category = "";
+
 $uother_value = "";
 
 $selected_number_discount_option_1 = "";
@@ -93,6 +95,12 @@ if($_POST) {
         $validator->add_field($field_name);
         $validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
     }
+
+    // category
+    $field_name = "category";
+    $field_display_name = "Category";
+    $validator->add_field($field_name);
+    $validator->add_rule_to_field($field_name, array('no-selection'), $field_display_name);
 
     // number_discount_1
     $field_name = "number_discount_1";
@@ -196,6 +204,7 @@ if($_POST) {
         else {
             $_SESSION["uother"] = "";
         }
+        $_SESSION["category"] = $_POST["category"];
         $_SESSION["number_discount_option"] = $_POST["number_discount_option"];
         if ($_POST["number_discount_option"] == "1") {
             $_SESSION["number_discount_1"] = $_POST["number_discount_1"];
@@ -315,6 +324,10 @@ if($_POST) {
         }
 
         $uother_value = $_POST["uother"];
+
+        if ($_POST["category"]) {
+            $selected_category = $_POST["category"];
+        }
 
         switch ($_POST["number_discount_option"]) {
             case "1":
@@ -477,21 +490,22 @@ if($_POST) {
                                     <?php $validator->out_field_error('uother');?>
 								</div>
 							</div>
+
 							<!-- Adding Category-->
 							<div class="control-group">
-								<div class = "controls" >
-									
-									
-									<select name = "category">
-									<option>Select a Category </option>
-                                    <?php 
-									getcategory(); ?>
+								<div class = "controls">
+                                    <select class = "span5" id = "category" name="category">
+									    <option>Select a Category </option>
+                                        <?php
+									        getcategory($selected_category);
+                                        ?>
 									</select>
+                                    <?php $validator->out_field_error('category');?>
 								</div>
 							</div>
+
 							<div class="control-group">	
-								<label>
-									# of Discount Option     
+								<label># of Discount Option
 									<select class = "span5" id = "number_discount_option" name="number_discount_option">
 										<!--<option value= "0">* # of Discount Option </option>									-->
 										<option value= "1" <?php echo $selected_number_discount_option_1 ?>>1</option>

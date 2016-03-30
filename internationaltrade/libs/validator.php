@@ -92,6 +92,12 @@
                      $this->add_error_to_field($field_name, ucwords($field_display_name)." must be at least one day after starting date.");
                  }
                  break;
+
+             case 'no-selection':
+                 if (!preg_match("/^[0-9]*$/", $_POST[$field_name])) {
+                     $this->add_error_to_field($field_name, "Please select one of the option.");
+                 }
+                 break;
 			 
 			 default:
 			 
