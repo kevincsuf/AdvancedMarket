@@ -6,6 +6,7 @@ require_once("./libs/validator.php");
 require_once("./libs/functions.php");
 //require_once("./libs/_incl_confirm_login.php");
 
+
 $validator = new validator();
 $field_name = "";
 
@@ -196,6 +197,7 @@ if($_POST) {
 
     // valid input
     if($validator-> form_valid()) {
+		
         $_SESSION["title"] = $_POST["title"];
         $_SESSION["description"] = $_POST["description"];
         $_SESSION["qty"] = $_POST["qty"];
