@@ -21,6 +21,7 @@ if($_POST) {
                     $message = "Logged in as a ".$login->member_type;
                     $login->warning($message);
 
+                    $_SESSION["ukey"] = $login->user_key;
                     $_SESSION["uid"] = $login->id;
                     $_SESSION["uname"] = $login->name;
                     $_SESSION["utype"] = $login->member_type;

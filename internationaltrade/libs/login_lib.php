@@ -2,6 +2,7 @@
 
 class Login {
 
+    private $user_key;
     private $id;
     private $pwd;
     private $name;
@@ -99,6 +100,7 @@ class Login {
         // Retrieve data successfully
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
+            $this->user_key = $row["id"];
             $this->name = $row["first_name"]." ".$row["last_name"];
             $this->member_type = $row["type"];
             return true;
