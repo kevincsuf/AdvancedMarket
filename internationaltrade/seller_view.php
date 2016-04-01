@@ -56,7 +56,7 @@ $user_key=$_SESSION["ukey"]
 					<tbody>
 					
 					  <?php 
-						$var_display_deal = "SELECT title,description,number_discount_1,amount_discount_1,number_discount_2,amount_discount_2,number_discount_3,amount_discount_3 FROM create_deal WHERE user_name='$user_id'";
+						$var_display_deal = "SELECT title,description,number_discount_1,amount_discount_1,number_discount_2,amount_discount_2,number_discount_3,amount_discount_3 FROM create_deal WHERE user_id='$user_key'";
 						$var_run_display_deal = mysqli_query($con,$var_display_deal);
 						
 						while($var_row_display_deal = mysqli_fetch_array($var_run_display_deal))
