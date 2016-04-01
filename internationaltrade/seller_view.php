@@ -2,10 +2,12 @@
 
 require_once("./libs/core/init.php");
 require_once("./libs/_incl_confirm_login.php");
+require_once("./libs/login_lib.php");
 
 $user_member_type = $_SESSION["utype"];
 $user_id = $_SESSION["uid"];
 $user_name = $_SESSION["uname"];
+$user_key=$_SESSION["ukey"]
 
 ?>
 
