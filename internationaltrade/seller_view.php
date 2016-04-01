@@ -67,16 +67,16 @@ $user_name = $_SESSION["uname"];
 							$var_display_deal_price_1 = $var_row_display_deal['amount_discount_1'];
 							$var_display_deal_price_2 = $var_row_display_deal['amount_discount_2'];
 							$var_display_deal_price_3 = $var_row_display_deal['amount_discount_3'];
-							echo "<tr>";
-							echo "<td>" .$var_display_deal_title ."</td>";
-							echo "<td>" .$var_display_deal_description ."</td>";
-							echo "<td>" .$var_display_deal_qty_1 ."</td>";
-							echo "<td>" .$var_display_deal_price_1 ."</td>";
-							echo "<td>" .$var_display_deal_qty_2 ."</td>";
-							echo "<td>" .$var_display_deal_price_2 ."</td>";
-							echo "<td>" .$var_display_deal_qty_3 ."</td>";
-							echo "<td>" .$var_display_deal_price_3 ."</td>";
-							echo "</tr>";
+							echo "<tr>
+							 <td> $var_display_deal_title</td>
+							 <td> $var_display_deal_description </td>
+							 <td> $var_display_deal_qty_1 </td>
+							 <td> $var_display_deal_price_1 </td>
+							 <td> $var_display_deal_qty_2 </td>
+							 <td> $var_display_deal_price_2 </td>
+							 <td> $var_display_deal_qty_3 </td>
+							 <td> $var_display_deal_price_3 </td>
+							</tr>";
 						}
 						?>
 					

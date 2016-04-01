@@ -73,7 +73,7 @@ echo "var_datafile: " . $var_datafile . "<br/>";
 
 //inserting into db
 
-$sql="insert into create_deal(start_date,end_date,user_name,title,description,qty,unit_price,unit,time_restricted,number_discount_option,number_discount_1,amount_discount_1,number_discount_2,amount_discount_2,number_discount_3,amount_discount_3,location_restricted,location_description,shipping_included,shipping_description,deal_image) values ('$var_start_date','$var_end_date','$var_user_id','$var_title','$var_description','$var_qty','$var_unit_price','$var_unit','$var_time_restricted','$var_number_discount_option','$var_number_discount_1','$var_amount_discount_1','$var_number_discount_2','$var_amount_discount_2','$var_number_discount_3','$var_amount_discount_3','$var_location_restricted','$var_description','$var_shipping_included','$var_shipping_description','$var_datafile')";
+$sql="insert into create_deal(start_date,end_date,user_name,title,description,deal_category,qty,unit_price,unit,time_restricted,number_discount_option,number_discount_1,amount_discount_1,number_discount_2,amount_discount_2,number_discount_3,amount_discount_3,location_restricted,location_description,shipping_included,shipping_description,deal_image) values ('$var_start_date','$var_end_date','$var_user_id','$var_title','$var_description','$var_category','$var_qty','$var_unit_price','$var_unit','$var_time_restricted','$var_number_discount_option','$var_number_discount_1','$var_amount_discount_1','$var_number_discount_2','$var_amount_discount_2','$var_number_discount_3','$var_amount_discount_3','$var_location_restricted','$var_description','$var_shipping_included','$var_shipping_description','$var_datafile')";
 
 if(mysqli_query($con,$sql))
 {
