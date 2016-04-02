@@ -62,7 +62,7 @@ else {
 						$var_deal_image = $var_row_deal['deal_image'];
 					
 					echo "
-					<div id = 'single_deal'>
+					<div class = 'single_deal'>
 						<h3> $var_deal_title </h3>
 						<img src = 'images/$var_deal_image' width='500' height='400' />
 						<p><h3> $$var_deal_unit_price</h3></p>

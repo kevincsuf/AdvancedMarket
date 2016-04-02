@@ -610,11 +610,11 @@ p {
     line-height:1.3em;
 }
 /*
-3.5 Price table
+3.5 Price table using this in seller-view page
 ******************************************************************/
  .price-table {
-    margin-top: 70px;
-    margin-bottom: 20px;
+    margin-top: 0px;
+    margin-bottom: 50px;
 }
 .price-column {
     background-color:white;
@@ -624,7 +624,19 @@ p {
     padding-bottom:20px;
     margin:0 auto;
     text-align:center;
+	 
+	
 }
+.price-column :link {
+	color:#0000ff;}
+	
+.price-column :hover {
+	text-decoration:underline;}
+
+.price-column :visited {
+	color:#0000ff;
+	text-decoration:underline;}
+	
 .price-column h3 {
     background-color:#181A1C;
     text-transform:uppercase;
@@ -689,7 +701,7 @@ p {
 }
 
 /*
-3.7 Contact
+3.7 Contact using this
 ********************************************************************/
  .contact {
     background: #FECE1A;
@@ -850,7 +862,15 @@ Deal Display
 	margin-left:20px;
 	padding: 10px;
 }
-
+.right {
+    float: right;
+    right: 10px;
+    width: 100px;
+    height: 75px;
+    margin: 50px;
+    
+    padding: 10px;
+}
 /*
 3.8 Footer
 ********************************************************************/
