@@ -42,9 +42,16 @@ else {
             <p><font color="red"><?php echo $message ?></font></p>
 		</div>
 		
+                    <div class="span2 price-column">
+                        <h4>Category</h4>
+                        <?php displaycategory();?>
+                    </div>
+		
+		
 		<div class = "container">
 			<div id= "deals_box">
 			<?php getdeal(); ?>
+			<?php getCatDeal(); ?>
 			</div>
 		</div>
 

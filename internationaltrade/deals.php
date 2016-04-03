@@ -3,7 +3,7 @@
 
 require_once("./libs/core/init.php");
 require_once("./libs/validator.php");
-require_once("./libs/functions.php");
+require_once("./libs/functions.php");  // for getcategory function
 //require_once("./libs/_incl_confirm_login.php");
 
 
