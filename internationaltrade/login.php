@@ -5,7 +5,7 @@ require_once("./libs/core/init.php");
 if($_POST) {
     require_once("./libs/login_lib.php");
 
-    $login = new Login($_POST['login_id'], $_POST['login_pwd']);
+    $login = new Login($_POST['login_id'],md5($_POST['login_pwd']));
 
     // login form check
     if(isset($_POST['login_exe']) == "login") {
