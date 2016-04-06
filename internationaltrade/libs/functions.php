@@ -33,6 +33,8 @@ function displaycategory()
     $var_run_category = mysqli_query($con,$var_get_category);
     //echo $run_category;
 
+    echo "<li class = 'list'> <a href='index.php'>All</a></li>";
+
     while($var_row_category=mysqli_fetch_array($var_run_category))
     {
         $var_category_id=$var_row_category['cat_id'];
