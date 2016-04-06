@@ -11,6 +11,7 @@ $libs_files = array(
     "_incl_header.php",
     "_incl_navbar.php",
     "deal_lib.php",
+    "details_lib.php",
     "login_lib.php",
     "register_lib.php",
     "validator.php",
