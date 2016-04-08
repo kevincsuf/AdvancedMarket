@@ -1,73 +1,96 @@
-<!-- Author: Yongseok Kim
-	Date: 02/26/2016 */ -->
-
 <?php
-include "login_lib.php";
 
-// login form check
-if(isset($_POST['login_exe']) == "login") {
-    if (!$_POST['login_id'])
-        Error("Check ID!");
-    else {
-        if (!$_POST['login_pwd'])
-            Error("Check password!");
+require_once("./libs/core/init.php");
+
+if($_POST) {
+    require_once("./libs/login_lib.php");
+
+    $login = new Login($_POST['login_id'],md5($_POST['login_pwd']));
+
+    // login form check
+    if(isset($_POST['login_exe']) == "login") {
+        if (!$_POST['login_id'])
+            $login->error("Check ID!");
         else {
-            if (!CheckLogin($_POST['login_id'], $_POST['login_pwd']))
-                Error ("Check ID or password!");
+            if (!$_POST['login_pwd'])
+                $login->error("Check password!");
             else {
-                // Create a cookie for login session
-                //SetCookie("TempLogin",$config_login_pwd,0,"/");
-                // Go to the first page of after-login
-                //echo "<meta http-equiv='refresh' content='0; url=./xxx.php'>";
-                Error ("Logged in successfully!");
+                if (!$login->check_login())
+                    $login->error("Check ID or password!");
+                else {
+                    $message = "Logged in as a ".$login->member_type;
+                    $login->warning($message);
+
+                    $_SESSION["ukey"] = $login->user_key;
+                    $_SESSION["uid"] = $login->id;
+                    $_SESSION["uname"] = $login->name;
+                    $_SESSION["utype"] = $login->member_type;
+
+                    // Go to the first page of Seller
+                    if ($login->member_type == "seller") {
+                        $echo_html = "<script type=\"text/javascript\">window.location.replace(\"./seller_view.php\");</script>";
+                        echo $echo_html;
+                    }
+                    else if ($login->member_type == "buyer") {
+                        $echo_html = "<script type=\"text/javascript\">window.location.replace(\"./buyer_view.php\");</script>";
+                        echo $echo_html;
+                    }
+                }
             }
         }
     }
 }
+
+
 ?>
 
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN">
+<html>
 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="author" content="" />
-	<!--meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" /-->
+    <head>
+        <title>Advanced Marketing123456 &gt; Log in</title>
+        <?php include "libs/_incl_header.php";?>
+    </head>
 
-	<!--meta name="keyword" content="" /-->
-	<!--meta name="description" content="" /-->
-	<meta name="copyright" content="" />
-	<meta name="distribution" content="Global" />
+	<body>
+        <?php include "libs/_incl_navbar.php";?>
 
-	<title>Advanced Group Buying &gt; Log in</title>
+        <!-- Login section starts -->
+        <div id="contact" class="contact">
+            <div class="section secondary-section">
 
-	<!--link rel="stylesheet" href="" type="text/css" /-->
+                <div class="container">
+                    <div class="title">
+                        <h2>Login</h2>
+                    </div>
+                </div>
 
-    <style type="text/css">
-    	body { background: #b7b7c0;}
-    </style>
-</head>
+                <div class="container">
+                    <div class="span5 contact-form centered">
+                        <form name="loginform" id="loginform" method = "post" action= "<?php echo $_SERVER["PHP_SELF"];?>">
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input class="span5" type="text" id="user_id" placeholder="ID" name="login_id" required />
+                                    <input class="span5" type="password" id="user_pass" placeholder="Password" name="login_pwd" required />
+                                </div>
+                            </div>
 
-<body class="login" onload="document.loginform.user_id.focus();">
+                            <div class="control-group">
+								<div class="controls">
+                                    <input type="hidden" name="login_exe" value="login" />
+                                    <button id="login-submit" class="message-btn">Submit</button>
+								</div>
+							</div>
+                		</form>
 
-	<div id="login">
-		<h1>Log in</h1>
-		<form name="loginform" id="loginform" action="<?=$_SERVER['PHP_SELF']?>" method="post">
-            <p>
-                <label>ID<br /><input type="text" name="login_id" id="user_id" class="input" value="" size="20" tabindex="20" /></label>
-            </p>
-            <p>
-				<label>Password<br /><input type="password" name="login_pwd" id="user_pass" class="input" value="" size="20" tabindex="20" /></label>
-			</p>
-			<p class="submit">
-				<input type="hidden" name="login_exe" value="login" />
-				<input type="submit" name="login-submit" id="login-submit" class="" value="Log in" tabindex="100" />
-			</p>
-		</form>
-	</div><!--end of login-->
+                    </div>
+                </div>
 
-</body>
+            </div>
+        </div>
+
+	   <?php include "libs/_incl_footer.php";?>
+	</body>
 
 </html>
