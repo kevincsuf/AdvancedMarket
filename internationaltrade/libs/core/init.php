@@ -14,6 +14,7 @@ $libs_files = array(
     "details_lib.php",
     "login_lib.php",
     "register_lib.php",
+	"profile_lib.php",
     "validator.php",
 	"functions.php"
 );
