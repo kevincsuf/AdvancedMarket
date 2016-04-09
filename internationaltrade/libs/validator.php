@@ -103,7 +103,7 @@
 
              case 'no-past-date':
                  $s_date = date("Y-m-d", strtotime($_POST['start_date']));
-                 $e_date = date("Y-m-d", time());
+                 $e_date = date("Y-m-d");
                  if($s_date < $e_date) {
                      $this->add_error_to_field($field_name, ucwords($field_display_name)." must be at least today.");
                  }
