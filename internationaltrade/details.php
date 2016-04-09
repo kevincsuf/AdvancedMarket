@@ -62,10 +62,15 @@ $global_deal_end_date = "";
     <head>
         <title>Advanced Marketing</title>
         <?php include "libs/_incl_header.php";?>
+		 <?php include "libs/_incl_navbar.php";?>
+		<!--Added header for progress bar-->
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </head>
 
 	<body>
-        <?php include "libs/_incl_navbar.php";?>
+       
 
 		<div class = "container">
 			<H1>Welcome To Our Site </H1>
@@ -78,9 +83,11 @@ $global_deal_end_date = "";
 
 <?php
 if(isset($_GET['deal_url_id']))
-{
+{	
+	// Get current deal id 
+    $var_deal_url_id = $_GET['deal_url_id'];
     // Find out this user already placed an order for this deal
-    $var_get_ukey = "SELECT * FROM order WHERE user_id=".$_SESSION["ukey"];
+    $var_get_ukey = "SELECT * FROM join_deal WHERE create_deal_id=$var_deal_url_id AND user_id=".$_SESSION["ukey"];
     $var_result_ukey = mysqli_query($con, $var_get_ukey);
 
     if ($var_result_ukey) {
@@ -92,7 +99,7 @@ if(isset($_GET['deal_url_id']))
     }
 
     // Get detail about this deal
-    $var_deal_url_id = $_GET['deal_url_id'];
+    
     $var_get_deal = "SELECT * FROM create_deal WHERE deal_id='$var_deal_url_id'";
     $var_run_deal = mysqli_query ($con,$var_get_deal);
 
@@ -105,12 +112,16 @@ if(isset($_GET['deal_url_id']))
         $var_deal_unit_price = $var_row_deal['unit_price'];
         $var_deal_unit = $var_row_deal['unit'];
         $var_deal_image = $var_row_deal['deal_image'];
-
+		$var_deal_max_qty = $var_row_deal['max_quantity'];
+		
+		//this variable is used for progress bar
+		$var_percent = 10;
         // Set global variable
         $global_min_quantity = $var_deal_qty;
         $global_deal_id = $var_deal_id;
         $global_deal_end_date = $var_row_deal['end_date'];
-
+		
+		// display the details of the deal
         echo "
         <div class = 'single_deal'>
             <h3> $var_deal_title </h3>
@@ -118,7 +129,12 @@ if(isset($_GET['deal_url_id']))
             <p><h3> $$var_deal_unit_price</h3></p>
             <p><h5> Product Description: $var_deal_description</h5></p>
             <p><h5> Minimum order quantity: $var_deal_qty</h5></p>
-
+			<div class='container'>
+				<div class='progress'>
+					<div class='progress-bar' role='progressbar' aria-valuenow='70' aria-valuemin='0' aria-valuemax='100' style='width: $var_percent%'>
+			  		</div>
+				</div>
+			</div>
 
             <a href= 'index.php'> <button id= 'button-sp' style = 'float:left' size = 30%>Back </button> </a>
             ";
@@ -157,15 +173,6 @@ if(isset($_GET['deal_url_id']))
     }
      ************************************************************************************
     */
-
-
-
-
-
-
-
-
-
 
 }
 ?>
