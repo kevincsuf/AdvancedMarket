@@ -27,8 +27,8 @@ else {
 */
 
 
-// Get current page name
-$page_name = basename($_SERVER['PHP_SELF']);
+// Get current page name and remove get values
+$page_name = strtok(basename($_SERVER['PHP_SELF']), '?');
 
 // Set menu and page name pair
 $menu_items_seller = array(

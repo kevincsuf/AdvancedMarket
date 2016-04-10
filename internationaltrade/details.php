@@ -62,19 +62,19 @@ $global_deal_end_date = "";
     <head>
         <title>Advanced Marketing</title>
         <?php include "libs/_incl_header.php";?>
-		 <?php include "libs/_incl_navbar.php";?>
 		<!--Added header for progress bar-->
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<!--link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </head>
 
 	<body>
 
+        <?php include "libs/_incl_navbar.php";?>
 
 		<div class = "container">
 			<H1>Welcome To Our Site </H1>
-            <p><font color="red">===== Login Test Mesage =====</font></p>
+            <p><font color="red">===== Login Test Message =====</font></p>
             <p><font color="red"><?php echo $message ?></font></p>
 		</div>
 
@@ -153,26 +153,22 @@ if(isset($_GET['deal_url_id']))
         echo "</div>";
     }
 
-    /************************************************************************************
-     * This part need total quantity of create_deal table.
-     * Work for this later when the column is ready.
-     ************************************************************************************
     // Get remaining stocks when this page is opened
-    $order_quantity_query = "SELECT SUM(order_quantity) AS order_quantity_sum FROM order";
+    $order_quantity_query = "SELECT SUM(order_quantity) AS order_quantity_sum FROM join_deal where create_deal_id=".$global_deal_id;
     $order_quantity_result = mysqli_query($con, $order_quantity_query);
     $order_quantity_sum = 0;
     while($order_quantity_row = mysqli_fetch_array($order_quantity_result)) {
         $order_quantity_sum += $order_quantity_row['order_quantity_sum'];
     }
 
-    $deal_quantity_query = "SELECT * FROM order WHERE user_id=".$_SESSION["ukey"];
-    $deal_quantity_result = mysqli_query($con, $order_quantity_query);
+    $deal_quantity_query = "SELECT * FROM create_deal WHERE deal_id=".$global_deal_id;
+    $deal_quantity_result = mysqli_query($con, $deal_quantity_query);
     $deal_quantity_total = 0;
     while($deal_quantity_row = mysqli_fetch_array($deal_quantity_result)) {
-        $deal_quantity_total += $order_quantity_row['order_quantity_sum'];
+        $deal_quantity_total = $deal_quantity_row['max_quantity'];
     }
-     ************************************************************************************
-    */
+
+    $global_remaining_stocks = $deal_quantity_total - $order_quantity_sum;
 
 }
 ?>
@@ -191,12 +187,14 @@ if(isset($_GET['deal_url_id']))
                             <form name="join_form" id="join_form" method= "post" action="<?php echo $_SERVER["PHP_SELF"];?>" onSubmit="return join_validate();">
 
                                 <input type='hidden' name='min_quantity' id='min_quantity' value='<?php echo $global_min_quantity; ?>'>
+                                <input type='hidden' name='remaining_stocks' id='remaining_stocks' value='<?php echo $global_remaining_stocks; ?>'>
                                 <input type='hidden' name='deal_id' id='deal_id' value='<?php echo $global_deal_id; ?>'>
                                 <input type='hidden' name='deal_end_date' id='deal_end_date' value='<?php echo $global_deal_end_date; ?>'>
 
                                 <div class='input-group'>
                                     <span class='input-group-addon'>@</span>
                                     <input type='text' class='form-control' name='quantity' id='quantity' placeholder='Quantity' type='number' />
+                                    <div class="warning left-align" id="display_remaining_stocks"><p>Remaining stocks: <?php echo $global_remaining_stocks ?> / Minimum order quantity: <?php echo $global_min_quantity ?></p></div>
                                 </div>
 
                                 <div class='input-group'>
@@ -236,12 +234,17 @@ if(isset($_GET['deal_url_id']))
         <script type="text/javascript">
             function join_validate() {
                 var minQty = document.forms["join_form"]["min_quantity"].value;
+                var remainStocks = document.forms["join_form"]["remaining_stocks"].value;
                 var orderQty = document.forms["join_form"]["quantity"].value;
                 var addr = document.forms["join_form"]["address"].value;
                 var state = document.forms["join_form"]["state"].value;
                 var zip = document.forms["join_form"]["zipcode"].value;
 
-                if (orderQty == "") {
+                minQty = Number(minQty);
+                remainStocks = Number(remainStocks);
+                orderQty = Number(orderQty);
+
+                if (isNaN(orderQty) || orderQty == 0) {
                     alert("Please enter order quantity");
                     document.forms["join_form"]["quantity"].focus();
                     return false;
@@ -255,6 +258,12 @@ if(isset($_GET['deal_url_id']))
 
                 if(orderQty%minQty != 0) {
                     alert("Order quantity must be multiplied by minimum order quantity");
+                    document.forms["join_form"]["quantity"].focus();
+                    return false;
+                }
+
+                if(orderQty > remainStocks) {
+                    alert("Remaining quantity is only " + remainStocks);
                     document.forms["join_form"]["quantity"].focus();
                     return false;
                 }
