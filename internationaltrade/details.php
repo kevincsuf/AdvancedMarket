@@ -70,21 +70,21 @@ $global_deal_end_date = "";
     </head>
 
 	<body>
-       
+
 
 		<div class = "container">
 			<H1>Welcome To Our Site </H1>
             <p><font color="red">===== Login Test Mesage =====</font></p>
             <p><font color="red"><?php echo $message ?></font></p>
 		</div>
-		
+
 		<div class = "container">
 
 
 <?php
 if(isset($_GET['deal_url_id']))
-{	
-	// Get current deal id 
+{
+	// Get current deal id
     $var_deal_url_id = $_GET['deal_url_id'];
     // Find out this user already placed an order for this deal
     $var_get_ukey = "SELECT * FROM join_deal WHERE create_deal_id=$var_deal_url_id AND user_id=".$_SESSION["ukey"];
@@ -99,7 +99,7 @@ if(isset($_GET['deal_url_id']))
     }
 
     // Get detail about this deal
-    
+
     $var_get_deal = "SELECT * FROM create_deal WHERE deal_id='$var_deal_url_id'";
     $var_run_deal = mysqli_query ($con,$var_get_deal);
 
@@ -113,14 +113,14 @@ if(isset($_GET['deal_url_id']))
         $var_deal_unit = $var_row_deal['unit'];
         $var_deal_image = $var_row_deal['deal_image'];
 		$var_deal_max_qty = $var_row_deal['max_quantity'];
-		
+
 		//this variable is used for progress bar
 		$var_percent = 10;
         // Set global variable
         $global_min_quantity = $var_deal_qty;
         $global_deal_id = $var_deal_id;
         $global_deal_end_date = $var_row_deal['end_date'];
-		
+
 		// display the details of the deal
         echo "
         <div class = 'single_deal'>
@@ -176,7 +176,7 @@ if(isset($_GET['deal_url_id']))
 
 }
 ?>
-			
+
 		</div>
 
 		<div class='modal fade' id='PostCommentsModal' tabindex='-1' role='dialog' aria-labelledby='helpModalLabel' aria-hidden='true'>
@@ -288,7 +288,7 @@ if(isset($_GET['deal_url_id']))
         </script>
 
 
-		
+
 	   <?php include "libs/_incl_footer.php";?>
 	</body>
 
