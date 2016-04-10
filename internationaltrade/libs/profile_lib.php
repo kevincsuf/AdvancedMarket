@@ -52,12 +52,9 @@ $var_user_id = $_SESSION["ukey"];
 	echo "var_seller_category_rawmaterial: " . $var_seller_category_rawmaterial . "<br/>";
 	echo "var_seller_category_entertainment: " . $var_seller_category_entertainment . "<br/>";
 
-
+	//update the record into database Nikita added query
 	
-	
-	
-	
-	$sql="UPDATE register SET first_name='$var_seller_first_name' WHERE id = $var_user_id";
+	$sql="UPDATE register SET first_name='$var_seller_first_name',last_name='$var_seller_last_name',business_name='$var_seller_buss_name',Address='$var_seller_addr',mobile_number='$var_seller_mobile_number',food_category='$var_seller_category_food',electronics_category='$var_seller_category_electronics',rawmaterial_Category='$var_seller_category_rawmaterial',entertainment_Category='$var_seller_category_entertainment',receive_message='$var_seller_rev_msg' WHERE id = $var_user_id";
 	if(mysqli_query($con,$sql))
 	{
 	echo "<script> alert(\"New record saved successfully..!\")</script>";
@@ -68,18 +65,5 @@ $var_user_id = $_SESSION["ukey"];
 	echo "<script> alert(\"New record not saved successfully..!\")</script>";
 	mysqli_close($con);
 	}
-	/*
 	
-	//inserting data into DB
-
-	//$sql= "insert into join_deal(create_deal_id,user_id,order_quantity,address,state,zipcode,closure_date)values('$var_create_deal_id','$var_user_id','$var_order_quantity','$var_address','$var_state','$var_zipcode','$var_closure_date')";
-	
-
-	
-	
-	*/
-
-
-
-
 ?>
