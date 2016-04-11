@@ -53,6 +53,9 @@ $global_deal_id = "";
 // The deal end date
 $global_deal_end_date = "";
 
+// Eligible to order
+$global_order_eligible = false;
+
 ?>
 
 
@@ -86,7 +89,7 @@ $global_deal_end_date = "";
 		<?php include "libs/_incl_navbar.php";?>
 		<div class = "container">
 			<H1>Welcome To Our Site </H1>
-            <p><font color="red">===== Login Test Mesage =====</font></p>
+            <p><font color="red">===== Login Test Message =====</font></p>
             <p><font color="red"><?php echo $message ?></font></p>
 		</div>
 		
@@ -102,7 +105,7 @@ $global_deal_end_date = "";
 				// Get current deal id 
 				$var_deal_url_id = $_GET['deal_url_id'];
 				// Find out this user already placed an order for this deal
-				$var_get_ukey = "SELECT * FROM join_deal WHERE create_deal_id=$var_deal_url_id AND user_id=".$_SESSION["ukey"];
+				$var_get_ukey = "SELECT * FROM join_deal WHERE create_deal_id='".$var_deal_url_id."' AND user_id='".$_SESSION["ukey"]."'";
 				$var_result_ukey = mysqli_query($con, $var_get_ukey);
 
 				if ($var_result_ukey) {
@@ -115,7 +118,7 @@ $global_deal_end_date = "";
 
 				// Get detail about this deal
 				
-				$var_get_deal = "SELECT * FROM create_deal WHERE deal_id='$var_deal_url_id'";
+				$var_get_deal = "SELECT * FROM create_deal WHERE deal_id='".$var_deal_url_id."'";
 				$var_run_deal = mysqli_query ($con,$var_get_deal);
 
 				while($var_row_deal= mysqli_fetch_array($var_run_deal))
@@ -155,40 +158,48 @@ $global_deal_end_date = "";
 						<a href= 'index.php'> <button id= 'button-sp' style = 'float:left' size = 30%>Back </button> </a>
 						";
 
-					// Hide Join button when this user joined this deal already
-					if (!$global_order_placed) {
-						echo "
-						<a href='#' data-toggle='modal' data-target='#PostCommentsModal'> <input type='submit' id='submit' value='Join' onclick='return changeText('submitbutton')' /> </a>
-						";
-					}
-					else {
-						echo "
-						You already joined this deal.
-						";
-					}
-					echo "</div>";
+                    // Hide Join button when this user joined this deal already or this user is seller
+                    if (($global_order_placed) || (strtolower($_SESSION["utype"]) == "seller")) {
+                        $global_order_eligible = false;
+                    }
+                    else {
+                        $global_order_eligible = true;
+                    }
+
+                    if ($global_order_eligible) {
+                        echo "
+                            <a href='#' data-toggle='modal' data-target='#PostCommentsModal'> <input type='submit' id='submit' value='Join' onclick='return changeText('submitbutton')' /> </a>
+                        ";
+                    }
+                    else if (strtolower($_SESSION["utype"]) == "seller") {
+                        echo "
+                            Seller can not join a deal. Please log in as a buyer.
+                        ";
+                    }
+                    else if ($global_order_placed) {
+                        echo "
+                            You already joined this deal.
+                        ";
+                    }
+                    echo "</div>";
 				}
 
-				/************************************************************************************
-				 * This part need total quantity of create_deal table.
-				 * Work for this later when the column is ready.
-				 ************************************************************************************
-				// Get remaining stocks when this page is opened
-				$order_quantity_query = "SELECT SUM(order_quantity) AS order_quantity_sum FROM order";
-				$order_quantity_result = mysqli_query($con, $order_quantity_query);
-				$order_quantity_sum = 0;
-				while($order_quantity_row = mysqli_fetch_array($order_quantity_result)) {
-					$order_quantity_sum += $order_quantity_row['order_quantity_sum'];
-				}
+                // Get remaining stocks when this page is opened
+                $order_quantity_query = "SELECT SUM(order_quantity) AS order_quantity_sum FROM join_deal where create_deal_id=".$global_deal_id;
+                $order_quantity_result = mysqli_query($con, $order_quantity_query);
+                $order_quantity_sum = 0;
+                while($order_quantity_row = mysqli_fetch_array($order_quantity_result)) {
+                    $order_quantity_sum += $order_quantity_row['order_quantity_sum'];
+                }
 
-				$deal_quantity_query = "SELECT * FROM order WHERE user_id=".$_SESSION["ukey"];
-				$deal_quantity_result = mysqli_query($con, $order_quantity_query);
-				$deal_quantity_total = 0;
-				while($deal_quantity_row = mysqli_fetch_array($deal_quantity_result)) {
-					$deal_quantity_total += $order_quantity_row['order_quantity_sum'];
-				}
-				 ************************************************************************************
-				*/
+                $deal_quantity_query = "SELECT * FROM create_deal WHERE deal_id=".$global_deal_id;
+                $deal_quantity_result = mysqli_query($con, $deal_quantity_query);
+                $deal_quantity_total = 0;
+                while($deal_quantity_row = mysqli_fetch_array($deal_quantity_result)) {
+                    $deal_quantity_total = $deal_quantity_row['max_quantity'];
+                }
+
+                $global_remaining_stocks = $deal_quantity_total - $order_quantity_sum;
 
 			}
 			?>
