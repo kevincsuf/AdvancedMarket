@@ -219,12 +219,14 @@ $global_order_eligible = false;
                             <form name="join_form" id="join_form" method= "post" action="<?php echo $_SERVER["PHP_SELF"];?>" onSubmit="return join_validate();">
 
                                 <input type='hidden' name='min_quantity' id='min_quantity' value='<?php echo $global_min_quantity; ?>'>
+                                <input type='hidden' name='remaining_stocks' id='remaining_stocks' value='<?php echo $global_remaining_stocks; ?>'>
                                 <input type='hidden' name='deal_id' id='deal_id' value='<?php echo $global_deal_id; ?>'>
                                 <input type='hidden' name='deal_end_date' id='deal_end_date' value='<?php echo $global_deal_end_date; ?>'>
 
                                 <div class='input-group'>
                                     <span class='input-group-addon'>@</span>
                                     <input type='text' class='form-control' name='quantity' id='quantity' placeholder='Quantity' type='number' />
+                                    <div class="warning left-align" id="display_remaining_stocks"><p>Remaining stocks: <?php echo $global_remaining_stocks ?> / Minimum order quantity: <?php echo $global_min_quantity ?></p></div>
                                 </div>
 
                                 <div class='input-group'>
@@ -264,12 +266,17 @@ $global_order_eligible = false;
         <script type="text/javascript">
             function join_validate() {
                 var minQty = document.forms["join_form"]["min_quantity"].value;
+                var remainStocks = document.forms["join_form"]["remaining_stocks"].value;
                 var orderQty = document.forms["join_form"]["quantity"].value;
                 var addr = document.forms["join_form"]["address"].value;
                 var state = document.forms["join_form"]["state"].value;
                 var zip = document.forms["join_form"]["zipcode"].value;
 
-                if (orderQty == "") {
+                minQty = Number(minQty);
+                remainStocks = Number(remainStocks);
+                orderQty = Number(orderQty);
+
+                if (isNaN(orderQty) || orderQty == 0) {
                     alert("Please enter order quantity");
                     document.forms["join_form"]["quantity"].focus();
                     return false;
@@ -283,6 +290,12 @@ $global_order_eligible = false;
 
                 if(orderQty%minQty != 0) {
                     alert("Order quantity must be multiplied by minimum order quantity");
+                    document.forms["join_form"]["quantity"].focus();
+                    return false;
+                }
+
+                if(orderQty > remainStocks) {
+                    alert("Remaining quantity is only " + remainStocks);
                     document.forms["join_form"]["quantity"].focus();
                     return false;
                 }
