@@ -4,8 +4,63 @@ require_once("./libs/core/init.php");
 require_once("./libs/login_lib.php");
 require_once("./libs/functions.php");
 global $cat;
-global $cat_name
+global $cat_name;
+
+
+$message = "";
+
+if (isset($_SESSION["uid"])) {
+    //$login = new Login($_GET['login_id'], $_GET['login_pwd']);
+    //$login->check_login();
+    $message = "You are currently LOGGED IN as a <b>".strtoupper($_SESSION["utype"])."</b>, the ID is <b>".$_SESSION["uid"]."</b>, and the NAME is <b>".$_SESSION["uname"]."</b>";
+}
+/*
+if (isset($_GET['login_id']) && isset($_GET['login_pwd'])) {
+    $login = new Login($_GET['login_id'], $_GET['login_pwd']);
+    $login->check_login();
+    $message = "You are currently LOGGED IN as a ".strtoupper($login->member_type)." and the ID is ".$login->id;
+}
+*/
+else {
+    $message = "You are currently <b>LOGGED OUT</b>";
+}
+
+
+// Pass form data to details_lib.php
+if($_POST) {
+    $_SESSION["create_deal_id"] = $_POST["deal_id"];
+    $_SESSION["order_quantity"] = $_POST["quantity"];
+    $_SESSION["address"] = $_POST["address"];
+    $_SESSION["state"] = $_POST["state"];
+    $_SESSION["zipcode"] = $_POST["zipcode"];
+    $_SESSION["closure_date"] = $_POST["deal_end_date"];
+
+    // Go to DB insert page
+    echo "<script type=\"text/javascript\">window.location.replace(\"./libs/details_lib.php\");</script>";
+}
+
+
+
+		// This user already placed an order for this deal?
+		$global_order_placed = false;
+
+		// Tha minimum quantity of this deal
+		$global_min_quantity = 0;
+
+		// The remaining stocks when this page is opened
+		$global_remaining_stocks = 0;
+
+		// The deal id
+		$global_deal_id = "";
+
+		// The deal end date
+		$global_deal_end_date = "";
+
+		// Eligible to order
+		$global_order_eligible = false;
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -104,13 +159,12 @@ global $cat_name
                                     <div class="" id="primary-navigation">                                        
                                         <ul class="nav navbar-nav primary-navbar">
                                             <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >Home</a>
-                                                <ul class="dropdown-menu">  
-                                                    <li><a href="index.php">Home</a></li>
-                                                    <li><a href="index-3.html">User</a></li>
+												<li><a href="index.php">Home</a></li>
+                                                 <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >Home</a>-->
+                                               
                                                     <!-- Niki need to add code for user switch based on buyer and seller-->    
                                                     
-                                                </ul>
+                                                
                                             </li> 
                                             
                                             <li class="dropdown mega-dropdown">
@@ -145,37 +199,7 @@ global $cat_name
                                             <li><a href="contact-us.html">Contact</a></li>
                                             <li class="dropdown mega-dropdown active">
                                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >Page</a>                                            
-                                                <div class="dropdown-menu mega-dropdown-menu mega-styl2"  style="background: white no-repeat url(assets/img/extra/megamenu-3.jpg) right top; ">
-                                                    <div class="col-sm-6 menu-block">
-                                                        <div class="sub-list">                                                           
-                                                            <h2 class="blk-clr title">                                                                
-                                                                <b class="extbold-font-4 fsz-16"> Product  </b> <span class="thm-clr funky-font fsz-25"> categories </span>
-                                                            </h2>
-                                                            <ul>
-                                                                <li><a href="category.html"> category </a></li>
-                                                                <li><a href="category-left-sidebar.html"> category left sidebar </a></li>
-                                                                <li><a href="category-fullwidth.html"> category fullwidth </a></li>
-                                                                <li><a href="category2.html"> category Style 2</a></li>
-                                                                <li><a href="category2-left-sidebar.html"> category style 2 left sidebar </a></li>
-                                                                <li><a href="single-product.html"> single product </a></li>  
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6 menu-block">
-                                                        <div class="sub-list">                                                           
-                                                            <h2 class="blk-clr title">                                                                
-                                                                <b class="extbold-font-4 fsz-16"> Theme  </b> <span class="thm-clr funky-font fsz-25"> pages </span>
-                                                            </h2>
-                                                            <ul>                                                                  
-                                                                <li><a href="cart.html"> Shopping Cart </a></li>
-                                                                <li><a href="checkout.html"> checkout </a></li>                                                            
-                                                                <li><a href="about-us.html"> About Us </a></li>
-                                                                <li><a href="404-error.html"> Error </a></li>
-                                                                <li><a href="coming-soon.html"> Coming Soon </a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                
                                             </li>
                                         </ul>
                                     </div>    
@@ -220,114 +244,169 @@ global $cat_name
 								if(isset($_GET['deal_url_id']))
 									{
 									$var_deal_url_id = $_GET['deal_url_id'];
+									
+									
+									$cat = "";
+									$var_deal_id = 0;
+									$var_deal_title = "";
+									$var_deal_description = "";
+									$var_deal_qty = 0;
+									$var_deal_unit_price = 0;
+									$var_deal_unit = "";
+									$var_deal_image = "";
+									$var_deal_max_qty = 0;
+									$var_number_discount_option = 0;
+									$var_number_discount_1 = 0;
+									$var_amount_discount_1 = 0;
+									$var_number_discount_2 = 0;
+									$var_amount_discount_2 = 0;
+									$var_number_discount_3 = 0;
+									$var_amount_discount_3 = 0;
+									
+									
 									// Quering for Particular ID
 									$sql = "SELECT * FROM create_deal WHERE deal_id='$var_deal_url_id'";
 									$res=mysqli_query($con,$sql);
-									while($row = mysqli_fetch_assoc($res))
+									while($var_row_deal = mysqli_fetch_assoc($res))
 									 {
-										$cat = $row['deal_category'];
-										// Image Section
-										echo"<div class='row'>";
-										echo"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>";
-										echo"<div id='gallery-2' class=''>";
-										echo"<a class='rsImg' data-rsbigimg='images/".$row["deal_image"]."' href='images/".$row["deal_image"]."' ></a>";
-										echo"</div>";
-										echo"</div>";
-										echo"<div class='spc-15 hidden-lg clear'></div>";
-										// Details Section
-										echo"<div class='col-lg-8 col-sm-8 col-md-8 col-xs-8'>";
-										echo"<div class='summary entry-summary'>";
-										echo"<div class='woocommerce-product-rating' itemprop='aggregateRating' itemscope itemtype='http://schema.org/AggregateRating'>";
+										$cat = $var_row_deal['deal_category'];
+										$var_deal_id = $var_row_deal['deal_id'];
+										$var_deal_title = $var_row_deal['title'];
+										$var_deal_description = $var_row_deal['description'];
+										$var_deal_qty = $var_row_deal['qty'];
+										$var_deal_unit_price = $var_row_deal['unit_price'];
+										$var_deal_unit = $var_row_deal['unit'];
+										$var_deal_image = $var_row_deal['deal_image'];
+										$var_deal_max_qty = $var_row_deal['max_quantity'];
+										$var_number_discount_option = $var_row_deal['number_discount_option'];
+										$var_number_discount_1 = $var_row_deal['number_discount_1'];
+										$var_amount_discount_1 = $var_row_deal['amount_discount_1'];
+										$var_number_discount_2 = $var_row_deal['number_discount_2'];
+										$var_amount_discount_2 = $var_row_deal['amount_discount_2'];
+										$var_number_discount_3 = $var_row_deal['number_discount_3'];
+										$var_amount_discount_3 = $var_row_deal['amount_discount_3'];
+										
+												echo "  <div class='progress'>";
+												// Check how many discounts
+												if ($var_number_discount_option == 1) {
+													$var_percent_1 = 100;
+													$var_percent_2 = 0;
+													$var_percent_3 = 0;
+													
+													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+												}
+												else if ($var_number_discount_option == 2) {
+													$var_percent_1 = 50;
+													$var_percent_2 = 50;
+													$var_percent_3 = 0;
+													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar progress-bar-warning' role='progressbar' style='width:".$var_percent_2."%'>".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
+												}
+												else if ($var_number_discount_option == 3) {
+													$var_percent_1 = 33;
+													$var_percent_2 = 33;
+													$var_percent_3 = 34;
+													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar progress-bar-warning' role='progressbar' style='width:".$var_percent_2."%'>".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar progress-bar-danger' role='progressbar' style='width:".$var_percent_3."%'>".$var_number_discount_3." ".$var_deal_unit.", $".$var_amount_discount_3."/".$var_deal_unit."</div>";
+												}
+												
+												echo "  </div>";
+												
+												// Set global variable
+												$global_min_quantity = $var_deal_qty;
+												$global_deal_id = $var_deal_id;
+												$global_deal_end_date = $var_row_deal['end_date'];
+												
+												// Image Section
+												echo"<div class='row'>";
+													echo"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>";
+														echo"<div id='gallery-2' class=''>";
+															echo"<a class='rsImg' data-rsbigimg='images/".$var_row_deal["deal_image"]."' href='images/".$var_row_deal["deal_image"]."' ></a>";
+														echo"</div>";
+													echo"</div>";
+													
+													echo"<div class='spc-15 hidden-lg clear'></div>";
+													// Details Section
+													echo"<div class='col-lg-8 col-sm-8 col-md-8 col-xs-8'>";
+														echo"<div class='summary entry-summary'>";
+															echo"<div class='woocommerce-product-rating' itemprop='aggregateRating' itemscope itemtype='http://schema.org/AggregateRating'>";
+																echo"<div class='posted_in'>";
+																	echo"<h3 class='funky-font-2 fsz-20'>".$cat_name."</h3>";
+																echo"</div>";
+															echo"</div>";
 
-                                        echo"<div class='posted_in'>";
-                                            echo"<h3 class='funky-font-2 fsz-20'>".$cat_name."</h3>";
-                                        echo"</div>";
-                                    echo"</div>";
+															echo"<div class='product_title_wrapper'>";
+																echo"<div itemprop='name' class='product_title entry-title'>";
+																	echo"".$var_row_deal["title"]."";
+																	echo"<p class='font-3 fsz-18 no-mrgn price'> <b class='amount blk-clr'>$".$var_row_deal["amount_discount_1"]."</b> <del>$".$var_row_deal["unit_price"]."</del> </p>";       
+																echo"</div>";
+															echo"</div>";
+												
+															echo"<div class='rating'>";
+																	 echo"<span class='star active'></span>";
+																	 echo"<span class='star active'></span>";
+																	 echo"<span class='star active'></span>";                                          
+																	 echo"<span class='star active'></span>";
+																	 echo"<span class='star half'></span>";
+															echo"</div>";
+												
+															echo"<div itemprop='description' class='fsz-15'>";
+																echo"<p>".$var_row_deal["description"]."</p>"; 
+																echo"<p class='progress-bar progress-bar-info'></p>";
+															echo"</div>";
+																						
+															echo"<div style='width: 35%;' class='progress-bar progress-bar-info'>";
+															echo"</div>";
+											
+														echo"</div>";
+													echo"</div>";
+													// code for join deal begins 
+												
+													
+													// Hide Join button when this user joined this deal already or this user is seller
+													if (($global_order_placed) || (strtolower($_SESSION["utype"]) == "seller")) {
+														$global_order_eligible = false;
+													}
+													else {
+														$global_order_eligible = true;
+													}
 
-                                    echo"<div class='product_title_wrapper'>";
-                                        echo"<div itemprop='name' class='product_title entry-title'>";
-                                            echo"".$row["title"]."";
-                                            echo"<p class='font-3 fsz-18 no-mrgn price'> <b class='amount blk-clr'>$".$row["amount_discount_1"]."</b> <del>$".$row["unit_price"]."</del> </p>";       
-                                        echo"</div>";
-                                    echo"</div>";
-									
-									echo"<div class='rating'>";
-                                             echo"<span class='star active'></span>";
-                                             echo"<span class='star active'></span>";
-                                             echo"<span class='star active'></span>";                                          
-                                             echo"<span class='star active'></span>";
-                                             echo"<span class='star half'></span>";
-                                        echo"</div>";
-									
-                                    echo"<div itemprop='description' class='fsz-15'>";
-                                        echo"<p>".$row["description"]."</p>"; 
-										echo"<p class='progress-bar progress-bar-info'></p>";
-                                    echo"</div>";
-									
-									
-									echo"<div style='width: 35%;' class='progress-bar progress-bar-info'>";
-									echo"</div>";
-									
-                                    /*<ul class="stock-detail list-items fsz-12">
-                                        <li> <strong> MATERIAL : <span class="blk-clr"> COTTON </span> </strong> </li>
-                                        <li> <strong>  STOCK : <span class="blk-clr"> READY STOCK </span> </strong> </li>
-                                    </ul>
+													if ($global_order_eligible) {
+														echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right gst-cta-buttons'>";
+														echo "<a href='#join_form' data-toggle='modal' data-target='#PostCommentsModal' class='fancy-btn fancy-btn-small'> Join </a>";
+														echo "</div>";
+													}
+													else if (strtolower($_SESSION["utype"]) == "seller") {
+														echo "
+															Seller can not join a deal. Please log in as a buyer.
+														";
+													}
+													else if ($global_order_placed) {
+														echo "
+															You already joined this deal.";
+													}
+													echo "</div>";
+												}
 
-                                    <form class="variations_form cart" method="post">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <div class="form-group selectpicker-wrapper">
-                                                    <label class="fsz-15 title-3"> <b> CHOOSE COLOR </b> </label>
-                                                    <div class="search-selectpicker selectpicker-wrapper">
-                                                        <select
-                                                            class="selectpicker input-price" data-live-search="true" data-width="100%"
-                                                            data-toggle="tooltip" title="White">
-                                                            <option>Pink</option>
-                                                            <option>Blue</option>
-                                                            <option>White</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="form-group selectpicker-wrapper">
-                                                    <label class="fsz-15 title-3"> <b> CHOOSE SIZE </b> </label>
-                                                    <div class="search-selectpicker selectpicker-wrapper">
-                                                        <select
-                                                            class="selectpicker input-price" data-live-search="true" data-width="100%"
-                                                            data-toggle="tooltip" title="Large">
-                                                            <option>Small</option>
-                                                            <option>Medium</option>
-                                                            <option>Large</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="form-group selectpicker-wrapper">
-                                                    <label class="fsz-15 title-3"> <b> QUANTITY </b> </label>
-                                                    <div class="search-selectpicker selectpicker-wrapper">
-                                                        <select
-                                                            class="selectpicker input-price" data-live-search="true" data-width="100%"
-                                                            data-toggle="tooltip" title="2 Pcs">
-                                                            <option>1 Pcs</option>
-                                                            <option>2 Pcs</option>
-                                                            <option>3 Pcs</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <button type="submit" class="single_add_to_cart_button button alt fancy-button left">Add to cart</button>
-                                                </div>    
-                                            </div>
-                                        </div>
-                                    </form> */
-                                echo"</div>";
-                            
-										echo"</div>";
-										}
+												// Get remaining stocks when this page is opened
+												$order_quantity_query = "SELECT SUM(order_quantity) AS order_quantity_sum FROM join_deal where create_deal_id=".$global_deal_id;
+												$order_quantity_result = mysqli_query($con, $order_quantity_query);
+												$order_quantity_sum = 0;
+												while($order_quantity_row = mysqli_fetch_array($order_quantity_result)) {
+													$order_quantity_sum += $order_quantity_row['order_quantity_sum'];
+												}
+
+												$deal_quantity_query = "SELECT * FROM create_deal WHERE deal_id=".$global_deal_id;
+												$deal_quantity_result = mysqli_query($con, $deal_quantity_query);
+												$deal_quantity_total = 0;
+												while($deal_quantity_row = mysqli_fetch_array($deal_quantity_result)) {
+													$deal_quantity_total = $deal_quantity_row['max_quantity'];
+												}
+
+												$global_remaining_stocks = $deal_quantity_total - $order_quantity_sum;
+                   
+										
 									}
 									
                             ?>
@@ -340,10 +419,68 @@ global $cat_name
 								while($row1 = mysqli_fetch_assoc($res1))
 									{
 						              $cat_name = $row1["category"]."</a>";  
-										echo $cat_name;
+										//echo $cat_name;
 									}
 								?>
 							<!-- PHP CATEOGRY Code ENDS -->
+							
+							<!-- #code for join-popup -->
+						 <div class="modal fade login-popup" id="loginpopup" tabindex="-1" role="dialog" aria-hidden="true">
+						   <div class="modal-dialog modal-lg">          
+							   <button type="button" class="close close-btn popup-cls" data-dismiss="modal" aria-label="Close"> <i class="fa-times fa"></i> </button> 
+
+									<div class="modal-content login-1 wht-clr">   
+										<div class="login-wrap text-center">                        
+											<h2 class="fsz-35 spcbtm-15"> <span class="bold-font-3 wht-clr">International</span> <span class="thm-clr funky-font">Trade</span> </h2>
+											
+											<p class="fsz-15 bold-font-4"> Join to get the most out of  <span class="thm-clr"> International Trade Website </span> </p>                       
+											
+											<div class="login-form">  
+											<br>
+											<form class= "login-form" name="join_form" id="join_form" method= "post" action="<?php echo $_SERVER["PHP_SELF"];?>" onSubmit="return join_validate();">
+
+												<input type='hidden' name='min_quantity' id='min_quantity' value='<?php echo $global_min_quantity; ?>'>
+												<input type='hidden' name='remaining_stocks' id='remaining_stocks' value='<?php echo $global_remaining_stocks; ?>'>
+												<input type='hidden' name='deal_id' id='deal_id' value='<?php echo $global_deal_id; ?>'>
+												<input type='hidden' name='deal_end_date' id='deal_end_date' value='<?php echo $global_deal_end_date; ?>'>
+
+												<div class='input-group'>
+													<span class='input-group-addon'>@</span>
+													<input type='text' class='form-control' name='quantity' id='quantity' placeholder='Quantity' type='number' />
+													<div class="warning left-align" id="display_remaining_stocks"><p>Remaining stocks: <?php echo $global_remaining_stocks ?> / Minimum order quantity: <?php echo $global_min_quantity ?></p></div>
+												</div>
+
+												<div class='input-group'>
+													<span class='input-group-addon'>@</span>
+													<input type='text' class='form-control' name='address' id='address' placeholder='Address' />
+												</div>
+
+												<div class='input-group'>
+													<span class='input-group-addon'>@</span>
+													<input type='text' class='form-control' name='state' id='state' placeholder='State' />
+												</div>
+
+												<div class='input-group'>
+													<span class='input-group-addon'>@</span>
+													<input type='text' class='form-control' name='zipcode' id='zipcode' placeholder='Zipcode' type='number' />
+												</div>
+
+												</br>
+
+												<button type='submit' class='btn btn-success'>Submit</button>
+
+											</form>
+
+										</div>
+
+										<div class='modal-footer'>
+											<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+										</div>
+
+								</div>
+							</div>
+						</div>
+					</div>	
 							
                         <div class="clearfix"></div>
 

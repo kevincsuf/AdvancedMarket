@@ -5,24 +5,24 @@ require_once("libs/core/init.php");
 
 function getcategory($selected_option)
 {
-    global $con;
-    $var_get_category = "SELECT * FROM category";
+					global $con;
+					$var_get_category = "SELECT * FROM category";
 
-    $var_run_category = mysqli_query($con,$var_get_category);
-    //echo $run_category;
+					$var_run_category = mysqli_query($con,$var_get_category);
+					//echo $run_category;
 
-    while($var_row_category=mysqli_fetch_array($var_run_category))
-    {
-        $var_category_id=$var_row_category['cat_id'];
-        $var_category_title=$var_row_category['category'];
-        //echo $category_title."</br>";
-       if ($var_category_id == $selected_option) {
-            echo "<option value= \"".$var_category_id."\" selected=\"selected\">".$var_category_title."</option>";
-        }
-        else {
-            echo "<option value= \"".$var_category_id."\">".$var_category_title."</option>";
-        }
-    }
+					while($var_row_category=mysqli_fetch_array($var_run_category))
+					{
+						$var_category_id=$var_row_category['cat_id'];
+						$var_category_title=$var_row_category['category'];
+						//echo $category_title."</br>";
+					   if ($var_category_id == $selected_option) {
+							echo "<option value= \"".$var_category_id."\" selected=\"selected\">".$var_category_title."</option>";
+						}
+						else {
+							echo "<option value= \"".$var_category_id."\">".$var_category_title."</option>";
+						}
+					}
 }
 // To display category choices in the home page
 function displaycategory()

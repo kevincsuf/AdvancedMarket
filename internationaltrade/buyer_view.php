@@ -43,7 +43,7 @@ $user_key=$_SESSION["ukey"]
 
                 <div class="container">
 
-								<div class="table-responsive price-table">          
+				<div class="table-responsive price-table">          
 				  <table class="table price-column">
 					<thead>
 					  <tr>

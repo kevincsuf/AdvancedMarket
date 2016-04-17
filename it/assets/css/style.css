@@ -31,9 +31,9 @@ body {
     font-family: 'Lato', sans-serif;
     font-weight: normal;
     background: #ffffff;
-    color: #979797; 
+    color: #4e5256; 
     height: 100%;
-    font-size: 15px;
+    font-size: 17px;
     line-height: 24px;   
 }
 .theme-container{
@@ -42,7 +42,7 @@ body {
 }
 
 a {
-    color: #979797;
+    color: #4e5256;
     transition: all 0.4s ease-in-out 0s;
     -webkit-transition: all 0.4s ease-in-out 0s;
     -ms-transition: all 0.4s ease-in-out 0s;

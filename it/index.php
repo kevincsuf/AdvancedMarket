@@ -378,7 +378,7 @@ else {
 					</div>
                        
 
-                    <a href="#" class="fancy-btn fancy-btn-small fsz-15">View all Deals</a>
+        
                 </div>           
             </section>
             <!-- / Product Slider -->
