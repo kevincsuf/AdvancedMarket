@@ -85,9 +85,10 @@ $user_key=$_SESSION["ukey"]
 										
                                             <li><a href="index.php">Home</a></li> 
 											
-                                            <li class="active"><a href="buyer_view.php">Buyer Deals</a></li>
+                                            <li class="active"><a href="seller_view.php">Seller Deals</a></li>
 											
-                                            											
+                                            <li><a href="deals.php">Create Deal</a></li>
+											
 											<li><a href="profile.php">Profile</a></li>
 											
                                             <li><a href="logout.php">Logout</a></li>
@@ -125,40 +126,42 @@ $user_key=$_SESSION["ukey"]
 					  <tr>
 						
 						<th>Title</th>
-						<th>Quantity</th>
-						<th>Address</th>
-						<th>State</th>
-						<th>Zipcode</th>
+						<th>Description</th>
+						<th>Quantity 1</th>
+						<th>Price</th>
+						<th>Quantity 2</th>
+						<th>Price</th>
+						<th>Quantity 3</th>
+						<th>Price</th>
+						<th>Joined</th>
 					  </tr>
 					</thead>
 					<tbody>
 					
-					 <?php 
-						$var_display_deal = "
-                            SELECT create_deal_id, order_quantity, address, state, zipcode, title
-                            FROM join_deal j
-                            INNER JOIN create_deal c
-                            ON j.create_deal_id = c.deal_id
-                            WHERE j.user_id='$user_key'
-                        ";
+					<?php 
+						$var_display_deal = "SELECT deal_id,title,description,number_discount_1,amount_discount_1,number_discount_2,amount_discount_2,number_discount_3,amount_discount_3 FROM create_deal WHERE user_id='$user_key'";
 						$var_run_display_deal = mysqli_query($con,$var_display_deal);
 						
 						while($var_row_display_deal = mysqli_fetch_array($var_run_display_deal))
 						{
-							$var_display_deal_id = $var_row_display_deal['create_deal_id'];
-							$var_display_deal_qty = $var_row_display_deal['order_quantity'];
-							$var_display_address = $var_row_display_deal['address'];
-							$var_display_state = $var_row_display_deal['state'];
-							$var_display_zipcode = $var_row_display_deal['zipcode'];
-							$var_display_title = $var_row_display_deal['title'];
-							
+							$var_display_deal_id = $var_row_display_deal['deal_id'];
+							$var_display_deal_title = $var_row_display_deal['title'];
+							$var_display_deal_description = $var_row_display_deal['description'];
+							$var_display_deal_qty_1 = $var_row_display_deal['number_discount_1'];
+							$var_display_deal_qty_2 = $var_row_display_deal['number_discount_2'];
+							$var_display_deal_qty_3 = $var_row_display_deal['number_discount_3'];
+							$var_display_deal_price_1 = $var_row_display_deal['amount_discount_1'];
+							$var_display_deal_price_2 = $var_row_display_deal['amount_discount_2'];
+							$var_display_deal_price_3 = $var_row_display_deal['amount_discount_3'];
 							echo "<tr>
-							 <td> <a href= 'single_product.php?deal_url_id=$var_display_deal_id'> $var_display_title </a></td>
-							 <td> $var_display_deal_qty </td>
-							 <td> $var_display_address </td>
-							 <td> $var_display_state </td>
-							 <td> $var_display_zipcode </td>
-							 
+							 <td> <a href= 'single_product.php?deal_url_id=$var_display_deal_id'> $var_display_deal_title </a></td>
+							 <td> $var_display_deal_description </td>
+							 <td> $var_display_deal_qty_1 </td>
+							 <td> $var_display_deal_price_1 </td>
+							 <td> $var_display_deal_qty_2 </td>
+							 <td> $var_display_deal_price_2 </td>
+							 <td> $var_display_deal_qty_3 </td>
+							 <td> $var_display_deal_price_3 </td>
 							</tr>";
 						}
 						?>
@@ -220,7 +223,30 @@ $user_key=$_SESSION["ukey"]
                 </div>
             </div>
         </div>
+        <!-- /Popup: Login 1 -->
 
+        <!-- Subscribe Popup 1
+        <section class="subscribe-me">
+            <a href="#close" class="sb-close-btn close popup-cls"><i class="fa-times fa"></i></a>      
+            <div class="modal-content subscribe-2 blk-clr">   
+                <div class="login-wrap text-center">                        
+                    <h2 class="fsz-35 spcbtm-15"> <span class="bold-font-3 blk-clr">GoShop</span> <span class="thm-clr funky-font">bikes</span> </h2>
+                    <h2 class="sec-title fsz-50">NEWSLETTER</h2>
+                    <h3 class="fsz-15 bold-font-4"> Did you know that we ship to over <span class="thm-clr"> 24 different countries </span> </h3>
+
+                    <div class="login-form spctop-30"> 
+                        <form class="subscribe">
+                            <div class="form-group"><input type="text" placeholder="Enter your name" class="form-control"></div>
+                            <div class="form-group"><input type="text" placeholder="Enter your email address" class="form-control"></div>
+                            <div class="form-group">
+                                <button class="alt fancy-button" type="submit"> <span class="fa fa-envelope"></span> Subscribe </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- / Subscribe Popup 1 -->
 
         <!-- Product Preview Popup -->
         <section class="modal fade" id="product-preview" tabindex="-1" role="dialog" aria-hidden="true">
