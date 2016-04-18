@@ -185,7 +185,7 @@ else {
                 <div class="container theme-container reltv-div">   
 
                     <div class="pull-right header-search visible-xs">
-                        <a id="open-popup-menu" class="nav-trigger header-link-search" href="javascript:void(0)" title="Menu">
+                        <a id="open-popup-menu" class="nav-trigger header-link-search" href="search.php" title="Menu">
                             <i class="fa fa-bars"></i>
                         </a>
                     </div>
@@ -468,7 +468,7 @@ else {
 											echo"<div class='pop-up-icon'>";
 												echo"<a class='left-link' href='#product-preview' data-toggle='modal'><i class='fa fa-search'></i></a>";
 												
-												echo"<a class='right-link' href='#'><i class='fa fa-heart'> </i></a>";
+												echo"<a class='right-link' href='#' value=".$row["deal_id"]."><i class='fa fa-heart'> </i></a>";
 											echo "</div>";
 										echo "</div>";
 								echo "</div>";
@@ -479,7 +479,7 @@ else {
 							echo "</div>";
 						echo "</div>";           				
 					}
-			?> 
+				?> 
 
                         <!-- PHP CODE ENDS HERE -->
                     </div>
@@ -625,12 +625,13 @@ else {
         <div class="popup-box page-search-box">
             <div>
                 <div class="popup-box-inner">
-                    <form>
-                        <input class="search-query" type="text" placeholder="Search and hit enter" />
+                    <form method="get" action="search.php">
+                        <input class="search-query" name="user_query" type="text" placeholder="Search and hit enter" />
+						<input type = "submit" name= "search" value="search">
                     </form>
                 </div>
             </div>
-            <a href="javascript:void(0)" class="close-popup-box close-page-search"><i class="fa fa-close"></i></a>
+            <a href="search.php" class="close-popup-box close-page-search"><i class="fa fa-close"></i></a>
         </div>
         <!-- / Search Popup -->
 

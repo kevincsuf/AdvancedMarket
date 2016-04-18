@@ -239,6 +239,8 @@ if($_POST) {
             <div class="theme-container container">
                 <main id="main-content" class="main-content">                  
                     <div itemscope itemtype="http://schema.org/Product" class="product has-post-thumbnail product-type-variable">
+						<!-- timestamp -->
+						<div id="countdown">Timestamp</div>
 						<!-- PHP Code -->
 							<?php 
 								if(isset($_GET['deal_url_id']))
@@ -374,7 +376,7 @@ if($_POST) {
 
 													if ($global_order_eligible) {
 														echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right gst-cta-buttons'>";
-														echo "<a href='#join_form' data-toggle='modal' data-target='#PostCommentsModal' class='fancy-btn fancy-btn-small'> Join </a>";
+														 echo"<a href='#join-popup' class='fancy-btn fancy-btn-small' data-toggle='modal'>JOIN</a>";
 														echo "</div>";
 													}
 													else if (strtolower($_SESSION["utype"]) == "seller") {
@@ -414,74 +416,15 @@ if($_POST) {
 							
 							<!--<PHP CODE FOR CATEOGRY> -->
 								<?php
-								$sql1="SELECT * FROM category where cat_id=$cat";
-								$res1=mysqli_query($con,$sql1);
-								while($row1 = mysqli_fetch_assoc($res1))
+								//$sql1="SELECT * FROM category where cat_id=$cat";
+								//$res1=mysqli_query($con,$sql1);
+								//while($row1 = mysqli_fetch_assoc($res1))
 									{
-						              $cat_name = $row1["category"]."</a>";  
+						          //    $cat_name = $row1["category"]."</a>";  
 										//echo $cat_name;
 									}
 								?>
-							<!-- PHP CATEOGRY Code ENDS -->
-							
-							<!-- #code for join-popup -->
-						 <div class="modal fade login-popup" id="loginpopup" tabindex="-1" role="dialog" aria-hidden="true">
-						   <div class="modal-dialog modal-lg">          
-							   <button type="button" class="close close-btn popup-cls" data-dismiss="modal" aria-label="Close"> <i class="fa-times fa"></i> </button> 
-
-									<div class="modal-content login-1 wht-clr">   
-										<div class="login-wrap text-center">                        
-											<h2 class="fsz-35 spcbtm-15"> <span class="bold-font-3 wht-clr">International</span> <span class="thm-clr funky-font">Trade</span> </h2>
-											
-											<p class="fsz-15 bold-font-4"> Join to get the most out of  <span class="thm-clr"> International Trade Website </span> </p>                       
-											
-											<div class="login-form">  
-											<br>
-											<form class= "login-form" name="join_form" id="join_form" method= "post" action="<?php echo $_SERVER["PHP_SELF"];?>" onSubmit="return join_validate();">
-
-												<input type='hidden' name='min_quantity' id='min_quantity' value='<?php echo $global_min_quantity; ?>'>
-												<input type='hidden' name='remaining_stocks' id='remaining_stocks' value='<?php echo $global_remaining_stocks; ?>'>
-												<input type='hidden' name='deal_id' id='deal_id' value='<?php echo $global_deal_id; ?>'>
-												<input type='hidden' name='deal_end_date' id='deal_end_date' value='<?php echo $global_deal_end_date; ?>'>
-
-												<div class='input-group'>
-													<span class='input-group-addon'>@</span>
-													<input type='text' class='form-control' name='quantity' id='quantity' placeholder='Quantity' type='number' />
-													<div class="warning left-align" id="display_remaining_stocks"><p>Remaining stocks: <?php echo $global_remaining_stocks ?> / Minimum order quantity: <?php echo $global_min_quantity ?></p></div>
-												</div>
-
-												<div class='input-group'>
-													<span class='input-group-addon'>@</span>
-													<input type='text' class='form-control' name='address' id='address' placeholder='Address' />
-												</div>
-
-												<div class='input-group'>
-													<span class='input-group-addon'>@</span>
-													<input type='text' class='form-control' name='state' id='state' placeholder='State' />
-												</div>
-
-												<div class='input-group'>
-													<span class='input-group-addon'>@</span>
-													<input type='text' class='form-control' name='zipcode' id='zipcode' placeholder='Zipcode' type='number' />
-												</div>
-
-												</br>
-
-												<button type='submit' class='btn btn-success'>Submit</button>
-
-											</form>
-
-										</div>
-
-										<div class='modal-footer'>
-											<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
-										</div>
-
-								</div>
-							</div>
-						</div>
-					</div>	
-							
+									
                         <div class="clearfix"></div>
 
                         <div class="woocommerce-tabs wc-tabs-wrapper row">
@@ -694,39 +637,160 @@ if($_POST) {
 
             <div class="clear"></div>
         </div>
+		
+		
+		<!-- PHP CATEOGRY Code ENDS -->
+							
+							<div class="modal fade login-popup" id="join-popup" tabindex="-1" role="dialog" aria-hidden="true">
+								<div class="modal-dialog modal-lg">                
+									<button type="button" class="close close-btn popup-cls" data-dismiss="modal" aria-label="Close"> <i class="fa-times fa"></i> </button>
 
-        <!-- Subscribe News -->
-        <section class="gst-row gst-color-white row-newsletter ovh">
-            <div class="gst-wrapper">
-                <div class="gst-column col-lg-12 no-padding text-center">
-                    <div class="fancy-heading text-center">
-                        <h3 class="wht-clr">Subscribe Newsletter</h3>
-                        <h5 class="funky-font-2 wht-clr">Sign up for <span class="thm-clr">Special Promotion</span></h5>
-                    </div>
+									<div class="modal-content login-1 wht-clr">   
+										<div class="login-wrap text-center">                        
+										<h2 class="fsz-35 spcbtm-15"> <span class="bold-font-3 wht-clr">International</span> <span class="thm-clr funky-font">Trade</span> </h2>
+																
+										<p class="fsz-15 bold-font-4"> Join to get the most out of  <span class="thm-clr"> International Trade Website </span> </p>     <div class="login-form">  
+											<br>
+											<form class= "login-form" name="join_form" id="join_form" method= "post" action="<?php echo $_SERVER["PHP_SELF"];?>" onSubmit="return join_validate();">
 
-                    <p><strong>Lorem ipsum dolor sit amet</strong>, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut<br /> laoreet dolore magna aliquam erat volutpat.</p>
+											<input type='hidden' name='min_quantity' id='min_quantity' value='<?php echo $global_min_quantity; ?>'>
+											<input type='hidden' name='remaining_stocks' id='remaining_stocks' value='<?php echo $global_remaining_stocks; ?>'>
+											<input type='hidden' name='deal_id' id='deal_id' value='<?php echo $global_deal_id; ?>'>
+											<input type='hidden' name='deal_end_date' id='deal_end_date' value='<?php echo $global_deal_end_date; ?>'>
 
-                    <div class="gst-empty-space clearfix"></div>
+											<div class="form-group">
+											 <input type="number" class="form-control" name="quantity" id="quantity" placeholder="Quantity" />
+											 <div class="warning left-align" id="display_remaining_stocks"><p>Remaining stocks: <?php echo $global_remaining_stocks ?> / Minimum order quantity: <?php echo $global_min_quantity ?></p></div>
+											</div>
 
-                    <form>
-                        <div class="col-md-2"> <h4> <strong class="fsz-20"> <span class="thm-clr">Subscribe</span> to us </strong> </h4> </div>
-                        <div class="gst-empty-space visible-sm clearfix"></div>
-                        <div class="col-md-4 col-sm-4">
-                            <input type="text" class="dblock" placeholder="Enter your name" />
-                        </div>
+																	<div class="form-group">
+																		<input type='text' class='form-control' name='address' id='address' placeholder='Address' />
+																	</div>
 
-                        <div class="col-md-4 col-sm-4">
-                            <input type="text" class="dblock" placeholder="Enter your email address" />
-                        </div>
+																	<div class="form-group">
+																		<input type='text' class='form-control' name='state' id='state' placeholder='State' />
+																	</div>
 
-                        <div class="col-md-2 col-sm-4">
-                            <input type="submit" class="dblock fancy-button" value="Submit" />
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
-        <!-- / Subscribe News -->
+																	<div class="form-group">
+																		<input type='text' class='form-control' name='zipcode' id='zipcode' placeholder='Zipcode' type='number' />
+																	</div>
+
+																	</br>
+																	<button type='submit' class='btn btn-success'>Submit</button>
+																	<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+																</form>
+
+															</div>
+
+								</div>
+							</div>
+						</div>
+							<!-- /Popup: Login 1 --> 
+
+									<script type="text/javascript">
+										function join_validate() {
+											var minQty = document.forms["join_form"]["min_quantity"].value;
+											var remainStocks = document.forms["join_form"]["remaining_stocks"].value;
+											var orderQty = document.forms["join_form"]["quantity"].value;
+											var addr = document.forms["join_form"]["address"].value;
+											var state = document.forms["join_form"]["state"].value;
+											var zip = document.forms["join_form"]["zipcode"].value;
+
+											minQty = Number(minQty);
+											remainStocks = Number(remainStocks);
+											orderQty = Number(orderQty);
+
+											if (isNaN(orderQty) || orderQty == 0) {
+												alert("Please enter order quantity");
+												document.forms["join_form"]["quantity"].focus();
+												return false;
+											}
+
+											if (minQty > orderQty) {
+												alert("Order quantity must be greater than minimum order quantity");
+												document.forms["join_form"]["quantity"].focus();
+												return false;
+											}
+
+											if(orderQty%minQty != 0) {
+												alert("Order quantity must be multiplied by minimum order quantity");
+												document.forms["join_form"]["quantity"].focus();
+												return false;
+											}
+
+											if(orderQty > remainStocks) {
+												alert("Remaining quantity is only " + remainStocks);
+												document.forms["join_form"]["quantity"].focus();
+												return false;
+											}
+
+											if (addr == "") {
+												alert("Please enter address");
+												document.forms["join_form"]["address"].focus();
+												return false;
+											}
+
+											if (state == "") {
+												alert("Please enter sate");
+												document.forms["join_form"]["state"].focus();
+												return false;
+											}
+
+											if (zip == "") {
+												alert("Please enter zip code");
+												document.forms["join_form"]["zipcode"].focus();
+												return false;
+											}
+
+											if(zip.length != 5 ) {
+												alert("Please enter a zip in the format #####.");
+												document.forms["join_form"]["zipcode"].focus();
+												return false;
+											}
+
+											return(true);
+										}
+									</script>
+											 
+							<!-- #end for join-popup -->	
+											<!--Script added to display the time countdown based on end date-->
+										<script>
+												// set the date we're counting down to
+												var target_date = new Date('<?php echo $global_deal_end_date; ?>').getTime();
+												 
+												// variables for time units
+												var days, hours, minutes, seconds, ms_step=10;
+												 
+												// get tag element
+												var countdown = document.getElementById('countdown');
+												 
+												setInterval(function () {
+													var current_date = new Date().getTime();
+													var seconds_left = (target_date - current_date) / 1000;
+													days = parseInt(seconds_left / 86400);
+													seconds_left = seconds_left % 86400;
+													hours = parseInt(seconds_left / 3600);
+													seconds_left = seconds_left % 3600;
+													min = parseInt(seconds_left / 60);
+													sec = parseInt(seconds_left % 60);
+													ms = parseInt(target_date-current_date);
+													 
+													// format countdown string + set tag value
+												   countdown.innerHTML = ''+
+													  '<span class="days">'+days+'<b>Days</b></span>'+
+													  '<span class="hours">'+hours+'<b>Hours</b></span>'+
+													  '<span class="minutes">'+min+'<b>Minutes</b></span>'+
+													  '<span class="seconds">'+sec+'<b>Seconds</b></span>';  
+												// this is just for milliseconds only
+												  /* countdown.innerHTML = 
+													  '<span class="ms">'+ms+' ms</span>'; */
+												}, ms_step);
+
+								</script>
+
+		
+
+      
 
   <!-- FOOTER -->
        <?php include "libs/_incl_footer.php";?>  
