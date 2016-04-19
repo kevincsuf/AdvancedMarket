@@ -510,7 +510,7 @@ else {
 									echo"<div class='text'>";
 										 echo"<a href='single_product.php?deal_url_id=$var_deal_id' class='add-to-cart cart-icn2'></a>";
 										 echo"<div class='name'><a href='single_product.php?deal_url_id=$var_deal_id'>".$row["title"]."</a></div>";
-											echo"<div class='url fn n '>".$row["description"]."</div>";									
+										//	echo"<div class='url fn n '>".$row["description"]."</div>";									
 											echo"<div class='price font-3'> $ ".$row["unit_price"]."</div>";
 								echo "</div>";		
 							echo "</div>";
