@@ -141,19 +141,19 @@ if($_POST) {
                     </div>
 					<!--Logo code -->
                     <div class="row">
-                        <div class="col-md-4 col-sm-4">
+                        <div class="col-md-3 col-sm-3">
                             <div class="top-header pull-left">
                                 <div class="logo-area">
                                     <a href="index-2.html" class="thm-logo fsz-35">
                                         <!--<img src="files/main-logo.png" alt="Goshop HTML Theme">  Niki Changed nav bar-->
-                                        <b class="bold-font-3 wht-clr">International</b><span class="thm-clr funky-font"> Trade</span>
+                                        <b class="bold-font-3 wht-clr"> International  </b> <span class="thm-clr funky-font"> Trade </span>
                                     </a>
                                 </div>                              
                             </div>
                         </div>
                         <!-- Navigation -->
 							 <!-- Niki Changed nav bar-->
-                        <div class="col-md-8 col-sm-8 static-div">
+                        <div class="col-md-9 col-sm-9 static-div">
                             <div class="navigation pull-left">
                                 <nav>                                                               
                                     <div class="" id="primary-navigation">                                        
@@ -220,15 +220,27 @@ if($_POST) {
 
         <!-- CONTENT + SIDEBAR -->
         <div class="main-wrapper clearfix">
-            
+            <div class="site-pagetitle jumbotron">
+                <div class="container theme-container text-center">
+                    <h3>International Trade Product</h3>
+
+                    <!-- Breadcrumbs -->
+                    <div class="breadcrumbs">
+                        <div class="breadcrumbs text-center">
+                            <i class="fa fa-home"></i>
+                            <span><a href="index-2.html">Home</a></span>
+                            <i class="fa fa-arrow-circle-right"></i>
+                            <span class="current">Shop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="theme-container container">
                 <main id="main-content" class="main-content">                  
                     <div itemscope itemtype="http://schema.org/Product" class="product has-post-thumbnail product-type-variable">
 						<!-- timestamp -->
-						<div class="row">
-						<div id="countdown" class="gst-countdown right">Timestamp</div>
-						</div>
+						<div id="countdown">Timestamp</div>
 						<!-- PHP Code -->
 							<?php 
 								if(isset($_GET['deal_url_id']))
@@ -276,7 +288,32 @@ if($_POST) {
 										$var_number_discount_3 = $var_row_deal['number_discount_3'];
 										$var_amount_discount_3 = $var_row_deal['amount_discount_3'];
 										
+												echo "  <div class='progress'>";
+												// Check how many discounts
+												if ($var_number_discount_option == 1) {
+													$var_percent_1 = 100;
+													$var_percent_2 = 0;
+													$var_percent_3 = 0;
+													
+													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+												}
+												else if ($var_number_discount_option == 2) {
+													$var_percent_1 = 50;
+													$var_percent_2 = 50;
+													$var_percent_3 = 0;
+													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar progress-bar-warning' role='progressbar' style='width:".$var_percent_2."%'>".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
+												}
+												else if ($var_number_discount_option == 3) {
+													$var_percent_1 = 33;
+													$var_percent_2 = 33;
+													$var_percent_3 = 34;
+													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar progress-bar-warning' role='progressbar' style='width:".$var_percent_2."%'>".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar progress-bar-danger' role='progressbar' style='width:".$var_percent_3."%'>".$var_number_discount_3." ".$var_deal_unit.", $".$var_amount_discount_3."/".$var_deal_unit."</div>";
+												}
 												
+												echo "  </div>";
 												
 												// Set global variable
 												$global_min_quantity = $var_deal_qty;
@@ -387,34 +424,7 @@ if($_POST) {
 										//echo $cat_name;
 									}
 								?>
-						<?php 		
-						echo " <div class='progress'>";
-												// Check how many discounts
-												if ($var_number_discount_option == 1) {
-													$var_percent_1 = 100;
-													$var_percent_2 = 0;
-													$var_percent_3 = 0;
-													
-													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
-												}
-												else if ($var_number_discount_option == 2) {
-													$var_percent_1 = 50;
-													$var_percent_2 = 50;
-													$var_percent_3 = 0;
-													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
-													echo "<div class='progress-bar progress-bar-warning' role='progressbar' style='width:".$var_percent_2."%'>".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
-												}
-												else if ($var_number_discount_option == 3) {
-													$var_percent_1 = 33;
-													$var_percent_2 = 33;
-													$var_percent_3 = 34;
-													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
-													echo "<div class='progress-bar progress-bar-warning' role='progressbar' style='width:".$var_percent_2."%'>".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
-													echo "<div class='progress-bar progress-bar-danger' role='progressbar' style='width:".$var_percent_3."%'>".$var_number_discount_3." ".$var_deal_unit.", $".$var_amount_discount_3."/".$var_deal_unit."</div>";
-												}
-												
-												echo "  </div>";
-												?>
+									
                         <div class="clearfix"></div>
 
                         <div class="woocommerce-tabs wc-tabs-wrapper row">
@@ -767,10 +777,10 @@ if($_POST) {
 													 
 													// format countdown string + set tag value
 												   countdown.innerHTML = ''+
-													  '<span>'+days+'</span><b> Days</b>'+
-													  '<span>'+hours+'</span><b> Hours</b>'+
-													  '<span>'+min+'</span><b> Minutes</b>'+
-													  '<span>'+sec+'</span><b> Seconds</b>';  
+													  '<span class="days">'+days+'<b>Days</b></span>'+
+													  '<span class="hours">'+hours+'<b>Hours</b></span>'+
+													  '<span class="minutes">'+min+'<b>Minutes</b></span>'+
+													  '<span class="seconds">'+sec+'<b>Seconds</b></span>';  
 												// this is just for milliseconds only
 												  /* countdown.innerHTML = 
 													  '<span class="ms">'+ms+' ms</span>'; */
