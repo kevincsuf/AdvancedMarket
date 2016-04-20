@@ -59,6 +59,9 @@ if($_POST) {
 		// Eligible to order
 		$global_order_eligible = false;
 
+        // The deal should be closed or already closed?
+        $global_deal_closed = false;
+
 ?>
 
 
@@ -225,16 +228,38 @@ if($_POST) {
             <div class="theme-container container">
                 <main id="main-content" class="main-content">                  
                     <div itemscope itemtype="http://schema.org/Product" class="product has-post-thumbnail product-type-variable">
-						<!-- timestamp -->
-						<div class="row">
-						<div id="countdown" class="gst-countdown right">Timestamp</div>
-						</div>
 						<!-- PHP Code -->
 							<?php 
 								if(isset($_GET['deal_url_id']))
 									{
 									$var_deal_url_id = $_GET['deal_url_id'];
-									
+
+                                    // Check deal closed
+                                    $global_deal_closed = closeDeal($var_deal_url_id);
+                                    if ($global_deal_closed) {
+                                    ?>
+                        <!-- deal already closed -->
+                        <div class="row">
+                            <div class="gst-countdown right">Sorry, this deal is already closed.</div>
+                        </div>
+                                    <?php
+                                    }
+                                    else {
+                                    ?>
+                        <!-- timestamp -->
+                        <div class="row">
+                            <div id="countdown" class="gst-countdown right">Timestamp</div>
+                        </div>
+                                    <?php
+                                    }
+
+                                    // Check deal closed
+                                    if (checkJoinedDeal($var_deal_url_id, $_SESSION["ukey"])) {
+                                        $global_order_placed = true;
+                                    }
+                                    else {
+                                        $global_order_placed = false;
+                                    }
 									
 									$cat = "";
 									$var_deal_id = 0;
@@ -329,8 +354,8 @@ if($_POST) {
 													// code for join deal begins 
 												
 													
-													// Hide Join button when this user joined this deal already or this user is seller
-													if (($global_order_placed) || (strtolower($_SESSION["utype"]) == "seller")) {
+													// Hide Join button when this user joined this deal already or this user is seller or the deal is already closed
+													if (($global_order_placed) || (strtolower($_SESSION["utype"]) == "seller" || $global_deal_closed)) {
 														$global_order_eligible = false;
 													}
 													else {
@@ -343,14 +368,25 @@ if($_POST) {
 														echo "</div>";
 													}
 													else if (strtolower($_SESSION["utype"]) == "seller") {
-														echo "
+                                                        echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right'>";
+                                                        echo "
 															Seller can not join a deal. Please log in as a buyer.
 														";
+                                                        echo "</div>";
 													}
 													else if ($global_order_placed) {
-														echo "
-															You already joined this deal.";
+                                                        echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right'>";
+                                                        echo "
+															You already joined this deal.
+                                                        ";
+                                                        echo "</div>";
 													}
+                                                    else if ($global_deal_closed) {
+                                                        echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right'>";
+                                                        echo "
+                                                        ";
+                                                        echo "</div>";
+                                                    }
 													echo "</div>";
 												}
 
@@ -370,8 +406,7 @@ if($_POST) {
 												}
 
 												$global_remaining_stocks = $deal_quantity_total - $order_quantity_sum;
-                   
-										
+
 									}
 									
                             ?>

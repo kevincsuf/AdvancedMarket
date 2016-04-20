@@ -11,7 +11,7 @@ require_once("./libs/login_lib.php");
 $user_member_type = $_SESSION["utype"];
 $user_id = $_SESSION["uid"];
 $user_name = $_SESSION["uname"];
-$user_key=$_SESSION["ukey"]
+$user_key=$_SESSION["ukey"];
 
 ?>
 

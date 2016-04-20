@@ -224,4 +224,144 @@ function getCatDeal()
 		
 
 	}
+
+// Close a deal
+function closeDeal($check_deal_id)
+{
+    global $con;
+
+    // Perform only when this deal_id is not closed yet
+    if (checkDealClosed($check_deal_id)) { // When already closed
+        return true;
+    } else { // When not closed yet
+
+        // Set flags
+        $is_out_of_stock = false;
+        $is_out_of_date = false;
+
+        $var_max_quantity = 0;
+        $var_sum_order = 0;
+
+        $var_end_date = "";
+        $var_current_time = "";
+
+        ///////////////////////////////////
+        // Condition 1: Check out of order
+        ///////////////////////////////////
+
+        // Total quantity
+        $var_get_deal_id = "
+            SELECT *
+            FROM create_deal
+            WHERE deal_id=" . $check_deal_id;
+        $var_run_deal_id = mysqli_query($con, $var_get_deal_id);
+        while ($var_row_deal_id = mysqli_fetch_array($var_run_deal_id)) {
+            $var_max_quantity = $var_row_deal_id['max_quantity'];
+            $var_end_date = $var_row_deal_id['end_date'];
+        }
+
+        // Total order
+        $var_get_sum_order = "
+            SELECT create_deal_id, SUM(order_quantity) AS sum_order
+            FROM join_deal
+            GROUP BY create_deal_id";
+        $var_run_sum_order = mysqli_query($con, $var_get_sum_order);
+        while ($var_row_sum_order = mysqli_fetch_array($var_run_sum_order)) {
+            if ($var_row_sum_order['create_deal_id'] == $check_deal_id) {
+                $var_sum_order = $var_row_sum_order['sum_order'];
+            }
+        }
+
+        // Out of stock?
+        if ($var_max_quantity > $var_sum_order) {
+            $is_out_of_stock = false;
+        } else {
+            $is_out_of_stock = true;
+        }
+
+        ///////////////////////////////////
+        // Condition 2: Check out of date
+        ///////////////////////////////////
+
+        //$var_end_time = date('Y-m-d 00:00:00', strtotime($var_end_date . ' +1 day'));
+        $var_end_time = new DateTime($var_end_date.' + 1day');
+        $var_current_time = new DateTime("now");
+
+        // Out ot date?
+        if ($var_current_time < $var_end_time) {
+            $is_out_of_date = false;
+        } else {
+            $is_out_of_date = true;
+        }
+
+        /////////////////////////////////////////////////////////////////////////////
+        // Conclusion: either out of stock or out of date, the deal should be closed
+        /////////////////////////////////////////////////////////////////////////////
+        if ($is_out_of_stock || $is_out_of_date) {
+            // Update as the deal closed
+            $var_update_deal_id = "
+                UPDATE create_deal
+                SET deal_closed = 1
+                WHERE deal_id=" . $check_deal_id;
+            if (mysqli_query($con, $var_update_deal_id)) {
+                echo "<script> alert(\"Update record saved successfully..!\")</script>";
+            } else {
+                echo "<script> alert(\"Update record NOT saved successfully..!\")</script>";
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+// Check whether a deal is closed
+function checkDealClosed($check_deal_id) {
+    global $con;
+
+    $var_deal_closed = 0;
+
+    $var_get_deal_id = "
+        SELECT *
+        FROM create_deal
+        WHERE deal_id=" . $check_deal_id;
+    $var_run_deal_id = mysqli_query($con, $var_get_deal_id);
+    while ($var_row_deal_id = mysqli_fetch_array($var_run_deal_id)) {
+        $var_deal_closed = $var_row_deal_id['deal_closed'];
+    }
+
+    // 0 means not closed
+    if ($var_deal_closed == 0) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+// Check the user already joined the deal
+function checkJoinedDeal($check_deal_id, $ukey) {
+    global $con;
+
+    $var_order_id = 0;
+
+    $var_get_join_deal = "
+        SELECT *
+        FROM join_deal
+        WHERE create_deal_id=" . $check_deal_id." AND user_id=".$ukey;
+    $var_run_join_deal = mysqli_query($con, $var_get_join_deal);
+    while ($var_row_join_deal = mysqli_fetch_array($var_run_join_deal)) {
+        $var_order_id = $var_row_join_deal['order_id'];
+    }
+
+    // 0 means not joined
+    if ($var_order_id == 0) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+
 ?>
