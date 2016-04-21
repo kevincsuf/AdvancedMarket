@@ -162,7 +162,7 @@ else {
 												echo"</ul>";
 										echo"</li>";
 									}
-							?>
+						?>
 						<!-- To Display Login / Logout based on logged in status -->	
                         <li class="menu-item">
 							<?php
@@ -365,10 +365,20 @@ else {
 													echo "<div class='product-media'>";
 														echo"<img src='images/".$row["deal_image"]."' alt=''/>";                                              
 													echo"</div>";
-													echo "<div class='product-content'>";
-														echo "<h3> <a href='single_product.php?deal_url_id=$var_deal_id' class='title-2'>".$row["title"]."</a> </h3>";
+													// code to single single_product page based on user login
+													if (isset($_SESSION["uid"])) 
+														{
+														echo "<div class='product-content'>";
+															echo "<h3> <a href='single_product.php?deal_url_id=$var_deal_id' class='title-2'>".$row["title"]."</a> </h3>";
+															echo "<p class='font-2'>Start from <span class='thm-clr'>$".$row["amount_discount_1"]."</span> </p>";
+														echo"</div>";
+														}
+													else
+														{
+														echo"<a href='#login-popup' data-toggle='modal'>".$row["title"]."</a>";
 														echo "<p class='font-2'>Start from <span class='thm-clr'>$".$row["amount_discount_1"]."</span> </p>";
-													echo"</div>";
+														}									
+													
 												echo"</div>	";
 											//echo "</div>";
 										//echo"</div>";						
@@ -454,7 +464,8 @@ else {
 						
 						<!-- PHP CODE GOES HERE -->
 				<?php
-				$sql="SELECT * FROM create_deal order by RAND() LIMIT 4" ;  // add function to display new arrival part
+				//$sql="SELECT * FROM create_deal WHERE start_date == 2016-04-09" ;
+				$sql="SELECT * FROM create_deal order by RAND() LIMIT 4 " ;  // add function to display new arrival part
 				$res=mysqli_query($con,$sql);
 				while($row = mysqli_fetch_assoc($res))
 					{
@@ -472,10 +483,21 @@ else {
 											echo "</div>";
 										echo "</div>";
 								echo "</div>";
-								echo"<div class='product-content'>";
-									echo"<h3> <a class='title-3 fsz-18' href='single_product.php?deal_url_id=$var_deal_id'>".$row["title"]."</a> </h3>";
-									echo"<p class='font-2'>Starting from<span class='thm-clr'> $ ".$row["unit_price"]."</span> </p>";  
-								echo "</div>";		
+								
+								// code to single single_product page based on user login
+								if (isset($_SESSION["uid"])) 
+									{
+									echo"<div class='product-content'>";
+										echo"<h3> <a class='title-3 fsz-18' href='single_product.php?deal_url_id=$var_deal_id'>".$row["title"]."</a> </h3>";
+										echo"<p class='font-2'>Starting from<span class='thm-clr'> $ ".$row["unit_price"]."</span> </p>";  
+									echo "</div>";
+									}
+								else
+									{
+									echo"<a href='#login-popup' data-toggle='modal'>".$row["title"]."</a>";
+									echo "<p class='font-2'>Start from <span class='thm-clr'>$".$row["amount_discount_1"]."</span> </p>";
+									}	
+																	
 							echo "</div>";
 						echo "</div>";           				
 					}
@@ -506,13 +528,27 @@ else {
 						$var_deal_id=$row["deal_id"];
 						echo"<div class='col-sm-6 col-lg-3 no-lr-padding'>";
 							echo"<div class='image'><img src='images/".$row["deal_image"]."' alt='Product'></div>";
-								echo"<div class='description'>";
-									echo"<div class='text'>";
-										 echo"<a href='single_product.php?deal_url_id=$var_deal_id' class='add-to-cart cart-icn2'></a>";
-										 echo"<div class='name'><a href='single_product.php?deal_url_id=$var_deal_id'>".$row["title"]."</a></div>";
-										//	echo"<div class='url fn n '>".$row["description"]."</div>";									
-											echo"<div class='price font-3'> $ ".$row["unit_price"]."</div>";
-								echo "</div>";		
+							echo"<div class='description'>";
+									
+										if (isset($_SESSION["uid"])) 
+										{
+											echo"<div class='text'>";
+												echo"<a href='single_product.php?deal_url_id=$var_deal_id' class='add-to-cart cart-icn2'></a>";
+												echo"<div class='name'><a href='single_product.php?deal_url_id=$var_deal_id'>".$row["title"]."</a></div>";
+												echo"<div class='price font-3'> $ ".$row["unit_price"]."</div>";
+											echo "</div>";
+										}
+										else
+										{
+											echo"<div class='text'>";
+												echo"<a href='#login-popup' data-toggle='modal' class='add-to-cart cart-icn2'></a>";
+												echo"<div class='name'><a href='#login-popup' data-toggle='modal'>".$row["title"]."</a></div>";
+												echo"<div class='price font-3'> $ ".$row["unit_price"]."</div>";
+											echo "</div>";
+										}
+										 
+										 
+											
 							echo "</div>";
 						echo "</div>";           				
 					}
@@ -657,7 +693,7 @@ else {
                                 </div>
                             </form>
 
-                            <p><i class="fa fa-user"></i> New User ??? <a class="thm-clr" href="">Click Here to Register .</a></p>
+                            <p><i class="fa fa-user"></i> New User ??? <a class="thm-clr" >Click Signup to Register .</a></p>
                             <p></p>
                         </div>
                     </div>

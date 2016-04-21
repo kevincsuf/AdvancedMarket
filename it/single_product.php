@@ -538,16 +538,7 @@ if($_POST) {
 								<p>Remaining stocks: <?php echo $global_remaining_stocks ?> </br>
 								Minimum order quantity: <?php echo $global_min_quantity ?></p></div>
 							</div>
-							<!--<PHP CODE FOR CATEOGRY> -->
-								<?php
-								//$sql1="SELECT * FROM category where cat_id=$cat";
-								//$res1=mysqli_query($con,$sql1);
-								//while($row1 = mysqli_fetch_assoc($res1))
-									{
-						          //    $cat_name = $row1["category"]."</a>";  
-										//echo $cat_name;
-									}
-								?>
+							
 						<?php 		
 						echo " <div class='progress'>";
 												// Check how many discounts
@@ -724,7 +715,27 @@ if($_POST) {
 
                 <!-- Portfolio items -->
                 <div class="related-product nav-2 text-center">
-                    <div class="product">
+				
+				<!--<PHP CODE FOR Product display based on CATEOGRY> -->
+					<?php
+					$sql2="SELECT * FROM create_deal where deal_category = $cat";
+					$res2=mysqli_query($con,$sql2);
+					while($row2 = mysqli_fetch_assoc($res2))
+						{
+					   
+						echo"<div class='product'>";
+							echo "<div class='rel-prod-media'>";
+								echo"<img src='images/".$row2["deal_image"]."' />";                                                 
+							echo "</div>";
+							echo "<div class='product-content'>";
+								echo "<h3> <a href='#' class='title-3 fsz-16'>".$row2["title"]."</a> </h3>";
+								echo "<p class='font-3'>Price: <span class='thm-clr'> $".$row2["amount_discount_1"]." </span> </p>";   
+							echo "</div>";
+						echo"</div>";
+						
+						}
+					?>
+				<!--     <div class="product">
                         <div class="rel-prod-media">
                             <img src="assets/img/products/rel-prod-1.png" alt="" />                                                 
                         </div>
@@ -782,7 +793,7 @@ if($_POST) {
                             <h3> <a href="#" class="title-3 fsz-16"> LYCRA BITZ MEN CLOTHING </a> </h3>
                             <p class="font-3">Price: <span class="thm-clr"> $299.00 </span> </p>    
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
