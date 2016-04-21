@@ -1,8 +1,69 @@
 <?php
-
+//login function
 require_once("./libs/core/init.php");
 require_once("./libs/login_lib.php");
 require_once("./libs/functions.php");
+
+if($_POST) {
+    require_once("./libs/login_lib.php");
+
+    $login = new Login($_POST['login_id'],md5($_POST['login_pwd']));
+
+    // login form check
+    if(isset($_POST['login_exe']) == "login") {
+        if (!$_POST['login_id'])
+            $login->error("Check ID!");
+        else {
+            if (!$_POST['login_pwd'])
+                $login->error("Check password!");
+            else {
+                if (!$login->check_login())
+                    $login->error("Check ID or password!");
+                else {
+                    $message = "Logged in as a ".$login->member_type;
+                    $login->warning($message);
+
+                    $_SESSION["ukey"] = $login->user_key;
+                    $_SESSION["uid"] = $login->id;
+                    $_SESSION["uname"] = $login->name;
+                    $_SESSION["utype"] = $login->member_type;
+
+                    // Go to the first page of Seller
+                    if ($login->member_type == "seller") {
+                        $echo_html = "<script type=\"text/javascript\">window.location.replace(\"./seller_view.php\");</script>";
+                        echo $echo_html;
+                    }
+                    else if ($login->member_type == "buyer") {
+                        $echo_html = "<script type=\"text/javascript\">window.location.replace(\"./buyer_view.php\");</script>";
+                        echo $echo_html;
+                    }
+                }
+            }
+        }
+    }
+}
+
+$message = "";
+
+if (isset($_SESSION["uid"])) {
+    //$login = new Login($_GET['login_id'], $_GET['login_pwd']);
+    //$login->check_login();
+    $message = "You are currently LOGGED IN as a <b>".strtoupper($_SESSION["utype"])."</b>, the ID is <b>".$_SESSION["uid"]."</b>, the Key is <b>".$_SESSION["ukey"]."</b>, and the NAME is <b>".$_SESSION["uname"]."</b>";
+}
+/*
+if (isset($_GET['login_id']) && isset($_GET['login_pwd'])) {
+    $login = new Login($_GET['login_id'], $_GET['login_pwd']);
+    $login->check_login();
+    $message = "You are currently LOGGED IN as a ".strtoupper($login->member_type)." and the ID is ".$login->id;
+}
+*/
+else {
+    $message = "You are currently <b>LOGGED OUT</b>";
+}
+
+?>
+<?php
+
 global $cat;
 global $cat_name;
 
@@ -105,34 +166,95 @@ if($_POST) {
     <body class="single single-product woocommerce woocommerce-page">
 
         <!-- HEADER -->
+        
+        <!-- HEADER -->
         <header id="masthead" class="clearfix" itemscope="itemscope" itemtype="https://schema.org/WPHeader">
             <div class="site-subheader site-header">
                 <div class="container theme-container">
                     <!-- Language & Currency Switcher -->
-            
-
                     <!-- Mini Cart -->
                     <ul class="pull-right list-unstyled list-inline">
-                        <li class="nav-dropdown">
-                            <a href="#">My Account</a>
-                            <ul class="nav-dropdown-inner list-unstyled accnt-list">
-                                <li> <a href="my-account.html">My Account</a></li>                                                
-                                <li> <a href="account-info.html"> Account Information </a></li>                                                
-                                <li> <a href="cng-pw.html">Change Password</a></li>
-                                <li> <a href="address-book.html">Address Books</a></li>
-                                <li> <a href="buyer_view.php">Order History</a></li>	<!--Niki added buyer view-->
-                                <li> <a href="review-rating.html">Reviews and Ratings</a></li>
-
-                            </ul>
-                        </li>
-                       
+                     						
+						<!-- To Display User name if logged in -->
+                        <?php
+						echo"<li class='menu-item'>";
+							
+								if (isset($_SESSION["uid"])) 
+									{
+									echo"<a href='profile.php'> Hi, ".$_SESSION['uname']."</a>";
+									}
+								else
+									{
+									
+									}
+							
+                        echo"</li>";
+						?>
+						
+						<!-- To Display View [seller / buyer] if logged in -->
+                        <?php
+						echo"<li class='menu-item'>";
+							
+								if (isset($_SESSION["uid"])) 
+									{
+										if ($_SESSION["utype"]=="seller")
+										echo"<a href='seller_view.php'>My Page</a>";
+										else
+										echo"<a href='buyer_view.php'>My Page</a>";
+									}
+								else
+									{
+									
+									}
+							
+                        echo"</li>";
+						?>
+						
+						<!-- To Display Sign up if not logged in -->
+						<?php
+								if (isset($_SESSION["uid"])) 
+									{
+									
+									}
+								else
+									{
+										echo"<li class='nav-dropdown'>";
+											echo"<a href='#'>Signup</a>";
+												echo"<ul class='nav-dropdown-inner list-unstyled accnt-list'>";
+													echo"<li> <a href='reg_buyer.php'> Buyer</a></li>";                                              
+													echo"<li> <a href='reg_seller.php'> Seller</a></li>";                                            
+												echo"</ul>";
+										echo"</li>";
+									}
+						?>
+						<!-- To Display Login / Logout based on logged in status -->	
                         <li class="menu-item">
-                            <a  href="#login-popup" data-toggle="modal">Login</a>
+							<?php
+								if (isset($_SESSION["uid"])) 
+									{
+									echo"<a  href='logout.php'>Logout</a>";
+									}
+								else
+									{
+									echo"<a  href='#login-popup' data-toggle='modal'>Login</a>";
+									}
+							?>
                         </li>
                     </ul>
 
                 </div>
             </div>
+			<!-- First nav bar->
+				<header id="masthead" class="clearfix" itemscope="itemscope" itemtype="https://schema.org/WPHeader">
+					<div class="site-subheader site-header">
+						<div class="container theme-container">
+							<!-- Language & Currency Switcher -->
+            
+
+                    <!-- Mini Cart -->
+                    
+
+              
 
             <div class="header-wrap" id="typo-sticky-header">
                 <div class="container theme-container reltv-div">   
@@ -147,7 +269,7 @@ if($_POST) {
                         <div class="col-md-4 col-sm-4">
                             <div class="top-header pull-left">
                                 <div class="logo-area">
-                                    <a href="index-2.html" class="thm-logo fsz-35">
+                                    <a href="index.php" class="thm-logo fsz-35">
                                         <!--<img src="files/main-logo.png" alt="Goshop HTML Theme">  Niki Changed nav bar-->
                                         <b class="bold-font-3 wht-clr">International</b><span class="thm-clr funky-font"> Trade</span>
                                     </a>
@@ -209,11 +331,11 @@ if($_POST) {
 
                                 </nav>
                             </div>
-                            <div class="pull-right srch-box">
+                         <!--   <div class="pull-right srch-box">
                                 <a id="open-popup-search" class="header-link-search" href="javascript:void(0)" title="Search">
                                     <i class="fa fa-search"></i>
                                 </a>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>          
@@ -366,18 +488,19 @@ if($_POST) {
 														echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right gst-cta-buttons'>";
 														 echo"<a href='#join-popup' class='fancy-btn fancy-btn-small' data-toggle='modal'>JOIN</a>";
 														echo "</div>";
+														echo "</br>";
 													}
 													else if (strtolower($_SESSION["utype"]) == "seller") {
                                                         echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right'>";
                                                         echo "
-															Seller can not join a deal. Please log in as a buyer.
+															//Seller can not join a deal. Please log in as a buyer.
 														";
                                                         echo "</div>";
 													}
 													else if ($global_order_placed) {
                                                         echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right'>";
                                                         echo "
-															You already joined this deal.
+															You have already joined this deal.
                                                         ";
                                                         echo "</div>";
 													}
@@ -389,7 +512,7 @@ if($_POST) {
                                                     }
 													echo "</div>";
 												}
-
+												
 												// Get remaining stocks when this page is opened
 												$order_quantity_query = "SELECT SUM(order_quantity) AS order_quantity_sum FROM join_deal where create_deal_id=".$global_deal_id;
 												$order_quantity_result = mysqli_query($con, $order_quantity_query);
@@ -406,12 +529,15 @@ if($_POST) {
 												}
 
 												$global_remaining_stocks = $deal_quantity_total - $order_quantity_sum;
-
+												
 									}
 									
                             ?>
 							<!-- PHP Code ENDS -->
-							
+							<div itemprop='description' class='fsz-15'>
+								<p>Remaining stocks: <?php echo $global_remaining_stocks ?> </br>
+								Minimum order quantity: <?php echo $global_min_quantity ?></p></div>
+							</div>
 							<!--<PHP CODE FOR CATEOGRY> -->
 								<?php
 								//$sql1="SELECT * FROM category where cat_id=$cat";
@@ -821,18 +947,7 @@ if($_POST) {
        <?php include "libs/_incl_footer.php";?>  
  <!-- / FOOTER -->
 
-        <!-- Search Popup -->
-        <div class="popup-box page-search-box">
-            <div>
-                <div class="popup-box-inner">
-                    <form>
-                        <input class="search-query" type="text" placeholder="Search and hit enter" />
-                    </form>
-                </div>
-            </div>
-            <a href="javascript:void(0)" class="close-popup-box close-page-search"><i class="fa fa-close"></i></a>
-        </div>
-        <!-- / Search Popup -->
+
 
         <!-- Popup: Login 1 -->
         <div class="modal fade login-popup" id="login-popup" tabindex="-1" role="dialog" aria-hidden="true">
