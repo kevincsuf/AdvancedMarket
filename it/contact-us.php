@@ -42,16 +42,80 @@ if(isset($_POST['submit'])) {
 }
 ?>
 
+<?php
+
+require_once("./libs/core/init.php");
+require_once("./libs/login_lib.php");
+require_once("./libs/functions.php");
+
+if($_POST) {
+    require_once("./libs/login_lib.php");
+
+    $login = new Login($_POST['login_id'],md5($_POST['login_pwd']));
+
+    // login form check
+    if(isset($_POST['login_exe']) == "login") {
+        if (!$_POST['login_id'])
+            $login->error("Check ID!");
+        else {
+            if (!$_POST['login_pwd'])
+                $login->error("Check password!");
+            else {
+                if (!$login->check_login())
+                    $login->error("Check ID or password!");
+                else {
+                    $message = "Logged in as a ".$login->member_type;
+                    $login->warning($message);
+
+                    $_SESSION["ukey"] = $login->user_key;
+                    $_SESSION["uid"] = $login->id;
+                    $_SESSION["uname"] = $login->name;
+                    $_SESSION["utype"] = $login->member_type;
+
+                    // Go to the first page of Seller
+                    if ($login->member_type == "seller") {
+                        $echo_html = "<script type=\"text/javascript\">window.location.replace(\"./seller_view.php\");</script>";
+                        echo $echo_html;
+                    }
+                    else if ($login->member_type == "buyer") {
+                        $echo_html = "<script type=\"text/javascript\">window.location.replace(\"./buyer_view.php\");</script>";
+                        echo $echo_html;
+                    }
+                }
+            }
+        }
+    }
+}
+
+$message = "";
+
+if (isset($_SESSION["uid"])) {
+    //$login = new Login($_GET['login_id'], $_GET['login_pwd']);
+    //$login->check_login();
+    $message = "You are currently LOGGED IN as a <b>".strtoupper($_SESSION["utype"])."</b>, the ID is <b>".$_SESSION["uid"]."</b>, the Key is <b>".$_SESSION["ukey"]."</b>, and the NAME is <b>".$_SESSION["uname"]."</b>";
+}
+/*
+if (isset($_GET['login_id']) && isset($_GET['login_pwd'])) {
+    $login = new Login($_GET['login_id'], $_GET['login_pwd']);
+    $login->check_login();
+    $message = "You are currently LOGGED IN as a ".strtoupper($login->member_type)." and the ID is ".$login->id;
+}
+*/
+else {
+    $message = "You are currently <b>LOGGED OUT</b>";
+}
+
+?>
+<!-- Actual HTML STARTS Here-->
+
 <!DOCTYPE html>
 <html lang="en">
-    
-<!-- Mirrored from event-theme.com/themes/goshophtml/default/contact-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 05 Apr 2016 09:31:43 GMT -->
 <head>
         <meta charset="utf-8">
         <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title> Goshop HTML Theme || Contact Us</title>
+        <title> International Trade || Home</title>
 
         <!-- Favicon -->
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.html">
@@ -71,7 +135,7 @@ if(isset($_POST['submit'])) {
 
         <!-- Theme CSS -->
         <link href="assets/css/style.css" rel="stylesheet" type="text/css">
-        <link href="assets/css/header.css" rel="stylesheet" type="text/css"> 
+        <link href="assets/css/header.css" rel="stylesheet" type="text/css">  
 
         <!--[if lt IE 9]>
        <script src="assets/plugins/iesupport/html5shiv.js"></script>
@@ -79,332 +143,144 @@ if(isset($_POST['submit'])) {
        <![endif]-->
 
     </head>
-    
-    <body class="blog">
+
+    <body class="home page">
 
         <!-- HEADER -->
         <header id="masthead" class="clearfix" itemscope="itemscope" itemtype="https://schema.org/WPHeader">
             <div class="site-subheader site-header">
                 <div class="container theme-container">
                     <!-- Language & Currency Switcher -->
-                    <ul class="pull-left list-unstyled list-inline">
-                        <li class="nav-dropdown language-switcher">
-                            <div>EN</div>
-                            <ul class="nav-dropdown-inner list-unstyled list-lang">
-                                <li><span class="current">EN</span></li>
-                                <li><a title="Russian" href="#">RU</a></li>
-                                <li><a title="France" href="#">FR</a></li>
-                                <li><a title="Brazil" href="#">IT</a></li>                                
-                            </ul>
-                        </li>
-                        <li class="nav-dropdown language-switcher">
-                            <div><span class="fa fa-dollar"></span>USD</div>
-                            <ul class="nav-dropdown-inner list-unstyled list-currency">
-                                <li><span class="current"><span class="fa fa-dollar"></span>USD</span></li>
-                                <li><a title="Euro" href="#"><span class="fa fa-eur"></span>Euro</a></li>
-                                <li><a title="GBP" href="#"><span class="fa fa-gbp"></span>GBP</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-
                     <!-- Mini Cart -->
                     <ul class="pull-right list-unstyled list-inline">
-                        <li class="nav-dropdown">
-                            <a href="#">My Account</a>
-                            <ul class="nav-dropdown-inner list-unstyled accnt-list">
-                                <li> <a href="my-account.html">My Account</a></li>                                                
-                                <li> <a href="account-info.html"> Account Information </a></li>                                                
-                                <li> <a href="cng-pw.html">Change Password</a></li>
-                                <li> <a href="address-book.html">Address Books</a></li>
-                                <li> <a href="order-history.html">Order History</a></li>
-                                <li> <a href="review-rating.html">Reviews and Ratings</a></li>
-                                <li> <a href="return.html">Returns Requests</a></li>
-                                <li> <a href="newsletter.html">Newsletter</a></li>
-                                <li> <a href="myaccount-leftsidebar.html">Left Sidebar</a></li>
-                            </ul>
-                        </li>
-                        <li id="cartContent" class="cartContent">
-                            <a id="miniCartDropdown" href="cart.html">
-                                My Cart 
-                                <span class="cart-item-num">3</span>
-                            </a>
-
-                            <div id="miniCartView" class="cartView">
-                                <ul id="minicartHeader" class="product_list_widget list-unstyled">
-                                    <li>
-                                        <div class="media clearfix">
-                                            <div class="media-lefta">
-                                                <a href="single-product.html">
-                                                    <img  src="assets/img/products/cart-popup-1.jpg" alt="hoodie_5_front" />
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <a href="single-product.html">Flusas Feminin</a>
-                                                <span class="price"><span class="amount"><span class="fa fa-dollar"></span>20.00</span></span>
-                                                <span class="quantity">Qty:  1Pcs</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="product-remove">
-                                            <a href="#" class="btn-remove" title="Remove this item"><i class="fa fa-close"></i></a>				
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="media clearfix">
-                                            <div class="media-lefta">
-                                                <a href="single-product.html">
-                                                    <img  src="assets/img/products/cart-popup-2.jpg" alt="T_2_front" />
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <a href="single-product.html">Autum Winter</a>
-                                                <span class="price"><span class="amount"><span class="fa fa-dollar"></span>20.00</span></span>
-                                                <span class="quantity">Qty:  1Pcs</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="product-remove">
-                                            <a href="#" class="btn-remove" title="Remove this item"><i class="fa fa-close"></i></a>				
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="media clearfix">
-                                            <div class="media-lefta">
-                                                <a href="single-product.html">
-                                                    <img  src="assets/img/products/cart-popup-3.jpg" alt="cd_6_angle" />
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <a href="single-product.html">Women's Summer</a>
-                                                <span class="price"><span class="amount"><span class="fa fa-dollar"></span>20.00</span></span>
-                                                <span class="quantity">Qty:  1Pcs</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="product-remove">
-                                            <a href="#" class="btn-remove" title="Remove this item"><i class="fa fa-close"></i></a>				
-                                        </div>
-                                    </li> 
-                                </ul>
-
-                                <div class="cartActions">
-                                    <span class="pull-left">Subtotal</span>
-                                    <span class="pull-right"><span class="amount"><span class="fa fa-dollar"></span>75.00</span></span>
-                                    <div class="clearfix"></div>
-
-                                    <div class="minicart-buttons">
-                                        <div class="col-lg-6">
-                                            <a href="cart.html">Your Cart</a>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <a href="checkout.html" class="minicart-checkout">Checkout</a>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                     						
+						<!-- To Display User name if logged in -->
+                        <?php
+						echo"<li class='menu-item'>";
+							
+								if (isset($_SESSION["uid"])) 
+									{
+									echo"<a href='profile.php'> Hi, ".$_SESSION['uname']."</a>";
+									}
+								else
+									{
+									
+									}
+							
+                        echo"</li>";
+						?>
+						
+						<!-- To Display View [seller / buyer] if logged in -->
+                        <?php
+						echo"<li class='menu-item'>";
+							
+								if (isset($_SESSION["uid"])) 
+									{
+										if ($_SESSION["utype"]=="seller")
+										echo"<a href='seller_view.php'>My Page</a>";
+										else
+										echo"<a href='buyer_view.php'>My Page</a>";
+									}
+								else
+									{
+									
+									}
+							
+                        echo"</li>";
+						?>
+						
+						<!-- To Display Sign up if not logged in -->
+						<?php
+								if (isset($_SESSION["uid"])) 
+									{
+									
+									}
+								else
+									{
+										echo"<li class='nav-dropdown'>";
+											echo"<a href='#'>Signup</a>";
+												echo"<ul class='nav-dropdown-inner list-unstyled accnt-list'>";
+													echo"<li> <a href='reg_buyer.php'> Buyer</a></li>";                                              
+													echo"<li> <a href='reg_seller.php'> Seller</a></li>";                                            
+												echo"</ul>";
+										echo"</li>";
+									}
+						?>
+						<!-- To Display Login / Logout based on logged in status -->	
                         <li class="menu-item">
-                            <a href="checkout.html">Checkout</a>
-                        </li>
-                        <li class="menu-item">
-                            <a  href="#login-popup" data-toggle="modal">Login</a>
+							<?php
+								if (isset($_SESSION["uid"])) 
+									{
+									echo"<a  href='logout.php'>Logout</a>";
+									}
+								else
+									{
+									echo"<a  href='#login-popup' data-toggle='modal'>Login</a>";
+									}
+							?>
                         </li>
                     </ul>
 
                 </div>
             </div>
-
+			
             <div class="header-wrap" id="typo-sticky-header">
                 <div class="container theme-container reltv-div">   
 
-                    <div class="pull-right header-search visible-xs">
-                        <a id="open-popup-menu" class="nav-trigger header-link-search" href="javascript:void(0)" title="Menu">
-                            <i class="fa fa-bars"></i>
-                        </a>
-                    </div>
-
+                    
                     <div class="row">
-                        <div class="col-md-3 col-sm-3">
+                        <div class="col-md-4 col-sm-4">
                             <div class="top-header pull-left">
                                 <div class="logo-area">
-                                    <a href="index-2.html" class="thm-logo fsz-35">
+                                    <a href="index.php" class="thm-logo fsz-35">
                                         <!--<img src="files/main-logo.png" alt="Goshop HTML Theme">-->
-                                        <b class="bold-font-3 wht-clr"> GoShop </b> <span class="thm-clr funky-font"> bikes </span>
+                                        <b class="bold-font-3 wht-clr">International</b><span class="thm-clr funky-font"> Trade</span>
                                     </a>
                                 </div>                              
                             </div>
                         </div>
                         <!-- Navigation -->
 
-                        <div class="col-md-9 col-sm-9 static-div">
+                        <div class="col-md-8 col-sm-8 static-div">
                             <div class="navigation pull-left">
                                 <nav>                                                               
                                     <div class="" id="primary-navigation">                                        
                                         <ul class="nav navbar-nav primary-navbar">
-                                            <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >Home</a>
-                                                <ul class="dropdown-menu">  
-                                                    <li><a href="index-2.html">Home</a></li>
-                                                    <li><a href="index-3.html">Home 2</a></li>
-                                                    <li><a href="index-4.html">Home 3</a></li>    
-                                                    <li class="dropdown">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >Sub Menu</a>
-                                                        <ul class="dropdown-menu">  
-                                                            <li><a href="#">Sub Menu 1</a></li>
-                                                            <li><a href="#">Sub Menu 2</a></li>    
-                                                            <li class="dropdown">
-                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >Sub Menu 3</a>
-                                                                <ul class="dropdown-menu">  
-                                                                    <li><a href="#">Sub Menu 4</a></li>
-                                                                    <li><a href="#">Sub Menu 5</a></li> 
-                                                                    <li><a href="#">Sub Menu 6</a></li> 
-                                                                </ul>
-                                                            </li> 
-                                                        </ul>
-                                                    </li> 
-                                                </ul>
-                                            </li> 
-                                            <li><a href="#">Bikes</a></li>
-                                            <li class="dropdown mega-dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >Clothing</a>                                            
+										
+                                            <li  class="active"><a href="index.php">Home</a></li> 
+											
+                                            <li><a href="about.html">About Us</a></li>
+											
+                                             <li class="dropdown mega-dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >Category</a>                                            
                                                 <div class="dropdown-menu mega-dropdown-menu mega-styl2"  style="background: white no-repeat url(assets/img/extra/megamenu-2.jpg) right 25px center; ">
                                                     <div class="col-sm-6 menu-block">
                                                         <div class="sub-list">                                                           
                                                             <h2 class="blk-clr title">                                                                
-                                                                <b class="extbold-font-4 fsz-16"> WOMEN  </b> <span class="thm-clr funky-font fsz-25"> fashion </span>
+                                                                <b class="extbold-font-4 fsz-16"> Exclusive  </b> <span class="thm-clr funky-font fsz-25"> Deals </span>
                                                             </h2>
                                                             <ul>
-                                                                <li><a href="#"> Electronic </a></li>
-                                                                <li><a href="#"> Perfume & Cologne </a></li>
-                                                                <li><a href="#"> Health & Beauty </a></li>
-                                                                <li><a href="#"> Kid’s Fashion </a></li>
-                                                                <li><a href="#"> Trend Watches </a></li>
-                                                                <li><a href="#"> Women’s Apparel </a></li>    
-                                                                <li><a href="#"> Men’s Apparel </a></li>
+															<?php 
+															// display the category menu- refer in functions.php
+															displaycategory();
+															 
+															?>
+                                                                
                                                             </ul>
                                                         </div>
                                                     </div>                                                   
                                                 </div>
-                                            </li> 
-                                            <li class="dropdown mega-dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >Components</a>                                            
-
-                                                <div class="dropdown-menu mega-dropdown-menu pr"  style="background: white no-repeat url(assets/img/extra/megamenu-1.jpg) right top; ">
-                                                    <div class="col-md-3 col-sm-3 menu-block">
-                                                        <div class="sub-list">                                                           
-                                                            <h2 class="blk-clr title">                                                                
-                                                                <b class="extbold-font-4 fsz-16"> WOMEN  </b> <span class="thm-clr funky-font fsz-25"> fashion </span>
-                                                            </h2>
-                                                            <ul>
-                                                                <li><a href="#"> Electronic </a></li>
-                                                                <li><a href="#"> Perfume & Cologne </a></li>
-                                                                <li><a href="#"> Health & Beauty </a></li>
-                                                                <li><a href="#"> Kid’s Fashion </a></li>
-                                                                <li><a href="#"> Trend Watches </a></li>
-                                                                <li><a href="#"> Women’s Apparel </a></li>    
-                                                                <li><a href="#"> Men’s Apparel </a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div> 
-                                                    <div class="col-md-3 col-sm-3 menu-block">                                                
-                                                        <div class="sub-list">                                                           
-                                                            <h2 class="blk-clr title">                                                                
-                                                                <b class="extbold-font-4 fsz-16"> MEN </b> <span class="thm-clr funky-font fsz-25"> fashion </span>
-                                                            </h2>
-                                                            <ul>
-                                                                <li><a href="#"> Electronic </a></li>
-                                                                <li><a href="#"> Perfume & Cologne </a></li>
-                                                                <li><a href="#"> Health & Beauty </a></li>
-                                                                <li><a href="#"> Kid’s Fashion </a></li>
-                                                                <li><a href="#"> Trend Watches </a></li>
-                                                                <li><a href="#"> Women’s Apparel </a></li>    
-                                                                <li><a href="#"> Men’s Apparel </a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3 col-sm-3 menu-block">
-                                                        <div class="sub-list">                                                           
-                                                            <h2 class="blk-clr title">                                                                
-                                                                <b class="extbold-font-4 fsz-16"> KID’S  </b> <span class="thm-clr funky-font fsz-25"> fashion </span>
-                                                            </h2>
-                                                            <ul>
-                                                                <li><a href="#"> Electronic </a></li>
-                                                                <li><a href="#"> Perfume & Cologne </a></li>
-                                                                <li><a href="#"> Health & Beauty </a></li>
-                                                                <li><a href="#"> Kid’s Fashion </a></li>
-                                                                <li><a href="#"> Trend Watches </a></li>
-                                                                <li><a href="#"> Women’s Apparel </a></li>    
-                                                                <li><a href="#"> Men’s Apparel </a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div> 
-                                                    <div class="col-md-3 col-sm-3 menu-block">
-                                                        <div class="sub-list">                                                           
-                                                            <h2 class="blk-clr title">                                                                
-                                                                <b class="extbold-font-4 fsz-16"> ELECTRONIC  </b> <span class="thm-clr funky-font fsz-25"> fashion </span>
-                                                            </h2>
-                                                            <ul>
-                                                                <li><a href="#"> Electronic </a></li>
-                                                                <li><a href="#"> Perfume & Cologne </a></li>
-                                                                <li><a href="#"> Health & Beauty </a></li>
-                                                                <li><a href="#"> Kid’s Fashion </a></li>
-                                                                <li><a href="#"> Trend Watches </a></li>
-                                                                <li><a href="#"> Women’s Apparel </a></li>    
-                                                                <li><a href="#"> Men’s Apparel </a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div> 
-                                                </div>
-                                            </li> 
-                                            <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >Blog</a>
-                                                <ul class="dropdown-menu">  
-                                                    <li><a href="blog.html"> Blog </a></li>                                            
-                                                    <li><a href="blog-leftside.html"> Blog Lef Sidebar</a></li>
-                                                    <li><a href="blog-single.html"> Blog Single </a></li>                                                   
-                                                </ul>
-                                            </li>
+											</li> 
+											
+											<li><a href="faq.html">F.A.Q</a></li>
+											
                                             <li><a href="contact-us.html">Contact</a></li>
-                                            <li class="dropdown mega-dropdown active">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >Page</a>                                            
-                                                <div class="dropdown-menu mega-dropdown-menu mega-styl2"  style="background: white no-repeat url(assets/img/extra/megamenu-3.jpg) right top; ">
-                                                    <div class="col-sm-6 menu-block">
-                                                        <div class="sub-list">                                                           
-                                                            <h2 class="blk-clr title">                                                                
-                                                                <b class="extbold-font-4 fsz-16"> Product  </b> <span class="thm-clr funky-font fsz-25"> categories </span>
-                                                            </h2>
-                                                            <ul>
-                                                                <li><a href="category.html"> category </a></li>
-                                                                <li><a href="category-left-sidebar.html"> category left sidebar </a></li>
-                                                                <li><a href="category-fullwidth.html"> category fullwidth </a></li>
-                                                                <li><a href="category2.html"> category Style 2</a></li>
-                                                                <li><a href="category2-left-sidebar.html"> category style 2 left sidebar </a></li>
-                                                                <li><a href="single-product.html"> single product </a></li>  
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6 menu-block">
-                                                        <div class="sub-list">                                                           
-                                                            <h2 class="blk-clr title">                                                                
-                                                                <b class="extbold-font-4 fsz-16"> Theme  </b> <span class="thm-clr funky-font fsz-25"> pages </span>
-                                                            </h2>
-                                                            <ul>                                                                  
-                                                                <li><a href="cart.html"> Shopping Cart </a></li>
-                                                                <li><a href="checkout.html"> checkout </a></li>                                                            
-                                                                <li><a href="about-us.html"> About Us </a></li>
-                                                                <li><a href="404-error.html"> Error </a></li>
-                                                                <li><a href="coming-soon.html"> Coming Soon </a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>    
-
-                                </nav>
+												
+										</ul>										
+									</div>    
+								</nav>
                             </div>
+							
                             <div class="pull-right srch-box">
                                 <a id="open-popup-search" class="header-link-search" href="javascript:void(0)" title="Search">
                                     <i class="fa fa-search"></i>
@@ -421,17 +297,12 @@ if(isset($_POST['submit'])) {
         <div class="main-wrapper clearfix">
             <div class="site-pagetitle jumbotron">
                 <div class="container  theme-container text-center">
-                    <h3>Goshop Contact</h3>
-
+                    <div class="fancy-heading text-center">
+                        <h3>Contact Us</h3>
+                        <h5 class="funky-font-2">Fell free to contact us</h5>
+                    </div> 
                     <!-- Breadcrumbs -->
-                    <div class="breadcrumbs">
-                        <div class="breadcrumbs text-center">
-                            <i class="fa fa-home"></i>
-                            <span><a href="index-2.html">Home</a></span>
-                            <i class="fa fa-arrow-circle-right"></i>
-                            <span class="current">Contact</span>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
 
@@ -444,10 +315,7 @@ if(isset($_POST['submit'])) {
 		
             <section class="gst-row"  id="contact-us">                 
                 <div class="container theme-container">
-                    <div class="fancy-heading text-center">
-                        <h3>Contact Us</h3>
-                        <h5 class="funky-font-2">Curabitur nec scelerisque nulla, non pharetra sapien.</h5>
-                    </div>                  
+                                    
                     <div class="cntct-frm  clearfix">
                         <form id="contactform" role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="contactform" class="col-md-offset-2 no-padding col-md-8 col-sm-12" method="post" >
 						
@@ -472,7 +340,7 @@ if(isset($_POST['submit'])) {
                                 </div>
 								
                                 <div class="form-group col-sm-12">
-                                    <textarea class="form-control message input-message" rows="8" cols="10" placeholder="Your Massage" name="message" id="message" data-toggle="tooltip" data-placement="top"  title="Message is required"></textarea>
+                                    <textarea class="form-control message input-message" rows="8" cols="10" placeholder="Your Message" name="message" id="message" data-toggle="tooltip" data-placement="top"  title="Message is required"></textarea>
                                 </div>
 								
                             </div>
@@ -528,118 +396,8 @@ if(isset($_POST['submit'])) {
         <!-- / Subscribe News -->
 
         <!-- FOOTER -->
-        <footer class="site-footer clearfix" itemscope itemtype="https://schema.org/WPFooter">
-            <div class="site-main-footer container theme-container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6 clearfix">
-                        <section class="widget footer-widget widget_text clearfix">
-                            <div class="textwidget">
-                                <p class="fsz-35"> <span class="bold-font-3 wht-clr">GoShop</span> <span class="thm-clr funky-font">bikes</span> </p>
-                                <p>ECommerce HTML Template</p>
-                                <div class="author-info-social">
-                                    <a class="goshop-share rcc-google" href="http://google.com/" rel="nofollow" target="_blank">
-                                        <i class="fa fa-google-plus"></i>
-                                    </a>
-                                    <a class="goshop-share rcc-twitter" href="http://twitter.com/" rel="nofollow" target="_blank">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                    <a class="goshop-share rcc-facebook" href="http://facebook.com/" rel="nofollow" target="_blank">
-                                        <i class="fa fa-facebook"></i>
-                                    </a>
-                                    <a class="goshop-share rcc-linkedin" href="http://linkedin.com/" rel="nofollow" target="_blank">
-                                        <i class="fa fa-linkedin"></i>
-                                    </a>
-                                    <a class="goshop-share rcc-pinterest" href="http://pinterest.com/" rel="nofollow" target="_blank">
-                                        <i class="fa fa-pinterest-p"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 clearfix">
-                        <section class="widget footer-widget widget_nav_menu clearfix">
-                            <h6 class="widget-title">My Account</h6>
-                            <ul>
-                                <li class="menu-item"><a href="#">Personal Information</a></li>
-                                <li class="menu-item"><a href="#">Address</a></li>
-                                <li class="menu-item"><a href="#">Discount</a></li>
-                                <li class="menu-item"><a href="#">Order History</a></li>
-                            </ul>
-                        </section>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 clearfix">
-                        <section id="nav_menu-3" class="widget footer-widget widget_nav_menu clearfix">
-                            <h6 class="widget-title">Our Services</h6>
-                            <ul>
-                                <li class="menu-item"><a href="#">Shipping Return</a></li>
-                                <li class="menu-item"><a href="#">International Shipping</a></li>
-                                <li class="menu-item"><a href="#">Secure Shopping</a></li>
-                                <li class="menu-item"><a href="#">Affiliates</a></li>
-                                <li class="menu-item"><a href="#">F.A.Q</a></li>
-                            </ul>
-                        </section>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 clearfix">
-                        <section id="text-6" class="widget footer-widget widget_text clearfix">
-                            <h6 class="widget-title">Newsletter</h6>
-                            <div class="textwidget">
-                                Lorem ipsum dolor sit amet conseret adipiscing elit sed diam nonunem.
-                                <form class="mc4wp-form">
-                                    <p>
-                                        <label>Email address: </label>
-                                        <input type="email" name="EMAIL" placeholder="Your email address" required />
-                                    </p>
-
-                                    <p>
-                                        <button class="submit"> <i class="fa fa-envelope-o"></i> </button>                                      
-                                    </p>
-                                </form>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-
-                <div class="post-footer">
-                    <div class="payment-systems text-center">
-                        <div class="item"> <a href="#"><img src="assets/img/extra/payment-1.png" alt=""></a> </div>
-                        <div class="item"> <a href="#"><img src="assets/img/extra/payment-2.png" alt=""></a> </div>
-                        <div class="item"> <a href="#"><img src="assets/img/extra/payment-3.png" alt=""></a> </div>
-                        <div class="item"> <a href="#"><img src="assets/img/extra/payment-4.png" alt=""></a> </div>
-                        <div class="item"> <a href="#"><img src="assets/img/extra/payment-5.png" alt=""></a> </div>
-                        <div class="item"> <a href="#"><img src="assets/img/extra/payment-6.png" alt=""></a> </div>
-                        <div class="item"> <a href="#"><img src="assets/img/extra/payment-7.png" alt=""></a> </div>
-                        <div class="item"> <a href="#"><img src="assets/img/extra/payment-8.png" alt=""></a> </div>
-                        <div class="item"> <a href="#"><img src="assets/img/extra/payment-1.png" alt=""></a> </div>
-                        <div class="item"> <a href="#"><img src="assets/img/extra/payment-2.png" alt=""></a> </div>
-                        <div class="item"> <a href="#"><img src="assets/img/extra/payment-5.png" alt=""></a> </div>
-                        <div class="item"> <a href="#"><img src="assets/img/extra/payment-3.png" alt=""></a> </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="subfooter text-center">
-                <div class="container theme-container">
-                    <p>Copyright &copy; <a href="#" class="thm-clr">jThemes Studio</a>.  All Right Reserved 2015</p>
-                </div>
-            </div>
-        </footer>
-
-        <!-- Search Popup -->
-        <div class="popup-box page-search-box">
-            <div>
-                <div class="popup-box-inner">
-                    <form>
-                        <input class="search-query" type="text" placeholder="Search and hit enter" />
-                    </form>
-                </div>
-            </div>
-            <a href="javascript:void(0)" class="close-popup-box close-page-search"><i class="fa fa-close"></i></a>
-        </div>
-        <!-- / Search Popup -->
-
+			<?php include "libs/_incl_footer.php";?>  
+		<!-- / FOOTER -->
         <!-- Popup: Login 1 -->
         <div class="modal fade login-popup" id="login-popup" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg">                

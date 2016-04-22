@@ -211,7 +211,7 @@ else {
 										
                                             <li  class="active"><a href="index.php">Home</a></li> 
 											
-                                            <li><a href="about.html">About Us</a></li>
+                                            <li><a href="about.php">About Us</a></li>
 											
                                              <li class="dropdown mega-dropdown">
                                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >Category</a>                                            
@@ -234,9 +234,9 @@ else {
                                                 </div>
 											</li> 
 											
-											<li><a href="faq.html">F.A.Q</a></li>
+											<li><a href="faq.php">F.A.Q</a></li>
 											
-                                            <li><a href="contact-us.html">Contact</a></li>
+                                            <li><a href="contact-us.php">Contact</a></li>
 												
 										</ul>										
 									</div>    

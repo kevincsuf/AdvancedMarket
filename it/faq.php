@@ -169,7 +169,7 @@
 		<div class="container theme-container">
 				<div class="gst-column col-lg-12 no-padding text-center">
 					<div class="fancy-heading text-center">
-						<h2> <span class="thm-clr">Purpose of this Application</span> </h2>
+						<h2> <span class="thm-clr">Frequently Asked Questions</span> </h2>
 						<p class="funky-font-2">A platform for individuals or small businesses to come together and buy items/commodities in bulk from registered suppliers to achieve low price advantage.</p>
 					</div>
 				</div>

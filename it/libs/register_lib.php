@@ -101,6 +101,18 @@ if (mysqli_query($con, $sql)) {
 	mysqli_close($con);
     echo "<script> alert(\"Please log in at index page...\")</script>";
     echo "<script type=\"text/javascript\">window.location.replace(\"../index.php\");</script>";
+	
+	//If there is no error, send the email
+	
+	if(!isset($hasError)) {
+		$emailTo = 'nikita@binqware.com'; // Put your own email address here
+		$subject='Advanced Marketing E-Mail Team';
+		$body = "test email for registration form";
+		$headers = 'From: My Admin Lets buy <'.$emailTo.'>' . "\r\n" . 'Reply-To: ' . $email;
+
+		mail($emailTo, $subject, $body, $headers);
+		$emailSent = true;
+	}
 }
 else {
 	echo "<script> alert(\"New record not saved successfully..!\")</script>";
