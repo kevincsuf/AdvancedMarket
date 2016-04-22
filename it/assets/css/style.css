@@ -363,6 +363,8 @@ h2,h3,h4,h5,h6{
 .clr1 {color: #5b3333;}
 .grn-clr { color: #99cc00;}
 .red-clr { color: #e60000;}
+.blu-clr { color: #0B0B61;}
+.org-clr { color: #FF4000;}
 
 .no-mrgn {
     margin: 0;

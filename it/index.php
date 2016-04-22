@@ -72,7 +72,7 @@ else {
         <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title> International Trade || Home</title>
+        <title> Advanced Group Marketing || Home</title>
 
         <!-- Favicon -->
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.html">
@@ -196,7 +196,7 @@ else {
                                 <div class="logo-area">
                                     <a href="index.php" class="thm-logo fsz-35">
                                         <!--<img src="files/main-logo.png" alt="Goshop HTML Theme">-->
-                                        <b class="bold-font-3 wht-clr">International</b><span class="thm-clr funky-font"> Trade</span>
+                                        <b class="bold-font-3 wht-clr">Advanced Group</b><span class="thm-clr funky-font"> Marketing</span>
                                     </a>
                                 </div>                              
                             </div>
@@ -264,9 +264,9 @@ else {
                     <div class="gst-caption container theme-container">
                         <div>
                             <div class="caption-right">
-                                <h3 class="fsz-40 wht-clr funky-font-2">  International Trade  </h3>
-                                <h2>Some Tag Line <span class="thm-clr"> Here</span></h2>
-                                <p class="hidden-xs">Description About International Trade Website</p>
+                                <h3 class="fsz-40 blk-clr funky-font-2">  Advanced Group Marketing  </h3>
+                                <h2> <span class="blu-clr">The best DEALS! <span class="blk-clr">All together we win</span></h2>
+                                <p class="hidden-xs"><span class="org-clr">Quantity of customers can change the price of your deal, so here All together can get the best DEALS</p>
                                 <a class="fancy-btn-alt fsz-16" href="#newarrival">More</a>
                             </div>
                         </div>
@@ -278,9 +278,9 @@ else {
                     <div class="gst-caption container theme-container">
                         <div>
                             <div class="caption-right">
-                                <h3 class="fsz-40 wht-clr funky-font-2">  International Trade  </h3>
-                                <h2>Some Tag Line <span class="thm-clr"> Here</span></h2>
-                                <p class="hidden-xs">Description About International Trade Website</p>
+                                <h3 class="fsz-40 blk-clr funky-font-2">  Advanced Group Marketing  </h3>
+                                <h2><span class="blu-clr">The best DEALS! <span class="blk-clr"> Good Luck!</span></h2>
+                                <p class="hidden-xs"><span class="org-clr">Serach on your products or serviecs that you like then click Join Deal button to joing the deal and wait until Deal is reaching to certain number of customers then you will win the deal </p>
                                 <a class="fancy-btn-alt fsz-16" href="#">More</a>
                             </div>
                         </div>
@@ -293,12 +293,12 @@ else {
             <section class="banner clear">
                 <div class="col-lg-4 col-md-4 col-sm-12 no-padding promo-wrap">
                     <div class="gst-promo gst-color-white">
-                        <img src="images/iphone.jpe" alt="" />
+                        <img src="images/Electronics.jpg" alt="" />
                         <div class="vertical-align-div gst-promo-text col-lg-6 right">
                             <div>
                                 <div class="vertical-align-text">
                                     <h2> <span class="sec-title fsz-20 wht-clr"> ELECTRONICS </span> <span class="light-font-3 fsz-20 thm-clr"> starting from $350 </span> </h2>
-                                    <p class="fsz-18">Mobiles , Music Player ,  Accessories ...</p>
+                                    <p class="fsz-18"><span class="blu-clr">Mobiles , Music Player ,  Accessories ...</p>
                                     <a href="#" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
@@ -308,13 +308,13 @@ else {
 
                 <div class="col-lg-4 col-md-4 col-sm-6 no-padding promo-wrap">
                     <div class="gst-promo gst-color-white">
-                        <img src="assets/img/banner/promo2.jpg" alt="" />
+                        <img src="images/food.jpg" alt="" />
 
                         <div class="vertical-align-div gst-promo-text col-lg-8 right">
                             <div>
                                 <div class="vertical-align-text">
-                                    <h2> <span class="sec-title fsz-20 wht-clr"> FOOD  ITEMS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span class="light-font-3 fsz-20 thm-clr"> starting from $15 </span> </h2>
-                                    <p class="fsz-18">Rice , Food Item 1 ,  Food Item 2 ...</p>
+                                    <h2> <span class="sec-title fsz-20 wht-clr"> FOOD  ITEMS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span class="light-font-3 fsz-20 wht-clr"> starting from $15 </span> </h2>
+                                    <p class="fsz-18"><span class="wht-clr">Rice , Food Item 1 ,  Food Item 2 ...</p>
                                     <a href="#" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
