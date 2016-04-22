@@ -1,6 +1,9 @@
 <?php
 
-require_once("libs/core/init.php");
+// Skip including init.php again if function.php is called in details.lib.php
+if (basename($_SERVER['PHP_SELF']) != "details_lib.php") {
+    require_once("libs/core/init.php");
+}
 
 // get category from the table and display in single_product page
 
@@ -261,6 +264,9 @@ function closeDeal($check_deal_id)
         }
 
         // Total order
+        /*
+         * Replaced by soldQuantity(): Kevin 04/21/2016
+         *
         $var_get_sum_order = "
             SELECT create_deal_id, SUM(order_quantity) AS sum_order
             FROM join_deal
@@ -271,6 +277,11 @@ function closeDeal($check_deal_id)
                 $var_sum_order = $var_row_sum_order['sum_order'];
             }
         }
+        if($var_sum_order == NULL) {
+            $var_sum_order = 0;
+        }
+        */
+        $var_sum_order = soldQuantity($check_deal_id);
 
         // Out of stock?
         if ($var_max_quantity > $var_sum_order) {
@@ -364,4 +375,105 @@ function checkJoinedDeal($check_deal_id, $ukey) {
 }
 
 
+// Check sold quantity of a deal
+function soldQuantity($check_deal_id) {
+    global $con;
+
+    $var_sold_quantity = 0;
+
+    $var_get_sold_quantity = "
+            SELECT create_deal_id, SUM(order_quantity) AS sum_order
+            FROM join_deal
+            GROUP BY create_deal_id";
+    $var_run_sold_quantity = mysqli_query($con, $var_get_sold_quantity);
+    while ($var_row_sold_quantity = mysqli_fetch_array($var_run_sold_quantity)) {
+        if ($var_row_sold_quantity['create_deal_id'] == $check_deal_id) {
+            $var_sold_quantity = $var_row_sold_quantity['sum_order'];
+        }
+    }
+    if($var_sold_quantity == NULL) {
+        $var_sold_quantity = 0;
+    }
+
+    return $var_sold_quantity;
+}
+
+
+// Check sold quantity of a deal
+function joinedBuyerNumber($check_deal_id) {
+    global $con;
+
+    $var_joined_buyer = 0;
+
+    $var_get_joined_buyer = "
+            SELECT create_deal_id, COUNT(*) AS count_buyer
+            FROM join_deal
+            GROUP BY create_deal_id";
+    $var_run_joined_buyer = mysqli_query($con, $var_get_joined_buyer);
+    while ($var_row_joined_buyer = mysqli_fetch_array($var_run_joined_buyer)) {
+        if ($var_row_joined_buyer['create_deal_id'] == $check_deal_id) {
+            $var_joined_buyer = $var_row_joined_buyer['count_buyer'];
+        }
+    }
+    if($var_joined_buyer == NULL) {
+        $var_joined_buyer = 0;
+    }
+
+    return $var_joined_buyer;
+}
+
+
+// Get current discount price for a deal
+function getCurrentPrice($check_deal_id) {
+    global $con;
+
+    $var_cur_join = 0;
+    $var_cur_price = 0;
+    $var_number_discount_1 = 0;
+    $var_amount_discount_1 = 0;
+    $var_number_discount_2 = 0;
+    $var_amount_discount_2 = 0;
+    $var_number_discount_3 = 0;
+    $var_amount_discount_3 = 0;
+
+    $var_cur_join = soldQuantity($check_deal_id);
+
+    $var_get_deal = "
+            SELECT *
+            FROM create_deal
+            WHERE deal_id=".$check_deal_id;
+    $var_run_deal = mysqli_query($con, $var_get_deal);
+    while ($var_row_deal = mysqli_fetch_array($var_run_deal)) {
+        if ($var_row_deal['deal_id'] == $check_deal_id) {
+            $var_number_discount_1 = $var_row_deal['number_discount_1'];
+            $var_amount_discount_1 = $var_row_deal['amount_discount_1'];
+            if ($var_row_deal['number_discount_2'] != "") {
+                $var_number_discount_2 = $var_row_deal['number_discount_2'];
+                $var_amount_discount_2 = $var_row_deal['amount_discount_2'];
+            }
+            if ($var_row_deal['number_discount_3'] != "") {
+                $var_number_discount_3 = $var_row_deal['number_discount_3'];
+                $var_amount_discount_3 = $var_row_deal['amount_discount_3'];
+            }
+        }
+    }
+
+    if ($var_cur_join <= $var_number_discount_1) {
+        $var_cur_price = $var_amount_discount_1;
+    }
+
+    if ($var_number_discount_2 != "") {
+        if (($var_number_discount_1 < $var_cur_join) && ($var_cur_join <= $var_number_discount_2)) {
+            $var_cur_price = $var_amount_discount_2;
+        }
+    }
+
+    if ($var_number_discount_3 != "") {
+        if (($var_number_discount_2 < $var_cur_join) && ($var_cur_join <= $var_number_discount_3)) {
+            $var_cur_price = $var_amount_discount_3;
+        }
+    }
+
+    return $var_cur_price;
+}
 ?>

@@ -4,6 +4,8 @@ require_once("./libs/core/init.php");
 require_once("./libs/login_lib.php");
 require_once("./libs/functions.php");
 
+/* Commented out by Kevin 4/21/2016
+
 if($_POST) {
     require_once("./libs/login_lib.php");
 
@@ -43,6 +45,7 @@ if($_POST) {
     }
 }
 
+
 $message = "";
 
 if (isset($_SESSION["uid"])) {
@@ -56,12 +59,14 @@ if (isset($_GET['login_id']) && isset($_GET['login_pwd'])) {
     $login->check_login();
     $message = "You are currently LOGGED IN as a ".strtoupper($login->member_type)." and the ID is ".$login->id;
 }
-*/
+
 else {
     $message = "You are currently <b>LOGGED OUT</b>";
 }
-
+*/
 ?>
+
+
 <?php
 
 global $cat;
@@ -83,7 +88,11 @@ if (isset($_GET['login_id']) && isset($_GET['login_pwd'])) {
 }
 */
 else {
-    $message = "You are currently <b>LOGGED OUT</b>";
+    //$message = "You are currently <b>LOGGED OUT</b>";
+
+    // User have to be logged in to see this page
+    echo "<script> alert(\"Please log in...\")</script>";
+    echo "<script type=\"text/javascript\">window.location.replace(\"./index.php\");</script>";
 }
 
 
@@ -375,7 +384,7 @@ if($_POST) {
                                     <?php
                                     }
 
-                                    // Check deal closed
+                                    // Check joined this deal
                                     if (checkJoinedDeal($var_deal_url_id, $_SESSION["ukey"])) {
                                         $global_order_placed = true;
                                     }
@@ -390,6 +399,7 @@ if($_POST) {
 									$var_deal_qty = 0;
 									$var_deal_unit_price = 0;
 									$var_deal_unit = "";
+                                    $var_deal_other_unit = "";
 									$var_deal_image = "";
 									$var_deal_max_qty = 0;
 									$var_number_discount_option = 0;
@@ -413,6 +423,7 @@ if($_POST) {
 										$var_deal_qty = $var_row_deal['qty'];
 										$var_deal_unit_price = $var_row_deal['unit_price'];
 										$var_deal_unit = $var_row_deal['unit'];
+										$var_deal_other_unit = $var_row_deal['other_unit'];
 										$var_deal_image = $var_row_deal['deal_image'];
 										$var_deal_max_qty = $var_row_deal['max_quantity'];
 										$var_number_discount_option = $var_row_deal['number_discount_option'];
@@ -451,7 +462,8 @@ if($_POST) {
 															echo"<div class='product_title_wrapper'>";
 																echo"<div itemprop='name' class='product_title entry-title'>";
 																	echo"".$var_row_deal["title"]."";
-																	echo"<p class='font-3 fsz-18 no-mrgn price'> <b class='amount blk-clr'>$".$var_row_deal["amount_discount_1"]."</b> <del>$".$var_row_deal["unit_price"]."</del> </p>";       
+																	//echo"<p class='font-3 fsz-18 no-mrgn price'> <b class='amount blk-clr'>$".$var_row_deal["amount_discount_1"]."</b> <del>$".$var_row_deal["unit_price"]."</del> </p>";
+                                                                    echo"<p class='font-3 fsz-18 no-mrgn price'> <b class='amount blk-clr'>$".getCurrentPrice($global_deal_id)."</b> <del>$".$var_row_deal["unit_price"]."</del> </p>";
 																echo"</div>";
 															echo"</div>";
 												
@@ -493,7 +505,7 @@ if($_POST) {
 													else if (strtolower($_SESSION["utype"]) == "seller") {
                                                         echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right'>";
                                                         echo "
-															//Seller can not join a deal. Please log in as a buyer.
+															Seller can not join a deal. Please log in as a buyer.
 														";
                                                         echo "</div>";
 													}
@@ -541,28 +553,33 @@ if($_POST) {
 							
 						<?php 		
 						echo " <div class='progress'>";
-												// Check how many discounts
+						                        // Take care of "other" category
+                                                if ($var_deal_unit == "other") {
+                                                    $var_deal_unit = $var_deal_other_unit;
+                                                }
+
+                                                // Check how many discounts
 												if ($var_number_discount_option == 1) {
 													$var_percent_1 = 100;
 													$var_percent_2 = 0;
 													$var_percent_3 = 0;
 													
-													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>1-".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
 												}
 												else if ($var_number_discount_option == 2) {
 													$var_percent_1 = 50;
 													$var_percent_2 = 50;
 													$var_percent_3 = 0;
-													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
-													echo "<div class='progress-bar progress-bar-warning' role='progressbar' style='width:".$var_percent_2."%'>".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>1-".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar progress-bar-warning' role='progressbar' style='width:".$var_percent_2."%'>".($var_number_discount_1+1)."-".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
 												}
 												else if ($var_number_discount_option == 3) {
 													$var_percent_1 = 33;
 													$var_percent_2 = 33;
 													$var_percent_3 = 34;
-													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
-													echo "<div class='progress-bar progress-bar-warning' role='progressbar' style='width:".$var_percent_2."%'>".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
-													echo "<div class='progress-bar progress-bar-danger' role='progressbar' style='width:".$var_percent_3."%'>".$var_number_discount_3." ".$var_deal_unit.", $".$var_amount_discount_3."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>1-".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar progress-bar-warning' role='progressbar' style='width:".$var_percent_2."%'>".($var_number_discount_1+1)."-".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar progress-bar-danger' role='progressbar' style='width:".$var_percent_3."%'>".($var_number_discount_2+1)."-".$var_number_discount_3." ".$var_deal_unit.", $".$var_amount_discount_3."/".$var_deal_unit."</div>";
 												}
 												
 												echo "  </div>";

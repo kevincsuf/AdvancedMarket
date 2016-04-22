@@ -111,24 +111,42 @@ if($_POST) {
     $validator->add_field($field_name);
     $validator->add_rule_to_field($field_name, array('no-selection'), $field_display_name);
 
-    // number_discount_1
-    $field_name = "number_discount_1";
-    $field_display_name = "First quantity";
-    $validator->add_field($field_name);
-    $validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
-    $validator->add_rule_to_field($field_name, array('numbers-only'), $field_display_name);
-    $validator->add_rule_to_field($field_name, array('greater-amount-only-1'), $field_display_name);
+    // discount_1
+    if ($_POST["number_discount_option"] == "1") {
+        // number_discount_1
+        $field_name = "number_discount_1";
+        $field_display_name = "First quantity";
+        $validator->add_field($field_name);
+        $validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+        $validator->add_rule_to_field($field_name, array('numbers-only'), $field_display_name);
+        $validator->add_rule_to_field($field_name, array('greater-amount-only-1'), $field_display_name);
 
-    // amount_discount_1
-    $field_name = "amount_discount_1";
-    $field_display_name = "First price";
-    $validator->add_field($field_name);
-    $validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
-    $validator->add_rule_to_field($field_name, array('price-only'), $field_display_name);
-    $validator->add_rule_to_field($field_name, array('discount-only-1'), $field_display_name);
+        // amount_discount_1
+        $field_name = "amount_discount_1";
+        $field_display_name = "First price";
+        $validator->add_field($field_name);
+        $validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+        $validator->add_rule_to_field($field_name, array('price-only'), $field_display_name);
+        $validator->add_rule_to_field($field_name, array('discount-only-1'), $field_display_name);
+    }
 
     // discount_2
-    if ($_POST["number_discount_option"] == "2" || $_POST["number_discount_option"] == "3") {
+    if ($_POST["number_discount_option"] == "2") {
+        // number_discount_1
+        $field_name = "number_discount_1";
+        $field_display_name = "First quantity";
+        $validator->add_field($field_name);
+        $validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+        $validator->add_rule_to_field($field_name, array('numbers-only'), $field_display_name);
+
+        // amount_discount_1
+        $field_name = "amount_discount_1";
+        $field_display_name = "First price";
+        $validator->add_field($field_name);
+        $validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+        $validator->add_rule_to_field($field_name, array('price-only'), $field_display_name);
+        $validator->add_rule_to_field($field_name, array('discount-only-1'), $field_display_name);
+
         // number_discount_2
         $field_name = "number_discount_2";
         $field_display_name = "Second quantity";
@@ -148,6 +166,36 @@ if($_POST) {
 
     // discount_3
     if ($_POST["number_discount_option"] == "3") {
+        // number_discount_1
+        $field_name = "number_discount_1";
+        $field_display_name = "First quantity";
+        $validator->add_field($field_name);
+        $validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+        $validator->add_rule_to_field($field_name, array('numbers-only'), $field_display_name);
+
+        // amount_discount_1
+        $field_name = "amount_discount_1";
+        $field_display_name = "First price";
+        $validator->add_field($field_name);
+        $validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+        $validator->add_rule_to_field($field_name, array('price-only'), $field_display_name);
+        $validator->add_rule_to_field($field_name, array('discount-only-1'), $field_display_name);
+
+        // number_discount_2
+        $field_name = "number_discount_2";
+        $field_display_name = "Second quantity";
+        $validator->add_field($field_name);
+        $validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+        $validator->add_rule_to_field($field_name, array('numbers-only'), $field_display_name);
+
+        // amount_discount_2
+        $field_name = "amount_discount_2";
+        $field_display_name = "Second price";
+        $validator->add_field($field_name);
+        $validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+        $validator->add_rule_to_field($field_name, array('price-only'), $field_display_name);
+        $validator->add_rule_to_field($field_name, array('discount-only-2'), $field_display_name);
+
         // number_discount_3
         $field_name = "number_discount_3";
         $field_display_name = "Third quantity";

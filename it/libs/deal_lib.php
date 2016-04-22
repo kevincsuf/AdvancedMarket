@@ -42,6 +42,28 @@ $var_shipping_description = $_SESSION['shipping_description'];
 $var_datafile = $_SESSION["datafile"];
 //$var_datafile = $_FILES["datafile"]["name"];
 //$var_datafile_temp = $_FILES["datafile_image"]["name"];
+$var_max_quantity = 0;
+
+/*
+ * Kevin: 04/21/2016
+ * Set var_max_quantity
+ */
+if ($var_number_discount_1 != "" &&
+    $var_number_discount_2 == "" &&
+    $var_number_discount_3 == "") {
+    $var_max_quantity = $var_number_discount_1;
+}
+else if ($var_number_discount_1 != "" &&
+         $var_number_discount_2 != "" &&
+         $var_number_discount_3 == "") {
+    $var_max_quantity = $var_number_discount_2;
+}
+else if ($var_number_discount_1 != "" &&
+         $var_number_discount_2 != "" &&
+         $var_number_discount_3 != "") {
+    $var_max_quantity = $var_number_discount_3;
+}
+
 
 /*
  * Kevin: 03/09/2016
@@ -65,6 +87,7 @@ echo "var_number_discount_2: " . $var_number_discount_2 . "<br/>";
 echo "var_amount_discount_2: " . $var_amount_discount_2 . "<br/>";
 echo "var_number_discount_3: " . $var_number_discount_3 . "<br/>";
 echo "var_amount_discount_3: " . $var_amount_discount_3 . "<br/>";
+echo "var_max_quantity: " . $var_max_quantity . "<br/>";
 echo "var_time_restricted: " . $var_time_restricted . "<br/>";
 echo "var_start_date: " . $var_start_date . "<br/>";
 echo "var_end_date: " . $var_end_date . "<br/>";
@@ -101,20 +124,20 @@ echo "var_end_date_db: " . $var_end_date_db . "<br/>";
 
 //$sql="insert into create_deal(start_date,end_date,user_id,user_name,title,description,deal_category,qty,max_order,unit_price,unit,time_restricted,number_discount_option,number_discount_1,amount_discount_1,number_discount_2,amount_discount_2,number_discount_3,amount_discount_3,location_restricted,location_description,shipping_included,shipping_description,deal_image) values ('$var_start_date_db','$var_end_date_db','$var_user_key','$var_user_id','$var_title','$var_description','$var_category','$var_qty','$var_max_order','$var_unit_price','$var_unit','$var_time_restricted','$var_number_discount_option','$var_number_discount_1','$var_amount_discount_1','$var_number_discount_2','$var_amount_discount_2','$var_number_discount_3','$var_amount_discount_3','$var_location_restricted','$var_location_description','$var_shipping_included','$var_shipping_description','$var_datafile')";
 $sql = "
-    insert into create_deal(start_date,end_date,user_id,user_name,title,description,deal_category,qty,max_order,unit_price,unit,time_restricted,number_discount_option,number_discount_1,amount_discount_1,number_discount_2,amount_discount_2,number_discount_3,amount_discount_3,location_restricted,location_description,shipping_included,shipping_description,deal_image,deal_closed)
-    values ('$var_start_date_db','$var_end_date_db','$var_user_key','$var_user_id','$var_title','$var_description','$var_category','$var_qty','$var_max_order','$var_unit_price','$var_unit','$var_time_restricted','$var_number_discount_option','$var_number_discount_1','$var_amount_discount_1','$var_number_discount_2','$var_amount_discount_2','$var_number_discount_3','$var_amount_discount_3','$var_location_restricted','$var_location_description','$var_shipping_included','$var_shipping_description','$var_datafile',0)
+    insert into create_deal(start_date,end_date,user_id,user_name,title,description,deal_category,qty,max_order,unit_price,unit,other_unit,time_restricted,number_discount_option,number_discount_1,amount_discount_1,number_discount_2,amount_discount_2,number_discount_3,amount_discount_3,max_quantity,location_restricted,location_description,shipping_included,shipping_description,deal_image,deal_closed)
+    values ('$var_start_date_db','$var_end_date_db','$var_user_key','$var_user_id','$var_title','$var_description','$var_category','$var_qty','$var_max_order','$var_unit_price','$var_unit','$var_uother','$var_time_restricted','$var_number_discount_option','$var_number_discount_1','$var_amount_discount_1','$var_number_discount_2','$var_amount_discount_2','$var_number_discount_3','$var_amount_discount_3','$var_max_quantity','$var_location_restricted','$var_location_description','$var_shipping_included','$var_shipping_description','$var_datafile',0)
 ";
 
 if(mysqli_query($con,$sql))
 {
-echo "<script> alert(\"New record saved successfully..!\")</script>";
-mysqli_close($con);
- echo "<script type=\"text/javascript\">window.location.replace(\"../seller_view.php\");</script>";
+    echo "<script> alert(\"New record saved successfully..!\")</script>";
+    mysqli_close($con);
+    echo "<script type=\"text/javascript\">window.location.replace(\"../seller_view.php\");</script>";
 }
 else
 {
-echo "<script> alert(\"New record not saved successfully..!\")</script>";
-mysqli_close($con);
+    echo "<script> alert(\"New record not saved successfully..!\")</script>";
+    mysqli_close($con);
 }
 
 

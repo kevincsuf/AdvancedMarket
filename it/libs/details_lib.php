@@ -3,6 +3,7 @@
 require_once("./core/init.php");
 require_once("./_incl_confirm_login.php");
 require_once("./login_lib.php");
+require_once("./functions.php");
 
 
 	$var_create_deal_id = $_SESSION["create_deal_id"];
@@ -56,15 +57,16 @@ if ($global_remaining_stocks > 0) {
 	$sql= "insert into join_deal(create_deal_id,user_id,order_quantity,address,state,zipcode,closure_date)values('$var_create_deal_id','$var_user_id','$var_order_quantity','$var_address','$var_state','$var_zipcode','$var_closure_date')";
 	
 
-	if(mysqli_query($con,$sql))
-	{
-	echo "<script> alert(\"New record saved successfully..!\")</script>";
-	mysqli_close($con);
+	if(mysqli_query($con,$sql)) {
+		echo "<script> alert(\"New record saved successfully..!\")</script>";
+        // Close this deal if out of stock
+        closeDeal($var_create_deal_id);
+        mysqli_close($con);
+		echo "<script type=\"text/javascript\">window.location.replace(\"../buyer_view.php\");</script>";
 	}
-	else
-	{
-	echo "<script> alert(\"New record not saved successfully..!\")</script>";
-	mysqli_close($con);
+	else {
+		echo "<script> alert(\"New record not saved successfully..!\")</script>";
+		mysqli_close($con);
 	}
 
 }

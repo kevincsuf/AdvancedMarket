@@ -128,12 +128,13 @@ $user_key=$_SESSION["ukey"]
 						<th>Title</th>
 						<th>Description</th>
 						<th>Quantity 1</th>
-						<th>Price</th>
+						<th>Price 1</th>
 						<th>Quantity 2</th>
-						<th>Price</th>
+						<th>Price 2</th>
 						<th>Quantity 3</th>
-						<th>Price</th>
-						<th>Joined</th>
+						<th>Price 3</th>
+                        <th>Sold Quantity</th>
+						<th>Joined Buyers</th>
 					  </tr>
 					</thead>
 					<tbody>
@@ -162,6 +163,8 @@ $user_key=$_SESSION["ukey"]
 							 <td> $var_display_deal_price_2 </td>
 							 <td> $var_display_deal_qty_3 </td>
 							 <td> $var_display_deal_price_3 </td>
+							 <td> ".soldQuantity($var_display_deal_id)." </td>
+							 <td> ".joinedBuyerNumber($var_display_deal_id)." </td>
 							</tr>";
 						}
 						?>
