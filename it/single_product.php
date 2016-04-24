@@ -321,15 +321,7 @@ if($_POST) {
                                                     </div>                                                   
                                                 </div>
                                             </li> 
-                                           
-                                            <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >Blog</a>
-                                                <ul class="dropdown-menu">  
-                                                    <li><a href="blog.html"> Blog </a></li>                                            
-                                                    <li><a href="blog-leftside.html"> Blog Lef Sidebar</a></li>
-                                                    <li><a href="blog-single.html"> Blog Single </a></li>                                                   
-                                                </ul>
-                                            </li>
+                                                                                       
                                             <li><a href="contact-us.html">Contact</a></li>
                                             <li class="dropdown mega-dropdown active">
                                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >Page</a>                                            
@@ -421,6 +413,7 @@ if($_POST) {
 										$var_deal_title = $var_row_deal['title'];
 										$var_deal_description = $var_row_deal['description'];
 										$var_deal_qty = $var_row_deal['qty'];
+										$global_max_quantity = $var_row_deal['max_order'];
 										$var_deal_unit_price = $var_row_deal['unit_price'];
 										$var_deal_unit = $var_row_deal['unit'];
 										$var_deal_other_unit = $var_row_deal['other_unit'];
@@ -433,6 +426,11 @@ if($_POST) {
 										$var_amount_discount_2 = $var_row_deal['amount_discount_2'];
 										$var_number_discount_3 = $var_row_deal['number_discount_3'];
 										$var_amount_discount_3 = $var_row_deal['amount_discount_3'];
+										$var_location_restricted = $var_row_deal['location_restricted'];
+										$var_location_description = $var_row_deal['location_description'];
+										$var_shipping_included = $var_row_deal['shipping_included'];
+										$var_shipping_description = $var_row_deal['shipping_description'];
+										
 										
 												
 												
@@ -480,9 +478,35 @@ if($_POST) {
 																echo"<p class='progress-bar progress-bar-info'></p>";
 															echo"</div>";
 																						
-															echo"<div style='width: 35%;' class='progress-bar progress-bar-info'>";
-															echo"</div>";
-											
+															if($var_location_restricted=='yes'){
+																// for location restriction
+																echo"<div itemprop='description' class='fsz-15'>";
+																	echo"<p> <b>Location Restricted: </b>".$var_location_description."</p>"; 
+																	echo"<p class='progress-bar progress-bar-info'></p>";
+																echo"</div>";
+																
+															}
+															else{
+																echo"<div itemprop='description' class='fsz-15'>";
+																	echo"<p><b>Location Restricted: </b> Not location restricted </p>"; 
+																	echo"<p class='progress-bar progress-bar-info'></p>";
+																echo"</div>";
+															}
+															
+															if($var_shipping_included=='yes'){
+																// for shipping restriction
+																echo"<div itemprop='description' class='fsz-15'>";
+																	echo"<p> <b>Shipping Cost: </b> $".$var_shipping_description."</p>"; 
+																	echo"<p class='progress-bar progress-bar-info'></p>";
+																echo"</div>";
+															}
+															else{
+																echo"<div itemprop='description' class='fsz-15'>";
+																	echo"<p> <b>Shipping Cost: </b> Free Shipping </p>"; 
+																	echo"<p class='progress-bar progress-bar-info'></p>";
+																echo"</div>";
+																
+															}
 														echo"</div>";
 													echo"</div>";
 													// code for join deal begins 
@@ -553,18 +577,20 @@ if($_POST) {
 							
 						<?php 		
 						echo " <div class='progress'>";
-						                        // Take care of "other" category
+												//getCurrentPercent($var_deal_url_id);
+												
+												// Take care of "other" category
                                                 if ($var_deal_unit == "other") {
                                                     $var_deal_unit = $var_deal_other_unit;
                                                 }
 
                                                 // Check how many discounts
 												if ($var_number_discount_option == 1) {
-													$var_percent_1 = 100;
+													$var_percent_1 = getCurrentPercent($var_deal_url_id);
 													$var_percent_2 = 0;
 													$var_percent_3 = 0;
 													
-													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>1-".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
 												}
 												else if ($var_number_discount_option == 2) {
 													$var_percent_1 = 50;
@@ -752,65 +778,7 @@ if($_POST) {
 						
 						}
 					?>
-				<!--     <div class="product">
-                        <div class="rel-prod-media">
-                            <img src="assets/img/products/rel-prod-1.png" alt="" />                                                 
-                        </div>
-                        <div class="product-content">
-                            <h3> <a href="#" class="title-3 fsz-16"> CICLYSMO JACKET </a> </h3>
-                            <p class="font-3">Price: <span class="thm-clr"> $299.00 </span> </p>    
-                        </div>
-                    </div>
-
-                    <div class="product">
-                        <div class="rel-prod-media">
-                            <img src="assets/img/products/rel-prod-2.png" alt="" />                                                  
-                        </div>
-                        <div class="product-content">
-                            <h3> <a href="#" class="title-3 fsz-16"> LYCRA BITZ MEN CLOTHING </a> </h3>
-                            <p class="font-3">Price: <span class="thm-clr"> $299.00 </span> </p>    
-                        </div>
-                    </div>
-
-                    <div class="product">
-                        <div class="rel-prod-media">
-                            <img src="assets/img/products/rel-prod-3.png" alt="" />
-                        </div>
-                        <div class="product-content">
-                            <h3> <a href="#" class="title-3 fsz-16"> CICLYSMO JACKET </a> </h3>
-                            <p class="font-3">Price: <span class="thm-clr"> $299.00 </span> </p>    
-                        </div>
-                    </div>
-
-                    <div class="product">
-                        <div class="rel-prod-media">
-                            <img src="assets/img/products/rel-prod-4.png" alt="" />
-                        </div>
-                        <div class="product-content">
-                            <h3> <a href="#" class="title-3 fsz-16"> LYCRA BITZ MEN CLOTHING </a> </h3>
-                            <p class="font-3">Price: <span class="thm-clr"> $299.00 </span> </p>    
-                        </div>
-                    </div>
-
-                    <div class="product">
-                        <div class="rel-prod-media">
-                            <img src="assets/img/products/rel-prod-5.png" alt="" />
-                        </div>
-                        <div class="product-content">
-                            <h3> <a href="#" class="title-3 fsz-16"> CICLYSMO JACKET </a> </h3>
-                            <p class="font-3">Price: <span class="thm-clr"> $299.00 </span> </p>    
-                        </div>
-                    </div>
-
-                    <div class="product">
-                        <div class="rel-prod-media">
-                            <img src="assets/img/products/rel-prod-6.png" alt="" />
-                        </div>
-                        <div class="product-content">
-                            <h3> <a href="#" class="title-3 fsz-16"> LYCRA BITZ MEN CLOTHING </a> </h3>
-                            <p class="font-3">Price: <span class="thm-clr"> $299.00 </span> </p>    
-                        </div>
-                    </div> -->
+				
                 </div>
             </div>
 
@@ -838,8 +806,8 @@ if($_POST) {
 											<input type='hidden' name='deal_end_date' id='deal_end_date' value='<?php echo $global_deal_end_date; ?>'>
 
 											<div class="form-group">
-											 <input type="number" class="form-control" name="quantity" id="quantity" placeholder="Quantity" />
-											 <div class="warning left-align" id="display_remaining_stocks"><p>Remaining stocks: <?php echo $global_remaining_stocks ?> / Minimum order quantity: <?php echo $global_min_quantity ?></p></div>
+											 <input type="number" class="form-control" name="quantity" id="quantity" min="<?php echo $global_min_quantity;?>" max="<?php echo $global_max_quantity; ?>" placeholder="Quantity" />
+											 <div class="warning left-align" id="display_remaining_stocks"><p>Remaining stocks: <?php echo $global_remaining_stocks ?> </br> Minimum order quantity: <?php echo $global_min_quantity ?></p></div>
 											</div>
 
 																	<div class="form-group">

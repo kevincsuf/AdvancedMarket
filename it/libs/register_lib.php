@@ -96,7 +96,7 @@ else if ($var_type==='buyer') {
 
 
 if (mysqli_query($con, $sql)) {
-	echo "<script> alert(\"you registered successfully..!\")</script>";
+	echo "<script> alert(\"You are registered successfully..!\")</script>";
 	//header("Location:http://localhost/it/it/index.php");
 	mysqli_close($con);
     echo "<script> alert(\"Please log in at index page...\")</script>";

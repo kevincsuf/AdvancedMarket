@@ -288,7 +288,16 @@ function closeDeal($check_deal_id)
                 SET deal_closed = 1
                 WHERE deal_id=" . $check_deal_id;
             if (mysqli_query($con, $var_update_deal_id)) {
-                echo "<script> alert(\"Update record saved successfully..!\")</script>";
+                //echo "<script> alert(\"Update record saved successfully..!\")</script>";
+				if(!isset($hasError)) {
+							$emailTo = 'nikita@binqware.com'; // seller or buyer email address here
+							$subject='Deal closed';
+							$body = "Test email for deal closure";
+							$headers = 'From: My Admin Lets buy <'.$emailTo.'>' . "\r\n" . 'Reply-To: ' . $email;
+
+							mail($emailTo, $subject, $body, $headers);
+							$emailSent = true;
+						}
             } else {
                 echo "<script> alert(\"Update record NOT saved successfully..!\")</script>";
             }
@@ -449,4 +458,33 @@ function getCurrentPrice($check_deal_id) {
 
     return $var_cur_price;
 }
+
+
+// Get current selling percentage for a deal
+function getCurrentPercent($check_deal_id) {
+    global $con;
+
+    $var_cur_join = 0;
+	$var_max_quantity = 0;
+	$var_percent = 0;
+
+    $var_cur_join = soldQuantity($check_deal_id);
+
+    $var_get_deal = "
+            SELECT *
+            FROM create_deal
+            WHERE deal_id=".$check_deal_id;
+    $var_run_deal = mysqli_query($con, $var_get_deal);
+    while ($var_row_deal = mysqli_fetch_array($var_run_deal)) {
+        if ($var_row_deal['deal_id'] == $check_deal_id) {
+            $var_max_quantity = $var_row_deal['max_quantity'];
+        }
+    }
+
+	$var_percent = floor($var_cur_join / $var_max_quantity * 100);
+
+    return $var_percent;
+}
+
+// email function
 ?>

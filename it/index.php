@@ -196,7 +196,7 @@ else {
                                 <div class="logo-area">
                                     <a href="index.php" class="thm-logo fsz-35">
                                         <!--<img src="files/main-logo.png" alt="Goshop HTML Theme">-->
-                                        <b class="bold-font-3 wht-clr">Advanced Group</b><span class="thm-clr funky-font"> Marketing</span>
+                                        <b class="bold-font-3 wht-clr">International </b><span class="thm-clr funky-font"> Trade</span>
                                     </a>
                                 </div>                              
                             </div>
@@ -281,7 +281,7 @@ else {
                                 <h3 class="fsz-40 blk-clr funky-font-2">  Advanced Group Marketing  </h3>
                                 <h2><span class="blu-clr">The best DEALS! <span class="blk-clr"> Good Luck!</span></h2>
                                 <p class="hidden-xs"><span class="org-clr">Serach on your products or serviecs that you like then click Join Deal button to joing the deal and wait until Deal is reaching to certain number of customers then you will win the deal </p>
-                                <a class="fancy-btn-alt fsz-16" href="#">More</a>
+                                <a class="fancy-btn-alt fsz-16" href="#featured">More</a>
                             </div>
                         </div>
                     </div>
@@ -293,13 +293,13 @@ else {
             <section class="banner clear">
                 <div class="col-lg-4 col-md-4 col-sm-12 no-padding promo-wrap">
                     <div class="gst-promo gst-color-white">
-                        <img src="images/Electronics.jpg" alt="" />
+                        <img src="assets/img/banner/promo1.jpg" alt="" />
                         <div class="vertical-align-div gst-promo-text col-lg-6 right">
                             <div>
                                 <div class="vertical-align-text">
                                     <h2> <span class="sec-title fsz-20 wht-clr"> ELECTRONICS </span> <span class="light-font-3 fsz-20 thm-clr"> starting from $350 </span> </h2>
                                     <p class="fsz-18"><span class="blu-clr">Mobiles , Music Player ,  Accessories ...</p>
-                                    <a href="#" class="fancy-btn fancy-btn-small">Shop Now</a>
+                                    <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
                         </div>
@@ -308,14 +308,14 @@ else {
 
                 <div class="col-lg-4 col-md-4 col-sm-6 no-padding promo-wrap">
                     <div class="gst-promo gst-color-white">
-                        <img src="images/food.jpg" alt="" />
+                        <img src="assets/img/banner/promo2.jpg" alt="" />
 
                         <div class="vertical-align-div gst-promo-text col-lg-8 right">
                             <div>
                                 <div class="vertical-align-text">
-                                    <h2> <span class="sec-title fsz-20 wht-clr"> FOOD  ITEMS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span class="light-font-3 fsz-20 wht-clr"> starting from $15 </span> </h2>
+                                    <h2> <span class="sec-title fsz-20 wht-clr"> FOOD  ITEMS </span> <span class="light-font-3 fsz-20 thm-clr"> starting from $15 </span> </h2>
                                     <p class="fsz-18"><span class="wht-clr">Rice , Food Item 1 ,  Food Item 2 ...</p>
-                                    <a href="#" class="fancy-btn fancy-btn-small">Shop Now</a>
+                                    <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
                         </div>
@@ -324,13 +324,13 @@ else {
 
                 <div class="col-lg-4 col-md-4 col-sm-6 no-padding promo-wrap">
                     <div class="gst-promo gst-color-white">
-                        <img src="assets/img/banner/promo3.jpg" alt="" />
+                        <img src="assets/img/banner/promo1.jpg" alt="" />
                         <div class="vertical-align-div gst-promo-text col-lg-7 col-xs-offset-1">
                             <div>
                                 <div class="vertical-align-text">
                                     <h2> <span class="sec-title fsz-20 blklt-clr"> WOMEN &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span class="light-font-3 fsz-20 wht-clr"> starting from $350 </span> </h2>
-                                    <p class="fsz-18 thm-clr">Dress 1 , Dress 2 ,  &nbsp;&nbsp;&nbsp; Dress 3 ...</p>
-                                    <a href="#" class="fancy-btn fancy-btn-small">Shop Now</a>
+                                    <p class="fsz-18 thm-clr">Cycle 1 , Cycle 2 ,  </p>
+                                    <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
                         </div>
@@ -406,13 +406,13 @@ else {
                         </h3>
 
                         <ul>
-                            <li>point 1 about phone</li>
-                            <li>point 2 about phone</li>
-                            <li>point 3 about phone</li>
+                            <li>New 8-megapixel iSight camera </li>
+                            <li>A8 chip with 64-bit architecture</li>
+                            <li>M8 motion coprocessor included</li>
                         </ul>
 
                         <p class="gst-compare-actions">
-                            <a class="compare-add-to-cart" href="#">Details</a>
+                            <a class="compare-add-to-cart" href='single_product.php?deal_url_id=57'>Details</a>
                         </p>
                     </div>
                 </div>
@@ -427,13 +427,13 @@ else {
                         </h3>
 
                         <ul>
-                            <li>point 1 about phone</li>
-                            <li>point 2 about phone</li>
-                            <li>point 3 about phone</li>
+                            <li>New 12-megapixel iSight camera </li>
+                            <li>A8 chip with 124-bit architecture</li>
+                            <li>M10 motion coprocessor included</li>
                         </ul>
 
                         <p class="gst-compare-actions">
-                            <a class="compare-add-to-cart" href="#">Details</a>
+                           <a class="compare-add-to-cart" href='single_product.php?deal_url_id=57'>Details</a>
                         </p>
                     </div>
                 </div>
@@ -477,7 +477,7 @@ else {
 									echo"<img src='images/".$row["deal_image"]."' alt=''>";
 										echo"<div class='portfolio-content'>";
 											echo"<div class='pop-up-icon'>";
-												echo"<a class='left-link' href='#product-preview' data-toggle='modal'><i class='fa fa-search'></i></a>";
+												echo"<a class='left-link' href='single_product.php?deal_url_id=$var_deal_id'><i class='fa fa-search'></i></a>";
 												
 												echo"<a class='right-link' href='#' value=".$row["deal_id"]."><i class='fa fa-heart'> </i></a>";
 											echo "</div>";
@@ -512,7 +512,7 @@ else {
             <!-- Featured Products Section-->
 			
 
-            <section class="box-content">   
+            <section class="box-content" id="featured">   
                 <div class="fancy-heading text-center spcbtm-15">
                     <h3>Featured Products</h3>
                     <h5 class="funky-font-2">Our featured products here</h5>
