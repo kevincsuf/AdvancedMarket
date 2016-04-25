@@ -554,7 +554,7 @@ function sendEmail($email_event, $email_to, $deal_id) {
 
             // when a user edit his/her profile
             case "profile":
-                $var_email_subject = "You just updated your personal info";
+                $var_email_subject = "You just updated your personal information";
                 $var_email_body = "
                     <html>
                     <head>
@@ -610,7 +610,7 @@ function sendEmail($email_event, $email_to, $deal_id) {
                         <p>Our system indicates that you just created a deal.</p>
                         <p>Deal ID: ".$var_deal_id."</p>
                         <p>Deal Title: ".$var_deal_title."</p>
-                        <p>We will send another notification email when this deal is closed.</p>
+                        <p>We will send you another notification email when this deal is closed.</p>
                         <p><br/></p>
                         <p>Thank you.</p>
                     </body>
@@ -658,7 +658,7 @@ function sendEmail($email_event, $email_to, $deal_id) {
                         <p>Our system indicates that you just joined a deal.</p>
                         <p>Deal ID: ".$var_deal_id."</p>
                         <p>Deal Title: ".$var_deal_title."</p>
-                        <p>We will send another notification email when this deal is closed.</p>
+                        <p>We will send you another notification email when this deal is closed.</p>
                         <p><br/></p>
                         <p>Thank you.</p>
                     </body>
@@ -785,7 +785,7 @@ function sendEmail($email_event, $email_to, $deal_id) {
                         <p>Deal ID: ".$var_deal_id."</p>
                         <p>Deal Title: ".$var_deal_title."</p>
                         <p><br/></p>
-                        <p>Below is the buyer's list of this deal</p>
+                        <p>Below is the buyer's list of this deal.</p>
                         <p>
                             <table border='1'>
                                 <thead>

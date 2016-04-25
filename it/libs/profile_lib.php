@@ -66,7 +66,7 @@ $var_user_id = $_SESSION["ukey"];
 	if(mysqli_query($con,$sql))
 	{
 	
-		//echo "<script> alert(\"New record saved successfully..!\")</script>";
+		echo "<script> alert(\"You personal information updated successfully..!\")</script>";
         sendEmail("profile", $_SESSION["uid"], "");
         mysqli_close($con);
         //header("Location:http://localhost/it/it/profile.php");
