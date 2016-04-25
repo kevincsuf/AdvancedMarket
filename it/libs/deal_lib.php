@@ -10,6 +10,7 @@
 require_once("./core/init.php");
 require_once("./_incl_confirm_login.php");
 require_once("./login_lib.php");
+require_once("./functions.php");
 
 // added user key field 04/01/2016
 $var_user_key=$_SESSION["ukey"];
@@ -131,6 +132,8 @@ $sql = "
 if(mysqli_query($con,$sql))
 {
     echo "<script> alert(\"New record saved successfully..!\")</script>";
+    $last_id = mysqli_insert_id($con);
+    sendEmail("create", $var_user_id, $last_id);
     mysqli_close($con);
     echo "<script type=\"text/javascript\">window.location.replace(\"../seller_view.php\");</script>";
 }

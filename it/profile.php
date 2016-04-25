@@ -102,10 +102,10 @@ if($_POST) {
 		$validator->add_rule_to_field($field_name, array('letters-only'), $field_display_name);
 
 		// seller_buss_name
-		$field_name = "seller_buss_name";
-		$field_display_name = "Business Name";
-		$validator->add_field($field_name);
-		$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
+		//$field_name = "seller_buss_name";
+		//$field_display_name = "Business Name";
+		//$validator->add_field($field_name);
+		//$validator->add_rule_to_field($field_name, array('empty'), $field_display_name);
 
 		// seller_addr
 		$field_name = "seller_addr";
@@ -169,7 +169,7 @@ if($_POST) {
 			//$_SESSION["seller_pwd"] = $_POST["seller_pwd"];
 			$_SESSION["seller_first_name"] = $_POST["seller_first_name"];
 			$_SESSION["seller_last_name"] = $_POST["seller_last_name"];
-			$_SESSION["seller_buss_name"] = $_POST["seller_buss_name"];
+			//$_SESSION["seller_buss_name"] = $_POST["seller_buss_name"];
 			$_SESSION["seller_addr"] = $_POST["seller_addr"];
 			$_SESSION["seller_mobile_number"] = $_POST["seller_mobile_number"];
 			$_SESSION["seller_rev_msg"] = $_POST["seller_rev_msg"];
@@ -241,7 +241,7 @@ if($_POST) {
 			//$seller_pwd_repeat_value = $_POST["seller_pwd_repeat"];
 			$seller_first_name_value = $_POST["seller_first_name"];
 			$seller_last_name_value = $_POST["seller_last_name"];
-			$seller_buss_name_value = $_POST["seller_buss_name"];
+			//$seller_buss_name_value = $_POST["seller_buss_name"];
 			$seller_addr_value = $_POST["seller_addr"];
 			$seller_mobile_number_value = $_POST["seller_mobile_number"];
 			if ($_POST["seller_rev_msg"] == "yes") {
@@ -475,11 +475,18 @@ if($_POST) {
 								<input class="form-control" type="text" name="seller_last_name" id="seller_last_name" placeholder="* Last Name..." value="<?php echo $seller_last_name_value;?>" required />
 								<?php $validator->out_field_error('seller_last_name');?>
 							</div>
-							
-							<div class="form-group">
-								<input class="form-control" type="text" name="seller_buss_name" id="seller_buss_name" placeholder="* Business Name..." value="<?php echo $seller_buss_name_value;?>" required />
-								<?php $validator->out_field_error('seller_buss_name');?>
-							</div>
+						<?php
+                        if ($var_user_type == "seller") {
+                        ?>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="seller_buss_name" id="seller_buss_name"
+                                       placeholder="* Business Name..." value="<?php echo $seller_buss_name_value; ?>"
+                                       required/>
+                                <?php $validator->out_field_error('seller_buss_name'); ?>
+                            </div>
+                        <?php
+                        }
+                        ?>
 							
 							<div class="form-group">
 								<textarea class="form-control" name="seller_addr" id="seller_addr" placeholder="* Address..." required><?php echo htmlspecialchars($seller_addr_value, ENT_QUOTES, 'UTF-8'); ?></textarea>

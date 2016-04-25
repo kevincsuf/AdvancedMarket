@@ -59,6 +59,7 @@ if ($global_remaining_stocks > 0) {
 
 	if(mysqli_query($con,$sql)) {
 		echo "<script> alert(\"New record saved successfully..!\")</script>";
+        sendEmail("join", $_SESSION["uid"], $var_create_deal_id);
         // Close this deal if out of stock
         closeDeal($var_create_deal_id);
         mysqli_close($con);

@@ -1,14 +1,22 @@
 <?php
 
-require_once("/core/init.php");
+require_once("./core/init.php");
 require_once("./_incl_confirm_login.php");
 require_once("./login_lib.php");
+require_once("./functions.php");
 
 
 
 $var_seller_first_name = $_SESSION["seller_first_name"];
 $var_seller_last_name = $_SESSION["seller_last_name"];
-$var_seller_buss_name = $_SESSION["seller_buss_name"];
+
+if ($_SESSION["utype"] == "seller") {
+    $var_seller_buss_name = $_SESSION["seller_buss_name"];
+}
+else {
+    $var_seller_buss_name = "";
+}
+
 $var_seller_addr = $_SESSION["seller_addr"];
 $var_seller_mobile_number = $_SESSION["seller_mobile_number"];
 $var_seller_rev_msg = $_SESSION["seller_rev_msg"];
@@ -58,14 +66,16 @@ $var_user_id = $_SESSION["ukey"];
 	if(mysqli_query($con,$sql))
 	{
 	
-	//echo "<script> alert(\"New record saved successfully..!\")</script>";
-	mysqli_close($con);
-	header("Location:http://localhost/it/it/profile.php");
+		//echo "<script> alert(\"New record saved successfully..!\")</script>";
+        sendEmail("profile", $_SESSION["uid"], "");
+        mysqli_close($con);
+        //header("Location:http://localhost/it/it/profile.php");
+		echo "<script type=\"text/javascript\">window.location.replace(\"../profile.php\");</script>";
 	}
 	else
 	{
-	echo "<script> alert(\"New record not saved successfully..!\")</script>";
-	mysqli_close($con);
+		echo "<script> alert(\"New record not saved successfully..!\")</script>";
+		mysqli_close($con);
 	}
 	
 ?>

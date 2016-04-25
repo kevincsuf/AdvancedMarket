@@ -1,8 +1,11 @@
 <?php
 
 // Skip including init.php again if function.php is called in details.lib.php
-if (basename($_SERVER['PHP_SELF']) != "details_lib.php") {
-    require_once("libs/core/init.php");
+if (basename($_SERVER['PHP_SELF']) != "details_lib.php" &&
+    basename($_SERVER['PHP_SELF']) != "profile_lib.php" &&
+    basename($_SERVER['PHP_SELF']) != "register_lib.php" &&
+    basename($_SERVER['PHP_SELF']) != "deal_lib.php") {
+    require_once("./libs/core/init.php");
 }
 
 // get category from the table and display in single_product page
@@ -289,15 +292,7 @@ function closeDeal($check_deal_id)
                 WHERE deal_id=" . $check_deal_id;
             if (mysqli_query($con, $var_update_deal_id)) {
                 //echo "<script> alert(\"Update record saved successfully..!\")</script>";
-				if(!isset($hasError)) {
-							$emailTo = 'nikita@binqware.com'; // seller or buyer email address here
-							$subject='Deal closed';
-							$body = "Test email for deal closure";
-							$headers = 'From: My Admin Lets buy <'.$emailTo.'>' . "\r\n" . 'Reply-To: ' . $email;
-
-							mail($emailTo, $subject, $body, $headers);
-							$emailSent = true;
-						}
+                sendEmail("close", "", $check_deal_id);
             } else {
                 echo "<script> alert(\"Update record NOT saved successfully..!\")</script>";
             }
@@ -486,5 +481,496 @@ function getCurrentPercent($check_deal_id) {
     return $var_percent;
 }
 
-// email function
+
+// Send an email on specific events
+/*
+ * ===============================================
+ * The arguments and events
+ * ===============================================
+ * "register": when a new user signed up
+ * "profile": when a user edit his/her profile
+ * "create": when a user created a deal
+ * "join": when a user joined a deal
+ * "close": when a deal is closed
+ * ===============================================
+ */
+function sendEmail($email_event, $email_to, $deal_id) {
+    global $con;
+
+    // Set variables
+    $is_OK = true;
+    $var_email_headers = "From: Advanced Marketing E-Mail Team (Do Not Reply)";//'From: My Site <'.$emailTo.'>' . "\r\n" . 'Reply-To: ' . $email;
+    $var_email_to = ""; //'nikita@binqware.com'; // Put your own email address here
+    $var_email_subject = ""; //'Advanced Marketing E-Mail Team';
+    $var_email_body = "";//"Name: $name \n\nEmail: $email \n\nSubject: $subject \n\nComments:\n $comments";
+
+    // Check email address
+    if ($email_event != "close") {
+        if(trim($email_to) == "" && $email_event != "close")  {
+            $is_OK = false;
+        }
+        else if (!filter_var(trim($email_to, FILTER_VALIDATE_EMAIL))) {
+            $is_OK = false;
+        } else {
+            $var_email_to = strtolower(trim($email_to));
+        }
+    }
+
+    if ($is_OK) {
+        switch ($email_event) {
+            // when a new user signed up
+            case "register":
+                $var_email_subject = "Welcome to Advanced Marketing!";
+                $var_email_body = "
+                    <html>
+                    <head>
+                        <title>Welcome to Advanced Marketing!</title>
+                    </head>
+                    <body>
+                        <p>Thank you for becoming a member of Advanced Marketing.</p>
+                        <p>Please visit <a href='http://www.binqware.com/it/about.php' target='_blank'>here</a> to find out how Advanced Marketing works.</p>
+                        <p>If you need more information, please visit our <a href='http://www.binqware.com/it/faq.php' target='_blank'>F.A.Q.</a> page.</p>
+                        <p><br/></p>
+                        <p>Thanks again for signing up!</p>
+                    </body>
+                    </html>
+                ";
+                $var_email_headers .=
+                // To send HTML mail, the Content-type header must be set
+                $var_email_headers  = 'MIME-Version: 1.0'.PHP_EOL;
+                $var_email_headers .= 'Content-type: text/html; charset=iso-8859-1'.PHP_EOL;
+
+                // Additional headers
+                $var_email_headers .= 'To: '.$var_email_to.PHP_EOL;
+                $var_email_headers .= 'From: Advanced Marketing E-Mail Team (Do Not Reply) <donotreply@advancedgroupmarketing.com>'.PHP_EOL;
+                //$var_email_headers .= 'Bcc: ABC <abc@example.com>, EFG <efg@example.com>'.PHP_EOL;
+
+                // Send an email
+                if (getEmailStatus($var_email_to)) {
+                    mail($var_email_to, $var_email_subject, $var_email_body, $var_email_headers);
+                }
+
+                break;
+
+            // when a user edit his/her profile
+            case "profile":
+                $var_email_subject = "You just updated your personal info";
+                $var_email_body = "
+                    <html>
+                    <head>
+                        <title>You just updated your personal info</title>
+                    </head>
+                    <body>
+                        <p>Our system indicates that you just updated your personal information.</p>
+                        <p>If you did not update your information recently, please <a href='http://www.binqware.com/it/contact-us.php' target='_blank'>contact us</a>.</p>
+                        <p><br/></p>
+                        <p>Thank you.</p>
+                    </body>
+                    </html>
+                ";
+                $var_email_headers .=
+                    // To send HTML mail, the Content-type header must be set
+                $var_email_headers  = 'MIME-Version: 1.0'.PHP_EOL;
+                $var_email_headers .= 'Content-type: text/html; charset=iso-8859-1'.PHP_EOL;
+
+                // Additional headers
+                $var_email_headers .= 'To: '.$var_email_to.PHP_EOL;
+                $var_email_headers .= 'From: Advanced Marketing E-Mail Team (Do Not Reply) <donotreply@advancedgroupmarketing.com>'.PHP_EOL;
+                //$var_email_headers .= 'Bcc: ABC <abc@example.com>, EFG <efg@example.com>'.PHP_EOL;
+
+                // Send an email
+                if (getEmailStatus($var_email_to)) {
+                    mail($var_email_to, $var_email_subject, $var_email_body, $var_email_headers);
+                }
+
+                break;
+
+            // when a user created a deal
+            case "create":
+                $var_deal_id = $deal_id;
+                $var_deal_title = "";
+                $var_get_deal = "
+                    SELECT *
+                    FROM create_deal
+                    WHERE deal_id=".$deal_id;
+                $var_run_deal = mysqli_query($con, $var_get_deal);
+                while ($var_row_deal = mysqli_fetch_array($var_run_deal)) {
+                    if ($var_row_deal['deal_id'] == $deal_id) {
+                        $var_deal_title = trim($var_row_deal['title']);
+                    }
+                }
+
+                $var_email_subject = "You just created a deal";
+                $var_email_body = "
+                    <html>
+                    <head>
+                        <title>You just created a deal</title>
+                    </head>
+                    <body>
+                        <p>Our system indicates that you just created a deal.</p>
+                        <p>Deal ID: ".$var_deal_id."</p>
+                        <p>Deal Title: ".$var_deal_title."</p>
+                        <p>We will send another notification email when this deal is closed.</p>
+                        <p><br/></p>
+                        <p>Thank you.</p>
+                    </body>
+                    </html>
+                ";
+
+                // To send HTML mail, the Content-type header must be set
+                $var_email_headers  = 'MIME-Version: 1.0'.PHP_EOL;
+                $var_email_headers .= 'Content-type: text/html; charset=iso-8859-1'.PHP_EOL;
+
+                // Additional headers
+                $var_email_headers .= 'To: '.$var_email_to.PHP_EOL;
+                $var_email_headers .= 'From: Advanced Marketing E-Mail Team (Do Not Reply) <donotreply@advancedgroupmarketing.com>'.PHP_EOL;
+                //$var_email_headers .= 'Bcc: ABC <abc@example.com>, EFG <efg@example.com>'.PHP_EOL;
+
+                // Send an email
+                if (getEmailStatus($var_email_to)) {
+                    mail($var_email_to, $var_email_subject, $var_email_body, $var_email_headers);
+                }
+
+                break;
+
+            // when a user joined a deal
+            case "join":
+                $var_deal_id = $deal_id;
+                $var_deal_title = "";
+                $var_get_deal = "
+                    SELECT *
+                    FROM create_deal
+                    WHERE deal_id=".$deal_id;
+                $var_run_deal = mysqli_query($con, $var_get_deal);
+                while ($var_row_deal = mysqli_fetch_array($var_run_deal)) {
+                    if ($var_row_deal['deal_id'] == $deal_id) {
+                        $var_deal_title = trim($var_row_deal['title']);
+                    }
+                }
+
+                $var_email_subject = "You just joined a deal";
+                $var_email_body = "
+                    <html>
+                    <head>
+                        <title>You just joined a deal</title>
+                    </head>
+                    <body>
+                        <p>Our system indicates that you just joined a deal.</p>
+                        <p>Deal ID: ".$var_deal_id."</p>
+                        <p>Deal Title: ".$var_deal_title."</p>
+                        <p>We will send another notification email when this deal is closed.</p>
+                        <p><br/></p>
+                        <p>Thank you.</p>
+                    </body>
+                    </html>
+                ";
+
+                // To send HTML mail, the Content-type header must be set
+                $var_email_headers  = 'MIME-Version: 1.0'.PHP_EOL;
+                $var_email_headers .= 'Content-type: text/html; charset=iso-8859-1'.PHP_EOL;
+
+                // Additional headers
+                $var_email_headers .= 'To: '.$var_email_to.PHP_EOL;
+                $var_email_headers .= 'From: Advanced Marketing E-Mail Team (Do Not Reply) <donotreply@advancedgroupmarketing.com>'.PHP_EOL;
+                //$var_email_headers .= 'Bcc: ABC <abc@example.com>, EFG <efg@example.com>'.PHP_EOL;
+
+                // Send an email
+                if (getEmailStatus($var_email_to)) {
+                    mail($var_email_to, $var_email_subject, $var_email_body, $var_email_headers);
+                }
+
+                break;
+
+            // when a deal is closed
+            case "close":
+                //////////////////////////////////////
+                // For seller
+                //////////////////////////////////////
+                $var_deal_id = $deal_id;
+                $var_deal_title = "";
+                $var_get_deal = "
+                    SELECT *
+                    FROM create_deal
+                    WHERE deal_id=".$deal_id;
+                $var_run_deal = mysqli_query($con, $var_get_deal);
+                while ($var_row_deal = mysqli_fetch_array($var_run_deal)) {
+                    if ($var_row_deal['deal_id'] == $deal_id) {
+                        $var_email_to = strtolower(trim($var_row_deal['user_name']));
+                        $var_deal_title = trim($var_row_deal['title']);
+                    }
+                }
+
+                // Assemble buyer's table
+                $var_buyer_list = getBuyerList($deal_id);
+                $var_buyer_list_table = "";
+
+                foreach ($var_buyer_list as $buyer_id) {
+
+                    $var_buyer_list_id = "";
+                    $var_buyer_list_name = "";
+                    $var_buyer_list_email = "";
+                    $var_buyer_list_address = "";
+                    $var_buyer_list_state = "";
+                    $var_buyer_list_zipcode = "";
+                    $var_buyer_list_quantity = "";
+
+                    $var_get_buyer = "
+                        SELECT *
+                        FROM register
+                        WHERE id=".$buyer_id;
+                    $var_run_buyer = mysqli_query($con, $var_get_buyer);
+                    while ($var_row_buyer = mysqli_fetch_array($var_run_buyer)) {
+                        $var_buyer_list_id = $var_row_buyer['id'];
+                        $var_buyer_list_name = $var_row_buyer['first_name'];
+                        $var_buyer_list_name .= " ";
+                        $var_buyer_list_name .= trim($var_row_buyer['last_name']);
+                        $var_buyer_list_email = strtolower(trim($var_row_buyer['email']));
+                    }
+
+                    $var_get_join = "
+                        SELECT *
+                        FROM join_deal
+                        WHERE user_id=".$var_buyer_list_id." AND create_deal_id=".$deal_id;
+                    $var_run_join = mysqli_query($con, $var_get_join);
+                    while ($var_row_join = mysqli_fetch_array($var_run_join)) {
+                        $var_buyer_list_address = $var_row_join['address'];
+                        $var_buyer_list_state = $var_row_join['state'];
+                        $var_buyer_list_zipcode = $var_row_join['zipcode'];
+                        $var_buyer_list_quantity = $var_row_join['order_quantity'];
+                    }
+
+                    $var_buyer_list_table .= "<tr>";
+
+                    // Name
+                    $var_buyer_list_table .= "<td>";
+                    $var_buyer_list_table .= $var_buyer_list_name;
+                    $var_buyer_list_table .= "</td>";
+
+                    // Email
+                    $var_buyer_list_table .= "<td>";
+                    $var_buyer_list_table .= $var_buyer_list_email;
+                    $var_buyer_list_table .= "</td>";
+
+                    // Address
+                    $var_buyer_list_table .= "<td>";
+                    $var_buyer_list_table .= $var_buyer_list_address;
+                    $var_buyer_list_table .= "</td>";
+
+                    // State
+                    $var_buyer_list_table .= "<td>";
+                    $var_buyer_list_table .= $var_buyer_list_state;
+                    $var_buyer_list_table .= "</td>";
+
+                    // Zipcode
+                    $var_buyer_list_table .= "<td>";
+                    $var_buyer_list_table .= $var_buyer_list_zipcode;
+                    $var_buyer_list_table .= "</td>";
+
+                    // Quantity
+                    $var_buyer_list_table .= "<td>";
+                    $var_buyer_list_table .= $var_buyer_list_quantity;
+                    $var_buyer_list_table .= "</td>";
+
+                    $var_buyer_list_table .= "</tr>";
+                }
+
+                $var_email_subject = "Your deal just closed successfully";
+                $var_email_body = "
+                    <html>
+                    <head>
+                        <title>Your deal just closed successfully</title>
+                    </head>
+                    <body>
+                        <p>Our system indicates that your deal just closed successfully.</p>
+                        <p>Deal ID: ".$var_deal_id."</p>
+                        <p>Deal Title: ".$var_deal_title."</p>
+                        <p><br/></p>
+                        <p>Below is the buyer's list of this deal</p>
+                        <p>
+                            <table border='1'>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Address</th>
+                                        <th>State</th>
+                                        <th>Zipcode</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>".$var_buyer_list_table."</tbody>
+                            </table>
+                        </p>
+                        <p><br/></p>
+                        <p>Thank you.</p>
+                    </body>
+                    </html>
+                ";
+                $var_email_headers .=
+                    // To send HTML mail, the Content-type header must be set
+                $var_email_headers  = 'MIME-Version: 1.0'.PHP_EOL;
+                $var_email_headers .= 'Content-type: text/html; charset=iso-8859-1'.PHP_EOL;
+
+                // Additional headers
+                $var_email_headers .= 'To: '.$var_email_to.PHP_EOL;
+                $var_email_headers .= 'From: Advanced Marketing E-Mail Team (Do Not Reply) <donotreply@advancedgroupmarketing.com>'.PHP_EOL;
+                //$var_email_headers .= 'Bcc: ABC <abc@example.com>, EFG <efg@example.com>'.PHP_EOL;
+
+                // Send an email
+                if (getEmailStatus($var_email_to)) {
+                    mail($var_email_to, $var_email_subject, $var_email_body, $var_email_headers);
+                }
+
+                //////////////////////////////////////
+                // For buyer
+                //////////////////////////////////////
+                $var_deal_id = $deal_id;
+                $var_deal_title = "";
+                $var_get_deal = "
+                    SELECT *
+                    FROM create_deal
+                    WHERE deal_id=".$deal_id;
+                $var_run_deal = mysqli_query($con, $var_get_deal);
+                while ($var_row_deal = mysqli_fetch_array($var_run_deal)) {
+                    if ($var_row_deal['deal_id'] == $deal_id) {
+                        $var_deal_title = trim($var_row_deal['title']);
+                    }
+                }
+
+                // Assemble buyer's list
+                $var_buyer_list = getBuyerList($deal_id);
+                $var_buyer_list_table = "";
+
+                foreach ($var_buyer_list as $buyer_id) {
+
+                    $var_buyer_list_id = "";
+                    $var_buyer_list_name = "";
+                    $var_buyer_list_email = "";
+                    $var_buyer_list_address = "";
+                    $var_buyer_list_state = "";
+                    $var_buyer_list_zipcode = "";
+                    $var_buyer_list_quantity = "";
+
+                    $var_get_buyer = "
+                        SELECT *
+                        FROM register
+                        WHERE id=" . $buyer_id;
+                    $var_run_buyer = mysqli_query($con, $var_get_buyer);
+                    while ($var_row_buyer = mysqli_fetch_array($var_run_buyer)) {
+                        $var_buyer_list_id = $var_row_buyer['id'];
+                        $var_buyer_list_name = $var_row_buyer['first_name'];
+                        $var_buyer_list_name .= " ";
+                        $var_buyer_list_name .= trim($var_row_buyer['last_name']);
+                        $var_buyer_list_email = strtolower(trim($var_row_buyer['email']));
+                        $var_email_to = $var_buyer_list_email;
+                    }
+
+                    $var_get_join = "
+                        SELECT *
+                        FROM join_deal
+                        WHERE user_id=" . $var_buyer_list_id . " AND create_deal_id=" . $deal_id;
+                    $var_run_join = mysqli_query($con, $var_get_join);
+                    while ($var_row_join = mysqli_fetch_array($var_run_join)) {
+                        $var_buyer_list_address = $var_row_join['address'];
+                        $var_buyer_list_state = $var_row_join['state'];
+                        $var_buyer_list_zipcode = $var_row_join['zipcode'];
+                        $var_buyer_list_quantity = $var_row_join['order_quantity'];
+                    }
+
+                    $var_email_subject = "Your joined deal is just closed";
+                    $var_email_body = "
+                        <html>
+                        <head>
+                            <title>Your joined deal is just closed</title>
+                        </head>
+                        <body>
+                            <p>Our system indicates that one of your joined deals is closed.</p>
+                            <p>Deal ID: ".$var_deal_id."</p>
+                            <p>Deal Title: ".$var_deal_title."</p>
+                            <p><br/></p>
+                            <p>Below is your order information.</p>
+                            <p>Name: ".$var_buyer_list_name."</p>
+                            <p>Address: ".$var_buyer_list_address."</p>
+                            <p>State: ".$var_buyer_list_state."</p>
+                            <p>Zipcode: ".$var_buyer_list_zipcode."</p>
+                            <p>Quantity: ".$var_buyer_list_quantity."</p>
+                            <p><br/></p>
+                            <p>The seller will contact you soon.</p>
+                            <p>Thank you.</p>
+                        </body>
+                        </html>
+                    ";
+                    $var_email_headers .=
+                        // To send HTML mail, the Content-type header must be set
+                    $var_email_headers  = 'MIME-Version: 1.0'.PHP_EOL;
+                    $var_email_headers .= 'Content-type: text/html; charset=iso-8859-1'.PHP_EOL;
+
+                    // Additional headers
+                    $var_email_headers .= 'To: '.$var_email_to.PHP_EOL;
+                    $var_email_headers .= 'From: Advanced Marketing E-Mail Team (Do Not Reply) <donotreply@advancedgroupmarketing.com>'.PHP_EOL;
+                    //$var_email_headers .= 'Bcc: ABC <abc@example.com>, EFG <efg@example.com>'.PHP_EOL;
+
+                    // Send an email
+                    if (getEmailStatus($var_email_to)) {
+                        mail($var_email_to, $var_email_subject, $var_email_body, $var_email_headers);
+                    }
+                }
+
+                break;
+
+        }
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+
+// Get status of email subscription
+function getEmailStatus($user_email) {
+    global $con;
+
+    $var_user_email = strtolower(trim($user_email));
+    $var_email_status = false;
+
+    $var_get_user = "
+            SELECT *
+            FROM register
+            WHERE email='".$var_user_email."'";
+    $var_run_user = mysqli_query($con, $var_get_user);
+    while ($var_row_user = mysqli_fetch_array($var_run_user)) {
+        if (strtolower(trim($var_row_user['email'])) == $var_user_email) {
+            if (strtolower(trim($var_row_user['receive_message'])) == "yes") {
+                $var_email_status = true;
+            }
+            else {
+                $var_email_status = false;
+            }
+        }
+    }
+
+    return $var_email_status;
+}
+
+
+// Get buyers list for a deal
+function getBuyerList($check_deal_id) {
+    global $con;
+
+    $var_buyer_list = array();
+
+    $var_get_joined_buyer = "
+            SELECT *
+            FROM join_deal
+            WHERE create_deal_id=".$check_deal_id;
+    $var_run_joined_buyer = mysqli_query($con, $var_get_joined_buyer);
+    while ($var_row_joined_buyer = mysqli_fetch_array($var_run_joined_buyer)) {
+        $var_buyer_list[] = $var_row_joined_buyer['user_id'];
+    }
+
+    return $var_buyer_list;
+}
+
+
 ?>

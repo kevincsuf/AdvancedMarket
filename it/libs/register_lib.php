@@ -1,10 +1,13 @@
 <?php
 
 require_once("./core/init.php");
+require_once("./functions.php");
 
 // to get the type from dropdown
 $var_type = $_SESSION['regtype'];
 //echo $var_type;
+
+$var_sending_email = "";
 
 //getting info from reg page to here for seller
 if ($var_type == "seller") {
@@ -23,6 +26,7 @@ if ($var_type == "seller") {
 	$var_seller_category_electronics = $_SESSION['seller_category_electronics'];
 	$var_seller_category_rawmaterial = $_SESSION['seller_category_rawmaterial'];
 	$var_seller_category_entertainment = $_SESSION['seller_category_entertainment'];
+    $var_sending_email = $var_seller_email;
 }
 //getting info from reg page to here for buyer
 else if ($var_type == "buyer") {
@@ -38,6 +42,7 @@ else if ($var_type == "buyer") {
 	$var_buyer_category_electronics = $_SESSION['buyer_category_electronics'];
 	$var_buyer_category_rawmaterial = $_SESSION['buyer_category_rawmaterial'];
 	$var_buyer_category_entertainment = $_SESSION['buyer_category_entertainment'];
+    $var_sending_email = $var_buyer_email;
 }
 
 
@@ -98,12 +103,13 @@ else if ($var_type==='buyer') {
 if (mysqli_query($con, $sql)) {
 	echo "<script> alert(\"You are registered successfully..!\")</script>";
 	//header("Location:http://localhost/it/it/index.php");
+    sendEmail("register", $var_sending_email, "");
 	mysqli_close($con);
     echo "<script> alert(\"Please log in at index page...\")</script>";
     echo "<script type=\"text/javascript\">window.location.replace(\"../index.php\");</script>";
 	
 	//If there is no error, send the email
-	
+	/*
 	if(!isset($hasError)) {
 		$emailTo = 'nikita@binqware.com'; // Put your own email address here
 		$subject='Advanced Marketing E-Mail Team';
@@ -113,6 +119,7 @@ if (mysqli_query($con, $sql)) {
 		mail($emailTo, $subject, $body, $headers);
 		$emailSent = true;
 	}
+	*/
 }
 else {
 	echo "<script> alert(\"New record not saved successfully..!\")</script>";
