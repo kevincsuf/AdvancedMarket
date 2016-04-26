@@ -593,19 +593,25 @@ if($_POST) {
 													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
 												}
 												else if ($var_number_discount_option == 2) {
-													$var_percent_1 = 50;
+													$var_percent_2 = getCurrentPercent($var_deal_url_id);
+													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_2."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_number_discount_2."/".$var_deal_unit."</div>";
+													/*$var_percent_1 = 50;
 													$var_percent_2 = 50;
 													$var_percent_3 = 0;
 													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>1-".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
 													echo "<div class='progress-bar progress-bar-warning' role='progressbar' style='width:".$var_percent_2."%'>".($var_number_discount_1+1)."-".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
+													*/
 												}
 												else if ($var_number_discount_option == 3) {
-													$var_percent_1 = 33;
+													$var_percent_3 = getCurrentPercent($var_deal_url_id);
+													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_3."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_number_discount_3."/".$var_deal_unit."</div>";
+													/*$var_percent_1 = 33;
 													$var_percent_2 = 33;
 													$var_percent_3 = 34;
 													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>1-".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
 													echo "<div class='progress-bar progress-bar-warning' role='progressbar' style='width:".$var_percent_2."%'>".($var_number_discount_1+1)."-".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
 													echo "<div class='progress-bar progress-bar-danger' role='progressbar' style='width:".$var_percent_3."%'>".($var_number_discount_2+1)."-".$var_number_discount_3." ".$var_deal_unit.", $".$var_amount_discount_3."/".$var_deal_unit."</div>";
+													*/
 												}
 												
 												echo "  </div>";
@@ -914,7 +920,7 @@ if($_POST) {
 												setInterval(function () {
 													var current_date = new Date().getTime();
 													var seconds_left = (target_date - current_date) / 1000;
-													days = parseInt(seconds_left / 86400);
+													days = parseInt(seconds_left / 86400) +1;
 													seconds_left = seconds_left % 86400;
 													hours = parseInt(seconds_left / 3600);
 													seconds_left = seconds_left % 3600;

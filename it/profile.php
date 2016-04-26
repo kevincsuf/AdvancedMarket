@@ -428,13 +428,12 @@ if($_POST) {
 										
                                             <li  class="active"><a href="index.php">Home</a></li> 
 											
-                                            <li><a href="#">About Us</a></li>
+                                            <li><a href="about.php">About Us</a></li>
 											
-                                            <li><a href="contact-us.html">Category</a></li>
+                                            											
+											<li><a href="faq.php">F.A.Q</a></li>
 											
-											<li><a href="contact-us.html">F.A.Q</a></li>
-											
-                                            <li><a href="contact-us.html">Contact</a></li>
+                                            <li><a href="contact-us.php">Contact</a></li>
 												
 										</ul>										
 									</div>    
