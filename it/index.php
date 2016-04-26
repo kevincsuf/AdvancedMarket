@@ -280,7 +280,7 @@ else {
                             <div class="caption-right">
                                 <h3 class="fsz-40 blk-clr funky-font-2">  Advanced Group Marketing  </h3>
                                 <h2><span class="blu-clr">The best DEALS! <span class="blk-clr"> Good Luck!</span></h2>
-                                <p class="hidden-xs"><span class="org-clr">Serach on your products or serviecs that you like then click Join Deal button to joing the deal and wait until Deal is reaching to certain number of customers then you will win the deal </p>
+                                <p class="hidden-xs"><span class="org-clr">Serach on your products or serviecs that you like then click Join Deal button to join the deal and wait until Deal is reaching to certain number of customers then you will win the deal </p>
                                 <a class="fancy-btn-alt fsz-16" href="#featured">More</a>
                             </div>
                         </div>
@@ -297,7 +297,6 @@ else {
                         <div class="vertical-align-div gst-promo-text col-lg-6 right">
                             <div>
                                 <div class="vertical-align-text">
-                                    <h2> <span class="sec-title fsz-10 wht-clr"> ELECTRONICS </span>
                                     <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
@@ -312,7 +311,6 @@ else {
                         <div class="vertical-align-div gst-promo-text col-lg-8 right">
                             <div>
                                 <div class="vertical-align-text">
-                                    <h2> <span class="sec-title fsz-10 blu-clr"> FOOD  PRODUCTS </span> 
                                     <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
@@ -326,7 +324,6 @@ else {
                         <div class="vertical-align-div gst-promo-text col-lg-7 col-xs-offset-1">
                             <div>
                                 <div class="vertical-align-text">
-                                    <h2> <span class="sec-title fsz-10 blu-clr"> ENTERTAINMENTS</span> 
                                     <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
@@ -563,7 +560,7 @@ else {
                     <div class="row">
                         <div class="col-md-7 col-sm-12 col-xs-12">
                             <h2>Found your <span class="thm-clr extbold-font-4">Dream Product</span> ? Why wait</h2>
-                            <p class="gry-clr fsz-16">Get it now with attractive deal from International Trade..</p>
+                            <p class="gry-clr fsz-16">Get it now with attractive deal from Advanced Group Marketing..</p>
                         </div>
 
                         <div class="col-md-5 col-sm-12 col-xs-12 text-right gst-cta-buttons">
@@ -677,7 +674,7 @@ else {
                     <div class="login-wrap text-center">                        
                         <h2 class="fsz-35 spcbtm-15"> <span class="bold-font-3 wht-clr">International</span> <span class="thm-clr funky-font">Trade</span> </h2>
                         <p class="fsz-20 title-3"> WELCOME TO OUR  WONDERFUL WORLD OF SHOPPING </p>
-                        <p class="fsz-15 bold-font-4"> Login to get the most out of  <span class="thm-clr"> International Trade Website </span> </p>                       
+                        <p class="fsz-15 bold-font-4"> Login to get the most out of  <span class="thm-clr"> Advanced Group Marketing Website </span> </p>                       
 
                         <div class="login-form">  
 							<br>
