@@ -196,7 +196,7 @@ else {
                                 <div class="logo-area">
                                     <a href="index.php" class="thm-logo fsz-35">
                                         <!--<img src="files/main-logo.png" alt="Goshop HTML Theme">-->
-                                        <b class="bold-font-3 wht-clr">International </b><span class="thm-clr funky-font"> Trade</span>
+                                        <b class="bold-font-3 wht-clr">Advanced Group </b><span class="thm-clr funky-font"> Marketing</span>
                                     </a>
                                 </div>                              
                             </div>
@@ -297,8 +297,7 @@ else {
                         <div class="vertical-align-div gst-promo-text col-lg-6 right">
                             <div>
                                 <div class="vertical-align-text">
-                                    <h2> <span class="sec-title fsz-20 wht-clr"> ELECTRONICS </span> <span class="light-font-3 fsz-20 thm-clr"> starting from $350 </span> </h2>
-                                    <p class="fsz-18"><span class="blu-clr">Mobiles , Music Player ,  Accessories ...</p>
+                                    <h2> <span class="sec-title fsz-10 wht-clr"> ELECTRONICS </span>
                                     <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
@@ -313,8 +312,7 @@ else {
                         <div class="vertical-align-div gst-promo-text col-lg-8 right">
                             <div>
                                 <div class="vertical-align-text">
-                                    <h2> <span class="sec-title fsz-20 wht-clr"> FOOD  ITEMS </span> <span class="light-font-3 fsz-20 thm-clr"> starting from $15 </span> </h2>
-                                    <p class="fsz-18"><span class="wht-clr">Rice , Food Item 1 ,  Food Item 2 ...</p>
+                                    <h2> <span class="sec-title fsz-10 blu-clr"> FOOD  PRODUCTS </span> 
                                     <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
@@ -324,12 +322,11 @@ else {
 
                 <div class="col-lg-4 col-md-4 col-sm-6 no-padding promo-wrap">
                     <div class="gst-promo gst-color-white">
-                        <img src="assets/img/banner/promo1.jpg" alt="" />
+                        <img src="assets/img/banner/promo3.png" alt="" />
                         <div class="vertical-align-div gst-promo-text col-lg-7 col-xs-offset-1">
                             <div>
                                 <div class="vertical-align-text">
-                                    <h2> <span class="sec-title fsz-20 blklt-clr"> WOMEN &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span class="light-font-3 fsz-20 wht-clr"> starting from $350 </span> </h2>
-                                    <p class="fsz-18 thm-clr">Cycle 1 , Cycle 2 ,  </p>
+                                    <h2> <span class="sec-title fsz-10 blu-clr"> ENTERTAINMENTS</span> 
                                     <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
