@@ -6,7 +6,7 @@
                         <div class="col-md-3 col-sm-6 clearfix">
                             <section class="widget footer-widget widget_text clearfix">
                                 <div class="textwidget">
-                                    <p class="fsz-25"> <span class="bold-font-3 wht-clr">International</span> <span class="thm-clr funky-font">Trade</span> </p>
+                                    <p class="fsz-25"> <span class="bold-font-3 wht-clr">Advanced Group</span> <span class="thm-clr funky-font">Marketing</span> </p>
                                     <p>The Best place to Shop</p>
                                 </div>
                             </section>
@@ -70,7 +70,7 @@
                 <div class="container theme-container">
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
-                            <p class="left">Copyright &copy; <a href="#" class="thm-clr"> International Trade </a>.  All Right Reserved 2016 </p>
+                            <p class="left">Copyright &copy; <a href="#" class="thm-clr"> Advanced Group Marketing </a>.  All Right Reserved 2016 </p>
                         </div>
                     </div>
                 </div>

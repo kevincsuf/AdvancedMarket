@@ -5,7 +5,7 @@
                 <div class="container theme-container">
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
-                            <p class="left">Copyright &copy; <a href="#" class="thm-clr"> International Trade </a>.  All Right Reserved 2016 </p>
+                            <p class="left">Copyright &copy; <a href="#" class="thm-clr"> Advanced Group Marketing </a>.  All Right Reserved 2016 </p>
                         </div>
                     </div>
                 </div>

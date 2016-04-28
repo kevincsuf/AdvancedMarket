@@ -19,7 +19,7 @@ require_once("./functions.php");
 /*
  * Kevin: 04/05/2016
  * Temporarily display variables
- */
+
 	echo "===== Temporarily display variables =====<br/>";;
 	echo "var_create_deal_id: " . $var_create_deal_id . "<br/>";
 	echo "var_user_id: " . $var_user_id. "<br/>";
@@ -28,7 +28,7 @@ require_once("./functions.php");
 	echo "var_state: " . $var_state . "<br/>";
 	echo "var_zipcode: " . $var_zipcode . "<br/>";
 	echo "var_closure_date: " . $var_closure_date . "<br/>";
-
+ */
 
 
 // Check remaining stocks again just before inserting the order to DB
