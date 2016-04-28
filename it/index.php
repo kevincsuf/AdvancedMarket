@@ -1,4 +1,4 @@
-<!-- Initernational Trade Index Page -->
+<!-- Initernational Marketing Index Page -->
 <?php
 
 require_once("./libs/core/init.php");
@@ -68,36 +68,7 @@ else {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8">
-        <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title> Advanced Group Marketing || Home</title>
-
-        <!-- Favicon -->
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.html">
-        <link rel="shortcut icon" href="assets/ico/favicon.ico">
-
-        <!-- CSS Global -->
-        <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">        
-        <link href="assets/plugins/bootstrap-select-1.9.3/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">         
-        <link href="assets/plugins/owl-carousel2/assets/owl.carousel.css" rel="stylesheet" type="text/css"> 
-        <link href="assets/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css" rel="stylesheet" type="text/css">   
-        <link href="assets/plugins/royalslider/skins/universal/rs-universal.css" rel="stylesheet">
-        <link href="assets/plugins/royalslider/royalslider.css" rel="stylesheet">
-        <link href="assets/plugins/subscribe-better-master/subscribe-better.css" rel="stylesheet" type="text/css">
-
-        <!-- Icons Font CSS -->
-        <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> 
-
-        <!-- Theme CSS -->
-        <link href="assets/css/style.css" rel="stylesheet" type="text/css">
-        <link href="assets/css/header.css" rel="stylesheet" type="text/css">  
-
-        <!--[if lt IE 9]>
-       <script src="assets/plugins/iesupport/html5shiv.js"></script>
-       <script src="assets/plugins/iesupport/respond.js"></script>
-       <![endif]-->
+      <?php include "libs/_incl_header.php";?>    
 
     </head>
 
@@ -280,7 +251,7 @@ else {
                             <div class="caption-right">
                                 <h3 class="fsz-40 blk-clr funky-font-2">  Advanced Group Marketing  </h3>
                                 <h2><span class="blu-clr">The best DEALS! <span class="blk-clr"> Good Luck!</span></h2>
-                                <p class="hidden-xs"><span class="org-clr">Serach on your products or serviecs that you like then click Join Deal button to join the deal and wait until Deal is reaching to certain number of customers then you will win the deal </p>
+                                <p class="hidden-xs"><span class="org-clr">Serach on your products or serviecs that you like then click Join Deal button to joing the deal and wait until Deal is reaching to certain number of customers then you will win the deal </p>
                                 <a class="fancy-btn-alt fsz-16" href="#featured">More</a>
                             </div>
                         </div>
@@ -297,6 +268,7 @@ else {
                         <div class="vertical-align-div gst-promo-text col-lg-6 right">
                             <div>
                                 <div class="vertical-align-text">
+                                    <h2> <span class="sec-title fsz-10 wht-clr"> ELECTRONICS </span>
                                     <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
@@ -311,6 +283,7 @@ else {
                         <div class="vertical-align-div gst-promo-text col-lg-8 right">
                             <div>
                                 <div class="vertical-align-text">
+                                    <h2> <span class="sec-title fsz-10 blu-clr"> FOOD  PRODUCTS </span> 
                                     <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
@@ -324,6 +297,7 @@ else {
                         <div class="vertical-align-div gst-promo-text col-lg-7 col-xs-offset-1">
                             <div>
                                 <div class="vertical-align-text">
+                                    <h2> <span class="sec-title fsz-10 blu-clr"> ENTERTAINMENTS</span> 
                                     <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
@@ -471,9 +445,9 @@ else {
 									echo"<img src='images/".$row["deal_image"]."' alt=''>";
 										echo"<div class='portfolio-content'>";
 											echo"<div class='pop-up-icon'>";
-												echo"<a class='left-link' href='single_product.php?deal_url_id=$var_deal_id'><i class='fa fa-search'></i></a>";
+												echo"<a class='center-link' href='single_product.php?deal_url_id=$var_deal_id'><i class='fa fa-search'></i></a>";
 												
-												echo"<a class='right-link' href='#' value=".$row["deal_id"]."><i class='fa fa-heart'> </i></a>";
+												
 											echo "</div>";
 										echo "</div>";
 								echo "</div>";
@@ -576,7 +550,7 @@ else {
                 <div class="container theme-container">
                     <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 add-wrap">
                         <div class=" text-center">
-                            <h2 class="fsz-35"> <span class="bold-font-3 wht-clr">International</span> <span class="thm-clr funky-font">Trade</span> </h2>
+                            <h2 class="fsz-35"> <span class="bold-font-3 wht-clr">Advanced Group </span> <span class="thm-clr funky-font">Marketing</span> </h2>
                             <p>148 Parramatta Road Stanmore NSW 2048, New York City </p>
                             <div class="fancy-heading text-center">
                                 <h2 class="title-2">24 / 7 TECH SUPPORT</h2>                           
@@ -634,7 +608,7 @@ else {
                                 </div>
 
                                 <div itemprop="description" class="fsz-15">
-                                    <p>Qossi is an emerging company and dedicated to making high quality bags and fashions.Qossi designers are internationally renowned designers,having participated in many international fashion designing contests,and perform outstandingly</p>                                  
+                                    <p>Qossi is an emerging company and dedicated to making high quality bags and fashions.Qossi designers are Advanced Grouply renowned designers,having participated in many Advanced Group fashion designing contests,and perform outstandingly</p>                                  
                                 </div>
 
                                 <ul class="stock-detail list-items fsz-12">
@@ -672,7 +646,7 @@ else {
 
                 <div class="modal-content login-1 wht-clr">   
                     <div class="login-wrap text-center">                        
-                        <h2 class="fsz-35 spcbtm-15"> <span class="bold-font-3 wht-clr">International</span> <span class="thm-clr funky-font">Trade</span> </h2>
+                        <h2 class="fsz-35 spcbtm-15"> <span class="bold-font-3 wht-clr">Advanced Group</span> <span class="thm-clr funky-font">Marketing</span> </h2>
                         <p class="fsz-20 title-3"> WELCOME TO OUR  WONDERFUL WORLD OF SHOPPING </p>
                         <p class="fsz-15 bold-font-4"> Login to get the most out of  <span class="thm-clr"> Advanced Group Marketing Website </span> </p>                       
 

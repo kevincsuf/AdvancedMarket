@@ -140,36 +140,7 @@ if($_POST) {
     
 <!-- Mirrored from event-theme.com/themes/goshophtml/default/single-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 05 Apr 2016 09:30:30 GMT -->
 <head>
-        <meta charset="utf-8">
-        <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title> Product Detail Page</title>
-
-        <!-- Favicon -->
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.html">
-        <link rel="shortcut icon" href="assets/ico/favicon.ico">
-
-        <!-- CSS Global -->
-        <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">        
-        <link href="assets/plugins/bootstrap-select-1.9.3/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">         
-        <link href="assets/plugins/owl-carousel2/assets/owl.carousel.css" rel="stylesheet" type="text/css"> 
-        <link href="assets/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css" rel="stylesheet" type="text/css">   
-        <link href="assets/plugins/royalslider/skins/universal/rs-universal.css" rel="stylesheet">
-        <link href="assets/plugins/royalslider/royalslider.css" rel="stylesheet">
-        <link href="assets/plugins/subscribe-better-master/subscribe-better.css" rel="stylesheet" type="text/css">
-
-        <!-- Icons Font CSS -->
-        <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> 
-
-        <!-- Theme CSS -->
-        <link href="assets/css/style.css" rel="stylesheet" type="text/css">
-        <link href="assets/css/header.css" rel="stylesheet" type="text/css"> 
-
-        <!--[if lt IE 9]>
-       <script src="assets/plugins/iesupport/html5shiv.js"></script>
-       <script src="assets/plugins/iesupport/respond.js"></script>
-       <![endif]-->
+        <?php include "libs/_incl_header.php";?>    
 
     </head>
     <body class="single single-product woocommerce woocommerce-page">
@@ -280,7 +251,7 @@ if($_POST) {
                                 <div class="logo-area">
                                     <a href="index.php" class="thm-logo fsz-35">
                                         <!--<img src="files/main-logo.png" alt="Goshop HTML Theme">  Niki Changed nav bar-->
-                                        <b class="bold-font-3 wht-clr">International</b><span class="thm-clr funky-font"> Trade</span>
+                                        <b class="bold-font-3 wht-clr">Advanced Group</b><span class="thm-clr funky-font"> Marketing</span>
                                     </a>
                                 </div>                              
                             </div>
@@ -589,29 +560,51 @@ if($_POST) {
 													$var_percent_1 = getCurrentPercent($var_deal_url_id);
 													$var_percent_2 = 0;
 													$var_percent_3 = 0;
-													
-													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+													echo "<div class= 'progress'>";
+													echo "<div class='progress-bar progress-bar-striped active' role='progressbar' style='width:".$var_percent_1."%' >".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+													echo "</div>";
+													echo "<i class='fa fa-arrow-up' style='position:absolute;right:0px;font-size:30px;color:black'></i>";
 												}
 												else if ($var_number_discount_option == 2) {
 													$var_percent_2 = getCurrentPercent($var_deal_url_id);
-													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_2."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_number_discount_2."/".$var_deal_unit."</div>";
-													/*$var_percent_1 = 50;
+												
+													
+													$var_percent_1 = 50;
 													$var_percent_2 = 50;
 													$var_percent_3 = 0;
+													/*echo "<div class= 'progress'>";
 													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>1-".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
 													echo "<div class='progress-bar progress-bar-warning' role='progressbar' style='width:".$var_percent_2."%'>".($var_number_discount_1+1)."-".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
-													*/
+													echo "</div>";*/
+													echo "<div class= 'progress'>";
+													echo "<div class='progress-bar progress-bar-striped active' role='progressbar' style='width:".$var_percent_2."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_number_discount_2."/".$var_deal_unit."</div>";
+													echo "</div>";
+													echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right'>";
+													echo "some text";
+													echo "</div>";
+													echo "<i class='fa fa-arrow-up' style='position:absolute;right: 50%;font-size:30px;color:black'></i>";
+													echo "<i class='fa fa-arrow-up' style='position:absolute;right: 0px;font-size:30px;color:black'></i>";
+													
 												}
 												else if ($var_number_discount_option == 3) {
 													$var_percent_3 = getCurrentPercent($var_deal_url_id);
-													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_3."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_number_discount_3."/".$var_deal_unit."</div>";
-													/*$var_percent_1 = 33;
+													
+													$var_percent_1 = 33;
 													$var_percent_2 = 33;
 													$var_percent_3 = 34;
 													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>1-".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
 													echo "<div class='progress-bar progress-bar-warning' role='progressbar' style='width:".$var_percent_2."%'>".($var_number_discount_1+1)."-".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
 													echo "<div class='progress-bar progress-bar-danger' role='progressbar' style='width:".$var_percent_3."%'>".($var_number_discount_2+1)."-".$var_number_discount_3." ".$var_deal_unit.", $".$var_amount_discount_3."/".$var_deal_unit."</div>";
-													*/
+													
+													echo "<div class= 'progress'>";
+													echo "<div class='progress-bar progress-bar-striped active' role='progressbar' style='width:".$var_percent_3."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_number_discount_3."/".$var_deal_unit."</div>";
+													echo "</div>";
+													
+													echo "<i class='fa fa-arrow-up' style='position:absolute;right: 20%;font-size:30px;color:black'></i>";
+													echo "<i class='fa fa-arrow-up' style='position:absolute;right: 50%;font-size:30px;color:black'></i>";
+													echo"<div class='col-lg-4 col-sm-6 col-xs-12'>";
+													echo "some text";
+													echo "</div>";
 												}
 												
 												echo "  </div>";
@@ -800,9 +793,9 @@ if($_POST) {
 
 									<div class="modal-content login-1 wht-clr">   
 										<div class="login-wrap text-center">                        
-										<h2 class="fsz-35 spcbtm-15"> <span class="bold-font-3 wht-clr">International</span> <span class="thm-clr funky-font">Trade</span> </h2>
+										<h2 class="fsz-35 spcbtm-15"> <span class="bold-font-3 wht-clr">Advanced Group</span> <span class="thm-clr funky-font">Marketing</span> </h2>
 																
-										<p class="fsz-15 bold-font-4"> Join to get the most out of  <span class="thm-clr"> International Trade Website </span> </p>     <div class="login-form">  
+										<p class="fsz-15 bold-font-4"> Join to get the most out of  <span class="thm-clr"> Advanced Group Marketing Website </span> </p>     <div class="login-form">  
 											<br>
 											<form class= "login-form" name="join_form" id="join_form" method= "post" action="<?php echo $_SERVER["PHP_SELF"];?>" onSubmit="return join_validate();">
 

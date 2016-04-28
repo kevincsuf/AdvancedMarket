@@ -1,4 +1,4 @@
-<!-- Initernational Trade Index Page -->
+<!-- Initernational Marketing Index Page -->
 <?php
 
 require_once("./libs/core/init.php");
@@ -68,36 +68,7 @@ else {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8">
-        <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title> International Trade || Home</title>
-
-        <!-- Favicon -->
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.html">
-        <link rel="shortcut icon" href="assets/ico/favicon.ico">
-
-        <!-- CSS Global -->
-        <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">        
-        <link href="assets/plugins/bootstrap-select-1.9.3/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">         
-        <link href="assets/plugins/owl-carousel2/assets/owl.carousel.css" rel="stylesheet" type="text/css"> 
-        <link href="assets/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css" rel="stylesheet" type="text/css">   
-        <link href="assets/plugins/royalslider/skins/universal/rs-universal.css" rel="stylesheet">
-        <link href="assets/plugins/royalslider/royalslider.css" rel="stylesheet">
-        <link href="assets/plugins/subscribe-better-master/subscribe-better.css" rel="stylesheet" type="text/css">
-
-        <!-- Icons Font CSS -->
-        <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> 
-
-        <!-- Theme CSS -->
-        <link href="assets/css/style.css" rel="stylesheet" type="text/css">
-        <link href="assets/css/header.css" rel="stylesheet" type="text/css">  
-
-        <!--[if lt IE 9]>
-       <script src="assets/plugins/iesupport/html5shiv.js"></script>
-       <script src="assets/plugins/iesupport/respond.js"></script>
-       <![endif]-->
+    <?php include "libs/_incl_header.php";?>    
 
     </head>
 
@@ -196,7 +167,7 @@ else {
                                 <div class="logo-area">
                                     <a href="index.php" class="thm-logo fsz-35">
                                         <!--<img src="files/main-logo.png" alt="Goshop HTML Theme">-->
-                                        <b class="bold-font-3 wht-clr">International</b><span class="thm-clr funky-font"> Trade</span>
+                                        <b class="bold-font-3 wht-clr">Advanced Group</b><span class="thm-clr funky-font"> Marketing</span>
                                     </a>
                                 </div>                              
                             </div>
@@ -211,7 +182,7 @@ else {
 										
                                             <li  class="active"><a href="index.php">Home</a></li> 
 											
-                                            <li><a href="about.html">About Us</a></li>
+                                            <li><a href="about.php">About Us</a></li>
 											
                                              <li class="dropdown mega-dropdown">
                                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >Category</a>                                            
@@ -234,9 +205,9 @@ else {
                                                 </div>
 											</li> 
 											
-											<li><a href="faq.html">F.A.Q</a></li>
+											<li><a href="faq.php">F.A.Q</a></li>
 											
-                                            <li><a href="contact-us.html">Contact</a></li>
+                                            <li><a href="contact-us.php">Contact</a></li>
 												
 										</ul>										
 									</div>    
@@ -291,9 +262,9 @@ else {
 														echo"<img src='images/".$row["deal_image"]."' alt=''>";
 															echo"<div class='portfolio-content'>";
 																echo"<div class='pop-up-icon'>";
-																	echo"<a class='left-link' href='single_product.php?deal_url_id=$var_deal_id' data-toggle='modal'><i class='fa fa-search'></i></a>";
+																	echo"<a class='center-link' href='single_product.php?deal_url_id=$var_deal_id' data-toggle='modal'><i class='fa fa-search'></i></a>";
 																	
-																	echo"<a class='right-link' href='#' value=".$row["deal_id"]."><i class='fa fa-heart'> </i></a>";
+																		
 																echo "</div>";
 															echo "</div>";
 													echo "</div>";

@@ -21,32 +21,7 @@ $user_key=$_SESSION["ukey"];
     
 <!-- Mirrored from event-theme.com/themes/goshophtml/default/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 05 Apr 2016 09:30:32 GMT -->
 <head>
-        <meta charset="utf-8">
-        <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title> Goshop HTML Theme || Goshop Store Template</title>
-
-        <!-- Favicon -->
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.html">
-        <link rel="shortcut icon" href="assets/ico/favicon.ico">
-
-        <!-- CSS Global -->
-        <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">        
-        <link href="assets/plugins/bootstrap-select-1.9.3/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">         
-        <link href="assets/plugins/owl-carousel2/assets/owl.carousel.css" rel="stylesheet" type="text/css"> 
-        <link href="assets/plugins/Swiper-3.2.7/dist/css/swiper.min.css" rel="stylesheet" type="text/css"> 
-        <link href="assets/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css" rel="stylesheet" type="text/css">   
-        <link href="assets/plugins/royalslider/skins/universal/rs-universal.css" rel="stylesheet">
-        <link href="assets/plugins/royalslider/royalslider.css" rel="stylesheet">
-        <link href="assets/plugins/subscribe-better-master/subscribe-better.css" rel="stylesheet" type="text/css">
-
-        <!-- Icons Font CSS -->
-        <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> 
-
-        <!-- Theme CSS -->
-        <link href="assets/css/style.css" rel="stylesheet" type="text/css">
-        <link href="assets/css/header.css" rel="stylesheet" type="text/css">        
+        <?php include "libs/_incl_header.php";?>    
 
     </head>
 
@@ -70,7 +45,7 @@ $user_key=$_SESSION["ukey"];
                                 <div class="logo-area">
                                     <a href="index.php" class="thm-logo fsz-35">
                                         <!--<img src="files/main-logo.png" alt="Goshop HTML Theme">-->
-                                        <b class="bold-font-3 wht-clr">International</b><span class="thm-clr funky-font"> Trade</span>
+                                        <b class="bold-font-3 wht-clr">Advanced Group</b><span class="thm-clr funky-font"> Marketing</span>
                                     </a>
                                 </div>                              
                             </div>
@@ -265,7 +240,7 @@ $user_key=$_SESSION["ukey"];
                                 </div>
 
                                 <div itemprop="description" class="fsz-15">
-                                    <p>Qossi is an emerging company and dedicated to making high quality bags and fashions.Qossi designers are internationally renowned designers,having participated in many international fashion designing contests,and perform outstandingly</p>                                  
+                                    <p>Qossi is an emerging company and dedicated to making high quality bags and fashions.Qossi designers are Advanced Grouply renowned designers,having participated in many Advanced Group fashion designing contests,and perform outstandingly</p>                                  
                                 </div>
 
                                 <ul class="stock-detail list-items fsz-12">
