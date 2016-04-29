@@ -1152,12 +1152,19 @@ article.post:first-child {
 }
 .entry-title a{
     color: #393939; 
+	font-size: 15px;
+}
+.entry-description {
+     color: #393939; 
+	font-size: 14px;
 }
 .entry-title a:hover, .entry-title a:focus{
     color: #ef4416;
+	font-size: 15px;
+	
 }
 .entry-author, .entry-categories {
-    font-size: 13px;
+    font-size: 15px;
     color: #a0a0a0;
 }
 

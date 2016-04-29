@@ -208,13 +208,158 @@ else {
 						<p class="funky-font-2">A platform for individuals or small businesses to come together and buy items/commodities in bulk from registered suppliers to achieve low price advantage.</p>
 					</div>
 				</div>
+					
+					
+					<main class="col-md-9 col-sm-8 blog-wrap">
+                        <article class="post type-post format-standard has-post-thumbnail" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+                            <!-- Featured Media
+                            <div class="entry-media">
+                                <a href="single.html">
+                                    <img src="assets/img/blog/blog-1.jpg" alt="" itemprop="image">
+                                </a>
+                            </div>	 -->				
+                            <div class="media clearfix">
+  
+                                <div class="media-body">
+                                    <header class="entry-header">
+                                        <!-- Post Title -->
+                                        <h3 class="entry-title" itemprop="headline">
+                                            <a href="index.php" rel="bookmark" itemprop="url">Q1. What is Advanced Group marketing and how does it work?</a>
+                                        </h3>
+                                    </header>
+
+                                    <!-- Main Content of the faq -->
+                                    <div class="entry-description" itemprop="description">
+                                        <p>Advanced Group Marketing is a platform for multiple buyers to come together and purchase items in bulk at comparatively lower prices from sellers. Sellers also get the benefit of selling the items in large quantity to multiple customers through a single deal. </p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+							<div class="media clearfix">
+  
+                                <div class="media-body">
+                                    <header class="entry-header">
+                                        <!-- Post Title -->
+                                        <h3 class="entry-title" itemprop="headline">
+                                            <a href="index.php" rel="bookmark" itemprop="url">Q2. What is a deal?</a>
+                                        </h3>
+                                    </header>
+
+                                    <!-- Main Content of the faq -->
+                                    <div class="entry-description" itemprop="description">
+                                        <p>A deal is an offer by seller to sell certain quantity of item at a discounted rate. Once seller publishes a deal on Advanced Group Marketing website, it becomes available for buyers to join the deal. </p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+							<div class="media clearfix">
+  
+                                <div class="media-body">
+                                    <header class="entry-header">
+                                        <!-- Post Title -->
+                                        <h3 class="entry-title" itemprop="headline">
+                                            <a href="index.php" rel="bookmark" itemprop="url">Q3. Who can register as a seller?</a>
+                                        </h3>
+                                    </header>
+
+                                    <!-- Main Content of the faq -->
+                                    <div class="entry-description" itemprop="description">
+                                        <p>If you are looking to sell a product in bulk to single/multiple buyers through a single platform and are ready to offer a good discounted rate, you can register as a Seller.  </p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+							<div class="media clearfix">
+  
+                                <div class="media-body">
+                                    <header class="entry-header">
+                                        <!-- Post Title -->
+                                        <h3 class="entry-title" itemprop="headline">
+                                            <a href="index.php" rel="bookmark" itemprop="url">Q4.Who can register as a buyer?</a>
+                                        </h3>
+                                    </header>
+
+                                    <!-- Main Content of the faq -->
+                                    <div class="entry-description" itemprop="description">
+                                        <p>If you are an individual or an organization interested in buying a product in bulk or willing to join other buyers to avail a group discount, you can register as a buyer.  </p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+							<div class="media clearfix">
+  
+                                <div class="media-body">
+                                    <header class="entry-header">
+                                        <!-- Post Title -->
+                                        <h3 class="entry-title" itemprop="headline">
+                                            <a href="index.php" rel="bookmark" itemprop="url">Q5. How can I win a deal?</a>
+                                        </h3>
+                                    </header>
+
+                                    <!-- Main Content of the faq -->
+                                    <div class="entry-description" itemprop="description">
+                                        <p>When the minimum deal quantity put on sale by seller is met, deal is closed and purchase is confirmed. </p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+							<div class="media clearfix">
+  
+                                <div class="media-body">
+                                    <header class="entry-header">
+                                        <!-- Post Title -->
+                                        <h3 class="entry-title" itemprop="headline">
+                                            <a href="index.php" rel="bookmark" itemprop="url">Q6. How can I track the deal?</a>
+                                        </h3>
+                                    </header>
+
+                                    <!-- Main Content of the faq -->
+                                    <div class="entry-description" itemprop="description">
+                                        <p>My page will show the progress bar indicating the quantity ordered.</p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+							<div class="media clearfix">
+  
+                                <div class="media-body">
+                                    <header class="entry-header">
+                                        <!-- Post Title -->
+                                        <h3 class="entry-title" itemprop="headline">
+                                            <a href="index.php" rel="bookmark" itemprop="url">Q7. How long I have to wait to get receive my order?</a>
+                                        </h3>
+                                    </header>
+
+                                    <!-- Main Content of the faq -->
+                                    <div class="entry-description" itemprop="description">
+                                        <p>When a deal is closed, an email notification is sent to buyer about shipping details. </p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+							<div class="media clearfix">
+  
+                                <div class="media-body">
+                                    <header class="entry-header">
+                                        <!-- Post Title -->
+                                        <h3 class="entry-title" itemprop="headline">
+                                            <a href="index.php" rel="bookmark" itemprop="url">Q1. What is Advanced Group marketing and how does it work?</a>
+                                        </h3>
+                                    </header>
+
+                                    <!-- Main Content of the faq -->
+                                    <div class="entry-description" itemprop="description">
+                                        <p>Advanced Group Marketing is a platform for multiple buyers to come together and purchase items in bulk at comparatively lower prices from sellers. Sellers also get the benefit of selling the items in large quantity to multiple customers through a single deal. </p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+					</main>
+				
 		</div>
 	</section>
 		
-		<!-- Main container start here -->
-		<!-- Javascript framework and plugins start here -->
-
 		
-<!-- Javascript framework and plugins end here -->
 </body>
 </html>
