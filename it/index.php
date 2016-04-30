@@ -688,60 +688,7 @@ else {
        <?php include "libs/_incl_footer.php";?>  
  <!-- / FOOTER -->
 
-        <!-- Product Preview Popup -->
-        <section class="modal fade" id="product-preview" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg product-modal">
-                <button class="close close-btn popup-cls" aria-label="Close" data-dismiss="modal" type="button">
-                    <i class="fa-times fa"></i>
-                </button>
-                <div class="modal-content single-product">
-                    <div class="diblock">
-                        <div class="col-lg-6 col-sm-12 col-xs-12">
-                            <div id="gallery-1" class="royalSlider rsUni">
-                                <a class="rsImg" data-rsbigimg="assets/img/products/single-1.jpg" href="assets/img/products/single-1.jpg" data-rsw="500" data-rsh="500"> <img class="rsTmb" src="assets/img/products/single-thumb-1.jpg" alt=""></a>
-                                </div>
-                        </div>
-                        <div class="spc-15 hidden-lg clear"></div>
-                        <div class=" col-sm-12 col-lg-6 col-xs-12">
-                            <div class="summary entry-summary">
-                                <div class="woocommerce-product-rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-                                    <div class="rating"> 
-                                        <span class="star active"></span>
-                                        <span class="star active"></span>
-                                        <span class="star active"></span>                                           
-                                        <span class="star active"></span>
-                                        <span class="star half"></span>
-                                    </div>
-
-                                    <div  class="posted_in">
-                                        <h3 class="funky-font-2 fsz-20">Women Collection</h3>
-                                    </div>
-                                </div>
-
-                                <div class="product_title_wrapper">
-                                    <div itemprop="name" class="product_title entry-title">
-                                        Flusas Denim <span class="thm-clr">Dress</span>
-                                        <p class="font-3 fsz-18 no-mrgn price"> <b class="amount blk-clr">$175.00</b> <del>$299.00</del> </p>       
-                                    </div>
-                                </div>
-
-                                <div itemprop="description" class="fsz-15">
-                                    <p>Qossi is an emerging company and dedicated to making high quality bags and fashions.Qossi designers are Advanced Grouply renowned designers,having participated in many Advanced Group fashion designing contests,and perform outstandingly</p>                                  
-                                </div>
-
-                                <ul class="stock-detail list-items fsz-12">
-                                    <li> <strong> MATERIAL : <span class="blk-clr"> COTTON </span> </strong> </li>
-                                    <li> <strong>  STOCK : <span class="blk-clr"> READY STOCK </span> </strong> </li>
-                                </ul>
-
-                                
-                            </div><!-- .summary -->
-                        </div>  
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- / Product Preview Popup -->
+        
 
         <!-- Search Popup -->
         <div class="popup-box page-search-box">

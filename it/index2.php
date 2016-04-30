@@ -213,10 +213,16 @@ else {
 									</div>    
 								</nav>
                             </div>
+							 <div class="pull-right srch-box">
+                                <a id="open-popup-search" class="header-link-search" href="javascript:void(0)" title="Search">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                            </div
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 			<?php 
 			
 			// collect
@@ -295,7 +301,69 @@ else {
   
   
 			?>
+		 <!-- Search Popup -->
+        <div class="popup-box page-search-box">
+            <div>
+                <div class="popup-box-inner">
+                    <form method="get" action="search.php">
+                        <input class="search-query" name="user_query" type="text" placeholder="Search and hit enter" />
+						<input type = "submit" name= "search" value="search">
+                    </form>
+                </div>
+            </div>
+            <a href="search.php" class="close-popup-box close-page-search"><i class="fa fa-close"></i></a>
+        </div>
+        <!-- / Search Popup -->
+        <!-- Popup: Login 1 -->
+        <div class="modal fade login-popup" id="login-popup" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">                
+                <button type="button" class="close close-btn popup-cls" data-dismiss="modal" aria-label="Close"> <i class="fa-times fa"></i> </button>
+
+                <div class="modal-content login-1 wht-clr">   
+                    <div class="login-wrap text-center">                        
+                        <h2 class="fsz-35 spcbtm-15"> <span class="bold-font-3 wht-clr">Advanced Group</span> <span class="thm-clr funky-font">Marketing</span> </h2>
+                        <p class="fsz-20 title-3"> WELCOME TO OUR  WONDERFUL WORLD OF SHOPPING </p>
+                        <p class="fsz-15 bold-font-4"> Login to get the most out of  <span class="thm-clr"> Advanced Group Marketing Website </span> </p>                       
+
+                        <div class="login-form">  
+							<br>
+                             <form class="login" name="loginform" id="loginform" method = "post" action= "<?php echo $_SERVER["PHP_SELF"];?>">
+                                <div class="form-group"><input type="text" id="user_id" name="login_id" placeholder="Email" class="form-control"></div>
+                                <div class="form-group"><input type="password" id="user_pass" name="login_pwd" placeholder="Password" class="form-control"></div>
+                                <div class="form-group">
+                                    <button class="alt fancy-button" id="login-submit" type="submit"> <span class="fa fa-lightbulb-o"></span> Login</button>
+									<input type="hidden" name="login_exe" value="login" />
+                                </div>
+                            </form>
+
+                            <p><i class="fa fa-user"></i> New User ??? <a class="thm-clr" >Click Signup to Register .</a></p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Popup: Login 1 --> 
 		
+		
+		<!-- Top -->
+        <div class="to-top" id="to-top"> <i class="fa fa-long-arrow-up"></i> </div>
+
+        <!-- JS Global -->
+        <script src="assets/plugins/jquery/jquery-2.1.3.js"></script>  
+        <script src="assets/plugins/royalslider/jquery.royalslider.min.js"></script>
+        <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/plugins/bootstrap-select-1.9.3/dist/js/bootstrap-select.min.js"></script>             
+        <script src="assets/plugins/owl-carousel2/owl.carousel.min.js"></script> 
+        <script src="assets/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js"></script> 
+
+        <script src="assets/plugins/isotope-master/dist/isotope.pkgd.min.js"></script>        
+        <script src="assets/plugins/subscribe-better-master/jquery.subscribe-better.min.js"></script>       
+
+        <!-- Page JS -->
+        <script src="assets/js/countdown.js"></script>
+        <script src="assets/js/jquery.sticky.js"></script>
+        <script src="assets/js/custom.js"></script>
 		
 		
 		
