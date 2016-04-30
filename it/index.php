@@ -238,7 +238,7 @@ else {
                                 <h3 class="fsz-40 blk-clr funky-font-2">  Advanced Group Marketing  </h3>
                                 <h2> <span class="blu-clr">The best DEALS! <span class="blk-clr">All together we win</span></h2>
                                 <p class="hidden-xs"><span class="org-clr">Quantity of customers can change the price of your deal, so here All together can get the best DEALS</p>
-                                <a class="fancy-btn-alt fsz-16" href="#newarrival">More</a>
+                                <a class="fancy-btn-alt fsz-16" href="index2.php?cat_url_id=6">More</a>
                             </div>
                         </div>
                     </div>
@@ -250,9 +250,9 @@ else {
                         <div>
                             <div class="caption-right">
                                 <h3 class="fsz-40 blk-clr funky-font-2">  Advanced Group Marketing  </h3>
-                                <h2><span class="blu-clr">The best DEALS! <span class="blk-clr"> Good Luck!</span></h2>
+                                <h2><span class="blu-clr">The best DEALS! <span class="blk-clr"> Electronics!</span></h2>
                                 <p class="hidden-xs"><span class="org-clr">Serach on your products or serviecs that you like then click Join Deal button to joing the deal and wait until Deal is reaching to certain number of customers then you will win the deal </p>
-                                <a class="fancy-btn-alt fsz-16" href="#featured">More</a>
+                                <a class="fancy-btn-alt fsz-16" href="index2.php?cat_url_id=2">More</a>
                             </div>
                         </div>
                     </div>
@@ -263,9 +263,9 @@ else {
                         <div>
                             <div class="caption-right">
                                 <h3 class="fsz-40 blk-clr funky-font-2">  Advanced Group Marketing  </h3>
-                                <h2><span class="blu-clr">The best DEALS! <span class="blk-clr"> Good Luck!</span></h2>
-                                <p class="hidden-xs"><span class="org-clr">Serach on your products or serviecs that you like then click Join Deal button to joing the deal and wait until Deal is reaching to certain number of customers then you will win the deal </p>
-                                <a class="fancy-btn-alt fsz-16" href="#featured">More</a>
+                                <h2><span class="blu-clr">The best DEALS! <span class="blk-clr"> Food Products!</span></h2>
+                                <p class="hidden-xs"><span class="org-clr">They are fresh and organic products click Join Deal button to joing the deal and wait until Deal is reaching to certain number of customers then you will win the deal </p>
+                                <a class="fancy-btn-alt fsz-16" href="index2.php?cat_url_id=1">More</a>
                             </div>
                         </div>
                     </div>
