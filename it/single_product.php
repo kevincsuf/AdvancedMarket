@@ -327,8 +327,7 @@ if($_POST) {
                     <div itemscope itemtype="http://schema.org/Product" class="product has-post-thumbnail product-type-variable">
 						<!-- PHP Code -->
 							<?php 
-								if(isset($_GET['deal_url_id']))
-									{
+								if(isset($_GET['deal_url_id'])) {
 									$var_deal_url_id = $_GET['deal_url_id'];
 
                                     // Check deal closed
@@ -377,11 +376,10 @@ if($_POST) {
 									$var_amount_discount_3 = 0;
 									
 									
-									// Quering for Particular ID
+									// Querying for Particular ID
 									$sql = "SELECT * FROM create_deal WHERE deal_id='$var_deal_url_id'";
 									$res=mysqli_query($con,$sql);
-									while($var_row_deal = mysqli_fetch_assoc($res))
-									 {
+									while($var_row_deal = mysqli_fetch_assoc($res)) {
 										$cat = $var_row_deal['deal_category'];
 										$var_deal_id = $var_row_deal['deal_id'];
 										$var_deal_title = $var_row_deal['title'];
@@ -404,222 +402,319 @@ if($_POST) {
 										$var_location_description = $var_row_deal['location_description'];
 										$var_shipping_included = $var_row_deal['shipping_included'];
 										$var_shipping_description = $var_row_deal['shipping_description'];
-										
-										
-												
-												
-												// Set global variable
-												$global_min_quantity = $var_deal_qty;
-												$global_deal_id = $var_deal_id;
-												$global_deal_end_date = $var_row_deal['end_date'];
-												
-												// Image Section
-												echo"<div class='row'>";
-													echo"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>";
-														echo"<div id='gallery-2' class=''>";
-															echo"<a class='rsImg' data-rsbigimg='images/".$var_row_deal["deal_image"]."' href='images/".$var_row_deal["deal_image"]."' ></a>";
-														echo"</div>";
-													echo"</div>";
-													
-													echo"<div class='spc-15 hidden-lg clear'></div>";
-													// Details Section
-													echo"<div class='col-lg-8 col-sm-8 col-md-8 col-xs-8'>";
-														echo"<div class='summary entry-summary'>";
-															echo"<div class='woocommerce-product-rating' itemprop='aggregateRating' itemscope itemtype='http://schema.org/AggregateRating'>";
-																echo"<div class='posted_in'>";
-																	echo"<h3 class='funky-font-2 fsz-20'>".$cat_name."</h3>";
-																echo"</div>";
-															echo"</div>";
 
-															echo"<div class='product_title_wrapper'>";
-																echo"<div itemprop='name' class='product_title entry-title'>";
-																	echo"".$var_row_deal["title"]."";
-																	//echo"<p class='font-3 fsz-18 no-mrgn price'> <b class='amount blk-clr'>$".$var_row_deal["amount_discount_1"]."</b> <del>$".$var_row_deal["unit_price"]."</del> </p>";
-                                                                    echo"<p class='font-3 fsz-18 no-mrgn price'> <b class='amount blk-clr'>$".getCurrentPrice($global_deal_id)."</b> <del>$".$var_row_deal["unit_price"]."</del> </p>";
-																echo"</div>";
-															echo"</div>";
 												
-															echo"<div class='rating'>";
-																	 echo"<span class='star active'></span>";
-																	 echo"<span class='star active'></span>";
-																	 echo"<span class='star active'></span>";                                          
-																	 echo"<span class='star active'></span>";
-																	 echo"<span class='star half'></span>";
-															echo"</div>";
-												
-															echo"<div itemprop='description' class='fsz-15'>";
-																echo"<p>".$var_row_deal["description"]."</p>"; 
-																echo"<p class='progress-bar progress-bar-info'></p>";
-															echo"</div>";
-																						
-															if($var_location_restricted=='yes'){
-																// for location restriction
-																echo"<div itemprop='description' class='fsz-15'>";
-																	echo"<p> <b>Location Restricted: </b>".$var_location_description."</p>"; 
-																	echo"<p class='progress-bar progress-bar-info'></p>";
-																echo"</div>";
-																
-															}
-															else{
-																echo"<div itemprop='description' class='fsz-15'>";
-																	echo"<p><b>Location Restricted: </b> Not location restricted </p>"; 
-																	echo"<p class='progress-bar progress-bar-info'></p>";
-																echo"</div>";
-															}
-															
-															if($var_shipping_included=='yes'){
-																// for shipping restriction
-																echo"<div itemprop='description' class='fsz-15'>";
-																	echo"<p> <b>Shipping Cost: </b> $".$var_shipping_description."</p>"; 
-																	echo"<p class='progress-bar progress-bar-info'></p>";
-																echo"</div>";
-															}
-															else{
-																echo"<div itemprop='description' class='fsz-15'>";
-																	echo"<p> <b>Shipping Cost: </b> Free Shipping </p>"; 
-																	echo"<p class='progress-bar progress-bar-info'></p>";
-																echo"</div>";
-																
-															}
-														echo"</div>";
-													echo"</div>";
-													// code for join deal begins 
-												
-													
-													// Hide Join button when this user joined this deal already or this user is seller or the deal is already closed
-													if (($global_order_placed) || (strtolower($_SESSION["utype"]) == "seller" || $global_deal_closed)) {
-														$global_order_eligible = false;
-													}
-													else {
-														$global_order_eligible = true;
-													}
+                                        // Set global variable
+                                        $global_min_quantity = $var_deal_qty;
+                                        $global_deal_id = $var_deal_id;
+                                        $global_deal_end_date = $var_row_deal['end_date'];
 
-													if ($global_order_eligible) {
-														echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right gst-cta-buttons'>";
-														 echo"<a href='#join-popup' class='fancy-btn fancy-btn-small' data-toggle='modal'>JOIN</a>";
-														echo "</div>";
-														echo "</br>";
-													}
-													else if (strtolower($_SESSION["utype"]) == "seller") {
-                                                        echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right'>";
-                                                        echo "
-															Seller can not join a deal. Please log in as a buyer.
-														";
-                                                        echo "</div>";
-													}
-													else if ($global_order_placed) {
-                                                        echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right'>";
-                                                        echo "
-															You have already joined this deal.
-                                                        ";
-                                                        echo "</div>";
-													}
-                                                    else if ($global_deal_closed) {
-                                                        echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right'>";
-                                                        echo "
-                                                        ";
-                                                        echo "</div>";
+                                        // Image Section
+                                        echo"<div class='row'>";
+                                            echo"<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>";
+                                                echo"<div id='gallery-2' class=''>";
+                                                    echo"<a class='rsImg' data-rsbigimg='images/".$var_row_deal["deal_image"]."' href='images/".$var_row_deal["deal_image"]."' ></a>";
+                                                echo"</div>";
+                                            echo"</div>";
+
+                                            echo"<div class='spc-15 hidden-lg clear'></div>";
+                                            // Details Section
+                                            echo"<div class='col-lg-8 col-sm-8 col-md-8 col-xs-8'>";
+                                                echo"<div class='summary entry-summary'>";
+                                                    echo"<div class='woocommerce-product-rating' itemprop='aggregateRating' itemscope itemtype='http://schema.org/AggregateRating'>";
+                                                        echo"<div class='posted_in'>";
+                                                            echo"<h3 class='funky-font-2 fsz-20'>".$cat_name."</h3>";
+                                                        echo"</div>";
+                                                    echo"</div>";
+
+                                                    echo"<div class='product_title_wrapper'>";
+                                                        echo"<div itemprop='name' class='product_title entry-title'>";
+                                                            echo"".$var_row_deal["title"]."";
+                                                            //echo"<p class='font-3 fsz-18 no-mrgn price'> <b class='amount blk-clr'>$".$var_row_deal["amount_discount_1"]."</b> <del>$".$var_row_deal["unit_price"]."</del> </p>";
+                                                            echo"<p class='font-3 fsz-18 no-mrgn price'> <b class='amount blk-clr'>$".getCurrentPrice($global_deal_id)."</b> <del>$".$var_row_deal["unit_price"]."</del> </p>";
+                                                        echo"</div>";
+                                                    echo"</div>";
+
+                                                    echo"<div class='rating'>";
+                                                             echo"<span class='star active'></span>";
+                                                             echo"<span class='star active'></span>";
+                                                             echo"<span class='star active'></span>";
+                                                             echo"<span class='star active'></span>";
+                                                             echo"<span class='star half'></span>";
+                                                    echo"</div>";
+
+                                                    echo"<div itemprop='description' class='fsz-15'>";
+                                                        echo"<p>".$var_row_deal["description"]."</p>";
+                                                        echo"<p class='progress-bar progress-bar-info'></p>";
+                                                    echo"</div>";
+
+                                                    if($var_location_restricted=='yes'){
+                                                        // for location restriction
+                                                        echo"<div itemprop='description' class='fsz-15'>";
+                                                            echo"<p> <b>Location Restricted: </b>".$var_location_description."</p>";
+                                                            //echo"<p class='progress-bar progress-bar-info'></p>";
+                                                        echo"</div>";
+
                                                     }
-													echo "</div>";
-												}
-												
-												// Get remaining stocks when this page is opened
-												$order_quantity_query = "SELECT SUM(order_quantity) AS order_quantity_sum FROM join_deal where create_deal_id=".$global_deal_id;
-												$order_quantity_result = mysqli_query($con, $order_quantity_query);
-												$order_quantity_sum = 0;
-												while($order_quantity_row = mysqli_fetch_array($order_quantity_result)) {
-													$order_quantity_sum += $order_quantity_row['order_quantity_sum'];
-												}
+                                                    else{
+                                                        echo"<div itemprop='description' class='fsz-15'>";
+                                                            echo"<p><b>Location Restricted: </b> Not location restricted </p>";
+                                                            //echo"<p class='progress-bar progress-bar-info'></p>";
+                                                        echo"</div>";
+                                                    }
 
-												$deal_quantity_query = "SELECT * FROM create_deal WHERE deal_id=".$global_deal_id;
-												$deal_quantity_result = mysqli_query($con, $deal_quantity_query);
-												$deal_quantity_total = 0;
-												while($deal_quantity_row = mysqli_fetch_array($deal_quantity_result)) {
-													$deal_quantity_total = $deal_quantity_row['max_quantity'];
-												}
+                                                    if($var_shipping_included=='yes'){
+                                                        // for shipping restriction
+                                                        echo"<div itemprop='description' class='fsz-15'>";
+                                                            echo"<p> <b>Shipping Cost: </b> $".$var_shipping_description."</p>";
+                                                            //echo"<p class='progress-bar progress-bar-info'></p>";
+                                                        echo"</div>";
+                                                    }
+                                                    else{
+                                                        echo"<div itemprop='description' class='fsz-15'>";
+                                                            echo"<p> <b>Shipping Cost: </b> Free Shipping </p>";
+                                                            //echo"<p class='progress-bar progress-bar-info'></p>";
+                                                        echo"</div>";
 
-												$global_remaining_stocks = $deal_quantity_total - $order_quantity_sum;
-                                                $global_order_quantity_sum = $order_quantity_sum;
-												
-									}
+                                                    }
+                                                echo"</div>";
+                                            echo"</div>";
+                                            // code for join deal begins
+
+
+                                            // Hide Join button when this user joined this deal already or this user is seller or the deal is already closed
+                                            if (($global_order_placed) || (strtolower($_SESSION["utype"]) == "seller" || $global_deal_closed)) {
+                                                $global_order_eligible = false;
+                                            }
+                                            else {
+                                                $global_order_eligible = true;
+                                            }
+
+                                            if ($global_order_eligible) {
+                                                echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right gst-cta-buttons'>";
+                                                 echo"<a href='#join-popup' class='fancy-btn fancy-btn-small' data-toggle='modal'>JOIN</a>";
+                                                echo "</div>";
+                                                echo "</br>";
+                                            }
+                                            else if (strtolower($_SESSION["utype"]) == "seller") {
+                                                echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right'>";
+                                                echo "
+                                                    Seller can not join a deal. Please log in as a buyer.
+                                                ";
+                                                echo "</div>";
+                                            }
+                                            else if ($global_order_placed) {
+                                                echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right'>";
+                                                echo "
+                                                    You have already joined this deal.
+                                                ";
+                                                echo "</div>";
+                                            }
+                                            else if ($global_deal_closed) {
+                                                echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right'>";
+                                                echo "
+                                                ";
+                                                echo "</div>";
+                                            }
+                                        echo "</div>";
+                                    }
+
+                                    // Get remaining stocks when this page is opened
+                                    $order_quantity_query = "SELECT SUM(order_quantity) AS order_quantity_sum FROM join_deal where create_deal_id=".$global_deal_id;
+                                    $order_quantity_result = mysqli_query($con, $order_quantity_query);
+                                    $order_quantity_sum = 0;
+                                    while($order_quantity_row = mysqli_fetch_array($order_quantity_result)) {
+                                        $order_quantity_sum += $order_quantity_row['order_quantity_sum'];
+                                    }
+
+                                    $deal_quantity_query = "SELECT * FROM create_deal WHERE deal_id=".$global_deal_id;
+                                    $deal_quantity_result = mysqli_query($con, $deal_quantity_query);
+                                    $deal_quantity_total = 0;
+                                    while($deal_quantity_row = mysqli_fetch_array($deal_quantity_result)) {
+                                        $deal_quantity_total = $deal_quantity_row['max_quantity'];
+                                    }
+
+                                    $global_remaining_stocks = $deal_quantity_total - $order_quantity_sum;
+                                    $global_order_quantity_sum = $order_quantity_sum;
+
+                                    // Take care of "other" category
+                                    if ($var_deal_unit == "other") {
+                                        $var_deal_unit = $var_deal_other_unit;
+                                    }
+
+                                }
 									
                             ?>
 							<!-- PHP Code ENDS -->
 							<div itemprop='description' class='fsz-15'>
-								<p>Remaining stocks: <?php echo $global_remaining_stocks ?> </br>
-								Minimum order quantity: <?php echo $global_min_quantity ?></p></div>
-							</div>
+                                <p>
+                                    Currently joined: <?php echo $global_order_quantity_sum ?> <?php echo $var_deal_unit ?> </br>
+                                    Remaining stocks: <?php echo $global_remaining_stocks ?> <?php echo $var_deal_unit ?> </br>
+                                    Minimum order quantity: <?php echo $global_min_quantity ?> <?php echo $var_deal_unit ?>
+                                </p>
+                                <p>
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Quantity Range</th>
+                                        <th>Price per unit</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                    // Status variables
+                                    $var_status_1 = "";
+                                    $var_status_2 = "";
+                                    $var_status_3 = "";
+
+                                    // Status
+                                    $var_status_progress = "<div class='gst-countdown'>In progress</div>";
+                                    $var_status_done = "Done !";
+
+                                    // Assemble table rows
+                                    if ($var_number_discount_option == 1) {
+                                        // Set status
+                                        if ($global_order_quantity_sum < $var_number_discount_1) {
+                                            $var_status_1 = $var_status_progress;
+                                        }
+                                        else if ($var_number_discount_1 <= $global_order_quantity_sum) {
+                                            $var_status_1 = $var_status_done;
+                                        }
+                                        // Display row
+                                        echo "
+                                            <tr>
+                                                <td> 1 - ".$var_number_discount_1. "</td>
+                                                <td> $".$var_amount_discount_1." </td>
+                                                <td> ".$var_status_1. "</td>
+                                            </tr>
+                                        ";
+                                    }
+                                    else if ($var_number_discount_option == 2) {
+                                        // Set status
+                                        if ($global_order_quantity_sum <= $var_number_discount_1) {
+                                            $var_status_1 = $var_status_progress;
+                                            $var_status_2 = "";
+                                        }
+                                        else if (($var_number_discount_1 < $global_order_quantity_sum) &&
+                                            ($global_order_quantity_sum < $var_number_discount_2)) {
+                                            $var_status_1 = $var_status_done;
+                                            $var_status_2 = $var_status_progress;
+                                        }
+                                        else if ($var_number_discount_2 <= $global_order_quantity_sum) {
+                                            $var_status_1 = $var_status_done;
+                                            $var_status_2 = $var_status_done;
+                                        }
+                                        // Display row
+                                        echo "
+                                            <tr>
+                                                <td> 1 - ".$var_number_discount_1. "</td>
+                                                <td> $".$var_amount_discount_1." </td>
+                                                <td> ".$var_status_1. "</td>
+                                            </tr>
+                                            <tr>
+                                                <td> ".($var_number_discount_1+1)." - ".$var_number_discount_2. "</td>
+                                                <td> $".$var_amount_discount_2." </td>
+                                                <td> ".$var_status_2. "</td>
+                                            </tr>
+                                        ";
+                                    }
+                                    else if ($var_number_discount_option == 3) {
+                                        // Set status
+                                        if ($global_order_quantity_sum <= $var_number_discount_1) {
+                                            $var_status_1 = $var_status_progress;
+                                            $var_status_2 = "";
+                                            $var_status_3 = "";
+                                        }
+                                        else if (($var_number_discount_1 < $global_order_quantity_sum) &&
+                                            ($global_order_quantity_sum <= $var_number_discount_2)) {
+                                            $var_status_1 = $var_status_done;
+                                            $var_status_2 = $var_status_progress;
+                                            $var_status_3 = "";
+                                        }
+                                        else if (($var_number_discount_2 < $global_order_quantity_sum) &&
+                                            ($global_order_quantity_sum < $var_number_discount_3)) {
+                                            $var_status_1 = $var_status_done;
+                                            $var_status_2 = $var_status_done;
+                                            $var_status_3 = $var_status_progress;
+                                        }
+                                        else if ($var_number_discount_3 <= $global_order_quantity_sum) {
+                                            $var_status_1 = $var_status_done;
+                                            $var_status_2 = $var_status_done;
+                                            $var_status_3 = $var_status_done;
+                                        }
+                                        // Display row
+                                        echo "
+                                            <tr>
+                                                <td> 1 - ".$var_number_discount_1. "</td>
+                                                <td> $".$var_amount_discount_1." </td>
+                                                <td> ".$var_status_1. "</td>
+                                            </tr>
+                                            <tr>
+                                                <td> ".($var_number_discount_1+1)." - ".$var_number_discount_2. "</td>
+                                                <td> $".$var_amount_discount_2." </td>
+                                                <td> ".$var_status_2. "</td>
+                                            </tr>
+                                            <tr>
+                                                <td> ".($var_number_discount_2+1)." - ".$var_number_discount_3. "</td>
+                                                <td> $".$var_amount_discount_3." </td>
+                                                <td> ".$var_status_3. "</td>
+                                            </tr>
+                                        ";
+                                    }
+
+                                    ?>
+                                    </tbody>
+                                </table>
+                                </p>
+                            </div>
+                    </div>
 							
 						<?php 		
 						echo " <div class='progress'>";
 												//getCurrentPercent($var_deal_url_id);
 												
-												// Take care of "other" category
-                                                if ($var_deal_unit == "other") {
-                                                    $var_deal_unit = $var_deal_other_unit;
-                                                }
-
                                                 // Get each percentages
-                                                $var_percent_1 = getDiscountPercent($var_deal_url_id, "1");
-                                                $var_percent_2 = getDiscountPercent($var_deal_url_id, "2");
-                                                $var_percent_3 = getDiscountPercent($var_deal_url_id, "3");
+                                                //$var_percent_1 = getDiscountPercent($var_deal_url_id, "1");
+                                                //$var_percent_2 = getDiscountPercent($var_deal_url_id, "2");
+                                                //$var_percent_3 = getDiscountPercent($var_deal_url_id, "3");
                                                 $var_percent_sold = getCurrentPercent($var_deal_url_id);
 
                                                 // Set progress bar style
                                                 $var_progress_static_1 = "progress-bar-success";
                                                 $var_progress_static_2 = "progress-bar-warning";
-                                                $var_progress_active = "progress-bar-danger progress-bar-striped active";
-
-                                                // Progress bar variables
-                                                $var_prgress_1 = "";
-                                                $var_prgress_2 = "";
-                                                $var_prgress_3 = "";
+                                                $var_progress_static_3 = "progress-bar-danger";
+                                                $var_progress_active = " progress-bar-striped active";
 
                                                 // Check how many discounts
 												if ($var_number_discount_option == 1) {
 													echo "<div class= 'progress'>";
-													echo "<div class='progress-bar ".$var_progress_active."' role='progressbar' style='width:".$var_percent_1."%' >".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar ".$var_progress_static_3.$var_progress_active."' role='progressbar' style='width:".$var_percent_sold."%' >".$global_order_quantity_sum." ".$var_deal_unit."</div>";
 													echo "</div>";
 												}
 												else if ($var_number_discount_option == 2) {
+                                                    echo "<div class= 'progress'>";
                                                     if ($global_order_quantity_sum <= $var_number_discount_1) {
-                                                        $var_prgress_1 = $var_progress_active;
-                                                        $var_prgress_2 = $var_progress_static_1;
+                                                        echo "<div class='progress-bar ".$var_progress_static_2.$var_progress_active."' role='progressbar' style='width:".$var_percent_sold."%' >".$global_order_quantity_sum." ".$var_deal_unit."</div>";
                                                     }
                                                     else if ($var_number_discount_1 < $global_order_quantity_sum) {
-                                                        $var_prgress_1 = $var_progress_static_1;
-                                                        $var_prgress_2 = $var_progress_active;
+                                                        echo "<div class='progress-bar ".$var_progress_static_3.$var_progress_active."' role='progressbar' style='width:".$var_percent_sold."%' >".$global_order_quantity_sum." ".$var_deal_unit."</div>";
                                                     }
-													echo "<div class= 'progress'>";
-													echo "<div class='progress-bar ".$var_prgress_1."' role='progressbar' style='width:".$var_percent_1."%'>1-".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
-													echo "<div class='progress-bar ".$var_prgress_2."' role='progressbar' style='width:".$var_percent_2."%'>".($var_number_discount_1+1)."-".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
 													echo "</div>";
 												}
 												else if ($var_number_discount_option == 3) {
 
                                                     if ($global_order_quantity_sum <= $var_number_discount_1) {
-                                                        $var_prgress_1 = $var_progress_active;
-                                                        $var_prgress_2 = $var_progress_static_1;
-                                                        $var_prgress_3 = $var_progress_static_2;
+                                                        echo "<div class='progress-bar ".$var_progress_static_1.$var_progress_active."' role='progressbar' style='width:".$var_percent_sold."%' >".$global_order_quantity_sum." ".$var_deal_unit."</div>";
                                                     }
                                                     else if (($var_number_discount_1 < $global_order_quantity_sum) &&
                                                              ($global_order_quantity_sum <= $var_number_discount_2)) {
-                                                        $var_prgress_1 = $var_progress_static_1;
-                                                        $var_prgress_2 = $var_progress_active;
-                                                        $var_prgress_3 = $var_progress_static_2;
+                                                        echo "<div class='progress-bar ".$var_progress_static_2.$var_progress_active."' role='progressbar' style='width:".$var_percent_sold."%' >".$global_order_quantity_sum." ".$var_deal_unit."</div>";
                                                     }
                                                     else if (($var_number_discount_2 < $global_order_quantity_sum) &&
                                                         ($global_order_quantity_sum <= $var_number_discount_3)) {
-                                                        $var_prgress_1 = $var_progress_static_1;
-                                                        $var_prgress_2 = $var_progress_static_2;
-                                                        $var_prgress_3 = $var_progress_active;
+                                                        echo "<div class='progress-bar ".$var_progress_static_3.$var_progress_active."' role='progressbar' style='width:".$var_percent_sold."%' >".$global_order_quantity_sum." ".$var_deal_unit."</div>";
                                                     }
-
-                                                    echo "<div class= 'progress'>";
-                                                    echo "<div class='progress-bar ".$var_prgress_1."' style='width:".$var_percent_1."%'>1-".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
-                                                    echo "<div class='progress-bar ".$var_prgress_2."' style='width:".$var_percent_2."%'>".($var_number_discount_1+1)."-".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
-                                                    echo "<div class='progress-bar ".$var_prgress_3."' style='width:".$var_percent_3."%'>".($var_number_discount_2+1)."-".$var_number_discount_3." ".$var_deal_unit.", $".$var_amount_discount_3."/".$var_deal_unit."</div>";
-                                                    echo "</div>";
 
 													//echo "<i class='fa fa-arrow-up' style='position:absolute;right: 20%;font-size:30px;color:black'></i>";
 													//echo "<i class='fa fa-arrow-up' style='position:absolute;right: 50%;font-size:30px;color:black'></i>";
