@@ -567,8 +567,8 @@ if($_POST) {
 												<input class="checkbox-inline" type="checkbox" name="seller_category_food" value="food" <?php echo $selected_seller_category_food ?> /> Food products<br />
 												<input class="checkbox-inline" type="checkbox" name="seller_category_electronics" value="electronics" <?php echo $selected_seller_category_electronics ?> /> Electronics<br />
 												<input class="checkbox-inline" type="checkbox" name="seller_category_rawmaterial" value="rawmaterial" <?php echo $selected_seller_category_rawmaterial ?> /> Raw Material<br />
-												<input class="checkbox-inline" type="checkbox" name="seller_category_entertainment" value="entertainment" <?php echo $selected_seller_category_entertainment ?> /> Entertainment
-												<input class="checkbox-inline" type="checkbox" name="seller_category_other" value="other" <?php echo $selected_seller_category_other ?> /> Entertainment
+												<input class="checkbox-inline" type="checkbox" name="seller_category_entertainment" value="entertainment" <?php echo $selected_seller_category_entertainment ?> /> Entertainment <br/>
+												<input class="checkbox-inline" type="checkbox" name="seller_category_other" value="other" <?php echo $selected_seller_category_other ?> /> Other
 								
 							</div>
 							<br>

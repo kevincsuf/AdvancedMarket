@@ -238,7 +238,7 @@ else {
                                 <h3 class="fsz-40 blk-clr funky-font-2">  Advanced Group Marketing  </h3>
                                 <h2> <span class="blu-clr">The best DEALS! <span class="blk-clr">All together we win</span></h2>
                                 <p class="hidden-xs"><span class="org-clr">Quantity of customers can change the price of your deal, so here All together can get the best DEALS</p>
-                                <a class="fancy-btn-alt fsz-16" href="#newarrival">More</a>
+                                <a class="fancy-btn-alt fsz-16" href="index2.php?cat_url_id=6">More</a>
                             </div>
                         </div>
                     </div>
@@ -250,9 +250,9 @@ else {
                         <div>
                             <div class="caption-right">
                                 <h3 class="fsz-40 blk-clr funky-font-2">  Advanced Group Marketing  </h3>
-                                <h2><span class="blu-clr">The best DEALS! <span class="blk-clr"> Good Luck!</span></h2>
+                                <h2><span class="blu-clr">The best DEALS! <span class="blk-clr"> Electronics!</span></h2>
                                 <p class="hidden-xs"><span class="org-clr">Serach on your products or serviecs that you like then click Join Deal button to joing the deal and wait until Deal is reaching to certain number of customers then you will win the deal </p>
-                                <a class="fancy-btn-alt fsz-16" href="#featured">More</a>
+                                <a class="fancy-btn-alt fsz-16" href="index2.php?cat_url_id=2">More</a>
                             </div>
                         </div>
                     </div>
@@ -263,9 +263,9 @@ else {
                         <div>
                             <div class="caption-right">
                                 <h3 class="fsz-40 blk-clr funky-font-2">  Advanced Group Marketing  </h3>
-                                <h2><span class="blu-clr">The best DEALS! <span class="blk-clr"> Good Luck!</span></h2>
-                                <p class="hidden-xs"><span class="org-clr">Serach on your products or serviecs that you like then click Join Deal button to joing the deal and wait until Deal is reaching to certain number of customers then you will win the deal </p>
-                                <a class="fancy-btn-alt fsz-16" href="#featured">More</a>
+                                <h2><span class="blu-clr">The best DEALS! <span class="blk-clr"> Food Products!</span></h2>
+                                <p class="hidden-xs"><span class="org-clr">They are fresh and organic products click Join Deal button to joing the deal and wait until Deal is reaching to certain number of customers then you will win the deal </p>
+                                <a class="fancy-btn-alt fsz-16" href="index2.php?cat_url_id=1">More</a>
                             </div>
                         </div>
                     </div>
@@ -281,7 +281,7 @@ else {
                         <div class="vertical-align-div gst-promo-text col-lg-6 right">
                             <div>
                                 <div class="vertical-align-text">
-                                    <h2> <span class="sec-title fsz-10 wht-clr"> ELECTRONICS </span>
+                                    
                                     <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
@@ -296,7 +296,7 @@ else {
                         <div class="vertical-align-div gst-promo-text col-lg-8 right">
                             <div>
                                 <div class="vertical-align-text">
-                                    <h2> <span class="sec-title fsz-10 blu-clr"> FOOD  PRODUCTS </span> 
+                                    
                                     <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
@@ -310,7 +310,7 @@ else {
                         <div class="vertical-align-div gst-promo-text col-lg-7 col-xs-offset-1">
                             <div>
                                 <div class="vertical-align-text">
-                                    <h2> <span class="sec-title fsz-10 blu-clr"> ENTERTAINMENTS</span> 
+                                    
                                     <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
@@ -324,7 +324,7 @@ else {
             <section class="gst-row row-bikes clear"> 
                 <div class="products-wrap text-center">
                     <div class="fancy-heading text-center">
-                        <h3>Choose Your <span class="thm-clr">PRODUCT</span></h3>
+                        <h3>Choose Your <span class="thm-clr"> Mobile</span></h3>
                         <h5 class="funky-font-2">The Ultimate Deals with exciting Price </h5>
                         <i class="thm-clr fsz-20 fa fa-angle-double-down"></i>
                     </div>
@@ -334,7 +334,112 @@ else {
 						
 							
 							<?php 
-								$sql="SELECT * FROM create_deal WHERE deal_category= (2 AND 5) order by RAND() LIMIT 4" ;  // add function to display new arrival part
+								$sql="SELECT * FROM create_deal WHERE deal_category= 5 order by RAND() LIMIT 4" ;  // add function to display new arrival part
+								$res=mysqli_query($con,$sql);
+								while($row = mysqli_fetch_assoc($res))
+								{
+									$deal_url_id=0;
+									$var_deal_id=$row["deal_id"];
+									//$var_deal_id=$row["deal_image"];
+																				
+												echo "<div class='product'>";
+													echo "<div class='product-media'>";
+														echo"<img src='images/".$row["deal_image"]."' alt=''/>";                                              
+													echo"</div>";
+													// code to single single_product page based on user login
+													if (isset($_SESSION["uid"])) 
+														{
+														echo "<div class='product-content'>";
+															echo "<h3> <a href='single_product.php?deal_url_id=$var_deal_id' class='title-2'>".$row["title"]."</a> </h3>";
+															echo "<p class='font-2'>Start from <span class='thm-clr'>$".$row["amount_discount_1"]."</span> </p>";
+														echo"</div>";
+														}
+													else
+														{
+														echo"<a href='#login-popup' data-toggle='modal'>".$row["title"]."</a>";
+														echo "<p class='font-2'>Start from <span class='thm-clr'>$".$row["amount_discount_1"]."</span> </p>";
+														}									
+													
+												echo"</div>	";
+											//echo "</div>";
+										//echo"</div>";						
+								}
+							?>
+						
+					</div>
+                       
+
+        
+                </div>           
+            </section>
+            <!-- / Product Slider -->
+			
+			 <section class="gst-row row-bikes clear"> 
+                <div class="products-wrap text-center">
+                    <div class="fancy-heading text-center">
+                        <h3>Choose Your <span class="thm-clr"> Electronics PRODUCT</span></h3>
+                        <h5 class="funky-font-2">The Ultimate Deals with exciting Price </h5>
+                        <i class="thm-clr fsz-20 fa fa-angle-double-down"></i>
+                    </div>
+
+                    <!-- Portfolio items -->
+					<div class="products-slider nav-2">
+						
+							
+							<?php 
+								$sql="SELECT * FROM create_deal WHERE deal_category= 2 order by RAND() LIMIT 4" ;  // add function to display new arrival part
+								$res=mysqli_query($con,$sql);
+								while($row = mysqli_fetch_assoc($res))
+								{
+									$deal_url_id=0;
+									$var_deal_id=$row["deal_id"];
+									//$var_deal_id=$row["deal_image"];
+																				
+												echo "<div class='product'>";
+													echo "<div class='product-media'>";
+														echo"<img src='images/".$row["deal_image"]."' alt=''/>";                                              
+													echo"</div>";
+													// code to single single_product page based on user login
+													if (isset($_SESSION["uid"])) 
+														{
+														echo "<div class='product-content'>";
+															echo "<h3> <a href='single_product.php?deal_url_id=$var_deal_id' class='title-2'>".$row["title"]."</a> </h3>";
+															echo "<p class='font-2'>Start from <span class='thm-clr'>$".$row["amount_discount_1"]."</span> </p>";
+														echo"</div>";
+														}
+													else
+														{
+														echo"<a href='#login-popup' data-toggle='modal'>".$row["title"]."</a>";
+														echo "<p class='font-2'>Start from <span class='thm-clr'>$".$row["amount_discount_1"]."</span> </p>";
+														}									
+													
+												echo"</div>	";
+											//echo "</div>";
+										//echo"</div>";						
+								}
+							?>
+						
+					</div>
+                       
+
+        
+                </div>           
+            </section>
+            <!-- / Product Slider -->
+			 <section class="gst-row row-bikes clear"> 
+                <div class="products-wrap text-center">
+                    <div class="fancy-heading text-center">
+                        <h3>Choose Your <span class="thm-clr"> Food PRODUCT</span></h3>
+                        <h5 class="funky-font-2">The Ultimate Deals with exciting Price </h5>
+                        <i class="thm-clr fsz-20 fa fa-angle-double-down"></i>
+                    </div>
+
+                    <!-- Portfolio items -->
+					<div class="products-slider nav-2">
+						
+							
+							<?php 
+								$sql="SELECT * FROM create_deal WHERE deal_category=1 order by RAND() LIMIT 4" ;  // add function to display new arrival part
 								$res=mysqli_query($con,$sql);
 								while($row = mysqli_fetch_assoc($res))
 								{
@@ -564,12 +669,12 @@ else {
                     <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 add-wrap">
                         <div class=" text-center">
                             <h2 class="fsz-35"> <span class="bold-font-3 wht-clr">Advanced Group </span> <span class="thm-clr funky-font">Marketing</span> </h2>
-                            <p>148 Parramatta Road Stanmore NSW 2048, New York City </p>
+                            <p>148 Cal State Fullerton, California </p>
                             <div class="fancy-heading text-center">
                                 <h2 class="title-2">24 / 7 TECH SUPPORT</h2>                           
                             </div>
-                            <p> Helpline Numbers -- </p>
-                            <p> Help Through Mail -- </p>
+                            <p> Helpline Numbers -- 951-123-4567 </p>
+                            <p> Help Through Mail -- help@advancedgroupmarketing.com </p>
                         </div>
                     </div>
                 </div>
@@ -583,60 +688,7 @@ else {
        <?php include "libs/_incl_footer.php";?>  
  <!-- / FOOTER -->
 
-        <!-- Product Preview Popup -->
-        <section class="modal fade" id="product-preview" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg product-modal">
-                <button class="close close-btn popup-cls" aria-label="Close" data-dismiss="modal" type="button">
-                    <i class="fa-times fa"></i>
-                </button>
-                <div class="modal-content single-product">
-                    <div class="diblock">
-                        <div class="col-lg-6 col-sm-12 col-xs-12">
-                            <div id="gallery-1" class="royalSlider rsUni">
-                                <a class="rsImg" data-rsbigimg="assets/img/products/single-1.jpg" href="assets/img/products/single-1.jpg" data-rsw="500" data-rsh="500"> <img class="rsTmb" src="assets/img/products/single-thumb-1.jpg" alt=""></a>
-                                </div>
-                        </div>
-                        <div class="spc-15 hidden-lg clear"></div>
-                        <div class=" col-sm-12 col-lg-6 col-xs-12">
-                            <div class="summary entry-summary">
-                                <div class="woocommerce-product-rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-                                    <div class="rating"> 
-                                        <span class="star active"></span>
-                                        <span class="star active"></span>
-                                        <span class="star active"></span>                                           
-                                        <span class="star active"></span>
-                                        <span class="star half"></span>
-                                    </div>
-
-                                    <div  class="posted_in">
-                                        <h3 class="funky-font-2 fsz-20">Women Collection</h3>
-                                    </div>
-                                </div>
-
-                                <div class="product_title_wrapper">
-                                    <div itemprop="name" class="product_title entry-title">
-                                        Flusas Denim <span class="thm-clr">Dress</span>
-                                        <p class="font-3 fsz-18 no-mrgn price"> <b class="amount blk-clr">$175.00</b> <del>$299.00</del> </p>       
-                                    </div>
-                                </div>
-
-                                <div itemprop="description" class="fsz-15">
-                                    <p>Qossi is an emerging company and dedicated to making high quality bags and fashions.Qossi designers are Advanced Grouply renowned designers,having participated in many Advanced Group fashion designing contests,and perform outstandingly</p>                                  
-                                </div>
-
-                                <ul class="stock-detail list-items fsz-12">
-                                    <li> <strong> MATERIAL : <span class="blk-clr"> COTTON </span> </strong> </li>
-                                    <li> <strong>  STOCK : <span class="blk-clr"> READY STOCK </span> </strong> </li>
-                                </ul>
-
-                                
-                            </div><!-- .summary -->
-                        </div>  
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- / Product Preview Popup -->
+        
 
         <!-- Search Popup -->
         <div class="popup-box page-search-box">

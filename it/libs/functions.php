@@ -66,7 +66,7 @@ function displaycategory()
         $var_category_id=$var_row_category['cat_id'];
         $var_category_title=$var_row_category['category'];
 		//echo "<li><a href='#'> $var_category_title </a></li>";
-        echo "<li class = 'list'> <a href='index2.php?category=$var_category_id'>$var_category_title </a></li>";
+        echo "<li class = 'list'> <a href='index2.php?cat_url_id=$var_category_id'>$var_category_title </a></li>";
        
     }
 }

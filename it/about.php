@@ -209,6 +209,53 @@ else {
 					</div>
 				</div>
 		</div>
+						<div class="theme-container container">
+
+					<!-- About Starts -->
+					<div class="gst-spc3 row">
+						<div class="about-box">
+							<div class="col-sm-4  spcbt-30">
+								<h2 class="title-3 no-margin"> the deals. </h2>
+							</div>
+							<div class="col-sm-8 about-info space-bottom-50">
+								<p> <b>We are supporting for small scale business people!</b> </p>
+								<p> Sellers offer the goods that they produce or sell in large quantities, set a date for their deal to end,
+
+									and indicate a price for the goods. Buyers can buy a portion of the seller’s goods, and when enough
+
+									buyers agree to the deal, in other words, when all the goods in the seller’s deal has been sold, the
+
+									deal closes. 
+									</p>
+								<p> The seller is obligated to supply the goods to the buyers at the agreed price.
+
+								The advantage of our website, over warehouse stores or traditional distributors, is that sellers gain
+
+								the advantage of selling in larger quantities, and buyers gain the large-quantity discounts normally
+
+								enjoyed by large-volume buyers. 
+								</p>
+							</div>    
+						</div>
+						<div class="about-box">
+							<div class="col-sm-4  spcbt-30">
+								<h2 class="title-3 no-margin"> contact us. </h2>
+							</div>
+							<div class="col-sm-8 about-info spcbt-30">
+								<ul class="about-contact">
+									<li> <i class="fa fa-map-marker fsz-20"></i> <span class="desc"> 1234 California State University Fullerton, California </span> </li>
+									<li> <i class="fa fa-envelope-o fsz-20"></i> <span class="desc"> hello@advancedgroupmarketing.com </span> </li>
+									<li> <i class="fa fa-phone fsz-20"></i> <span class="desc"> (0091) 8547 632521 </span> </li>
+								</ul>
+								<p> <strong class="gray-color">HOUR WORK:</strong> <b>  MONDAY - FRIDAY  /  08AM - 05PM</b> </p>
+							</div>    
+						</div>
+						
+					</div>
+					<!-- / About Ends -->
+
+				</div>
+
 	</section>
 		
 		<!-- Main container start here -->
