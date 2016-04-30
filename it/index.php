@@ -257,6 +257,19 @@ else {
                         </div>
                     </div>
                 </div>
+				<div class="gst-slide">
+                    <img src="assets/img/slides/3.jpg" alt=""/>
+                    <div class="gst-caption container theme-container">
+                        <div>
+                            <div class="caption-right">
+                                <h3 class="fsz-40 blk-clr funky-font-2">  Advanced Group Marketing  </h3>
+                                <h2><span class="blu-clr">The best DEALS! <span class="blk-clr"> Good Luck!</span></h2>
+                                <p class="hidden-xs"><span class="org-clr">Serach on your products or serviecs that you like then click Join Deal button to joing the deal and wait until Deal is reaching to certain number of customers then you will win the deal </p>
+                                <a class="fancy-btn-alt fsz-16" href="#featured">More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- / Main Slider -->
 

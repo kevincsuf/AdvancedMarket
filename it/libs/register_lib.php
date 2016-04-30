@@ -26,6 +26,7 @@ if ($var_type == "seller") {
 	$var_seller_category_electronics = $_SESSION['seller_category_electronics'];
 	$var_seller_category_rawmaterial = $_SESSION['seller_category_rawmaterial'];
 	$var_seller_category_entertainment = $_SESSION['seller_category_entertainment'];
+	$var_seller_category_other = $_SESSION['seller_category_other'];
     $var_sending_email = $var_seller_email;
 }
 //getting info from reg page to here for buyer
@@ -42,6 +43,7 @@ else if ($var_type == "buyer") {
 	$var_buyer_category_electronics = $_SESSION['buyer_category_electronics'];
 	$var_buyer_category_rawmaterial = $_SESSION['buyer_category_rawmaterial'];
 	$var_buyer_category_entertainment = $_SESSION['buyer_category_entertainment'];
+	$var_buyer_category_other = $_SESSION['buyer_category_other'];
     $var_sending_email = $var_buyer_email;
 }
 
@@ -93,10 +95,10 @@ else if ($var_type == "buyer") {
 //inserting into db
 if ($var_type==='seller') 
 	{  // have to split the category based on the db
-	$sql="insert into register(type,email,password,first_name,last_name,business_name,food_category,electronics_category,rawmaterial_Category,entertainment_Category,Address,mobile_number,receive_message)values('$var_type','$var_seller_email','$hash_seller','$var_seller_first_name','$var_seller_last_name','$var_seller_bussiness_name','$var_seller_category_food','$var_seller_category_electronics','$var_seller_category_rawmaterial','$var_seller_category_entertainment','$var_seller_addr','$var_seller_mobile_number','$var_seller_rev_msg')";
+	$sql="insert into register(type,email,password,first_name,last_name,business_name,food_category,electronics_category,rawmaterial_Category,entertainment_Category,other_category,Address,mobile_number,receive_message)values('$var_type','$var_seller_email','$hash_seller','$var_seller_first_name','$var_seller_last_name','$var_seller_bussiness_name','$var_seller_category_food','$var_seller_category_electronics','$var_seller_category_rawmaterial','$var_seller_category_entertainment','$var_seller_category_other'.'$var_seller_addr','$var_seller_mobile_number','$var_seller_rev_msg')";
 	}
 else if ($var_type==='buyer') {
-	$sql="insert into register(type,email,password,first_name,last_name,food_category,electronics_category,rawmaterial_Category,entertainment_Category,Address,mobile_number,receive_message)values('$var_type','$var_buyer_email','$hash_buyer','$var_buyer_first_name','$var_buyer_last_name','$var_buyer_category_food','$var_buyer_category_electronics','$var_buyer_category_rawmaterial','$var_buyer_category_entertainment','$var_buyer_addr','$var_buyer_mobile_number','$var_buyer_rev_msg')";
+	$sql="insert into register(type,email,password,first_name,last_name,food_category,electronics_category,rawmaterial_Category,entertainment_Category,other_category,Address,mobile_number,receive_message)values('$var_type','$var_buyer_email','$hash_buyer','$var_buyer_first_name','$var_buyer_last_name','$var_buyer_category_food','$var_buyer_category_electronics','$var_buyer_category_rawmaterial','$var_buyer_category_entertainment','$var_buyer_category_other','$var_buyer_addr','$var_buyer_mobile_number','$var_buyer_rev_msg')";
 	}
 
 

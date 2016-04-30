@@ -85,6 +85,7 @@ $selected_seller_category_food = "";
 $selected_seller_category_electronics = "";
 $selected_seller_category_rawmaterial = "";
 $selected_seller_category_entertainment = "";
+$selected_seller_category_other = "";
 
 // Set previous input value for buyer
 $selected_regtype_buyer = "";
@@ -101,6 +102,7 @@ $selected_buyer_category_food = "";
 $selected_buyer_category_electronics = "";
 $selected_buyer_category_rawmaterial = "";
 $selected_buyer_category_entertainment = "";
+$selected_buyer_category_other = "";
 
 if($_POST) {
 	/*
@@ -255,6 +257,12 @@ if($_POST) {
 			else {
 				$_SESSION["seller_category_entertainment"] = "0";
 			}
+			if (isset($_POST["seller_category_other"])) {
+				$_SESSION["seller_category_other"] = "1";
+			}
+			else {
+				$_SESSION["seller_category_other"] = "0";
+			}
 		}
 		// When buyer
 		else if (isset($_POST["buyer_reg"]) == "buyer") {
@@ -289,6 +297,12 @@ if($_POST) {
 			}
 			else {
 				$_SESSION["buyer_category_entertainment"] = "0";
+			}
+			if (isset($_POST["buyer_category_other"])) {
+				$_SESSION["buyer_category_other"] = "1";
+			}
+			else {
+				$_SESSION["buyer_category_other"] = "0";
 			}
 		}
 
@@ -326,6 +340,9 @@ if($_POST) {
 			if (isset($_POST["seller_category_entertainment"])) {
 				$selected_seller_category_entertainment = "checked=\"checked\"";
 			}
+			if (isset($_POST["seller_category_other"])) {
+				$selected_seller_category_other = "checked=\"checked\"";
+			}
 		}
 		// When buyer
 		else if (isset($_POST['buyer_reg']) == "buyer") {
@@ -353,6 +370,9 @@ if($_POST) {
 			}
 			if (isset($_POST["buyer_category_entertainment"])) {
 				$selected_buyer_category_entertainment = "checked=\"checked\"";
+			}
+			if (isset($_POST["buyer_category_other"])) {
+				$selected_buyer_category_other = "checked=\"checked\"";
 			}
 		}
 	}
@@ -548,6 +568,7 @@ if($_POST) {
 												<input class="checkbox-inline" type="checkbox" name="seller_category_electronics" value="electronics" <?php echo $selected_seller_category_electronics ?> /> Electronics<br />
 												<input class="checkbox-inline" type="checkbox" name="seller_category_rawmaterial" value="rawmaterial" <?php echo $selected_seller_category_rawmaterial ?> /> Raw Material<br />
 												<input class="checkbox-inline" type="checkbox" name="seller_category_entertainment" value="entertainment" <?php echo $selected_seller_category_entertainment ?> /> Entertainment
+												<input class="checkbox-inline" type="checkbox" name="seller_category_other" value="other" <?php echo $selected_seller_category_other ?> /> Entertainment
 								
 							</div>
 							<br>
