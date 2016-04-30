@@ -578,7 +578,7 @@ if($_POST) {
                                                 // Check how many discounts
 												if ($var_number_discount_option == 1) {
 													echo "<div class= 'progress'>";
-													echo "<div class='progress-bar ".$var_progress_active."' role='progressbar' style='width:".$var_percent_1."%' >".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar ".$var_progress_active."' role='progressbar' style='width:".$var_percent_1."%' > $".$var_amount_discount_1."/".$var_deal_unit."</div>";
 													echo "</div>";
 												}
 												else if ($var_number_discount_option == 2) {
@@ -591,8 +591,8 @@ if($_POST) {
                                                         $var_prgress_2 = $var_progress_active;
                                                     }
 													echo "<div class= 'progress'>";
-													echo "<div class='progress-bar ".$var_prgress_1."' role='progressbar' style='width:".$var_percent_1."%'>1-".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
-													echo "<div class='progress-bar ".$var_prgress_2."' role='progressbar' style='width:".$var_percent_2."%'>".($var_number_discount_1+1)."-".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar ".$var_prgress_1."' role='progressbar' style='width:".$var_percent_1."%'> $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar ".$var_prgress_2."' role='progressbar' style='width:".$var_percent_2."%'> $".$var_amount_discount_2."/".$var_deal_unit."</div>";
 													echo "</div>";
 												}
 												else if ($var_number_discount_option == 3) {
@@ -616,9 +616,9 @@ if($_POST) {
                                                     }
 
                                                     echo "<div class= 'progress'>";
-                                                    echo "<div class='progress-bar ".$var_prgress_1."' style='width:".$var_percent_1."%'>1-".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
-                                                    echo "<div class='progress-bar ".$var_prgress_2."' style='width:".$var_percent_2."%'>".($var_number_discount_1+1)."-".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
-                                                    echo "<div class='progress-bar ".$var_prgress_3."' style='width:".$var_percent_3."%'>".($var_number_discount_2+1)."-".$var_number_discount_3." ".$var_deal_unit.", $".$var_amount_discount_3."/".$var_deal_unit."</div>";
+                                                    echo "<div class='progress-bar ".$var_prgress_1."' style='width:".$var_percent_1."%'> $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+                                                    echo "<div class='progress-bar ".$var_prgress_2."' style='width:".$var_percent_2."%'> $".$var_amount_discount_2."/".$var_deal_unit."</div>";
+                                                    echo "<div class='progress-bar ".$var_prgress_3."' style='width:".$var_percent_3."%'> $".$var_amount_discount_3."/".$var_deal_unit."</div>";
                                                     echo "</div>";
 
 													//echo "<i class='fa fa-arrow-up' style='position:absolute;right: 20%;font-size:30px;color:black'></i>";

@@ -16,10 +16,10 @@
                             <section class="widget footer-widget widget_nav_menu clearfix">
                             <h6 class="widget-title">Useful Links</h6>
                                 <ul>
-                                    <li class="menu-item"><a href="#">About us</a></li>
-                                    <li class="menu-item"><a href="#">Products</a></li>
-									<li class="menu-item"><a href="#">F.A.Q</a></li>
-                                    <li class="menu-item"><a href="#">Contact Us</a></li>
+                                    <li class="menu-item"><a href="about.php">About us</a></li>
+                                    <li class="menu-item"><a href="index.php">Products</a></li>
+									<li class="menu-item"><a href="faq.php">F.A.Q</a></li>
+                                    <li class="menu-item"><a href="contact-us.php">Contact Us</a></li>
                                 </ul>   
                             </section>
                         </div>

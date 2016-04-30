@@ -281,7 +281,7 @@ else {
                         <div class="vertical-align-div gst-promo-text col-lg-6 right">
                             <div>
                                 <div class="vertical-align-text">
-                                    <h2> <span class="sec-title fsz-10 wht-clr"> ELECTRONICS </span>
+                                    
                                     <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
@@ -296,7 +296,7 @@ else {
                         <div class="vertical-align-div gst-promo-text col-lg-8 right">
                             <div>
                                 <div class="vertical-align-text">
-                                    <h2> <span class="sec-title fsz-10 blu-clr"> FOOD  PRODUCTS </span> 
+                                    
                                     <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
@@ -310,7 +310,7 @@ else {
                         <div class="vertical-align-div gst-promo-text col-lg-7 col-xs-offset-1">
                             <div>
                                 <div class="vertical-align-text">
-                                    <h2> <span class="sec-title fsz-10 blu-clr"> ENTERTAINMENTS</span> 
+                                    
                                     <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
@@ -324,7 +324,7 @@ else {
             <section class="gst-row row-bikes clear"> 
                 <div class="products-wrap text-center">
                     <div class="fancy-heading text-center">
-                        <h3>Choose Your <span class="thm-clr">PRODUCT</span></h3>
+                        <h3>Choose Your <span class="thm-clr"> Mobile</span></h3>
                         <h5 class="funky-font-2">The Ultimate Deals with exciting Price </h5>
                         <i class="thm-clr fsz-20 fa fa-angle-double-down"></i>
                     </div>
@@ -334,7 +334,112 @@ else {
 						
 							
 							<?php 
-								$sql="SELECT * FROM create_deal WHERE deal_category= (2 AND 5) order by RAND() LIMIT 4" ;  // add function to display new arrival part
+								$sql="SELECT * FROM create_deal WHERE deal_category= 5 order by RAND() LIMIT 4" ;  // add function to display new arrival part
+								$res=mysqli_query($con,$sql);
+								while($row = mysqli_fetch_assoc($res))
+								{
+									$deal_url_id=0;
+									$var_deal_id=$row["deal_id"];
+									//$var_deal_id=$row["deal_image"];
+																				
+												echo "<div class='product'>";
+													echo "<div class='product-media'>";
+														echo"<img src='images/".$row["deal_image"]."' alt=''/>";                                              
+													echo"</div>";
+													// code to single single_product page based on user login
+													if (isset($_SESSION["uid"])) 
+														{
+														echo "<div class='product-content'>";
+															echo "<h3> <a href='single_product.php?deal_url_id=$var_deal_id' class='title-2'>".$row["title"]."</a> </h3>";
+															echo "<p class='font-2'>Start from <span class='thm-clr'>$".$row["amount_discount_1"]."</span> </p>";
+														echo"</div>";
+														}
+													else
+														{
+														echo"<a href='#login-popup' data-toggle='modal'>".$row["title"]."</a>";
+														echo "<p class='font-2'>Start from <span class='thm-clr'>$".$row["amount_discount_1"]."</span> </p>";
+														}									
+													
+												echo"</div>	";
+											//echo "</div>";
+										//echo"</div>";						
+								}
+							?>
+						
+					</div>
+                       
+
+        
+                </div>           
+            </section>
+            <!-- / Product Slider -->
+			
+			 <section class="gst-row row-bikes clear"> 
+                <div class="products-wrap text-center">
+                    <div class="fancy-heading text-center">
+                        <h3>Choose Your <span class="thm-clr"> Electronics PRODUCT</span></h3>
+                        <h5 class="funky-font-2">The Ultimate Deals with exciting Price </h5>
+                        <i class="thm-clr fsz-20 fa fa-angle-double-down"></i>
+                    </div>
+
+                    <!-- Portfolio items -->
+					<div class="products-slider nav-2">
+						
+							
+							<?php 
+								$sql="SELECT * FROM create_deal WHERE deal_category= 2 order by RAND() LIMIT 4" ;  // add function to display new arrival part
+								$res=mysqli_query($con,$sql);
+								while($row = mysqli_fetch_assoc($res))
+								{
+									$deal_url_id=0;
+									$var_deal_id=$row["deal_id"];
+									//$var_deal_id=$row["deal_image"];
+																				
+												echo "<div class='product'>";
+													echo "<div class='product-media'>";
+														echo"<img src='images/".$row["deal_image"]."' alt=''/>";                                              
+													echo"</div>";
+													// code to single single_product page based on user login
+													if (isset($_SESSION["uid"])) 
+														{
+														echo "<div class='product-content'>";
+															echo "<h3> <a href='single_product.php?deal_url_id=$var_deal_id' class='title-2'>".$row["title"]."</a> </h3>";
+															echo "<p class='font-2'>Start from <span class='thm-clr'>$".$row["amount_discount_1"]."</span> </p>";
+														echo"</div>";
+														}
+													else
+														{
+														echo"<a href='#login-popup' data-toggle='modal'>".$row["title"]."</a>";
+														echo "<p class='font-2'>Start from <span class='thm-clr'>$".$row["amount_discount_1"]."</span> </p>";
+														}									
+													
+												echo"</div>	";
+											//echo "</div>";
+										//echo"</div>";						
+								}
+							?>
+						
+					</div>
+                       
+
+        
+                </div>           
+            </section>
+            <!-- / Product Slider -->
+			 <section class="gst-row row-bikes clear"> 
+                <div class="products-wrap text-center">
+                    <div class="fancy-heading text-center">
+                        <h3>Choose Your <span class="thm-clr"> Food PRODUCT</span></h3>
+                        <h5 class="funky-font-2">The Ultimate Deals with exciting Price </h5>
+                        <i class="thm-clr fsz-20 fa fa-angle-double-down"></i>
+                    </div>
+
+                    <!-- Portfolio items -->
+					<div class="products-slider nav-2">
+						
+							
+							<?php 
+								$sql="SELECT * FROM create_deal WHERE deal_category=1 order by RAND() LIMIT 4" ;  // add function to display new arrival part
 								$res=mysqli_query($con,$sql);
 								while($row = mysqli_fetch_assoc($res))
 								{
@@ -564,12 +669,12 @@ else {
                     <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 add-wrap">
                         <div class=" text-center">
                             <h2 class="fsz-35"> <span class="bold-font-3 wht-clr">Advanced Group </span> <span class="thm-clr funky-font">Marketing</span> </h2>
-                            <p>148 Parramatta Road Stanmore NSW 2048, New York City </p>
+                            <p>148 Cal State Fullerton, California </p>
                             <div class="fancy-heading text-center">
                                 <h2 class="title-2">24 / 7 TECH SUPPORT</h2>                           
                             </div>
-                            <p> Helpline Numbers -- </p>
-                            <p> Help Through Mail -- </p>
+                            <p> Helpline Numbers -- 951-123-4567 </p>
+                            <p> Help Through Mail -- help@advancedgroupmarketing.com </p>
                         </div>
                     </div>
                 </div>
