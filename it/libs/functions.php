@@ -482,6 +482,68 @@ function getCurrentPercent($check_deal_id) {
 }
 
 
+// Get each discount stock percentage for a deal
+function getDiscountPercent($check_deal_id, $discount_tier) {
+    global $con;
+
+    $var_max_quantity = 0;
+
+    $var_number_discount_1 = 0;
+    $var_number_discount_2 = 0;
+    $var_number_discount_3 = 0;
+
+    $var_percent_discount_1 = 0;
+    $var_percent_discount_2 = 0;
+    $var_percent_discount_3 = 0;
+
+    $var_percent = 0;
+
+    $var_get_deal = "
+            SELECT *
+            FROM create_deal
+            WHERE deal_id=".$check_deal_id;
+    $var_run_deal = mysqli_query($con, $var_get_deal);
+    while ($var_row_deal = mysqli_fetch_array($var_run_deal)) {
+        if ($var_row_deal['deal_id'] == $check_deal_id) {
+            $var_max_quantity = $var_row_deal['max_quantity'];
+            $var_number_discount_1 = $var_row_deal['number_discount_1'];
+            $var_number_discount_2 = $var_row_deal['number_discount_2'];
+            $var_number_discount_3 = $var_row_deal['number_discount_3'];
+        }
+    }
+
+    $var_percent_discount_1 = floor($var_number_discount_1 / $var_max_quantity * 100);
+    $var_percent_discount_2 = floor(($var_number_discount_2 - $var_number_discount_1) / $var_max_quantity * 100);
+    $var_percent_discount_3 = floor(($var_number_discount_3 - $var_number_discount_2) / $var_max_quantity * 100);
+
+    if ($var_max_quantity == $var_number_discount_1) {
+        $var_percent_discount_1 = 100;
+    }
+    else if ($var_max_quantity == $var_number_discount_2) {
+        $var_percent_discount_2 = 100 - $var_percent_discount_1;
+    }
+    else if ($var_max_quantity == $var_number_discount_3) {
+        $var_percent_discount_3 = 100 - $var_percent_discount_1 - $var_percent_discount_2;
+    }
+
+    switch ($discount_tier) {
+        case "1":
+            $var_percent = $var_percent_discount_1;
+            break;
+
+        case "2":
+            $var_percent = $var_percent_discount_2;
+            break;
+
+        case "3":
+            $var_percent = $var_percent_discount_3;
+            break;
+    }
+
+    return $var_percent;
+}
+
+
 // Send an email on specific events
 /*
  * ===============================================

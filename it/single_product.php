@@ -120,6 +120,9 @@ if($_POST) {
 		// The remaining stocks when this page is opened
 		$global_remaining_stocks = 0;
 
+        // The sum of order quantity
+        $global_order_quantity_sum = 0;
+
 		// The deal id
 		$global_deal_id = "";
 
@@ -536,6 +539,7 @@ if($_POST) {
 												}
 
 												$global_remaining_stocks = $deal_quantity_total - $order_quantity_sum;
+                                                $global_order_quantity_sum = $order_quantity_sum;
 												
 									}
 									
@@ -555,56 +559,73 @@ if($_POST) {
                                                     $var_deal_unit = $var_deal_other_unit;
                                                 }
 
+                                                // Get each percentages
+                                                $var_percent_1 = getDiscountPercent($var_deal_url_id, "1");
+                                                $var_percent_2 = getDiscountPercent($var_deal_url_id, "2");
+                                                $var_percent_3 = getDiscountPercent($var_deal_url_id, "3");
+                                                $var_percent_sold = getCurrentPercent($var_deal_url_id);
+
+                                                // Set progress bar style
+                                                $var_progress_static_1 = "progress-bar-success";
+                                                $var_progress_static_2 = "progress-bar-warning";
+                                                $var_progress_active = "progress-bar-danger progress-bar-striped active";
+
+                                                // Progress bar variables
+                                                $var_prgress_1 = "";
+                                                $var_prgress_2 = "";
+                                                $var_prgress_3 = "";
+
                                                 // Check how many discounts
 												if ($var_number_discount_option == 1) {
-													$var_percent_1 = getCurrentPercent($var_deal_url_id);
-													$var_percent_2 = 0;
-													$var_percent_3 = 0;
 													echo "<div class= 'progress'>";
-													echo "<div class='progress-bar progress-bar-striped active' role='progressbar' style='width:".$var_percent_1."%' >".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar ".$var_progress_active."' role='progressbar' style='width:".$var_percent_1."%' >".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
 													echo "</div>";
-													echo "<i class='fa fa-arrow-up' style='position:absolute;right:0px;font-size:30px;color:black'></i>";
 												}
 												else if ($var_number_discount_option == 2) {
-													$var_percent_2 = getCurrentPercent($var_deal_url_id);
-												
-													
-													$var_percent_1 = 50;
-													$var_percent_2 = 50;
-													$var_percent_3 = 0;
-													/*echo "<div class= 'progress'>";
-													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>1-".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
-													echo "<div class='progress-bar progress-bar-warning' role='progressbar' style='width:".$var_percent_2."%'>".($var_number_discount_1+1)."-".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
-													echo "</div>";*/
+                                                    if ($global_order_quantity_sum <= $var_number_discount_1) {
+                                                        $var_prgress_1 = $var_progress_active;
+                                                        $var_prgress_2 = $var_progress_static_1;
+                                                    }
+                                                    else if ($var_number_discount_1 < $global_order_quantity_sum) {
+                                                        $var_prgress_1 = $var_progress_static_1;
+                                                        $var_prgress_2 = $var_progress_active;
+                                                    }
 													echo "<div class= 'progress'>";
-													echo "<div class='progress-bar progress-bar-striped active' role='progressbar' style='width:".$var_percent_2."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_number_discount_2."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar ".$var_prgress_1."' role='progressbar' style='width:".$var_percent_1."%'>1-".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+													echo "<div class='progress-bar ".$var_prgress_2."' role='progressbar' style='width:".$var_percent_2."%'>".($var_number_discount_1+1)."-".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
 													echo "</div>";
-													echo"<div class='col-md-10 col-sm-12 col-sm-12 text-right'>";
-													echo "some text";
-													echo "</div>";
-													echo "<i class='fa fa-arrow-up' style='position:absolute;right: 50%;font-size:30px;color:black'></i>";
-													echo "<i class='fa fa-arrow-up' style='position:absolute;right: 0px;font-size:30px;color:black'></i>";
-													
 												}
 												else if ($var_number_discount_option == 3) {
-													$var_percent_3 = getCurrentPercent($var_deal_url_id);
-													
-													$var_percent_1 = 33;
-													$var_percent_2 = 33;
-													$var_percent_3 = 34;
-													echo "<div class='progress-bar progress-bar-success' role='progressbar' style='width:".$var_percent_1."%'>1-".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
-													echo "<div class='progress-bar progress-bar-warning' role='progressbar' style='width:".$var_percent_2."%'>".($var_number_discount_1+1)."-".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
-													echo "<div class='progress-bar progress-bar-danger' role='progressbar' style='width:".$var_percent_3."%'>".($var_number_discount_2+1)."-".$var_number_discount_3." ".$var_deal_unit.", $".$var_amount_discount_3."/".$var_deal_unit."</div>";
-													
-													echo "<div class= 'progress'>";
-													echo "<div class='progress-bar progress-bar-striped active' role='progressbar' style='width:".$var_percent_3."%'>".$var_number_discount_1." ".$var_deal_unit.", $".$var_number_discount_3."/".$var_deal_unit."</div>";
-													echo "</div>";
-													
-													echo "<i class='fa fa-arrow-up' style='position:absolute;right: 20%;font-size:30px;color:black'></i>";
-													echo "<i class='fa fa-arrow-up' style='position:absolute;right: 50%;font-size:30px;color:black'></i>";
-													echo"<div class='col-lg-4 col-sm-6 col-xs-12'>";
-													echo "some text";
-													echo "</div>";
+
+                                                    if ($global_order_quantity_sum <= $var_number_discount_1) {
+                                                        $var_prgress_1 = $var_progress_active;
+                                                        $var_prgress_2 = $var_progress_static_1;
+                                                        $var_prgress_3 = $var_progress_static_2;
+                                                    }
+                                                    else if (($var_number_discount_1 < $global_order_quantity_sum) &&
+                                                             ($global_order_quantity_sum <= $var_number_discount_2)) {
+                                                        $var_prgress_1 = $var_progress_static_1;
+                                                        $var_prgress_2 = $var_progress_active;
+                                                        $var_prgress_3 = $var_progress_static_2;
+                                                    }
+                                                    else if (($var_number_discount_2 < $global_order_quantity_sum) &&
+                                                        ($global_order_quantity_sum <= $var_number_discount_3)) {
+                                                        $var_prgress_1 = $var_progress_static_1;
+                                                        $var_prgress_2 = $var_progress_static_2;
+                                                        $var_prgress_3 = $var_progress_active;
+                                                    }
+
+                                                    echo "<div class= 'progress'>";
+                                                    echo "<div class='progress-bar ".$var_prgress_1."' style='width:".$var_percent_1."%'>1-".$var_number_discount_1." ".$var_deal_unit.", $".$var_amount_discount_1."/".$var_deal_unit."</div>";
+                                                    echo "<div class='progress-bar ".$var_prgress_2."' style='width:".$var_percent_2."%'>".($var_number_discount_1+1)."-".$var_number_discount_2." ".$var_deal_unit.", $".$var_amount_discount_2."/".$var_deal_unit."</div>";
+                                                    echo "<div class='progress-bar ".$var_prgress_3."' style='width:".$var_percent_3."%'>".($var_number_discount_2+1)."-".$var_number_discount_3." ".$var_deal_unit.", $".$var_amount_discount_3."/".$var_deal_unit."</div>";
+                                                    echo "</div>";
+
+													//echo "<i class='fa fa-arrow-up' style='position:absolute;right: 20%;font-size:30px;color:black'></i>";
+													//echo "<i class='fa fa-arrow-up' style='position:absolute;right: 50%;font-size:30px;color:black'></i>";
+													//echo"<div class='col-lg-4 col-sm-6 col-xs-12'>";
+													//echo "some text";
+													//echo "</div>";
 												}
 												
 												echo "  </div>";
@@ -984,8 +1005,8 @@ if($_POST) {
         <script src="assets/plugins/jquery/jquery-2.1.3.js"></script>  
         <script src="assets/plugins/royalslider/jquery.royalslider.min.js"></script>
         <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/plugins/bootstrap-select-1.9.3/dist/js/bootstrap-select.min.js"></script>             
-        <script src="assets/plugins/owl-carousel2/owl.carousel.min.js"></script> 
+        <script src="assets/plugins/bootstrap-select-1.9.3/dist/js/bootstrap-select.min.js"></script>
+        <script src="assets/plugins/owl-carousel2/owl.carousel.min.js"></script>
         <script src="assets/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js"></script> 
         <script src="assets/plugins/isotope-master/dist/isotope.pkgd.min.js"></script>  
 
