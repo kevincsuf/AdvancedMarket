@@ -69,7 +69,7 @@ else if ($var_number_discount_1 != "" &&
 /*
  * Kevin: 03/09/2016
  * Temporarily display variables
- */
+
 echo "===== Temporarily display variables =====<br/>";;
 echo "var_title: " . $var_title . "<br/>";
 echo "var_user_id: " . $var_user_id. "<br/>";
@@ -97,6 +97,7 @@ echo "var_location_description: " . $var_location_description . "<br/>";
 echo "var_shipping_included: " . $var_shipping_included . "<br/>";
 echo "var_shipping_description: " . $var_shipping_description . "<br/>";
 echo "var_datafile: " . $var_datafile . "<br/>";
+ */
 
 // Take care of start and end date
 if (($var_time_restricted == "no") ||($var_start_date == "") || ($var_end_date == "")) { // When no time restricted
@@ -115,9 +116,9 @@ else { // When time restricted
 }
 
 // Test display
-echo "var_start_date_db: " . $var_start_date_db . "<br/>";
+/*echo "var_start_date_db: " . $var_start_date_db . "<br/>";
 echo "var_end_date_db: " . $var_end_date_db . "<br/>";
-
+*/
 
 
 

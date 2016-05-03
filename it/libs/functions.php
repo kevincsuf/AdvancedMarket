@@ -590,8 +590,8 @@ function sendEmail($email_event, $email_to, $deal_id) {
                     </head>
                     <body>
                         <p>Thank you for becoming a member of Advanced Marketing.</p>
-                        <p>Please visit <a href='http://www.binqware.com/it/about.php' target='_blank'>here</a> to find out how Advanced Marketing works.</p>
-                        <p>If you need more information, please visit our <a href='http://www.binqware.com/it/faq.php' target='_blank'>F.A.Q.</a> page.</p>
+                        <p>Please visit <a href='http://www.advancedgroupmarketing.com/index.php' target='_blank'>here</a> to find out how Advanced Marketing works.</p>
+                        <p>If you need more information, please visit our <a href='http://www.advancedgroupmarketing.com/faq.php' target='_blank'>F.A.Q.</a> page.</p>
                         <p><br/></p>
                         <p>Thanks again for signing up!</p>
                     </body>

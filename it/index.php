@@ -277,12 +277,12 @@ else {
             <section class="banner clear">
                 <div class="col-lg-4 col-md-4 col-sm-12 no-padding promo-wrap">
                     <div class="gst-promo gst-color-white">
-                        <img src="assets/img/banner/promo1.jpg" alt="" />
+                        <img src="assets/img/banner/promo1.png" alt="" />
                         <div class="vertical-align-div gst-promo-text col-lg-6 right">
                             <div>
                                 <div class="vertical-align-text">
                                     
-                                    <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
+                                    <a href="index2.php?cat_url_id=1" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
                         </div>
@@ -297,7 +297,7 @@ else {
                             <div>
                                 <div class="vertical-align-text">
                                     
-                                    <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
+                                    <a href="index2.php?cat_url_id=2" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
                         </div>
@@ -306,12 +306,12 @@ else {
 
                 <div class="col-lg-4 col-md-4 col-sm-6 no-padding promo-wrap">
                     <div class="gst-promo gst-color-white">
-                        <img src="assets/img/banner/promo3.png" alt="" />
-                        <div class="vertical-align-div gst-promo-text col-lg-7 col-xs-offset-1">
+                        <img src="assets/img/banner/promo3.jpg" alt="" />
+                        <div class="vertical-align-div gst-promo-text col-lg-8 col-xs-offset-1">
                             <div>
                                 <div class="vertical-align-text">
                                     
-                                    <a href="#featured" class="fancy-btn fancy-btn-small">Shop Now</a>
+                                    <a href="index2.php?cat_url_id=4" class="fancy-btn fancy-btn-small">Shop Now</a>
                                 </div>
                             </div>
                         </div>

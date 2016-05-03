@@ -5,63 +5,6 @@ require_once("./libs/login_lib.php");
 require_once("./libs/functions.php");
 require_once("./libs/validator.php");
 
-if($_POST) {
-    require_once("./libs/login_lib.php");
-
-    $login = new Login($_POST['login_id'],md5($_POST['login_pwd']));
-
-    // login form check
-    if(isset($_POST['login_exe']) == "login") {
-        if (!$_POST['login_id'])
-            $login->error("Check ID!");
-        else {
-            if (!$_POST['login_pwd'])
-                $login->error("Check password!");
-            else {
-                if (!$login->check_login())
-                    $login->error("Check ID or password!");
-                else {
-                    $message = "Logged in as a ".$login->member_type;
-                    $login->warning($message);
-
-                    $_SESSION["ukey"] = $login->user_key;
-                    $_SESSION["uid"] = $login->id;
-                    $_SESSION["uname"] = $login->name;
-                    $_SESSION["utype"] = $login->member_type;
-
-                    // Go to the first page of Seller
-                    if ($login->member_type == "seller") {
-                        $echo_html = "<script type=\"text/javascript\">window.location.replace(\"./seller_view.php\");</script>";
-                        echo $echo_html;
-                    }
-                    else if ($login->member_type == "buyer") {
-                        $echo_html = "<script type=\"text/javascript\">window.location.replace(\"./buyer_view.php\");</script>";
-                        echo $echo_html;
-                    }
-                }
-            }
-        }
-    }
-}
-
-$message = "";
-
-if (isset($_SESSION["uid"])) {
-    //$login = new Login($_GET['login_id'], $_GET['login_pwd']);
-    //$login->check_login();
-    $message = "You are currently LOGGED IN as a <b>".strtoupper($_SESSION["utype"])."</b>, the ID is <b>".$_SESSION["uid"]."</b>, the Key is <b>".$_SESSION["ukey"]."</b>, and the NAME is <b>".$_SESSION["uname"]."</b>";
-}
-/*
-if (isset($_GET['login_id']) && isset($_GET['login_pwd'])) {
-    $login = new Login($_GET['login_id'], $_GET['login_pwd']);
-    $login->check_login();
-    $message = "You are currently LOGGED IN as a ".strtoupper($login->member_type)." and the ID is ".$login->id;
-}
-*/
-else {
-    $message = "You are currently <b>LOGGED OUT</b>";
-}
-
 ?>
 <?php
 

@@ -279,7 +279,7 @@ else {
 														{
 														echo"<div class='product-content'>";
 															echo"<h3> <a class='title-3 fsz-18' href='single_product.php?deal_url_id=$var_deal_id'>".$row["title"]."</a> </h3>";
-															echo"<p class='font-2'>Starting from<span class='thm-clr'> $ ".$row["unit_price"]."</span> </p>";  
+															echo"<p class='font-2'>Starting from<span class='thm-clr'> $ ".$row["amount_discount_1"]."</span> </p>";  
 														echo "</div>";
 														}
 													else
