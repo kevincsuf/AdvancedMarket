@@ -679,6 +679,7 @@ if($_POST) {
                                                 //$var_percent_2 = getDiscountPercent($var_deal_url_id, "2");
                                                 //$var_percent_3 = getDiscountPercent($var_deal_url_id, "3");
                                                 $var_percent_sold = getCurrentPercent($var_deal_url_id);
+                                                $var_percent_remain = 100 - $var_percent_sold;
 
                                                 // Set progress bar style
                                                 $var_progress_static_1 = "progress-bar-success";
@@ -689,32 +690,36 @@ if($_POST) {
                                                 // Check how many discounts
 												if ($var_number_discount_option == 1) {
 													echo "<div class= 'progress'>";
-													echo "<div class='progress-bar ".$var_progress_static_3.$var_progress_active."' role='progressbar' style='width:".$var_percent_sold."%' >".$global_order_quantity_sum." ".$var_deal_unit."</div>";
+													echo "<div class='progress-bar ".$var_progress_static_3.$var_progress_active."' role='progressbar' style='width:".$var_percent_sold."%' >Joined: ".$global_order_quantity_sum." ".$var_deal_unit."</div>";
+													echo "<div class='progress-bar' role='progressbar' style='width:".$var_percent_remain."%' >Remaining: ".$global_remaining_stocks." ".$var_deal_unit."</div>";
 													echo "</div>";
 												}
 												else if ($var_number_discount_option == 2) {
                                                     echo "<div class= 'progress'>";
                                                     if ($global_order_quantity_sum <= $var_number_discount_1) {
-                                                        echo "<div class='progress-bar ".$var_progress_static_2.$var_progress_active."' role='progressbar' style='width:".$var_percent_sold."%' >".$global_order_quantity_sum." ".$var_deal_unit."</div>";
+                                                        echo "<div class='progress-bar ".$var_progress_static_2.$var_progress_active."' role='progressbar' style='width:".$var_percent_sold."%' >Joined: ".$global_order_quantity_sum." ".$var_deal_unit."</div>";
                                                     }
                                                     else if ($var_number_discount_1 < $global_order_quantity_sum) {
-                                                        echo "<div class='progress-bar ".$var_progress_static_3.$var_progress_active."' role='progressbar' style='width:".$var_percent_sold."%' >".$global_order_quantity_sum." ".$var_deal_unit."</div>";
+                                                        echo "<div class='progress-bar ".$var_progress_static_3.$var_progress_active."' role='progressbar' style='width:".$var_percent_sold."%' >Joined: ".$global_order_quantity_sum." ".$var_deal_unit."</div>";
                                                     }
+                                                    echo "<div class='progress-bar' role='progressbar' style='width:".$var_percent_remain."%' >Remaining: ".$global_remaining_stocks." ".$var_deal_unit."</div>";
 													echo "</div>";
 												}
 												else if ($var_number_discount_option == 3) {
 
                                                     if ($global_order_quantity_sum <= $var_number_discount_1) {
-                                                        echo "<div class='progress-bar ".$var_progress_static_1.$var_progress_active."' role='progressbar' style='width:".$var_percent_sold."%' >".$global_order_quantity_sum." ".$var_deal_unit."</div>";
+                                                        echo "<div class='progress-bar ".$var_progress_static_1.$var_progress_active."' role='progressbar' style='width:".$var_percent_sold."%' >Joined: ".$global_order_quantity_sum." ".$var_deal_unit."</div>";
                                                     }
                                                     else if (($var_number_discount_1 < $global_order_quantity_sum) &&
                                                              ($global_order_quantity_sum <= $var_number_discount_2)) {
-                                                        echo "<div class='progress-bar ".$var_progress_static_2.$var_progress_active."' role='progressbar' style='width:".$var_percent_sold."%' >".$global_order_quantity_sum." ".$var_deal_unit."</div>";
+                                                        echo "<div class='progress-bar ".$var_progress_static_2.$var_progress_active."' role='progressbar' style='width:".$var_percent_sold."%' >Joined: ".$global_order_quantity_sum." ".$var_deal_unit."</div>";
                                                     }
                                                     else if (($var_number_discount_2 < $global_order_quantity_sum) &&
                                                         ($global_order_quantity_sum <= $var_number_discount_3)) {
-                                                        echo "<div class='progress-bar ".$var_progress_static_3.$var_progress_active."' role='progressbar' style='width:".$var_percent_sold."%' >".$global_order_quantity_sum." ".$var_deal_unit."</div>";
+                                                        echo "<div class='progress-bar ".$var_progress_static_3.$var_progress_active."' role='progressbar' style='width:".$var_percent_sold."%' >Joined: ".$global_order_quantity_sum." ".$var_deal_unit."</div>";
                                                     }
+                                                    echo "<div class='progress-bar' role='progressbar' style='width:".$var_percent_remain."%' >Remaining: ".$global_remaining_stocks." ".$var_deal_unit."</div>";
+                                                    echo "</div>";
 
 													//echo "<i class='fa fa-arrow-up' style='position:absolute;right: 20%;font-size:30px;color:black'></i>";
 													//echo "<i class='fa fa-arrow-up' style='position:absolute;right: 50%;font-size:30px;color:black'></i>";
